@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-    <link rel="stylesheet" href="public/css/cmdb.css">
+    <link rel="stylesheet" href="static/css/cmdb.css">
 
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -326,12 +327,12 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="active"><a href="#Dashboard" role="tab" data-toggle="tab"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-                <li><a href="#Configuration" role="tab" data-toggle="tab"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
-                <li><a href="#Monitor" role="tab" data-toggle="tab"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
-                <li><a href="#ITSource" role="tab" data-toggle="tab"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
-                <li><a href="#TopoGraph" role="tab" data-toggle="tab"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
-                <li><a href="#Report" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
+                <li class="active"><a href="#Dashboard"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
+                <li><a href="#Configuration"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
+                <li><a href="#Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
+                <li><a href="#ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
+                <li><a href="#TopoGraph"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
+                <li><a href="#Report"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -340,216 +341,13 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                仪表盘
-            </h1>
+        <section class="content-header" id="index-content-header">
+
         </section>
 
         <!-- Main content -->
-        <section class="content">
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <section class="col-lg-6 connectedSortable">
-                    <div class="box box-solid">
-                        <div class="box-header">
-                            <i class="fa fa-search"></i>
-                            <h3 class="box-title">自动发现状态</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body" id="dashboard-autoDiscovery">
-                            <div class="form-horizontal form-group">
-                                <div class="">
-                                    <label class="col-sm-5 control-label">进行中的任务：</label>
-                                    <p class="form-control-static text-aqua" role="button">10</p>
-                                </div>
-                                <div class="">
-                                    <label class="col-sm-5 control-label">计划的任务：</label>
-                                    <p class="form-control-static text-aqua" role="button">10</p>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="control-label">最近完成的3个任务
-                                    <small class="text-aqua pull-right" role="button">更多</small>
-                                </h4>
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>任务名称</th>
-                                        <th>任务状态</th>
-                                        <th>结束时间</th>
-                                        <th>发现详情</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>发现物理设备</td>
-                                        <td>扫描完成</td>
-                                        <td>2018-01-10 13:26:36</td>
-                                        <td class="text-aqua hand" role="button">14个发现</td>
-                                    </tr>
-                                    <tr>
-                                        <td>发现中间件</td>
-                                        <td>扫描完成</td>
-                                        <td>2018-01-10 13:30:36</td>
-                                        <td class="text-aqua hand" role="button">10个发现</td>
-                                    </tr>
-                                    <tr>
-                                        <td>发现数据库</td>
-                                        <td>扫描完成</td>
-                                        <td>2018-01-10 13:35:36</td>
-                                        <td class="text-aqua hand" role="button">10个发现</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+        <section class="content" id="index-content">
 
-                    <div class="box box-solid">
-                        <div class="box-header">
-                            <i class="fa fa-refresh"></i>
-
-                            <h3 class="box-title">CMDB同步状态</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body ">
-                            <ul class="todo-list">
-                                <li>
-                                    <!-- todo text -->
-                                    <span class="text">进行CMDB同步，同步失败</span>
-                                    <!-- Emphasis label -->
-                                    <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                                    <!-- General tools such as edit or delete-->
-                                </li>
-                                <li>
-                                    <span class="text">CMDB倒计时同步</span>
-                                    <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                                </li>
-                                <li>
-                                    <span class="text">连接CMDB</span>
-                                    <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                                </li>
-                                <li>
-                                    <span class="text">配置CMDB同步</span>
-                                    <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </section>
-                <!-- /.Left col -->
-                <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-6 connectedSortable">
-
-                    <div class="box box-solid">
-                        <div class="box-header">
-                            <i class="fa fa-file-text"></i>
-
-                            <h3 class="box-title">快速访问</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-                                <span class="info-box-number text-aqua">33个主机</span>
-                            </div>
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-                                <span class="info-box-number text-aqua">1284个数据库系统</span>
-                            </div>
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-save"></i></span>
-                                <span class="info-box-number text-aqua">1001个中间件</span>
-                            </div>
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
-                                <span class="info-box-number text-aqua">1个Vmware云环境</span>
-                            </div>
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-cog"></i></span>
-                                <span class="info-box-number text-aqua">4个网络设备</span>
-                            </div>
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                                <span class="info-box-number text-aqua">4个应用程序</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box box-solid">
-                        <div class="box-header">
-                            <i class="fa fa-newspaper-o"></i>
-
-                            <h3 class="box-title">新特征</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body newFeature">
-                            <!-- Nav tabs -->
-                            <ul class="vertical-nav nav">
-                                <li class="active bg-aqua"><a href="#home" role="tab" data-toggle="tab"></a></li>
-                                <li class="bg-aqua"><a href="#profile" role="tab" data-toggle="tab"></a></li>
-                                <li class="bg-aqua"><a href="#messages" role="tab" data-toggle="tab"></a></li>
-                                <li class="bg-aqua"><a href="#settings" role="tab" data-toggle="tab"></a></li>
-                                <li class="bg-aqua"><a href="#settings1" role="tab" data-toggle="tab"></a></li>
-                                <li class="bg-aqua"><a href="#settings2" role="tab" data-toggle="tab"></a></li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content" style="padding-left: 50px;">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    <h4>自动发现1.0新特性</h4>
-                                    <ul>
-                                        <li><a href="#profile" role="tab" data-toggle="tab">自动发现网络环境中的IT资源</a></li>
-                                        <li><a href="#messages" role="tab" data-toggle="tab">自动发现IT资源的部署信息和运行信息</a></li>
-                                        <li><a href="#settings" role="tab" data-toggle="tab">自动发现IT资源的关联关系</a></li>
-                                        <li><a href="#settings1" role="tab" data-toggle="tab">提供Restful外部接口</a></li>
-                                        <li><a href="#settings2" role="tab" data-toggle="tab">可视化IT资源的拓扑关系</a></li>
-                                    </ul>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                    <h4>自动发现网络环境中的IT资源</h4>
-                                    <ul>
-                                        <li>系统支持自动发现网络环境中的网络设备、服务器、存储、数据库、中间件和应用程序等IT资源</li>
-                                    </ul>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="messages">
-                                    <h4>自动发现IT资源的部署信息和运行信息</h4>
-                                    <ul>
-                                        <li>系统支持自动发现IT资源的部署信息和运行信息</li>
-                                    </ul>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="settings">
-                                    <h4>自动发现IT资源的关联关系</h4>
-                                    <ul>
-                                        <li>系统支持自动发现IT资源的关联关系，包括部署层级关系，物理连接关系，数据通信关系</li>
-                                    </ul>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="settings1">
-                                    <h4>提供Restful外部接口</h4>
-                                    <ul>
-                                        <li>系统对外提供Restful接口，供CMDB系统同步IT资源的部署、运行和关联关系信息</li>
-                                        <li>同步某类IT资源简要信息</li>
-                                        <li>同步某个IT资源的详细信息</li>
-                                        <li>同步指定时间开始发现的IT资源信息</li>
-                                    </ul>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="settings2">
-                                    <h4>可视化IT资源的拓扑关系</h4>
-                                    <ul>
-                                        <li>系统从应用系统的视角，向用户可视化展示IT资源的拓扑关系</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </section>
-                <!-- right col -->
-            </div>
-            <!-- /.row (main row) -->
         </section>
         <!-- /.content -->
     </div>

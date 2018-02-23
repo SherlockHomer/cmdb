@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 module.exports = {
-    entry: './src/cmdb.js',
+    entry: './static/js/cmdb.js',
     output: {
         path: __dirname + '/build',
         filename: "cmdb.js"
