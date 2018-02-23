@@ -1,0 +1,758 @@
+// #仪表盘
+
+
+// 自动发现状态
+// 请求：
+action: discovery/getStatus
+// 返回
+{
+    "data": {
+        "missionIng": 10,
+        "missionPlan": 20,
+        "missoneLately": [{
+            "name": "发现物理设备",
+            "status": 1,
+            "endTime": "2018-01-10 13:26:36"
+        }, {
+            "name": "发现中间件",
+            "status": 1,
+            "endTime": "2018-01-10 13:30:36"
+        }, {
+            "name": "发现数据库",
+            "status": 1,
+            "endTime": "2018-01-10 13:35:36"
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+// CMDB 同步状态
+
+// 请求
+action: sync/getStatus
+{
+    "data": [{
+        "info": "进行CMDB同步，同步失败",
+        "startTime": "2018-2-5 10:11:14"
+    }, {
+        "info": "CMDB倒计时同步",
+        "startTime": "2018-2-5 10:11:14"
+    }, {
+        "info": "进行CMDB同步，同步失败",
+        "startTime": "2018-2-5 10:11:14"
+    }, {
+        "info": "进行CMDB同步，同步失败",
+        "startTime": "2018-2-5 10:11:14"
+    }, {
+        "info": "进行CMDB同步，同步失败",
+        "startTime": "2018-2-5 10:11:14"
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+// 快速访问
+action:  discovery/getCategoryInfo
+{
+    "data": [{
+        "type": 1,
+        "sum": 33
+    }, {
+        "type": 2,
+        "sum": 1284
+    }, {
+        "type": 3,
+        "sum": 1001
+    }, {
+        "type": 4,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 1001
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+// 新特征
+action:  discovery/getVersionNEWS
+{
+    "data": {
+        "version": 1.0,
+        "features":[{
+            "title":"自动发现网络环境中的IT资源",
+            "info":["系统支持自动发现网络环境中的网络设备、服务器、存储、数据库、中间件和应用程序等IT资源"]
+        },{
+            "title":"自动发现IT资源的部署信息和运行信息",
+            "info":["系统支持自动发现IT资源的部署信息和运行信息"]
+        },{
+            "title":"自动发现IT资源的关联关系",
+            "info":["系统支持自动发现IT资源的关联关系，包括部署层级关系，物理连接关系，数据通信关系"]
+        },{
+            "title":"提供Restful外部接口",
+            "info":["系统对外提供Restful接口，供CMDB系统同步IT资源的部署、运行和关联关系信息","同步某类IT资源简要信息","同步某个IT资源的详细信息","同步指定时间开始发现的IT资源信息"]
+        },{
+            "title":"可视化IT资源的拓扑关系",
+            "info":["系统从应用系统的视角，向用户可视化展示IT资源的拓扑关系"]
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+
+
+// #自动发现配置
+
+// SNMP设备发现策略
+action：  strategy/SNMPInfo
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "SNMP发现策略",
+        "port": 161,
+        "protVersion":"v1",
+        "RGroupName":"public",
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveSNMP
+请求
+{
+    // id 为 null 则 为新增
+    "id": 1,
+    "name": "SNMP发现策略",
+    "port": 161,
+    "protVersion": "v1",
+    "rGroupName": "public",
+    "safeName":"",
+    "engineId":"",
+    "signatureProt":"",
+    "signaturePassw":"",
+    "encryptProt":"",
+    "encryptPassw":""
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delSNMP
+请求
+{
+    "ids": [1,2,3],
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// 端口发现策略
+action：  strategy/portAll
+请求
+{
+    // 1: 标准的  2：客户化端口
+    "type":1 ,
+    // type == 2 才有下面这三项
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "appName": "FTP",
+        "port": 161
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/defPort
+请求
+{
+    // 1: 标准的  2：客户化端口
+    "type":1,
+    "name":"Window RPC",
+    "prots":[135,188],
+    // id 为null 则是客户端的新增
+    "id":1
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/delPort
+请求
+{
+    "ids": [1,2,3],
+    "type":2
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// 服务器设备发现策略
+action：  strategy/serverAll
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "服务器发现策略",
+        "type": "window",
+        "account":"administrator",
+        "encoding":"GBK",
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveServer
+请求
+{
+    // id 为null 则是新增
+    "id": 1,
+    "name": "服务器发现策略",
+    "type": "window",
+    "account":"administrator",
+    "password":"",
+    "domain":"digitalchina.com",
+    "encoding":"GBK",
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delServer
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// 云环境设备发现策略
+action：  strategy/cloudAll
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "服务器发现策略",
+        "address": "10.0.220.201",
+        "account":"administrator"
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveCloud
+请求
+{
+    // id 为null 则是新增
+    "id": 1,
+    "name": "服务器发现策略",
+    "domainType": "vmware",
+    "domainIp":"",
+    "account":"administrator",
+    "password":""
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delCloud
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// 数据库设备发现策略
+action：  strategy/dbAll
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "数据库发现策略",
+        "type":"SQL Server",
+        "dbName": "auto4_4",
+        "port":"1433",
+        "account":"root",
+        "encoding":"gbk"
+
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveDB
+请求
+{
+    // id 为null 则是新增
+    "id": 1,
+    "name": "数据库发现策略",
+    "type":"SQL Server",
+    "dbName": "auto4_4",
+    "port":"1433",
+    "account":"root",
+    "password":"123",
+    "encoding":"gbk"
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delDB
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+// 中间件设备发现策略
+action：  strategy/midwareAll
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "中间件发现策略1",
+        "type":"Tomcat",
+        "port":"8080",
+        "account":"admin"
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveMidware
+请求
+{
+    // id 为null 则是新增
+    "id": 1,
+    "name": "中间件发现策略1",
+    "type":"Tomcat",
+    "port":"8080",
+    "account":"admin",
+    "password":"123"
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delMidware
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// 发现任务发现策略
+// 
+// 策略Type：物理设备 1 ；端口2 ：服务器3  ；云 4  数据库 5 ，中间件6
+action：  strategy/missionAll
+请求
+{
+    "page":4,
+    "rows":15,
+    "searchText":""
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "中间件发现策略1",
+        "content":[1,2,3],
+        "schedule":"每天九点",
+        "scheduleId":"1",
+        "ips":["10.5.5.53"]
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  strategy/saveMission
+请求
+{
+    // id 为null 则是新增
+    "id": 1,
+    "name": "中间件发现策略1",
+    "content":[1,2,3],
+    "scheduleId":1,
+    "目标范围":["10.5.5.53","10.4.5.5--10.4.5.80"]
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  strategy/delMission
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+
+// # 自动发现监控
+// 正在扫描 1  ；扫描完成 2 ； 计划扫描 3 ； 全部 4
+//策略Type 物理设备 1 ；端口2 ：服务器3  ；云 4  数据库 5 ，中间件6
+
+action：  monitor/infoAll
+请求
+{
+    "page":1,
+    "rows":15,
+    "searchText":"",
+    "type":1
+}
+{
+    "data": [{
+        "id": 1,
+        "name": "扫描任务1",
+        "content":[1,2,3],
+        "schedule":"每天九点",
+        "scheduleId":"1",
+        "startTime":"2018-01-10 09:00:00",
+        "endTime":"2018-01-10 10:00:00",
+        "operator":"系统",
+        "status": 0.4
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  monitor/detail
+请求
+{
+    "id":1
+}
+{
+    "data": {
+        "contentInfo": [{
+            "type": 1,
+            "sum": 33
+        }, {
+            "type": 2,
+            "sum": 1284
+        }, {
+            "type": 3,
+            "sum": 1001
+        }, {
+            "type": 4,
+            "sum": 4
+        }, {
+            "type": 5,
+            "sum": 4
+        }, {
+            "type": 5,
+            "sum": 1001
+        }],
+        "details":[{
+            // "key":"startTime",
+            "keyText":"开始时间",
+            "value":"2018-01-10 09:00:00",
+            "type":"text"
+        },{
+            // "key":"scanProgress",
+            "keyText":"扫描进度",
+            "value":0.4,
+            "type":"process"
+        },{
+            "keyText":"扫描进度",
+            "value":{
+                "columnsText":["服务器名","IP地址","OS类型","OS版本"],
+                "tableData":[{
+                    "serverName": "LIANGDL",
+                    "ip":"10.5.5.175",
+                    "OSType":"Linux",
+                    "OSVer":"Redhat Enterprise 6.5 Santago"
+                }]
+            },
+            "type":"table"
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+
+action：  scan/start
+请求
+{
+    "ids":[1,2,3]
+}
+{
+    "data":{},
+    "success": true,
+    "msg": "成功"
+}
+
+action：  scan/stop
+请求
+{
+    "ids":[1,2,3]
+}
+{
+    "data": [],
+    "success": true,
+    "msg": "成功"
+}
+
+// # IT资源信息
+//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+
+action：  ITSource/getTags
+请求
+{
+    // types : 现阶段是数组为1，以下是查出服务器的id为1的资源的应用系统
+    "types":[1],
+    "ids":[1]
+}
+{
+    "data": ["应用服务器","应用服务器1"],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  ITSource/infoAll
+请求
+{
+    "page":1,
+    "rows":15,
+    "searchText":"",
+    "tags":[],
+    "type":1
+}
+{
+    "data": {
+        "columnsText":["服务器名","IP地址","OS类型","OS版本"],
+        "identifier":"id",
+        "tableData":[{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":1
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+action：  ITSource/detail
+{
+    "id":1,
+    "type":1
+}
+{
+    "data": {
+        "tags":["应用服务器","数据库服务器"],
+        "details":[{
+            // "key":"startTime",
+            "keyText":"开始时间",
+            "value":"2018-01-10 09:00:00",
+            "type":"text"
+        },{
+            // "key":"scanProgress",
+            "keyText":"扫描进度",
+            "value":0.4,
+            "type":"process"
+        },{
+            "keyText":"补丁",
+            "value":{
+                // 如果超出五列就显示显示详情
+                "columnsText":["服务器名","IP地址","OS类型","OS版本"],
+                "tableData":[{
+                    "serverName": "LIANGDL",
+                    "ip":"10.5.5.175",
+                    "OSType":"Linux",
+                    "OSVer":"Redhat Enterprise 6.5 Santago"
+                }]
+            },
+            "type":"table"
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
+
+// 获取应用系统，可能作为标签
+action：  ITSource/getAllApp
+{
+
+}
+{
+    "data": [{
+        "id":1,
+        "name":"应用系统1"
+    },{
+        "id":2,
+        "name":"应用系统2"
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  ITSource/setTag
+{
+    "id":1,
+    "type":1,
+    "tags":["应用服务器1","应用服务器2","应用服务器3"]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+
+// IT 资源报表
+//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+action：  ITSource/report
+{
+
+}
+{
+    "data": [{
+        "type": 1,
+        "sum": 33
+    }, {
+        "type": 2,
+        "sum": 1284
+    }, {
+        "type": 3,
+        "sum": 1001
+    }, {
+        "type": 4,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 1001
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+
+// IT资源拓扑图
+//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+// 关系图 ： 0  ；部署关系图：1 ；通信关系图 ：2  ；物理连接关系图 ： 3
+action：  ITSourceTopo/showTopo
+{
+    // 默认查所有存在发现内容的应用系统中的第一
+    "app":1,
+    "relation": 0
+}
+{
+    "data": {
+        "nodeDataArray":[{
+            // md5  唯一鉴别的key，可用于前端的key
+            "key":1234,
+            // 父级的key,用于前端显示上下游关系
+            "parent":456,
+            "id":1,
+            // 资源 type
+            "type":1,
+            // 节点的名字
+            "name": "BMC Patrol Agent 10.7.00"
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}
