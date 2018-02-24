@@ -31,6 +31,10 @@
 
     <link rel="stylesheet" href="static/css/cmdb.css">
 
+    <script>
+        // 前后端分离
+        window.UrlConfig = 'frontEnd';
+    </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
@@ -327,12 +331,12 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="active"><a href="#Dashboard"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-                <li><a href="#Configuration"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
-                <li><a href="#Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
-                <li><a href="#ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
-                <li><a href="#TopoGraph"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
-                <li><a href="#Report"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
+                <li class="active"><a href="#/Dashboard"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
+                <li><a href="#/Configuration"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
+                <li><a href="#/Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
+                <li><a href="#/ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
+                <li><a href="#/TopoGraph"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
+                <li><a href="#/Report"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -589,7 +593,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="build/cmdb.js"></script>
+<script src="static/js/cmdb.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

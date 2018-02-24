@@ -10,5 +10,11 @@
         window.returnExports = factory(window.jQuery);
     }
 }(window, function ($) {
-    alert('dashboard')
+    if ( window.Dashboard ) { return };
+    var Dashboard = {
+        getAllView : function (){
+            
+        }
+    };
+    return Dashboard;
 }));
