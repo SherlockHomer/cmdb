@@ -86,10 +86,10 @@
         module.exports = factory();
     } else {
         // Browser globals (window is window)
-        window.returnExports = factory();
+        window.fecthData = factory();
     };
 }(window, function () {
-    window.fecthData = function (url,type,params,callback) {
+    function fecthData (url,type,params,callback) {
         url = window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
         $.ajax({
             url: url,
@@ -107,7 +107,8 @@
                 }
             }
         });
-    }
+    };
+    return fecthData;
 }));
 
 // 对handlebars封装
@@ -123,8 +124,8 @@
         window.returnExports = factory();
     };
 }(window, function () {
-    Handlebars.renderDOMInTemp = function(dom,tempID,data){
-        var $tpl = $('#'+tempID);
+    Handlebars.renderDOMInTemp = function(dom,tempMap,data){
+        var $tpl = $('#'+tempMap[dom]);
         var source = $tpl.text();
         var template = Handlebars.compile(source);
         var html = template(data);
@@ -133,6 +134,17 @@
     Handlebars.registerHelper('statusInMission', function(status) {
         if(status == 1)
             return new Handlebars.SafeString('任务完成') ;
+    });
+
+    Handlebars.registerHelper('startTimeMat',function(startTime){
+        var long = moment(startTime).fromNow();
+        return new Handlebars.SafeString('<small class="label label-default"><i class="fa fa-clock-o"></i>'+long+'</small>');
+    });
+    Handlebars.registerHelper('deviceIcon',function(type){
+        return getStatusItem('devices',type).icon;
+    });
+    Handlebars.registerHelper('deviceText',function(type){
+        return getStatusItem('devices',type).text;
     });
 }));
 

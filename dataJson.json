@@ -34,14 +34,14 @@ action: discovery/getStatus
 // CMDB 同步状态
 
 // 请求
-action: sync/getStatus
+action: discovery/sync
 {
     "data": [{
         "info": "进行CMDB同步，同步失败",
-        "startTime": "2018-2-5 10:11:14"
+        "startTime": "2018-3-5 10:11:14"
     }, {
         "info": "CMDB倒计时同步",
-        "startTime": "2018-2-5 10:11:14"
+        "startTime": "2018-3-5 16:11:14"
     }, {
         "info": "进行CMDB同步，同步失败",
         "startTime": "2018-2-5 10:11:14"

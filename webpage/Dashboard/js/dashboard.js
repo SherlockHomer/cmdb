@@ -11,27 +11,82 @@
     }
 }(window, function ($) {
     if ( window.Dashboard ) { return };
-    var Dashboard = {};
-    function getAllView(){
-        renderDashboard();
+
+    // 配置DOM和temp的一一对应
+    var domAndTemp = {
+        'index-content':'dashboard-template',
+        'dashboard-discovery-status':'dashboard-discovery-status-template',
+        'dashboard-discovery-sync':'dashboard-discovery-sync-template',
+        'dashboard-discovery-quick':'dashboard-discovery-quick-template',
+        'dashboard-discovery-NEWS':'dashboard-discovery-NEWS-template'
+    };
+    function render(dom,data) {
+        if (!data) {
+            data = {};
+        };
+        Handlebars.renderDOMInTemp(dom,domAndTemp,data);
+    };
+    // 渲染首页
+    function renderDb(){
+        render('index-content');
+    }
+    // 渲染自动发现状态
+    function renderDbStatus(){
         fecthData('discovery/getStatus','json',null,{
             success:function(res){
-                // $('#')
-                Handlebars.renderDOMInTemp('dashboard-discovery-status','dashboard-discovery-status-template',res.data)
+                render('dashboard-discovery-status',res.data);
             },
             error:function(){
 
             }
         });
-    };
-    function renderDashboard(){
-        Handlebars.renderDOMInTemp('index-content','dashboard-template',{});
+    }
+    // 渲染同步状态
+    function renderDbSync(){
+        fecthData('discovery/sync','json',null,{
+            success:function(res){
+                render('dashboard-discovery-sync',res);
+            },
+            error:function(){
+
+            }
+        });
+    }
+    // 渲染快速访问
+    function renderDbQuick(){
+        fecthData('discovery/getCategoryInfo','json',null,{
+            success:function(res){
+                render('dashboard-discovery-quick',res);
+            },
+            error:function(){
+
+            }
+        });
+    }
+    // 渲染NEWS
+    function renderDbNEWS(){
+        fecthData('discovery/getVersionNEWS','json',null,{
+            success:function(res){
+                render('dashboard-discovery-NEWS',res);
+            },
+            error:function(){
+
+            }
+        });
     }
     function renderModule(params) {
         if (!params) {
             getAllView();
         }
-    }
+    };
+    function getAllView(){
+        renderDb();
+        renderDbStatus();
+        renderDbSync();
+        renderDbQuick();
+        renderDbNEWS();
+    };
+    var Dashboard = {};
     Dashboard.renderModule = renderModule;
     Dashboard.getAllView = getAllView ;
     return Dashboard;

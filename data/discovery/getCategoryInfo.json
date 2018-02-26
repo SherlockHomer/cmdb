@@ -1,0 +1,23 @@
+{
+    "data": [{
+        "type": 1,
+        "sum": 33
+    }, {
+        "type": 2,
+        "sum": 1284
+    }, {
+        "type": 3,
+        "sum": 1001
+    }, {
+        "type": 4,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 4
+    }, {
+        "type": 5,
+        "sum": 1001
+    }],
+    "success": true,
+    "msg": "成功"
+}
