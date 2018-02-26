@@ -7,14 +7,32 @@
         module.exports = factory(require('jquery'));
     } else {
         // Browser globals (window is window)
-        window.returnExports = factory(window.jQuery);
+        window.Dashboard = factory(window.jQuery);
     }
 }(window, function ($) {
     if ( window.Dashboard ) { return };
-    var Dashboard = {
-        getAllView : function (){
-            
-        }
+    var Dashboard = {};
+    function getAllView(){
+        renderDashboard();
+        fecthData('discovery/getStatus','json',null,{
+            success:function(res){
+                // $('#')
+                Handlebars.renderDOMInTemp('dashboard-discovery-status','dashboard-discovery-status-template',res.data)
+            },
+            error:function(){
+
+            }
+        });
     };
+    function renderDashboard(){
+        Handlebars.renderDOMInTemp('index-content','dashboard-template',{});
+    }
+    function renderModule(params) {
+        if (!params) {
+            getAllView();
+        }
+    }
+    Dashboard.renderModule = renderModule;
+    Dashboard.getAllView = getAllView ;
     return Dashboard;
 }));

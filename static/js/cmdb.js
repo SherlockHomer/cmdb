@@ -36,8 +36,12 @@
             success:function(res){
                 if ( moduleName == '404'){
                     Router[moduleName].innerHTML = res;
+                    $('#index-content').html(res);
+                    return;
                 };
-                $('#index-content').html(res);
+                $('body').append(res);
+                // 通过参数加载模块
+                window[moduleName].renderModule(params);
             },
             error:function(e){
                 // 虽然js配置了，但还是找不到该文件
@@ -71,7 +75,8 @@
 
 
 
-// 前后端分离配置
+// 提取数据
+// UrlConfig 是配置前端开发静态数据的
 (function (window, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
@@ -84,7 +89,54 @@
         window.returnExports = factory();
     };
 }(window, function () {
-    window.confirmUrl = function(actionUrl){
-        return window.UrlConfig == 'frontEnd' ?'/data' + actionUrl + '.json' : actionUrl;  
-    };
+    window.fecthData = function (url,type,params,callback) {
+        url = window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
+        $.ajax({
+            url: url,
+            dataType: type,
+            data:params,
+            type: 'post',
+            success:function(res){
+                if (callback && callback.success) {
+                    callback.success(res);
+                }
+            },
+            error:function(e){
+                if (callback && callback.error) {
+                    callback.error();
+                }
+            }
+        });
+    }
 }));
+
+// 对handlebars封装
+(function (window, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (window is window)
+        window.returnExports = factory();
+    };
+}(window, function () {
+    Handlebars.renderDOMInTemp = function(dom,tempID,data){
+        var $tpl = $('#'+tempID);
+        var source = $tpl.text();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#'+dom).html(html);
+    };
+    Handlebars.registerHelper('statusInMission', function(status) {
+        if(status == 1)
+            return new Handlebars.SafeString('任务完成') ;
+    });
+}));
+
+
+
+
+
