@@ -105,7 +105,7 @@
         {{/each}}
      </div>
 </script>
-<script type="text/x-handlebars-template" id="dashboard-discovery-NEWS">
+<script type="text/x-handlebars-template" id="dashboard-discovery-NEWS-template">
     <div class="box-header">
         <i class="fa fa-newspaper-o"></i>
 
@@ -115,70 +115,37 @@
     <div class="box-body newFeature">
         <!-- Nav tabs -->
         <ul class="vertical-nav nav">
+            <li class="bg-aqua active"><a href="#dashboard-news-home" role="tab" data-toggle="tab"></a></li>
             {{#each features}}
-                <li class="bg-aqua"><a href="#dashboard-news{{@index}}" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#dashboard-news-{{@index}}" role="tab" data-toggle="tab"></a></li>
             {{/each}}
-            {{!-- <li class="active bg-aqua"><a href="#home" role="tab" data-toggle="tab"></a></li>
-            <li class="bg-aqua"><a href="#profile" role="tab" data-toggle="tab"></a></li>
-            <li class="bg-aqua"><a href="#messages" role="tab" data-toggle="tab"></a></li>
-            <li class="bg-aqua"><a href="#settings" role="tab" data-toggle="tab"></a></li>
-            <li class="bg-aqua"><a href="#settings1" role="tab" data-toggle="tab"></a></li>
-            <li class="bg-aqua"><a href="#settings2" role="tab" data-toggle="tab"></a></li> --}}
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content" style="padding-left: 50px;">
-            <div role="tabpanel" class="tab-pane active" id="dashboard-news{{@index}}">
+            <div role="tabpanel" class="tab-pane active" id="dashboard-news-home">
                 <h4>自动发现{{version}}新特性</h4>
                 <ul>
                     {{#each features}}
-                        <li><a href="#dashboard-news{{@index}}" role="tab" data-toggle="tab">{{title}}</a></li>
+                        <li><a href="#dashboard-news-{{@index}}" role="tab" data-toggle="tab">{{title}}</a></li>
                     {{/each}}
                     
-                    <li><a href="#messages" role="tab" data-toggle="tab">自动发现IT资源的部署信息和运行信息</a></li>
+                    {{!-- <li><a href="#messages" role="tab" data-toggle="tab">自动发现IT资源的部署信息和运行信息</a></li>
                     <li><a href="#settings" role="tab" data-toggle="tab">自动发现IT资源的关联关系</a></li>
                     <li><a href="#settings1" role="tab" data-toggle="tab">提供Restful外部接口</a></li>
-                    <li><a href="#settings2" role="tab" data-toggle="tab">可视化IT资源的拓扑关系</a></li>
+                    <li><a href="#settings2" role="tab" data-toggle="tab">可视化IT资源的拓扑关系</a></li> --}}
                 </ul>
             </div>
             {{#each features}}
-                <div role="tabpanel" class="tab-pane" id="profile">
+                <div role="tabpanel" class="tab-pane" id="dashboard-news-{{@index}}">
                     <h4>{{title}}</h4>
                     <ul>
                         {{#each info}}
-                            <li>系统支持自动发现网络环境中的网络设备、服务器、存储、数据库、中间件和应用程序等IT资源</li>
+                            <li>{{this}}</li>
                         {{/each}}
                     </ul>
                 </div>
             {{/each}}
-            
-            <div role="tabpanel" class="tab-pane" id="messages">
-                <h4>自动发现IT资源的部署信息和运行信息</h4>
-                <ul>
-                    <li>系统支持自动发现IT资源的部署信息和运行信息</li>
-                </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="settings">
-                <h4>自动发现IT资源的关联关系</h4>
-                <ul>
-                    <li>系统支持自动发现IT资源的关联关系，包括部署层级关系，物理连接关系，数据通信关系</li>
-                </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="settings1">
-                <h4>提供Restful外部接口</h4>
-                <ul>
-                    <li>系统对外提供Restful接口，供CMDB系统同步IT资源的部署、运行和关联关系信息</li>
-                    <li>同步某类IT资源简要信息</li>
-                    <li>同步某个IT资源的详细信息</li>
-                    <li>同步指定时间开始发现的IT资源信息</li>
-                </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="settings2">
-                <h4>可视化IT资源的拓扑关系</h4>
-                <ul>
-                    <li>系统从应用系统的视角，向用户可视化展示IT资源的拓扑关系</li>
-                </ul>
-            </div>
         </div>
     </div>
 </script>

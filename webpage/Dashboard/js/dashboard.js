@@ -10,7 +10,7 @@
         window.Dashboard = factory(window.jQuery);
     }
 }(window, function ($) {
-    if ( window.Dashboard ) { return };
+    if ( window.Dashboard ) { return window.Dashboard};
 
     // 配置DOM和temp的一一对应
     var domAndTemp = {
@@ -67,7 +67,7 @@
     function renderDbNEWS(){
         fecthData('discovery/getVersionNEWS','json',null,{
             success:function(res){
-                render('dashboard-discovery-NEWS',res);
+                render('dashboard-discovery-NEWS',res.data);
             },
             error:function(){
 
@@ -86,6 +86,11 @@
         renderDbQuick();
         renderDbNEWS();
     };
+
+    $('body').on('click','#dashboard-news-home li',function(){
+        var index = $(this).index()+1;
+        $('#dashboard-discovery-NEWS .vertical-nav li').removeClass('active').eq(index).addClass('active');
+    })
     var Dashboard = {};
     Dashboard.renderModule = renderModule;
     Dashboard.getAllView = getAllView ;
