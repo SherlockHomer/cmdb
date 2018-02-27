@@ -710,23 +710,74 @@ action：  ITSource/report
 }
 {
     "data": [{
-        "type": 1,
-        "sum": 33
+        "type": 5,
+        "sum": 12,
+        "details":[{
+            "typeName":"SNMP设备",
+            "sum":"10"
+        },{
+            "typeName":"其他设备",
+            "sum":"2"
+        }]
     }, {
         "type": 2,
-        "sum": 1284
+        "sum": 18,
+        "details":[{
+            "typeName":"Oracle",
+            "sum":"3"
+        },{
+            "typeName":"Mysql",
+            "sum":"4"
+        },{
+            "typeName":"DB2",
+            "sum":"5"
+        },{
+            "typeName":"SQL Server",
+            "sum":"6"
+        }]
     }, {
         "type": 3,
-        "sum": 1001
+        "sum": 18,
+        "details":[{
+            "typeName":"Tomcat",
+            "sum":"3"
+        },{
+            "typeName":"WebLogic",
+            "sum":"6"
+        },{
+            "typeName":"Websphere",
+            "sum":"9"
+        }]
     }, {
         "type": 4,
-        "sum": 4
+        "sum": 12,
+        "details":[{
+            "typeName":"vmware云环境",
+            "sum":"12"
+        }]
     }, {
-        "type": 5,
-        "sum": 4
+        "type": 1,
+        "sum": 52,
+        "details":[{
+            "typeName":"Window",
+            "sum":"30"
+        },{
+            "typeName":"Linux",
+            "sum":"2"
+        },{
+            "typeName":"AIX",
+            "sum":"10"
+        },{
+            "typeName":"HP-UX",
+            "sum":"10"
+        }]
     }, {
-        "type": 5,
-        "sum": 1001
+        "type": 6,
+        "sum": 1001,
+        "details":[{
+            "typeName":"应用程序",
+            "sum":"12"
+        }]
     }],
     "success": true,
     "msg": "成功"

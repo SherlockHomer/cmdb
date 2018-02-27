@@ -74,6 +74,7 @@
             }
         });
     }
+    // 对外统一接口，在cmdb.js中调用
     function renderModule(params) {
         if (!params) {
             getAllView();
@@ -81,6 +82,7 @@
     };
     function getAllView(){
         renderDb();
+        // 细节独立开
         renderDbStatus();
         renderDbSync();
         renderDbQuick();

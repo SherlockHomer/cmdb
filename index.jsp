@@ -348,7 +348,7 @@
                 <li><a href="#/Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
                 <li><a href="#/ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
                 <li><a href="#/TopoGraph"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
-                <li><a href="#/Report"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
+                <li><a href="#/ITSourceReport"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
                 <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
             </ul>
         </section>

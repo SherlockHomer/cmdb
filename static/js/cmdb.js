@@ -17,6 +17,9 @@
         'Configuration':{
             'moduleUrl':'webpage/Configuration/view/configuration.html'
         },
+        'ITSourceReport':{
+            'moduleUrl':'webpage/ITSourceReport/view/ITSourceReport.html'
+        },
         '404': {
             'moduleUrl':'webpage/404/view/404.html'
         }
@@ -62,8 +65,10 @@
             loadModule('ITSource');
         } else if ( hashes[1] == 'TopoGraph'){
             loadModule('TopoGraph');
-        } else if ( hashes[1] == 'Report'){
-            loadModule('Report');
+        } else if ( hashes[1] == 'ITSourceReport' && !hashes[2]){
+            loadModule('ITSourceReport');
+        } else if ( hashes[1] == 'ITSourceReport'){
+            // todo: 载入二级还是三级，参数怎么传递
         }
         return ;
     };
