@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CMDB自动发现</title>
+  <title>自动化</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -47,19 +47,20 @@
     }
     .info-box{
       display: inline-block;
-      width: 120px;
+      width: 110px;
       text-align: center;
       box-shadow: none;
       vertical-align:top;
       cursor:pointer;
     }
-    .info-box:hover .info-box-icon{
+    /*.info-box:hover .info-box-icon{
       color:#ff6700;
-    }
+    }*/
     .info-box-icon {
       display: inline-block;
       height: 60px;
       line-height: 60px;
+      font-size: 34px;
       float: none;
       background-color: inherit;
     }
@@ -90,6 +91,17 @@
     .newFeature .vertical-nav li.active{
       background-color: #c3c3c3 !important;
     }
+    .sysMenu{
+      height: 30px;
+      padding:0 10px;
+    }
+    .sysMenu a{
+      font-size: 20px;
+      margin:0 10px;
+    }
+    .sidebar-collapse .sysMenu{
+      display: none;
+    }
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
@@ -97,11 +109,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>CM</b></span>
+      <span class="logo-mini"><b>AS</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>CMDB</b> 自动发现</span>
+      <span class="logo-lg"><b>Auto</b> 服务自动化</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -114,12 +126,11 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-             <li><a href="http://localhost:8080/CMDB/THEAuto.html" target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
-             <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
-             <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
-             <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
-           </ul>
-         </li>
+              <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
+              <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
+              <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="navbar-custom-menu">
@@ -385,79 +396,116 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <!-- <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form> -->
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
-        <li class="active">
-          <a href="sher-auto.html">
-            <i class="fa fa-dashboard"></i>
-            <span>首页</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cogs"></i> 
-            <span>作业设计</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li menucode="design" href="http://localhost:8080/auto_web/webpage/design/designPanel/designPanel.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>设计面板</a></li>
-            <li menucode="jobList" href="http://localhost:8080/auto_web/webpage/design/prop/jobList.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>作业列表</a></li>
-            <li menucode="mission" href="http://localhost:8080/auto_web/webpage/design/scriptMission/scriptMissionTab.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>脚本任务</a></li>
-            <li menucode="aduit" href="http://localhost:8080/auto_web/webpage/design/jobApprove/approveList.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>作业审批</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-search"></i>
-            <span>作业监控</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-share-alt"></i>
-            <span>IT资源信息</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-object-ungroup"></i>
-            <span>IT资源拓扑图</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-text"></i>
-            <span>报表分析</span>
-          </a>
-        </li>
-        <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
+        <li class="active"><a href="http://localhost:8080/CMDB/THEAuto.html"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
+        <li><a href="#"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 300px;">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <iframe id="auto_web" src="http://localhost:8080/auto_web/index.jsp" frameborder="0" style="width: 100%;height: 100%"></iframe>
+    <section class="content-header">
+      <h1>
+        系统管理
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-gg-circle"></i>
+
+              <h3 class="box-title">调度资源</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                <span class="info-box-number text-aqua">日历管理</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-calendar-check-o"></i></span>
+                <span class="info-box-number text-aqua">调度计划</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-cubes"></i></span>
+                <span class="info-box-number text-aqua">应用系统</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">节点管理</span>
+              </div>
+            </div>
+          </div>
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-ellipsis-h"></i>
+
+              <h3 class="box-title">其它</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-sticky-note"></i></span>
+                <span class="info-box-number text-aqua">操作日记</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa  fa-search"></i></span>
+                <span class="info-box-number text-aqua">自身监控</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-6 connectedSortable">
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-group"></i>
+
+              <h3 class="box-title">用户</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-user-md"></i></span>
+                <span class="info-box-number text-aqua">角色</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-user"></i></span>
+                <span class="info-box-number text-aqua">用户</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa  fa-users"></i></span>
+                <span class="info-box-number text-aqua">用户组</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 5.0.0
+    </div>
+    <strong>Copyright &copy; 2014-2018 <a href="http://www.dcits.com" title="神州数码">神州数码 </a>技术支持:服务自动化
+  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -689,7 +737,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/index-auto.js"></script>
+<script src="static/js/THEAuto.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

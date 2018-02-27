@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CMDB自动发现</title>
+  <title>自动化</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -53,9 +53,9 @@
       vertical-align:top;
       cursor:pointer;
     }
-    .info-box:hover .info-box-icon{
+    /*.info-box:hover .info-box-icon{
       color:#ff6700;
-    }
+    }*/
     .info-box-icon {
       display: inline-block;
       height: 60px;
@@ -90,6 +90,17 @@
     .newFeature .vertical-nav li.active{
       background-color: #c3c3c3 !important;
     }
+    .sysMenu{
+      height: 30px;
+      padding:0 10px;
+    }
+    .sysMenu a{
+      font-size: 20px;
+      margin:0 10px;
+    }
+    .sidebar-collapse .sysMenu{
+      display: none;
+    }
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
@@ -97,11 +108,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>CM</b></span>
+      <span class="logo-mini"><b>AS</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>CMDB</b> 自动发现</span>
+      <span class="logo-lg"><b>Auto</b> 服务自动化</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -114,12 +125,11 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-             <li><a href="http://localhost:8080/CMDB/THEAuto.html" target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
-             <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
-             <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
-             <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
-           </ul>
-         </li>
+              <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
+              <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
+              <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="navbar-custom-menu">
@@ -385,65 +395,10 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <!-- <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form> -->
-      <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
-        <li class="active">
-          <a href="sher-auto.html">
-            <i class="fa fa-dashboard"></i>
-            <span>首页</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cogs"></i> 
-            <span>作业设计</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li menucode="design" href="http://localhost:8080/auto_web/webpage/design/designPanel/designPanel.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>设计面板</a></li>
-            <li menucode="jobList" href="http://localhost:8080/auto_web/webpage/design/prop/jobList.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>作业列表</a></li>
-            <li menucode="mission" href="http://localhost:8080/auto_web/webpage/design/scriptMission/scriptMissionTab.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>脚本任务</a></li>
-            <li menucode="aduit" href="http://localhost:8080/auto_web/webpage/design/jobApprove/approveList.jsp"><a class="level-two-text"><i class="fa fa-circle-o"></i>作业审批</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-search"></i>
-            <span>作业监控</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-share-alt"></i>
-            <span>IT资源信息</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-object-ungroup"></i>
-            <span>IT资源拓扑图</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-text"></i>
-            <span>报表分析</span>
-          </a>
-        </li>
+        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
         <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
       </ul>
     </section>
@@ -451,13 +406,208 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="height: 300px;">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <iframe id="auto_web" src="http://localhost:8080/auto_web/index.jsp" frameborder="0" style="width: 100%;height: 100%"></iframe>
+    <section class="content-header">
+      <h1>
+        仪表盘
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">巡检</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="bar-chart" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="box box-info">
+            <div class="box-header">
+              <i class="fa fa-search"></i>
+
+              <h3 class="box-title">自动发现状态</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="form-horizontal form-group">
+                <div class="">
+                  <label class="col-sm-5 control-label">进行中的任务：</label>
+                  <p class="form-control-static text-aqua" role="button">10</p>
+                </div>
+                <div class="">
+                  <label class="col-sm-5 control-label">计划的任务：</label>
+                  <p class="form-control-static text-aqua" role="button">10</p>
+                </div>
+              </div>
+              <div>
+                <h4 class="control-label">最近完成的3个任务
+                  <small class="text-aqua pull-right" role="button">更多</small></h4>
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>任务名称</th>
+                      <th>任务状态</th>
+                      <th>结束时间</th>
+                      <th>发现详情</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>发现物理设备</td>
+                      <td>扫描完成</td>
+                      <td>2018-01-10 13:26:36</td>
+                      <td class="text-aqua hand" role="button">14个发现</td>
+                    </tr>
+                    <tr>
+                      <td>发现中间件</td>
+                      <td>扫描完成</td>
+                      <td>2018-01-10 13:30:36</td>
+                      <td class="text-aqua hand" role="button">10个发现</td>
+                    </tr>
+                    <tr>
+                      <td>发现数据库</td>
+                      <td>扫描完成</td>
+                      <td>2018-01-10 13:35:36</td>
+                      <td class="text-aqua hand" role="button">10个发现</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-6 connectedSortable">
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="fa fa-refresh"></i>
+
+              <h3 class="box-title">作业调度</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="info-box">
+                <span class="info-box-icon text-red"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">300个正在运行</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon text-maroon"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">4个超时</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon text-fuchsia"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">1个强制终止</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon text-green"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">660个正常</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon text-red"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">1个错误</span>
+              </div>
+            </div>
+          </div>
+          <div class="box box-solid">
+            <div class="box-header">
+              <i class="fa fa-newspaper-o"></i>
+
+              <h3 class="box-title">新特征</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body newFeature">
+              <!-- Nav tabs -->
+              <ul class="vertical-nav nav">
+                <li class="active bg-aqua"><a href="#home" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#profile" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#messages" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#settings" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#settings1" role="tab" data-toggle="tab"></a></li>
+                <li class="bg-aqua"><a href="#settings2" role="tab" data-toggle="tab"></a></li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content" style="padding-left: 50px;">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                  <h4>自动化5.0新特性</h4>
+                  <ul>
+                    <li><a href="#profile" role="tab" data-toggle="tab">作业调度计划跨年选取</a></li>
+                    <li><a href="#messages" role="tab" data-toggle="tab">巡检调度移动端</a></li>
+                    <li><a href="#settings" role="tab" data-toggle="tab">自动发现IT资源的关联关系</a></li>
+                    <li><a href="#settings1" role="tab" data-toggle="tab">提供Restful外部接口</a></li>
+                    <li><a href="#settings2" role="tab" data-toggle="tab">可视化IT资源的拓扑关系</a></li>
+                  </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                  <h4>作业调度计划跨年选取</h4>
+                  <ul>
+                    <li>从原来的当年选取多个日期到跨年</li>
+                  </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+                  <h4>巡检调度移动端</h4>
+                  <ul>
+                    <li>系统支持巡检调度移动端</li>
+                    <li>巡检调度移动端可视化图表丰富</li>
+                  </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings">
+                  <h4>自动发现IT资源的关联关系</h4>
+                  <ul>
+                    <li>系统支持自动发现IT资源的关联关系，包括部署层级关系，物理连接关系，数据通信关系</li>
+                  </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings1">
+                  <h4>提供Restful外部接口</h4>
+                  <ul>
+                    <li>系统对外提供Restful接口，供CMDB系统同步IT资源的部署、运行和关联关系信息</li>
+                    <li>同步某类IT资源简要信息</li>
+                    <li>同步某个IT资源的详细信息</li>
+                    <li>同步指定时间开始发现的IT资源信息</li>
+                  </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings2">
+                  <h4>可视化IT资源的拓扑关系</h4>
+                  <ul>
+                    <li>系统从应用系统的视角，向用户可视化展示IT资源的拓扑关系</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 5.0.0
+    </div>
+    <strong>Copyright &copy; 2014-2018 <a href="http://www.dcits.com" title="神州数码">神州数码 </a>技术支持:服务自动化
+  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -689,7 +839,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/index-auto.js"></script>
+<script src="static/js/THEAuto.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>

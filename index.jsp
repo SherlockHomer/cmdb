@@ -55,8 +55,20 @@
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
-
-            <div class="navbar-custom-menu">
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                       <li><a href="http://localhost:8080/CMDB/THEAuto.html" target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
+                       <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
+                       <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
+                       <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
+                   </ul>
+              </li>
+          </ul>
+      </div>
+      <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
@@ -330,13 +342,14 @@
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu" data-widget="tree">
                 <li class="active"><a href="#/Dashboard"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
                 <li><a href="#/Configuration"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
                 <li><a href="#/Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
                 <li><a href="#/ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
                 <li><a href="#/TopoGraph"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
                 <li><a href="#/Report"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
+                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
