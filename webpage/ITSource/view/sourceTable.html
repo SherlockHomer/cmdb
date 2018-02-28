@@ -1,0 +1,28 @@
+<script type="text/x-handlebars-template" id="ITSource-sourceTable-template">
+    <table id="ITSource-sourceTable" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                {{#each columnsText}}
+                    <th>{{this}}</th>
+                {{/each}}
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each tableData}}
+                <tr>
+                    {{#each @this}}
+                        <td>{{@this}}</td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="webpage/ITSource/js/ITSourceTable.js"></script>

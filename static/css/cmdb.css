@@ -55,3 +55,8 @@ ul {
 .newFeature .vertical-nav li.active {
     background-color: #c3c3c3 !important;
 }
+.ITSource-countBox .btn{
+    min-width: 200px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}

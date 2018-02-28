@@ -14,7 +14,8 @@
                         {{#each this.details}}
                             <div class="info-box">
                                 <span class="info-box-icon"><i class="fa {{deviceIcon type}}"></i></span>
-                                <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})</span>
+                                <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})
+                                </span>
                             </div>
                         {{/each}}
                     </div>
@@ -26,4 +27,33 @@
         <!-- /.Left col -->
     </div>
 </script>
+<script type="text/x-handlebars-template" id="ITSourceReport-count-template">
+    <div class="row">
+        <!-- Left col -->
+        {{#each data}}
+            <section class="col-lg-12 col-sm-12">
+                <div class="box-success ITSource-countBox">
+                   <div class="box-header">
+                        <i class="fa fa-circle"></i>
+                        <h3 class="box-title">按{{countText this.countType}}统计</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        {{#each this.details}}
+                            <div class="btn btn-default">
+                                <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})
+                                </span>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                
+            </section>
+        {{/each}}
+        
+        <!-- /.Left col -->
+    </div>
+
+</script>
+
 <script src="webpage/ITSourceReport/js/ITSourceReport.js"></script>

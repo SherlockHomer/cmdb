@@ -10,7 +10,8 @@
         window.getStatusItem = factory();
     };
 }(window, function () {
-    var Devices = [
+    var Constant = {};
+    Constant.devices = [
     {type:1,icon:'fa-flag-o',text:'服务器'},
     {type:2,icon:'fa-flag-o',text:'数据库'},
     {type:3,icon:'fa-save',text:'中间件'},
@@ -18,12 +19,13 @@
     {type:5,icon:'fa-cog',text:'网络设备'},
     {type:6,icon:'fa-wifi',text:'应用程序'}
     ];
+    Constant.count = [
+    {type:1,text:'设备厂商'},
+    {type:2,text:'版本'},
+    {type:3,text:'标签'}
+    ]
     function getStatusItem(itemsName,status,def){
-        var items = [];
-        switch (itemsName){
-            case 'devices': {items = Devices;break;}
-            default:{break;}
-        }
+        var items = Constant[itemsName];
         var k = -1;
         for(var i=0; i< items.length; i++ ){
             if (items[i].type == status){

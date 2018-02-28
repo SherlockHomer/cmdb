@@ -1,0 +1,39 @@
+{
+    "data": {
+        "columnsText":["服务器名","IP地址","OS类型","OS版本"],
+        "identifier":"id",
+        "tableData":[{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":1
+        },{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":2
+        },{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":3
+        },{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":4
+        },{
+            "serverName": "LIANGDL",
+            "ip":"10.5.5.175",
+            "OSType":"Linux",
+            "OSVer":"Redhat Enterprise 6.5 Santago",
+            "id":5
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}

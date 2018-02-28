@@ -13,28 +13,28 @@
     if ( window.Dashboard ) { return window.Dashboard};
 
     // 配置DOM和temp的一一对应
-    var domAndTemp = {
-        'index-content':'dashboard-template',
-        'dashboard-discovery-status':'dashboard-discovery-status-template',
-        'dashboard-discovery-sync':'dashboard-discovery-sync-template',
-        'dashboard-discovery-quick':'dashboard-discovery-quick-template',
-        'dashboard-discovery-NEWS':'dashboard-discovery-NEWS-template'
+    var tempAndDom = {
+        'dashboard-template':'index-content',
+        'dashboard-discovery-status-template':'dashboard-discovery-status',
+        'dashboard-discovery-sync-template':'dashboard-discovery-sync',
+        'dashboard-discovery-quick-template':'dashboard-discovery-quick',
+        'dashboard-discovery-NEWS-template':'dashboard-discovery-NEWS'
     };
-    function render(dom,data) {
+    function render(temp,data) {
         if (!data) {
             data = {};
         };
-        Handlebars.renderDOMInTemp(dom,domAndTemp,data);
+        Handlebars.renderDOMInTemp(temp,tempAndDom,data);
     };
     // 渲染首页
     function renderDb(){
-        render('index-content');
+        render('dashboard-template');
     }
     // 渲染自动发现状态
     function renderDbStatus(){
         fecthData('discovery/getStatus','json',null,{
             success:function(res){
-                render('dashboard-discovery-status',res.data);
+                render('dashboard-discovery-status-template',res.data);
             },
             error:function(){
 
@@ -45,7 +45,7 @@
     function renderDbSync(){
         fecthData('discovery/sync','json',null,{
             success:function(res){
-                render('dashboard-discovery-sync',res);
+                render('dashboard-discovery-sync-template',res);
             },
             error:function(){
 
@@ -56,7 +56,7 @@
     function renderDbQuick(){
         fecthData('discovery/getCategoryInfo','json',null,{
             success:function(res){
-                render('dashboard-discovery-quick',res);
+                render('dashboard-discovery-quick-template',res);
             },
             error:function(){
 
@@ -67,7 +67,7 @@
     function renderDbNEWS(){
         fecthData('discovery/getVersionNEWS','json',null,{
             success:function(res){
-                render('dashboard-discovery-NEWS',res.data);
+                render('dashboard-discovery-NEWS-template',res.data);
             },
             error:function(){
 
@@ -76,7 +76,7 @@
     }
     // 对外统一接口，在cmdb.js中调用
     function renderModule(params) {
-        if (!params) {
+        if ( !params || params.length == 0 ) {
             getAllView();
         }
     };

@@ -7,7 +7,7 @@
         module.exports = factory(require('jquery'));
     } else {
         // Browser globals (window is window)
-        window.returnExports = factory(window.jQuery);
+        window.Route = factory(window.jQuery);
     };
 }(window, function ($) {
     var Router = {
@@ -31,12 +31,16 @@
         if ( moduleName == '404' && Router[moduleName].innerHTML ) {
             $('#index-content').html(Router[moduleName].innerHTML);
             return;
+        } else if ( Router[moduleName].isLoaded  ){
+            window[moduleName].renderModule(params);
+            return;
         }
         $.ajax({
             url: url,
             dataType: 'html',
             type: 'post',
             success:function(res){
+                Router[moduleName].isLoaded = true;
                 if ( moduleName == '404'){
                     Router[moduleName].innerHTML = res;
                     $('#index-content').html(res);
@@ -44,6 +48,7 @@
                 };
                 $('body').append(res);
                 // 通过参数加载模块
+                // 交由模版去判断参数来加载对应的内容
                 window[moduleName].renderModule(params);
             },
             error:function(e){
@@ -53,29 +58,31 @@
         });
     }
     function router () {
-        var hashes = ( location.hash.slice(1) || '/' ).split('/');
-
-        if ( (!hashes[1]) || ( hashes[1] == 'Dashboard' && !hashes[2] ) ) {
-            loadModule('Dashboard');
-        } else if ( hashes[1] == 'Configuration' ){
-            loadModule('Configuration');
-        } else if ( hashes[1] == 'Monitor'){
-            loadModule('Monitor');
-        } else if ( hashes[1] == 'ITSource'){
-            loadModule('ITSource');
-        } else if ( hashes[1] == 'TopoGraph'){
-            loadModule('TopoGraph');
-        } else if ( hashes[1] == 'ITSourceReport' && !hashes[2]){
-            loadModule('ITSourceReport');
-        } else if ( hashes[1] == 'ITSourceReport'){
-            // todo: 载入二级还是三级，参数怎么传递
-        }
+        var hashes = ( location.hash.slice(1) || '/' ).split('/'); 
+        // 首页
+        if ( !hashes[1] ) {
+            loadModule('Dashboard' , [] );
+        } else if ( hashes[1] ){
+            loadModule( hashes[1] ,hashes.slice(2) );
+        } 
         return ;
     };
-
+    // 在已有上加
+    function addHash(name){
+        var newHash = window.location.hash.split('/');
+        if( newHash[newHash.length-1] ){
+            newHash.push(name);
+        } else {
+            newHash[newHash.length-1] = name;
+        }
+        window.location = window.location.origin + window.location.pathname + newHash.join('/');
+    };
     // 事件注册
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
+    return {
+        addHash : addHash
+    }
 }));
 
 
@@ -116,6 +123,40 @@
     return fecthData;
 }));
 
+// 提取公用模版
+(function (window, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (window is window)
+        window.loadTemp = factory();
+    };
+}(window, function () {
+    function loadTemp (url,callback) {
+        $.ajax({
+            url: url,
+            dataType: 'html',
+            type: 'post',
+            success:function(res){
+                $('body').append(res);
+                if (callback && callback.success) {
+                    callback.success(res);
+                }
+            },
+            error:function(e){
+                if (callback && callback.error) {
+                    callback.error();
+                }
+            }
+        });
+    };
+    return loadTemp;
+}));
+
 // 对handlebars封装
 (function (window, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -129,12 +170,12 @@
         window.returnExports = factory();
     };
 }(window, function () {
-    Handlebars.renderDOMInTemp = function(dom,tempMap,data){
-        var $tpl = $('#'+tempMap[dom]);
+    Handlebars.renderDOMInTemp = function(temp,tempMap,data){
+        var $tpl = $('#'+temp);
         var source = $tpl.text();
         var template = Handlebars.compile(source);
         var html = template(data);
-        $('#'+dom).html(html);
+        $('#'+tempMap[temp]).html(html);
     };
     Handlebars.registerHelper('statusInMission', function(status) {
         if(status == 1)
@@ -150,6 +191,9 @@
     });
     Handlebars.registerHelper('deviceText',function(type){
         return getStatusItem('devices',type).text;
+    });
+    Handlebars.registerHelper('countText',function(type){
+        return getStatusItem('count',type).text;
     });
 }));
 
