@@ -15,8 +15,7 @@
     // 配置DOM和temp的一一对应
     var tempAndDom = {
         'ITSourceReport-template':'index-content',
-        'ITSourceReport-count-template':'index-content',
-        'ITSource-sourceTable-template':'index-content'
+        'ITSourceReport-count-template':'index-content'
     };
     function render(temp,data) {
         if (!data) {
@@ -51,35 +50,6 @@
             }
         });
     }
-    // 渲染统计内容的具体情况表
-    // 有数据才有表，因为是模版
-    function loadInfoTb(params){
-        if ( !$('#ITSource-sourceTable-template')[0] ){
-            loadTemp('webpage/ITSource/view/sourceTable.html',{
-                success:function(){
-                    getTbDataAndRender(params);
-                },
-                error:function(){
-
-                }
-            })
-        } else {
-            getTbDataAndRender(params);
-        }
-        // 
-        function getTbDataAndRender(params){
-            fecthData('ITSource/infoAll','json',params,{
-                success:function(res){
-                    render('ITSource-sourceTable-template',res.data);
-                    $('#ITSource-sourceTable').dataTable();
-                    // todo : 根据菜单不同处理内容
-                },
-                error:function(){
-
-                }
-            });
-        }
-    }
     
     // 对外统一接口，在cmdb.js中调用
     function renderModule(params) {
@@ -90,14 +60,6 @@
             renderCount({
                 typeName : params[0]
             });
-        } else if ( params[0] && params[1]){
-            loadInfoTb({
-                "page":1,
-                "rows":15,
-                "searchText":"",
-                "tags":[],
-                "type":1
-            })
         }
     };
     // 对于一个界面多个box多个ajax友好

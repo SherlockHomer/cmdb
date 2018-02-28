@@ -1,23 +1,26 @@
 <script type="text/x-handlebars-template" id="ITSource-sourceTable-template">
-    <table id="ITSource-sourceTable" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                {{#each columnsText}}
-                    <th>{{this}}</th>
-                {{/each}}
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each tableData}}
+    <div class="box box-info box-body">
+        <table id="ITSource-sourceTable" class="table table-bordered table-hover">
+            <thead>
                 <tr>
-                    {{#each @this}}
-                        <td>{{@this}}</td>
+                    {{#each columnsText}}
+                        <th>{{this}}</th>
                     {{/each}}
+                    <th>操作</th>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{#each tableData}}
+                    <tr>
+                        {{#each @this}}
+                            <td>{{@this}}</td>
+                        {{/each}}
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    
 </script>
 
 <!-- DataTables -->

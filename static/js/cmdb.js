@@ -22,6 +22,9 @@
         },
         '404': {
             'moduleUrl':'webpage/404/view/404.html'
+        },
+        'ITSourceTable':{
+            'moduleUrl':'webpage/ITSource/view/sourceTable.html'
         }
     };
 
@@ -62,6 +65,10 @@
         // 首页
         if ( !hashes[1] ) {
             loadModule('Dashboard' , [] );
+        } else if ( hashes[1] == 'ITSourceReport' && hashes [2] && hashes [3]){
+            loadModule( 'ITSourceTable' , hashes);
+        } else if ( hashes[1] == 'ITSource' && hashes [2] && hashes [3]) {
+            loadModule( 'ITSourceTable' , hashes);
         } else if ( hashes[1] ){
             loadModule( hashes[1] ,hashes.slice(2) );
         } 
@@ -121,40 +128,6 @@
         });
     };
     return fecthData;
-}));
-
-// 提取公用模版
-(function (window, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD
-        define(factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS-like
-        module.exports = factory();
-    } else {
-        // Browser globals (window is window)
-        window.loadTemp = factory();
-    };
-}(window, function () {
-    function loadTemp (url,callback) {
-        $.ajax({
-            url: url,
-            dataType: 'html',
-            type: 'post',
-            success:function(res){
-                $('body').append(res);
-                if (callback && callback.success) {
-                    callback.success(res);
-                }
-            },
-            error:function(e){
-                if (callback && callback.error) {
-                    callback.error();
-                }
-            }
-        });
-    };
-    return loadTemp;
 }));
 
 // 对handlebars封装
