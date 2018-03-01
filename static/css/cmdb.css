@@ -60,3 +60,6 @@ ul {
     margin-bottom: 10px;
     background-color: #fff;
 }
+#ITSource-sourceTable span.operator{
+    margin-right: 10px;
+}

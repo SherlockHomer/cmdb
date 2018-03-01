@@ -58,6 +58,7 @@
     "font-awesome": "^4.7.0",
     "Ionicons": "ionicons#^2.0.1",
     "jquery-ui": "1.11.4",
-    "handlebars": "^4.0.11"
+    "handlebars": "^4.0.11",
+    "bootstrap-table": "^1.11.1"
   }
 }

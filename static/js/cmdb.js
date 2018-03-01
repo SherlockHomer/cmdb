@@ -127,6 +127,9 @@
             }
         });
     };
+    window.ConfirmUrl = function(url){
+        return  window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
+    }
     return fecthData;
 }));
 

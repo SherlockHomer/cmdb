@@ -1,31 +1,44 @@
 <script type="text/x-handlebars-template" id="ITSource-sourceTable-template">
     <div class="box box-info box-body">
+        <div id="ITSource-sourceTable-toolbar">
+            <div class="form-group col-sm-6 col-xs-12">
+                <label>选择：</label>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default checkAll">全选</button>
+                    <button type="button" class="btn btn-default uncheckAll">无</button>
+                    <button type="button" class="btn btn-default invertCheck">反选</button>
+                </div>
+                <label>操作：</label>
+                <button type="button" class="btn btn-default export">导出excle</button>
+            </div>
+            <div class="col-sm-6 col-xs-12 form-inline">
+                <div class="pull-right">
+                    <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                    <button type="button" class="btn btn-default searchBtn">查询</button>
+                </div>
+            </div>
+        </div>
         <table id="ITSource-sourceTable" class="table table-bordered table-hover">
-            <thead>
+            <!-- <thead>
                 <tr>
-                    {{#each columnsText}}
-                        <th>{{this}}</th>
-                    {{/each}}
-                    <th>操作</th>
+                    <th data-checkbox="true"></th>
+                    <th data-field="serverName" data-sortable="true">服务器名</th>
+                    <th data-field="ip" data-sortable="true">IP地址</th>
+                    <th data-field="OSType" data-sortable="true">OS类型</th>
+                    <th data-field="OSVer" data-sortable="true">OS版本</th>
+                    <th data-field="serFac" data-sortable="true">服务器厂商</th>
+                    <th data-field="tag" data-sortable="true">标签</th>
+                    <th data-field="name">操作</th>
                 </tr>
-            </thead>
-            <tbody>
-                {{#each tableData}}
-                    <tr>
-                        {{#each @this}}
-                            <td>{{@this}}</td>
-                        {{/each}}
-                    </tr>
-                {{/each}}
-            </tbody>
+            </thead> -->
         </table>
     </div>
     
 </script>
-
-<!-- DataTables -->
-<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+ 
+<script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
 <script src="webpage/ITSource/js/ITSourceTable.js"></script>
+
+<!-- <script src="bower_components/bootstrap-table/dist/extensions/filter/bootstrap-table-filter.min.js"></script> -->
+<script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
