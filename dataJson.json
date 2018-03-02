@@ -60,22 +60,22 @@ action: discovery/sync
 action:  discovery/getCategoryInfo
 {
     "data": [{
-        "type": 1,
+        "typeCode": "server",
         "sum": 33
     }, {
-        "type": 2,
+        "typeCode": "db",
         "sum": 1284
     }, {
-        "type": 3,
+        "typeCode": "middleware",
         "sum": 1001
     }, {
-        "type": 4,
+        "typeCode": "cloud",
         "sum": 4
     }, {
-        "type": 5,
+        "typeCode": "network",
         "sum": 4
     }, {
-        "type": 5,
+        "typeCode": "app",
         "sum": 1001
     }],
     "success": true,
@@ -175,7 +175,7 @@ action：  strategy/portAll
 请求
 {
     // 1: 标准的  2：客户化端口
-    "type":1 ,
+    "portType":1 ,
     // type == 2 才有下面这三项
     "page":4,
     "rows":15,
@@ -195,7 +195,7 @@ action：  strategy/defPort
 请求
 {
     // 1: 标准的  2：客户化端口
-    "type":1,
+    "portType":1,
     "name":"Window RPC",
     "prots":[135,188],
     // id 为null 则是客户端的新增
@@ -213,7 +213,7 @@ action：  strategy/delPort
 请求
 {
     "ids": [1,2,3],
-    "type":2
+    "portType":2
 }
 {
     "data": {},
@@ -338,7 +338,7 @@ action：  strategy/dbAll
     "data": [{
         "id": 1,
         "name": "数据库发现策略",
-        "type":"SQL Server",
+        "OSType":"SQL Server",
         "dbName": "auto4_4",
         "port":"1433",
         "account":"root",
@@ -355,7 +355,7 @@ action：  strategy/saveDB
     // id 为null 则是新增
     "id": 1,
     "name": "数据库发现策略",
-    "type":"SQL Server",
+    "OSType":"SQL Server",
     "dbName": "auto4_4",
     "port":"1433",
     "account":"root",
@@ -394,7 +394,7 @@ action：  strategy/midwareAll
     "data": [{
         "id": 1,
         "name": "中间件发现策略1",
-        "type":"Tomcat",
+        "OSType":"Tomcat",
         "port":"8080",
         "account":"admin"
     }],
@@ -408,7 +408,7 @@ action：  strategy/saveMidware
     // id 为null 则是新增
     "id": 1,
     "name": "中间件发现策略1",
-    "type":"Tomcat",
+    "OSType":"Tomcat",
     "port":"8080",
     "account":"admin",
     "password":"123"
@@ -499,7 +499,7 @@ action：  monitor/infoAll
     "page":1,
     "rows":15,
     "searchText":"",
-    "type":1
+    "monitorType":1
 }
 {
     "data": [{
@@ -525,22 +525,22 @@ action：  monitor/detail
 {
     "data": {
         "contentInfo": [{
-            "type": 1,
+            "typeCode": "server",
             "sum": 33
         }, {
-            "type": 2,
+            "typeCode": "db",
             "sum": 1284
         }, {
-            "type": 3,
+            "typeCode": "middleware",
             "sum": 1001
         }, {
-            "type": 4,
+            "typeCode": "cloud",
             "sum": 4
         }, {
-            "type": 5,
+            "typeCode": "network",
             "sum": 4
         }, {
-            "type": 5,
+            "typeCode": "app",
             "sum": 1001
         }],
         "details":[{
@@ -595,7 +595,12 @@ action：  scan/stop
 }
 
 // # IT资源信息
-//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+//资源type  {type:'server',',text:'服务器'},
+    // {type:'db',',text:'数据库'},
+    // {type:'middleware,text:'中间件'},
+    // {type:'cloud,text:'Vmware云环境'},
+    // {type:'network,text:'网络设备'},
+    // {type:'app,text:'应用程序'}
 
 action：  ITSource/getTags
 请求
@@ -616,8 +621,11 @@ action：  ITSource/infoAll
     "page":1,
     "rows":15,
     "searchText":"",
+    "OSVer":"",
+    "OSType":"",
+    "serFac":"",
     "tags":[],
-    "type":1
+    "typeCode":"server"
 }
 {
     "total": 180,
@@ -657,36 +665,72 @@ action：  ITSource/infoAll
 action：  ITSource/detail
 {
     "id":1,
-    "type":1
+    // "typeCode":1
 }
 {
     "data": {
+        "name":"WIN-0ECQ6MI24DJ",
+        "ip":"10.5.5.174",
         "tags":["应用服务器","数据库服务器"],
         "details":[{
             // "key":"startTime",
             "keyText":"开始时间",
             "value":"2018-01-10 09:00:00",
-            "type":"text"
+            "isText":true
         },{
             // "key":"scanProgress",
             "keyText":"扫描进度",
-            "value":0.4,
-            "type":"process"
+            "value":44,
+            "isProcess":true
         },{
             "keyText":"补丁",
             "value":{
                 // 如果超出五列就显示显示详情
                 "columnsText":["服务器名","IP地址","OS类型","OS版本"],
-                "tableData":[{
-                    "serverName": "LIANGDL",
-                    "ip":"10.5.5.175",
-                    "OSType":"Linux",
-                    "OSVer":"Redhat Enterprise 6.5 Santago"
-                }]
+                "tableData": [[
+                    "##IANGDL",
+                    "10.5.5.175",
+                    "Linux",
+                    "Redhat Enterprise 15.5 Santago",
+                    15,
+                    "sher"
+                ],[
+                    "LIGDL",
+                    "10.5.5.175",
+                    "Lin x",
+                    "Redhat Enterprise 6115 Santago",
+                    20,
+                    "lock"
+                ],[
+                    "L DL",
+                    "10.5.5.175",
+                    "Lux",
+                    "Redhat Enterprise 4.5 Santago",
+                    24,
+                    "lockss"
+                ]]
             },
-            "type":"table"
+            "isTable":true
         }]
     },
+    "success": true,
+    "msg": "成功"
+}
+
+action：  ITSource/more
+{
+    "id":1,
+    "label":"数量"
+}
+{
+    "data": [
+        "##IANGDL",
+        "10.5.5.175",
+        "Linux",
+        "Redhat Enterprise 15.5 Santago",
+        15,
+        "sher"
+    ],
     "success": true,
     "msg": "成功"
 }
@@ -711,7 +755,7 @@ action：  ITSource/getAllApp
 action：  ITSource/setTag
 {
     "id":1,
-    "type":1,
+    "typeCode":1,
     "tags":["应用服务器1","应用服务器2","应用服务器3"]
 }
 {
@@ -729,7 +773,7 @@ action：  ITSourceReport/report
 }
 {
     "data": [{
-        "type": 5,
+        "typeCode": "network",
         "sum": 12,
         "details":[{
             "typeName":"SNMP设备",
@@ -739,7 +783,7 @@ action：  ITSourceReport/report
             "sum":"2"
         }]
     }, {
-        "type": 2,
+        "typeCode": "db",
         "sum": 18,
         "details":[{
             "typeName":"Oracle",
@@ -755,7 +799,7 @@ action：  ITSourceReport/report
             "sum":"6"
         }]
     }, {
-        "type": 3,
+        "typeCode": "middleware",
         "sum": 18,
         "details":[{
             "typeName":"Tomcat",
@@ -768,14 +812,14 @@ action：  ITSourceReport/report
             "sum":"9"
         }]
     }, {
-        "type": 4,
+        "typeCode": "cloud",
         "sum": 12,
         "details":[{
             "typeName":"vmware云环境",
             "sum":"12"
         }]
     }, {
-        "type": 1,
+        "typeCode": "network",
         "sum": 52,
         "details":[{
             "typeName":"Window",
@@ -791,7 +835,7 @@ action：  ITSourceReport/report
             "sum":"10"
         }]
     }, {
-        "type": 6,
+        "typeCode": "app",
         "sum": 1001,
         "details":[{
             "typeName":"应用程序",
@@ -809,40 +853,49 @@ action：  ITSourceReport/count
 }
 {
     "data": [{
-        "countType":1,
-        "details":[{
-            "typeName":"HP",
-            "sum":"5"
-        },{
-            "typeName":"Dell",
-            "sum":"5"
+        "countType": 1,
+        "details": [{
+            "typeName": "HP",
+            "sum": "5",
+            "countType": 1
+        }, {
+            "typeName": "Dell",
+            "sum": "5",
+            "countType": 1
         }]
-    },{
-        "countType":2,
-        "details":[{
-            "typeName":"Windows Server 2008 SP2",
-            "sum":"5"
-        },{
-            "typeName":"Windows Server 2012 SP1",
-            "sum":"5"
-        },{
-            "typeName":"Windows Server 2012 SP2",
-            "sum":20
+    }, {
+        "countType": 2,
+        "details": [{
+            "typeName": "Windows Server 2008 SP2",
+            "sum": "5",
+            "countType": 2
+        }, {
+            "typeName": "Windows Server 2012 SP1",
+            "sum": "5",
+            "countType": 2
+        }, {
+            "typeName": "Windows Server 2012 SP2",
+            "sum": 20,
+            "countType": 2
         }]
-    },{
-        "countType":3,
-        "details":[{
-            "typeName":"应用服务器",
-            "sum":"5"
-        },{
-            "typeName":"数据库服务器",
-            "sum":"5"
-        },{
-            "typeName":"灾备服务器",
-            "sum":"5"
-        },{
-            "typeName":"邮件服务器",
-            "sum":"5"
+    }, {
+        "countType": 3,
+        "details": [{
+            "typeName": "应用服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "数据库服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "灾备服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "邮件服务器",
+            "sum": "5",
+            "countType": 3
         }]
     }],
     "success": true,
@@ -867,7 +920,7 @@ action：  ITSourceTopo/showTopo
             "parent":456,
             "id":1,
             // 资源 type
-            "type":1,
+            "typeCode":"server",
             // 节点的名字
             "name": "BMC Patrol Agent 10.7.00"
         }]

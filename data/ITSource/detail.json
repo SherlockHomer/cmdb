@@ -1,0 +1,46 @@
+{
+    "data": {
+        "name": "WIN-0ECQ6MI24DJ",
+        "ip": "10.5.5.174",
+        "tags": ["应用服务器", "数据库服务器"],
+        "details": [{
+            "keyText": "开始时间",
+            "value": "2018-01-10 09:00:00",
+            "isText": true
+        }, {
+            "keyText": "扫描进度",
+            "value": 40,
+            "isProcess": true
+        }, {
+            "keyText": "补丁",
+            "value": {
+                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本","数量","发布者"],
+                "tableData": [[
+                    "##IANGDL",
+                    "10.5.5.175",
+                    "Linux",
+                    "Redhat Enterprise 15.5 Santago",
+                    15,
+                    "sher"
+                ],[
+                    "LIGDL",
+                    "10.5.5.175",
+                    "Lin x",
+                    "Redhat Enterprise 6115 Santago",
+                    20,
+                    "lock"
+                ],[
+                    "L DL",
+                    "10.5.5.175",
+                    "Lux",
+                    "Redhat Enterprise 4.5 Santago",
+                    24,
+                    "lockss"
+                ]]
+            },
+            "isTable": true
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}

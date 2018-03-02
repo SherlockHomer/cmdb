@@ -33,7 +33,54 @@
             </thead> -->
         </table>
     </div>
-    
+</script>
+<script type="text/x-handlebars-template" id="ITSource-table-detail-template">
+    <div class="row">
+        <section class="col-lg-12 col-sm-12">
+            <div class="box" id="ITSource-table-detail">
+                <div class="box-header">
+                    <i class="fa fa-laptop"></i>
+                    <h3 class="box-title">{{name}}({{ip}})</h3>
+                </div>
+                <div class="box-body">
+                    <div class="tags form-group">
+                        {{#each tags}}
+                        <button type="button" class="btn bg-olive btn-flat">{{@this}}</button>
+                        {{/each}}
+                    </div>
+                    <div class="form-horizontal">
+                        {{#each details}}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{keyText}}</label>
+
+                            {{#if isText}}
+                            <div class="col-sm-9 form-control-static">{{value}}</div>
+                            {{/if}}
+
+                            {{#if isProcess}}
+                            <div class="col-sm-9 form-control-static">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{#if isTable}}
+                            <div class="col-sm-9">
+                                <table class="table table-bordered">
+                                    {{tableDetail value}}
+                                </table>
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
 </script>
 <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
  

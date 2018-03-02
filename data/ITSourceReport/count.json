@@ -1,39 +1,48 @@
 {
     "data": [{
-        "countType":1,
-        "details":[{
-            "typeName":"HP",
-            "sum":"5"
-        },{
-            "typeName":"Dell",
-            "sum":"5"
+        "countType": 1,
+        "details": [{
+            "typeName": "HP",
+            "sum": "5",
+            "countType": 1
+        }, {
+            "typeName": "Dell",
+            "sum": "5",
+            "countType": 1
         }]
-    },{
-        "countType":2,
-        "details":[{
-            "typeName":"Windows Server 2008 SP2",
-            "sum":"5"
-        },{
-            "typeName":"Windows Server 2012 SP1",
-            "sum":"5"
-        },{
-            "typeName":"Windows Server 2012 SP2",
-            "sum":20
+    }, {
+        "countType": 2,
+        "details": [{
+            "typeName": "Windows Server 2008 SP2",
+            "sum": "5",
+            "countType": 2
+        }, {
+            "typeName": "Windows Server 2012 SP1",
+            "sum": "5",
+            "countType": 2
+        }, {
+            "typeName": "Windows Server 2012 SP2",
+            "sum": 20,
+            "countType": 2
         }]
-    },{
-        "countType":3,
-        "details":[{
-            "typeName":"应用服务器",
-            "sum":"5"
-        },{
-            "typeName":"数据库服务器",
-            "sum":"5"
-        },{
-            "typeName":"灾备服务器",
-            "sum":"5"
-        },{
-            "typeName":"邮件服务器",
-            "sum":"5"
+    }, {
+        "countType": 3,
+        "details": [{
+            "typeName": "应用服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "数据库服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "灾备服务器",
+            "sum": "5",
+            "countType": 3
+        }, {
+            "typeName": "邮件服务器",
+            "sum": "5",
+            "countType": 3
         }]
     }],
     "success": true,

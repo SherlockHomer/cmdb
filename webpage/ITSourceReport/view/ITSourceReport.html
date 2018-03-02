@@ -5,15 +5,15 @@
             <section class="col-lg-6 col-sm-6">
                 <div class="box box-solid ITSourceBox">
                    <div class="box-header">
-                        <i class="fa {{deviceIcon this.type}}"></i>
+                        <i class="fa {{deviceIcon this.typeCode}}"></i>
 
-                        <h3 class="box-title">{{deviceText this.type}}</h3>
+                        <h3 class="box-title">{{deviceText this.typeCode}}</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         {{#each this.details}}
                             <div class="info-box">
-                                <span class="info-box-icon"><i class="fa {{deviceIcon type}}"></i></span>
+                                <span class="info-box-icon"><i class="fa {{deviceIcon typeCode}}"></i></span>
                                 <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})
                                 </span>
                             </div>
@@ -41,7 +41,7 @@
                     <div class="box-body">
                         {{#each this.details}}
                             <div class="btn btn-default">
-                                <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})
+                                <span class="info-box-number text-aqua" data-name="{{typeName}}" data-countType="{{countType}}">{{typeName}}({{sum}})
                                 </span>
                             </div>
                         {{/each}}

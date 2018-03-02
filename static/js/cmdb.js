@@ -171,6 +171,33 @@
     Handlebars.registerHelper('countText',function(type){
         return getStatusItem('count',type).text;
     });
+    // ITSource details 
+    Handlebars.registerHelper('tableDetail',function(table){
+        var html = '<thead><tr>';
+        $.each(table.columnsText,function(i,perCol){
+            if (i == 5){
+                html = html + '<td>操作</td>';
+                return false;
+            } else {
+                html = html + '<td>'+perCol+'</td>'
+            }
+        });
+        html = html + '</tr></thead><tbody>';
+        $.each(table.tableData,function(y,perRow){
+            html = html + '<tr>';
+            $.each(perRow,function(dIndex,perD){
+                if (dIndex == 5) {
+                    html = html + '<td class="more text-aqua" role="button">显示详情</td>';
+                    return false;
+                } else {
+                    html = html + '<td>'+perD+'</td>'
+                }
+            });
+            html = html + '</tr>';
+        });
+        html = html + '</tbody>'
+        return new Handlebars.SafeString(html);
+    });
 }));
 
 

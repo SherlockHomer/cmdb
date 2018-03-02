@@ -1,6 +1,6 @@
 {
     "data": [{
-        "type": 5,
+        "typeCode": "network",
         "sum": 12,
         "details":[{
             "typeName":"SNMP设备",
@@ -10,7 +10,7 @@
             "sum":"2"
         }]
     }, {
-        "type": 2,
+        "typeCode": "db",
         "sum": 18,
         "details":[{
             "typeName":"Oracle",
@@ -26,7 +26,7 @@
             "sum":"6"
         }]
     }, {
-        "type": 3,
+        "typeCode": "middleware",
         "sum": 18,
         "details":[{
             "typeName":"Tomcat",
@@ -39,14 +39,14 @@
             "sum":"9"
         }]
     }, {
-        "type": 4,
+        "typeCode": "cloud",
         "sum": 12,
         "details":[{
             "typeName":"vmware云环境",
             "sum":"12"
         }]
     }, {
-        "type": 1,
+        "typeCode": "network",
         "sum": 52,
         "details":[{
             "typeName":"Window",
@@ -62,7 +62,7 @@
             "sum":"10"
         }]
     }, {
-        "type": 6,
+        "typeCode": "app",
         "sum": 1001,
         "details":[{
             "typeName":"应用程序",

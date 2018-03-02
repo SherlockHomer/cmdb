@@ -12,12 +12,12 @@
 }(window, function () {
     var Constant = {};
     Constant.devices = [
-    {type:1,icon:'fa-flag-o',text:'服务器'},
-    {type:2,icon:'fa-flag-o',text:'数据库'},
-    {type:3,icon:'fa-save',text:'中间件'},
-    {type:4,icon:'fa-wrench',text:'Vmware云环境'},
-    {type:5,icon:'fa-cog',text:'网络设备'},
-    {type:6,icon:'fa-wifi',text:'应用程序'}
+    {type:'server',icon:'fa-flag-o',text:'服务器'},
+    {type:'db',icon:'fa-flag-o',text:'数据库'},
+    {type:'middleware',icon:'fa-save',text:'中间件'},
+    {type:'cloud',icon:'fa-wrench',text:'Vmware云环境'},
+    {type:'network',icon:'fa-cog',text:'网络设备'},
+    {type:'app',icon:'fa-wifi',text:'应用程序'}
     ];
     Constant.count = [
     {type:1,text:'设备厂商'},

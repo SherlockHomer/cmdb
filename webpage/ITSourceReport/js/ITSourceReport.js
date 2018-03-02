@@ -29,7 +29,7 @@
             success:function(res){
                 $.each(res.data,function(i,per){
                     $.each(per.details,function(y,perD){
-                        perD.type = per.type;
+                        perD.typeCode = per.typeCode;
                     })
                 })
                 render('ITSourceReport-template',res);
@@ -58,7 +58,7 @@
         } else if ( params[0] && !params[1]){
             // 加载统计情况
             renderCount({
-                typeName : params[0]
+                typeCode : params[0]
             });
         }
     };
@@ -73,7 +73,8 @@
     });
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');
-        Route.addHash(name);
+        var countType = $(this).find('.info-box-number').attr('data-countType')
+        Route.addHash(countType+'/'+name);
     })
     
     var ITSourceReport = {};

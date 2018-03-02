@@ -1,21 +1,21 @@
 {
     "data": [{
-        "type": 1,
+        "typeCode": "server",
         "sum": 33
     }, {
-        "type": 2,
+        "typeCode": "db",
         "sum": 1284
     }, {
-        "type": 3,
+        "typeCode": "middleware",
         "sum": 1001
     }, {
-        "type": 4,
+        "typeCode": "cloud",
         "sum": 4
     }, {
-        "type": 5,
+        "typeCode": "network",
         "sum": 4
     }, {
-        "type": 5,
+        "typeCode": "app",
         "sum": 1001
     }],
     "success": true,
