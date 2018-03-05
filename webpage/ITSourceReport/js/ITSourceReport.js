@@ -25,7 +25,7 @@
     };
     // 渲染首页
     function renderITSourceReport(){
-        fecthData('ITSourceReport/report','json',null,{
+        fetchData('ITSourceReport/report','json',null,{
             success:function(res){
                 $.each(res.data,function(i,per){
                     $.each(per.details,function(y,perD){
@@ -41,7 +41,7 @@
     }
     // 渲染统计
     function renderCount(params){
-        fecthData('ITSourceReport/count','json',params,{
+        fetchData('ITSourceReport/count','json',params,{
             success:function(res){
                 render('ITSourceReport-count-template',res);
             },

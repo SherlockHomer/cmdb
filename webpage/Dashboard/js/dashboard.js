@@ -32,7 +32,7 @@
     }
     // 渲染自动发现状态
     function renderDbStatus(){
-        fecthData('discovery/getStatus','json',null,{
+        fetchData('discovery/getStatus','json',null,{
             success:function(res){
                 render('dashboard-discovery-status-template',res.data);
             },
@@ -43,7 +43,7 @@
     }
     // 渲染同步状态
     function renderDbSync(){
-        fecthData('discovery/sync','json',null,{
+        fetchData('discovery/sync','json',null,{
             success:function(res){
                 render('dashboard-discovery-sync-template',res);
             },
@@ -54,7 +54,7 @@
     }
     // 渲染快速访问
     function renderDbQuick(){
-        fecthData('discovery/getCategoryInfo','json',null,{
+        fetchData('discovery/getCategoryInfo','json',null,{
             success:function(res){
                 render('dashboard-discovery-quick-template',res);
             },
@@ -65,7 +65,7 @@
     }
     // 渲染NEWS
     function renderDbNEWS(){
-        fecthData('discovery/getVersionNEWS','json',null,{
+        fetchData('discovery/getVersionNEWS','json',null,{
             success:function(res){
                 render('dashboard-discovery-NEWS-template',res.data);
             },

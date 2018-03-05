@@ -60,7 +60,7 @@
                             {{#if isProcess}}
                             <div class="col-sm-9 form-control-static">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">
+                                    <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
                                     </div>
                                 </div>
                             </div>
@@ -88,8 +88,8 @@
             <div class="form-horizontal row">
                 {{#each more}}
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">{{keyText}}：</label>
-                    <div class="col-sm-9 form-control-static">{{value}}</div>
+                    <label class="col-sm-2 control-label">{{keyText}}：</label>
+                    <div class="col-sm-10 form-control-static">{{value}}</div>
                 </div>
                 {{/each}}
             </div>

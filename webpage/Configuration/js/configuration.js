@@ -36,8 +36,7 @@
         initMidwareTable();
         initMissionTable();
     }
-    // 渲染统计内容的具体情况表
-    // 有数据才有表，因为是模版
+    // 各个表的渲染
     function initSNMPTable(){
         $('#Configuration-SNMP-table').bootstrapTable({
             method:'post',
@@ -393,6 +392,67 @@
                 $(this).show();
             }
         })
+    };
+    function deleteSome(){
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        var ids = [];
+        $.each(sels,function(i,perSel){
+            ids.push(perSel.id);
+        });
+        if ( !ids[0] ) {
+            console.warn('sel some');
+            return false;
+        }
+        var params = {ids : ids};
+        ajaxDelete(tableId,params);
+    }
+    function ajaxDelete(tableId,params){
+        switch(tableId){
+            case 'Configuration-SNMP-table':{
+                var url = 'strategy/delSNMP';
+                break;
+            }
+            case 'Configuration-portStandard-table':{
+                var url = 'strategy/delPort';
+                params.portType = 1;
+                break;
+            }
+            case 'Configuration-portCustom-table':{
+                var url = 'strategy/delPort';
+                params.portType = 2;
+                break;
+            }
+            case 'Configuration-server-table':{
+                var url = 'strategy/delServer';
+                break;
+            }
+            case 'Configuration-cloud-table':{
+                var url = 'strategy/delCloud';
+                break;
+            }
+            case 'Configuration-database-table':{
+                var url = 'strategy/delDB';
+                break;
+            }
+            case 'Configuration-middleware-table':{
+                var url = 'strategy/delMidware';
+                break;
+            }
+            case 'Configuration-mission-table':{
+                var url = 'strategy/delMission';
+                break;
+            }
+        }
+        fetchData(url,'json',params,{
+            success:function(res){
+                if (res.success) {
+                    alert(1);
+                } else {
+
+                }
+            }
+        })
     }
     function queryParams(params){
         return params;
@@ -407,6 +467,8 @@
     $('body').on('click','#Configuration-basic .uncheckAll' ,uncheckAll);
     $('body').on('click','#Configuration-basic .invertCheck' ,invertCheck);
     $('body').on('input','#Configuration-basic .searchInput',filterText);
+    $('body').on('click','#Configuration-basic .toolbar .delete',deleteSome);
+
     // todo :
     $('body').on('click','#ITSource-sourceTable-toolbar .searchBtn',search);
 

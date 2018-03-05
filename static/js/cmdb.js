@@ -105,10 +105,10 @@
         module.exports = factory();
     } else {
         // Browser globals (window is window)
-        window.fecthData = factory();
+        window.fetchData = factory();
     };
 }(window, function () {
-    function fecthData (url,type,params,callback) {
+    function fetchData (url,type,params,callback) {
         url = window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
         $.ajax({
             url: url,
@@ -130,7 +130,7 @@
     window.ConfirmUrl = function(url){
         return  window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
     }
-    return fecthData;
+    return fetchData;
 }));
 
 // 对handlebars封装

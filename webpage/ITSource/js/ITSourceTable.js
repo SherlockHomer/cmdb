@@ -177,7 +177,7 @@
         var params = {
             id: Record.rowId
         }
-        fecthData('ITSource/detail','json',params,{
+        fetchData('ITSource/detail','json',params,{
             success:function(res){
                 render('ITSource-table-detail-template',res.data);
                 Record.details = res.data.details;
