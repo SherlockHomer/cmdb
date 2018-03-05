@@ -153,6 +153,14 @@
         var html = template(data);
         $('#'+tempMap[temp]).html(html);
     };
+    Handlebars.getHTMLByCompile = function(temp,data){
+        var $tpl = $('#'+temp);
+        var source = $tpl.text();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        return html;
+    };
+
     Handlebars.registerHelper('statusInMission', function(status) {
         if(status == 1)
             return new Handlebars.SafeString('任务完成') ;

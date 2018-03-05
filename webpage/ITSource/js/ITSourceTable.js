@@ -10,7 +10,7 @@
         window.ITSourceTable = factory(window.jQuery);
     }
 }(window, function ($) {
-    var setting = {
+    var Record = {
         tags:[],
         // 默认资源是服务器
         typeCode:'server',
@@ -78,7 +78,7 @@
                 field:'tag',
                 sortable:true
             },{
-                title:'修改',
+                title:'操作',
                 formatter:function(value, row, index, field){
                     return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
                 }
@@ -92,30 +92,30 @@
         if ( hashes[1] == 'ITSourceReport') {
             // todo : 针对报表的部分内容显隐
             // todo: 这里也许要换成 typeCode
-            setting.OSType = hashes[2];
+            Record.OSType = hashes[2];
             // /1/HP 
             // 按厂商统计的-> HP 名字的
-            setting.countType = hashes[3];
-            switch(setting.countType){
+            Record.countType = hashes[3];
+            switch(Record.countType){
                 // 厂商
                 case '1':{
-                    setting.serFac = hashes[4];
+                    Record.serFac = hashes[4];
                     break;
                 }
                 // os 版本
                 case '2':{
-                    setting.OSVer = hashes[4];
+                    Record.OSVer = hashes[4];
                     break;
                 }
                 // 标签
                 case '3':{
-                    setting.tags = [hashes[4]];
+                    Record.tags = [hashes[4]];
                     break;
                 }
             };
             // hashes[5] : rowId
             if ( hashes[5] ) {
-                setting.rowId = hashes[5];
+                Record.rowId = hashes[5];
                 renderDetail();
                 return;
             }
@@ -157,12 +157,12 @@
     }
     function queryParams(params){
         params.searchText = $('#ITSource-sourceTable-toolbar .searchInput').text();
-        params.tags = setting.tags;
+        params.tags = Record.tags;
         // 资源大分类
-        params.typeCode = setting.typeCode;
+        params.typeCode = Record.typeCode;
         // 资源二级分类
-        params.OSType = setting.OSType;
-        params.OSVer = setting.OSVer;
+        params.OSType = Record.OSType;
+        params.OSVer = Record.OSVer;
         return params;
     }
     function search(){
@@ -175,11 +175,12 @@
     // 点击行详情按钮后-> 渲染详情
     function renderDetail() {
         var params = {
-            id: setting.rowId
+            id: Record.rowId
         }
         fecthData('ITSource/detail','json',params,{
             success:function(res){
                 render('ITSource-table-detail-template',res.data);
+                Record.details = res.data.details;
             },
             error:function(){
 
@@ -187,9 +188,26 @@
         });
     }
     function clickMore(){
-        var searchText = $(this).parents('.form-group').find('label').text();
-        alert(searchText);
-        // fecthData('')
+        if ( $(this).text() == '显示详情') {
+            $(this).text('隐藏详情');
+        } else {
+            $(this).text('显示详情');
+            $(this).parents('tr').next().remove();
+            return;
+        }
+        var trIndex = $(this).parents('tr').index();
+        var labelIndex = $(this).parents('.form-group').index();
+        var columnsTexts = Record.details[labelIndex].value.columnsText;
+        var tr = Record.details[labelIndex].value.tableData[trIndex];
+        var data = {more:[]};
+        for (var i = 5; i < columnsTexts.length; i++) {
+            data.more.push({
+                keyText:columnsTexts[i],
+                value:tr[i]
+            });
+        };
+        var html = Handlebars.getHTMLByCompile('ITSource-table-more-template',data);
+        $(html).insertAfter($(this).parents('tr'));
     }
     // 事件注册
     $('body').on('click','#ITSource-sourceTable-toolbar .checkAll' ,checkAll);

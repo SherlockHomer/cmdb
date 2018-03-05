@@ -1,0 +1,22 @@
+{
+    "total":14,
+    "rows": [{
+        "id": 1,
+        "name": "SNMP发现策略",
+        "port": 161,
+        "protVersion":"v1",
+        "RGroupName":"public"
+    },{
+        "id": 1,
+        "name": "SNMP发现策略",
+        "port": 164,
+        "protVersion":"v3",
+        "RGroupName":"public"
+    },{
+        "id": 1,
+        "name": "SNMP发现策略",
+        "port": 162,
+        "protVersion":"v4",
+        "RGroupName":"public"
+    }]
+}

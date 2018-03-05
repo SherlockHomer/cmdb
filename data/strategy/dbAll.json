@@ -1,0 +1,12 @@
+{
+    "total":55,
+    "rows": [{
+        "id": 1,
+        "name": "数据库发现策略",
+        "OSType":"SQL Server",
+        "dbName": "auto4_4",
+        "port":"1433",
+        "account":"root",
+        "encoding":"gbk"
+    }]
+}

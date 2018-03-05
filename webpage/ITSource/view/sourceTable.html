@@ -82,6 +82,20 @@
     </div>
 
 </script>
+<script type="text/x-handlebars-template" id="ITSource-table-more-template">
+    <tr>
+        <td colspan="6">
+            <div class="form-horizontal row">
+                {{#each more}}
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">{{keyText}}：</label>
+                    <div class="col-sm-9 form-control-static">{{value}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </td>
+    </tr>
+</script>
 <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
  
 <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>

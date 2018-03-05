@@ -1,0 +1,10 @@
+{
+    "total":55,
+    "rows": [{
+        "id": 1,
+        "name": "中间件发现策略1",
+        "OSType":"Tomcat",
+        "port":"8080",
+        "account":"admin"
+    }]
+}
