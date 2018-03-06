@@ -3,14 +3,14 @@
     "rows": [{
         "id": 1,
         "appName": "FTP",
-        "port": 161
+        "ports": [161]
     },{
         "id": 2,
-        "appName": "FTP",
-        "port": 162
+        "appName": "FTP1",
+        "ports": [162]
     },{
         "id": 3,
-        "appName": "FTP",
-        "port": 163
+        "appName": "FTP2",
+        "ports": [163,144]
     }]
 }

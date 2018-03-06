@@ -152,7 +152,7 @@ action：  strategy/saveSNMP
     "id": 1,
     "name": "SNMP发现策略",
     "port": 161,
-    "protVersion": "v1",
+    "protVersion": "v1/v2",
     "rGroupName": "public",
     "safeName":"",
     "engineId":"",
@@ -199,15 +199,15 @@ action：  strategy/portAll
     "rows": [{
         "id": 1,
         "appName": "FTP",
-        "port": 161
+        "ports": [161]
     },{
         "id": 2,
-        "appName": "FTP",
-        "port": 162
+        "appName": "FTP1",
+        "ports": [162]
     },{
         "id": 3,
-        "appName": "FTP",
-        "port": 163
+        "appName": "FTP2",
+        "ports": [163,144]
     }]
 }
 
@@ -217,7 +217,7 @@ action：  strategy/defPort
     // 1: 标准的  2：客户化端口
     "portType":1,
     "name":"Window RPC",
-    "prots":[135,188],
+    "ports":[135,188],
     // id 为null 则是客户端的新增
     "id":1
 }
@@ -256,15 +256,17 @@ action：  strategy/serverAll
     "rows": [{
         "id": 1,
         "name": "服务器发现策略",
-        "type": "window",
+        "prot": "window",
         "account":"administrator",
         "encoding":"GBK",
+        "port":15
     },{
         "id": 2,
         "name": "发现策略",
-        "type": "linux",
+        "prot": "linux",
         "account":"admin",
         "encoding":"utf",
+        "port":16
     }]
 }
 
@@ -274,11 +276,13 @@ action：  strategy/saveServer
     // id 为null 则是新增
     "id": 1,
     "name": "服务器发现策略",
-    "type": "window",
+    "prot": "window",
+    "port":151,
     "account":"administrator",
     "password":"",
     "domain":"digitalchina.com",
     "encoding":"GBK",
+    "echo":"sdf"
 }
 {
     "data": {
@@ -371,11 +375,33 @@ action：  strategy/dbAll
     "rows": [{
         "id": 1,
         "name": "数据库发现策略",
-        "OSType":"SQL Server",
+        "dbType":"Oracle",
+        "connectType":"服务名",
         "dbName": "auto4_4",
         "port":"1433",
         "account":"root",
+        "password":234,
         "encoding":"gbk"
+    },{
+        "id": 2,
+        "name": "数据库发现策略",
+        "dbType":"Oracle",
+        "connectType":"实例名",
+        "dbName": "auto1",
+        "port":"1433",
+        "account":"root",
+        "password":234,
+        "encoding":"utf8"
+    },{
+        "id": 3,
+        "name": "数据库发现策略",
+        "dbType":"DB2",
+        "connectType":"实例名",
+        "dbName": "auto1",
+        "port":"1433",
+        "account":"root",
+        "password":234,
+        "encoding":"utf8"
     }]
 }
 
@@ -385,12 +411,13 @@ action：  strategy/saveDB
     // id 为null 则是新增
     "id": 1,
     "name": "数据库发现策略",
-    "OSType":"SQL Server",
+    "dbType": "Oracle",
+    "connectType": "服务名",
     "dbName": "auto4_4",
-    "port":"1433",
-    "account":"root",
-    "password":"123",
-    "encoding":"gbk"
+    "port": "1433",
+    "account": "root",
+    "password": 234,
+    "encoding": "gbk"
 }
 {
     "data": {
@@ -422,15 +449,15 @@ action：  strategy/midwareAll
     "searchText":""
 }
 {
-    "data": [{
+    "total":55,
+    "rows": [{
         "id": 1,
         "name": "中间件发现策略1",
-        "OSType":"Tomcat",
-        "port":"8080",
-        "account":"admin"
-    }],
-    "success": true,
-    "msg": "成功"
+        "OSType": "Tomcat",
+        "port": "8080",
+        "soapPort": 0000,
+        "account": "admin"
+    }]
 }
 
 action：  strategy/saveMidware
@@ -441,6 +468,7 @@ action：  strategy/saveMidware
     "name": "中间件发现策略1",
     "OSType":"Tomcat",
     "port":"8080",
+    "soapPort":0000,
     "account":"admin",
     "password":"123"
 }

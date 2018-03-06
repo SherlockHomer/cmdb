@@ -52,6 +52,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -93,6 +94,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -101,8 +103,11 @@
                 sortable:true
             },{
                 title:'端口',
-                field:'port',
-                sortable:true
+                field:'ports',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    return value.join(',');
+                }
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
@@ -126,6 +131,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -134,8 +140,11 @@
                 sortable:true
             },{
                 title:'端口',
-                field:'port',
-                sortable:true
+                field:'ports',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    return value.join(',');
+                }
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
@@ -159,6 +168,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -204,6 +214,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -241,6 +252,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -249,7 +261,7 @@
                 sortable:true
             },{
                 title:'数据库类型',
-                field:'OSType',
+                field:'dbType',
                 sortable:true
             },{
                 title:'数据库名/服务名',
@@ -290,6 +302,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -298,7 +311,7 @@
                 sortable:true
             },{
                 title:'中间件类型',
-                field:'type',
+                field:'OSType',
                 sortable:true
             },{
                 title:'端口',
@@ -331,6 +344,7 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:[{
                 checkbox:true,
             },{
@@ -393,6 +407,12 @@
             }
         })
     };
+    function deleteThis(){
+        var rowId = $(this).attr('data-id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var params = { ids : [rowId] };
+        ajaxDelete( tableId,params );
+    }
     function deleteSome(){
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var sels = $('#'+tableId).bootstrapTable('getSelections');
@@ -447,7 +467,9 @@
         fetchData(url,'json',params,{
             success:function(res){
                 if (res.success) {
-                    alert(1);
+                    $.each(params.ids,function(i,perId){
+                        $('#'+tableId).bootstrapTable('removeByUniqueId',perId);
+                    })
                 } else {
 
                 }
@@ -458,9 +480,122 @@
         return params;
     }
     function search(){
-        $('#ITSource-sourceTable').bootstrapTable('refresh');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+tableId).bootstrapTable('refresh');
     }
-    
+    function addNew(){
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        renderAddNew( tabId );
+    }
+    function editOne(){
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
+        renderAddNew( tabId , params );
+    }
+    function renderAddNew(tabId,params){
+        $('#'+tabId).find('.tableView').addClass('hide');
+        var html = Handlebars.getHTMLByCompile(tabId+'-editView',params);
+        $('#'+tabId).find('.editView').html(html);
+        if ( params ) {
+            $('#'+tabId).find('.editView select').each(function(i,perSel){
+                $(perSel).val( $(perSel).attr('value') ).change();
+            })
+        };
+    }
+    function backToTableView(e){
+        e.preventDefault();
+        var tabId = $(e.target).parents('.tab-pane').eq(0).attr('id');
+        $('#'+tabId).find('.editView').html('');
+        $('#'+tabId).find('.tableView').removeClass('hide');
+    }
+    function saveOne(e){
+        e.preventDefault();
+        var tabId = $(e.target).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(e.target).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        if ( tableId == 'Configuration-portStandard-table' || tableId == 'Configuration-portCustom-table') {
+            // 非表格类的处理
+            params = collectPortTags(tabId);
+
+        } else {
+            var arr = $('#'+tabId).find('.editView form').serializeArray();
+            var params = {}
+            $.each(arr,function(i,perA){
+                params[perA.name] = perA.value;
+            });
+        }
+        
+        ajaxSave(tableId,params,e);
+    }
+    function ajaxSave(tableId,params,e){
+        switch(tableId){
+            case 'Configuration-SNMP-table':{
+                var url = 'strategy/saveSNMP';
+                break;
+            }
+            case 'Configuration-portStandard-table':{
+                var url = 'strategy/defPort';
+                params.portType = 1;
+                break;
+            }
+            case 'Configuration-portCustom-table':{
+                var url = 'strategy/defPort';
+                params.portType = 2;
+                break;
+            }
+            case 'Configuration-server-table':{
+                var url = 'strategy/saveServer';
+                break;
+            }
+            case 'Configuration-cloud-table':{
+                var url = 'strategy/saveCloud';
+                break;
+            }
+            case 'Configuration-database-table':{
+                var url = 'strategy/saveDB';
+                break;
+            }
+            case 'Configuration-middleware-table':{
+                var url = 'strategy/saveMidware';
+                break;
+            }
+            case 'Configuration-mission-table':{
+                var url = 'strategy/saveMission';
+                break;
+            }
+        }
+        fetchData(url,'json',params,{
+            success:function(res){
+                if (res.success) {
+                    $('#'+tableId).bootstrapTable('refresh');
+                    backToTableView(e);
+                } else {
+
+                }
+            }
+        })
+    };
+    // 添加标签
+    function addTag(e){
+        var num = $(e.target).prev().val();
+        if (!num) {
+            return false;
+        };
+        var newOne = $( $('#tag-template').html() );
+        newOne.find('.text').text(num);
+        newOne.insertBefore( $(e.target).prev() );
+    }
+    function collectPortTags(tabId){
+        var params = {};
+        params.ports = [];
+        $('#'+tabId).find('.editView .tags .text').each(function(i,perT){
+            params.ports.push($(perT).text());
+        });
+        params.name = $('#'+tabId).find('.editView [name="appName"]').val();
+        params.id = $('#'+tabId).find('.editView [name="id"]').val();
+        return params;
+    }
+
     // 事件注册
     // 相同功能
     $('body').on('click','#Configuration-basic .checkAll' ,checkAll);
@@ -468,12 +603,28 @@
     $('body').on('click','#Configuration-basic .invertCheck' ,invertCheck);
     $('body').on('input','#Configuration-basic .searchInput',filterText);
     $('body').on('click','#Configuration-basic .toolbar .delete',deleteSome);
+    $('body').on('click','#Configuration-basic td .delete',deleteThis);
+    $('body').on('click','#Configuration-basic .toolbar .searchBtn',search);
+    $('body').on('click','#Configuration-basic .toolbar .addNew',addNew);
+    $('body').on('click','#Configuration-basic td .edit',editOne);
 
-    // todo :
-    $('body').on('click','#ITSource-sourceTable-toolbar .searchBtn',search);
 
-    // SNMP
-    // $('body').on('click','#ITSource- .searchBtn',search);
+    // 编辑表单 
+    $('body').on('change','#Configuration-basic .editView select.changeView',Tool.changeSelected);
+    $('body').on('click','#Configuration-basic .editView .btn.cancle',function(e){
+        backToTableView(e);
+    });
+    $('body').on('click','#Configuration-basic .editView .backToTableView',function(e){
+        backToTableView(e);
+    });
+    $('body').on('click','#Configuration-basic .editView .btn.save',function(e){
+        saveOne(e);
+    });
+    $('body').on('click','#Configuration-basic .editView .btn.addTag',function(e){
+        addTag(e);
+    });
+    // 
+
 
     var Configuration = {};
     Configuration.renderModule = renderModule;

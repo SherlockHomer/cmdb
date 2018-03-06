@@ -208,6 +208,38 @@
     });
 }));
 
+// 一些常用的方法
+(function (window, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (window is window)
+        window.Tool = factory(window.jQuery);
+    };
+}(window, function ($) {
+    function changeSelected (e) {
+        var selected = e.target;
+        // 适用于Bootstrap 且 固定模版
+        var thoseDiv = $(selected).parents('.form-group').eq(0).find('~[data-belong]');
+        var length = thoseDiv.length;
+        var value = $(selected).val();
+        for(var i = 0; i < length; i++){
+            if($(thoseDiv[i]).attr('data-belong').split('#').indexOf(value) > -1){
+                $(thoseDiv[i]).removeClass("hide");
+            }else{
+                $(thoseDiv[i]).addClass("hide");
+            }
+        }
+    };
+
+    return {
+        changeSelected : changeSelected
+    }
+}));
 
 
 

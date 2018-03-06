@@ -63,3 +63,18 @@ ul {
 .bootstrap-table span.operator{
     margin-right: 10px;
 }
+.tags{
+    font-size:0;
+}
+.tags .alert{
+    padding: 6px;
+    min-width: 142px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    margin: 3px;
+    vertical-align: middle;
+}
+.tags .alert .close{
+    right:0;
+}

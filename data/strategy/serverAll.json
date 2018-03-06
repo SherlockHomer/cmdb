@@ -3,14 +3,16 @@
     "rows": [{
         "id": 1,
         "name": "服务器发现策略",
-        "type": "window",
+        "prot": "WMI",
         "account":"administrator",
-        "encoding":"GBK"
+        "encoding":"GBK",
+        "port":15
     },{
         "id": 2,
         "name": "发现策略",
-        "type": "linux",
+        "prot": "SSH",
         "account":"admin",
-        "encoding":"utf"
+        "encoding":"utf",
+        "port":16
     }]
 }

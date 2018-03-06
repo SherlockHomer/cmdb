@@ -3,12 +3,14 @@
     "rows": [{
         "id": 1,
         "name": "服务器发现策略",
-        "address": "10.4.4.201",
-        "account":"administrator"
+        "domainIp": "10.4.4.201",
+        "account":"administrator",
+        "domainIp":"10.5.4.5"
     },{
         "id": 2,
         "name": "服务器发现策略",
-        "address": "10.0.220.201",
-        "account":"admin"
+        "domainIp": "10.0.220.201",
+        "account":"admin",
+        "domainIp":"10.5.4.5"
     }]
 }
