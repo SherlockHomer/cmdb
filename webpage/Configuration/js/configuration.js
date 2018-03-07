@@ -354,15 +354,28 @@
             },{
                 title:'发现内容',
                 field:'content',
-                sortable:true
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    var discoveryTypes = value.split(',');
+                    var discoveryTexts = [];
+                    $.each(discoveryTypes,function(i,perT){
+                        discoveryTexts.push(getStatusItem('devices',perT).text);
+                    });
+                    return discoveryTexts.join('，');
+                }
             },{
                 title:'调度计划',
                 field:'scheduleId',
-                sortable:true
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    return row.schedule.join(';');
+                }
             },{
                 title:'目标范围',
                 field:'ips',
-                sortable:true
+                sortable:true,
+                // formatter:function(value, row, index, field){
+                // }
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
@@ -499,9 +512,51 @@
         $('#'+tabId).find('.editView').html(html);
         if ( params ) {
             $('#'+tabId).find('.editView select').each(function(i,perSel){
-                $(perSel).val( $(perSel).attr('value') ).change();
+                $(perSel).val( $(perSel).attr('value').split(',') ).change();
             })
         };
+        // 特殊标签内容处理
+        if (tabId == 'Configuration-mission') {
+            $('#'+tabId+' .select2').select2({
+                closeOnSelect:false
+            });
+            fetchData('strategy/getSchedule','json',null,{
+                success:function(res){
+                    if (res.success) {
+                        var scheduleSel = $('#'+tabId+' .schedulePlan');
+                        var val = scheduleSel.attr('value').split(',');
+                        scheduleSel.select2({
+                            data:res.data,
+                            closeOnSelect:false
+                        }).val( val ).change();
+                    } 
+                }
+            });
+            if(params.ips && params.ips.length > 1 ){
+                $.each(params.ips,function(i,perIp){
+                    var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
+                    newOne.insertBefore( $('#'+tabId+ ' .editView .ips .add') );
+                    newOne.find('.targetDevice').val(perIp.type).change();
+                    switch(perIp.type){
+                        case '指定IP' : {
+                            var values = perIp.value.split('.');
+                            break;
+                        }
+                        case 'IP地址段' : {
+                            var values = perIp.value.split('-').join('.').split('.');
+                            break;
+                        }
+                        case 'CIDR' : {
+                            var values = perIp.value.split('/').join('.').split('.');
+                            break;
+                        }
+                    }
+                    newOne.find('input:visible').each(function(y,perInput){
+                        $(perInput).val(values[y]);
+                    });
+                });
+            }
+        }
     }
     function backToTableView(e){
         e.preventDefault();
@@ -517,11 +572,17 @@
             // 非表格类的处理
             params = collectPortTags(tabId);
 
+        } else if ( tabId == 'Configuration-mission' ){
+            params = collectIPs(tabId);
         } else {
             var arr = $('#'+tabId).find('.editView form').serializeArray();
             var params = {}
             $.each(arr,function(i,perA){
-                params[perA.name] = perA.value;
+                if (params[perA.name]) {
+                    params[perA.name] = params[perA.name] + ',' +  perA.value;
+                } else {
+                    params[perA.name] = perA.value;
+                }
             });
         }
         
@@ -595,6 +656,91 @@
         params.id = $('#'+tabId).find('.editView [name="id"]').val();
         return params;
     }
+    // 添加ip
+    function addIp(e){
+        e.preventDefault();
+        var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
+        newOne.insertBefore( $(e.target) );
+    }
+    function removeIp(e){
+        e.preventDefault();
+        $(e.target).parent().remove();
+    }
+    function collectIPs(tabId) {
+        var arr = $('#'+tabId).find('.editView form').serializeArray();
+        var params = {}
+        $.each(arr,function(i,perA){
+            if (params[perA.name]) {
+                params[perA.name] = params[perA.name] + ',' +  perA.value;
+            } else {
+                params[perA.name] = perA.value;
+            }
+        });
+        params.ips = [];
+        $('#'+tabId+ ' .editView .ips .ip').each(function(i,perIp){
+            var ip = {};
+            ip.type = $(perIp).find('.targetDevice').val();
+            var inputs = $(perIp).find('input:visible').map(function(){
+                return $(this).val();
+            }).get();
+            switch(ip.type){
+                case '指定IP' : {
+                    ip.value = inputs.join('.');
+                    break;
+                }
+                case 'IP地址段' : {
+                    ip.value = inputs.splice(4,4).join('.') ;
+                    ip.value = inputs.join('.') + '-' + ip.value;
+                    break;
+                }
+                case 'CIDR' : {
+                    var pop = inputs.pop();
+                    ip.value = inputs.join('.') + '/' + pop;
+                    break;
+                }
+            };
+            params.ips.push(ip);
+        });
+        return params;
+    }
+    // 扫描
+    function scanThis() {
+        var rowId = $(this).attr('data-id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var params = { ids : [rowId] };
+        ajaxScan( tableId,params );
+    }
+    function scanSome() {
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        var ids = [];
+        $.each(sels,function(i,perSel){
+            ids.push(perSel.id);
+        });
+        if ( !ids[0] ) {
+            console.warn('sel some');
+            return false;
+        }
+        var params = {ids : ids};
+        ajaxScan(tableId,params);
+    };
+
+    function ajaxScan(tableId,params){
+        fetchData('monitor/startScan','json',params,{
+            success:function(res){
+                if (res.success) {
+                    window.location = window.location.origin + window.location.pathname + '#/Monitor';
+                } else {
+
+                }
+            }
+        })
+    }
+
+    // 设置代理
+    function setAgent() {
+
+    }
 
     // 事件注册
     // 相同功能
@@ -607,6 +753,10 @@
     $('body').on('click','#Configuration-basic .toolbar .searchBtn',search);
     $('body').on('click','#Configuration-basic .toolbar .addNew',addNew);
     $('body').on('click','#Configuration-basic td .edit',editOne);
+    $('body').on('click','#Configuration-basic td .scan',scanThis);
+    $('body').on('click','#Configuration-basic .toolbar .scan',scanSome);
+    $('body').on('click','#Configuration-basic .toolbar .setAgent',setAgent);
+
 
 
     // 编辑表单 
@@ -623,6 +773,15 @@
     $('body').on('click','#Configuration-basic .editView .btn.addTag',function(e){
         addTag(e);
     });
+
+    $('body').on('click','#Configuration-basic .editView .ips .add',function(e){
+        addIp(e);
+    });
+    $('body').on('click','#Configuration-basic .editView .ips .remove',function(e){
+        removeIp(e);
+    });
+
+
     // 
 
 

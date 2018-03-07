@@ -25,6 +25,9 @@
         },
         'ITSourceTable':{
             'moduleUrl':'webpage/ITSource/view/sourceTable.html'
+        },
+        'Monitor':{
+            'moduleUrl':'webpage/Monitor/view/monitor.html'
         }
     };
 
@@ -224,7 +227,7 @@
     function changeSelected (e) {
         var selected = e.target;
         // 适用于Bootstrap 且 固定模版
-        var thoseDiv = $(selected).parents('.form-group').eq(0).find('~[data-belong]');
+        var thoseDiv = $(selected).parents('.changeViewBox').eq(0).find('~[data-belong]');
         var length = thoseDiv.length;
         var value = $(selected).val();
         for(var i = 0; i < length; i++){

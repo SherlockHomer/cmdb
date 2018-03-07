@@ -6,7 +6,9 @@ ul {
     list-style: none;
     padding-left: 20px;
 }
-
+.showInline{
+    display: inline-block;
+}
 .info-box {
     display: inline-block;
     width: 120px;
@@ -77,4 +79,24 @@ ul {
 }
 .tags .alert .close{
     right:0;
+}
+#Configuration-mission .editView .ips{
+    /*margin-top : -40px;*/
+}
+#Configuration-mission .editView .ips .ip{
+    margin-bottom: 5px;
+}
+#Configuration-mission .editView .ips .ip > * {
+    display: inline-block;
+    vertical-align: top;
+}
+.ipBox{
+    display: inline-block;
+    width:60px !important;
+    margin-right: 4px;
+}
+
+/*select 2*/
+.select2-container{
+    width: 100% !important;
 }

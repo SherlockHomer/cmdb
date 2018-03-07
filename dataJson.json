@@ -509,11 +509,36 @@ action：  strategy/missionAll
     "rows": [{
         "id": 1,
         "name": "中间件发现策略1",
-        "content":[1,2,3],
-        "schedule":"每天九点",
-        "scheduleId":"1",
-        "ips":["10.5.5.53"]
+        "content":"server,db",
+        "schedule":["每天九点","下午三点"],
+        "scheduleId":"2,3,4",
+        "ips":[{
+            "type":"指定IP",
+            "value":"10.5.5.53"
+        },{
+            "type":"IP地址段",
+            "value":"10.5.5.54-10.5.5.65"
+        },{
+            "type":"CIDR",
+            "value":"10.5.5.54/9"
+        }]
     }]
+}
+
+action: strategy/getSchedule
+{
+    "data": [{
+        "id": 1,
+        "text": "Option 1"
+    }, {
+        "id": 2,
+        "text": "Option 2"
+    }, {
+        "id": 3,
+        "text": "Option 3"
+    }],
+    "success":true,
+    "msg":""
 }
 
 action：  strategy/saveMission
@@ -522,9 +547,18 @@ action：  strategy/saveMission
     // id 为null 则是新增
     "id": 1,
     "name": "中间件发现策略1",
-    "content":[1,2,3],
-    "scheduleId":1,
-    "目标范围":["10.5.5.53","10.4.5.5--10.4.5.80"]
+    "content": "1,2,3",
+    "scheduleId": "2,3,4",
+    "ips": [{
+        "type": "指定ip",
+        "value": "10.5.5.53"
+    }, {
+        "type": "IP地址段",
+        "value": "10.5.5.54-10.5.5.65"
+    }, {
+        "type": "CIDR",
+        "value": "10.5.5.54/9"
+    }]
 }
 {
     "data": {
@@ -631,7 +665,7 @@ action：  monitor/detail
 }
 
 
-action：  scan/start
+action：  monitor/startScan
 请求
 {
     "ids":[1,2,3]
@@ -642,7 +676,7 @@ action：  scan/start
     "msg": "成功"
 }
 
-action：  scan/stop
+action：  monitor/stopScan
 请求
 {
     "ids":[1,2,3]
