@@ -72,6 +72,8 @@
             loadModule( 'ITSourceTable' , hashes);
         } else if ( hashes[1] == 'ITSource' && hashes [2] && hashes [3]) {
             loadModule( 'ITSourceTable' , hashes);
+        } else if ( hashes[1] == 'ITSource' ) {
+            loadModule( 'ITSourceTable' , hashes);
         } else if ( hashes[1] ){
             loadModule( hashes[1] ,hashes.slice(2) );
         } 

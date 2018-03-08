@@ -35,7 +35,7 @@
     };
     // 渲染统计内容的具体情况表
     // 有数据才有表，因为是模版
-    function renderTable(){
+    function renderBasic(){
         render('ITSource-sourceTable-template');
         $('#ITSource-sourceTable').bootstrapTable({
             method:'post',
@@ -114,15 +114,24 @@
                 }
             };
             // hashes[5] : rowId
-            if ( hashes[5] ) {
-                Record.rowId = hashes[5];
+            if ( hashes[5] == 'detail' && hashes[6]) {
+                Record.rowId = hashes[6];
                 renderDetail();
                 return;
             }
+        } else if ( hashes[1] == 'ITSource' && hashes[2] == 'detail' ){
+            // 如果配有id才有渲染，否则还是渲染表格
+            if ( hashes[3] ) {
+                Record.rowId = hashes[3];
+                renderDetail();
+                return;
+            }
+
         } else if ( hashes[1] == 'ITSource' ){
             // todo : 针对资源信息的部分内容显隐
+            
         }
-        renderTable();
+        renderBasic();
     };
 
     // 对于一个界面多个box多个ajax友好
@@ -170,7 +179,7 @@
     }
     function clickDetail() {
         var id = $(this).attr('data-id');
-        Route.addHash(id);
+        Route.addHash('detail/'+id);
     };
     // 点击行详情按钮后-> 渲染详情
     function renderDetail() {

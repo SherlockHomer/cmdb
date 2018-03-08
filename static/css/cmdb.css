@@ -68,13 +68,16 @@ ul {
 .tags{
     font-size:0;
 }
+.tags > * {
+    margin:3px;
+}
+/*可关闭标签*/
 .tags .alert{
     padding: 6px;
     min-width: 142px;
     display: inline-block;
     font-size: 14px;
     text-align: center;
-    margin: 3px;
     vertical-align: middle;
 }
 .tags .alert .close{
