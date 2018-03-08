@@ -1,0 +1,126 @@
+<script type="text/x-handlebars-template" id="Monitor-basic-template">
+    <div class="box box-info box-body" id="Monitor-basic">
+        <div class="box-header">
+            <ul class="nav nav-tabs nav-justified form-group">
+                <li class="active"><a href="#Monitor-ing" role="tab" data-toggle="tab">正在扫描</a></li>
+                <li><a href="#Monitor-done" role="tab" data-toggle="tab">扫描完成</a></li>
+                <li><a href="#Monitor-planTo" role="tab" data-toggle="tab">计划扫描</a></li>
+                <li><a href="#Monitor-all" role="tab" data-toggle="tab">全部</a></li>
+            </ul>
+        </div>
+        <div class="box-body tab-content">
+            <div role="tabpanel" class="tab-pane active" id="Monitor-ing">
+                <div class="tableView">
+                    <div id="Monitor-ing-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <button type="button" class="btn btn-default cancleScan">取消扫描</button>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="Monitor-ing-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Monitor-done">
+                <div class="tableView">
+                    <div id="Monitor-done-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <button type="button" class="btn btn-default startScan">启动扫描</button>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="Monitor-done-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Monitor-planTo">
+                <div class="tableView">
+                    <div id="Monitor-planTo-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <button type="button" class="btn btn-default startScan">启动扫描</button>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="Monitor-planTo-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Monitor-all">
+                <div class="tableView">
+                    <div id="Monitor-all-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <button type="button" class="btn btn-default cancleScan">取消扫描</button>
+                            <button type="button" class="btn btn-default startScan">启动扫描</button>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="Monitor-all-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+<link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+
+<script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+
+<script src="webpage/Monitor/js/monitor.js"></script>
+
+<!-- <script src="bower_components/bootstrap-table/dist/extensions/filter/bootstrap-table-filter.min.js"></script> -->
+<script src="bower_components/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>

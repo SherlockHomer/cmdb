@@ -100,3 +100,8 @@ ul {
 .select2-container{
     width: 100% !important;
 }
+
+/*bootstrap table*/
+.bootstrap-table .table tr td .progress{
+    margin-top: 0;
+}

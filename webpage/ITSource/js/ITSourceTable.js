@@ -156,7 +156,7 @@
         })
     }
     function queryParams(params){
-        params.searchText = $('#ITSource-sourceTable-toolbar .searchInput').text();
+        params.searchText = $('#ITSource-sourceTable-toolbar .searchInput').val();
         params.tags = Record.tags;
         // 资源大分类
         params.typeCode = Record.typeCode;

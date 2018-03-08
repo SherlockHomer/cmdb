@@ -1,0 +1,15 @@
+{
+    "total": 180,
+    "rows": [{
+        "id": 1,
+        "name": "扫描任务1",
+        "content": "server,db",
+        "schedule": ["每天九点", "下午三点"],
+        "scheduleId": "2,3,4",
+        "startTime": "2018-01-10 09:00:00",
+        "endTime": "2018-01-10 10:00:00",
+        "operator": "系统",
+        "status": 1,
+        "progress":40
+    }]
+}

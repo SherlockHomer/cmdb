@@ -1,0 +1,14 @@
+{
+    "results": [{
+        "id": 1,
+        "text": "WIN-0ECQ6MI24DJ(window-10.5.5.1)"
+    }, {
+        "id": 2,
+        "text": "youjf-win8-148(window-10.5.5.2)"
+    }, {
+        "id": 3,
+        "text": "RHLE6.5.20171129(linux-10.5.5.3)"
+    }],
+    "success":true,
+    "msg":""
+}

@@ -1,0 +1,11 @@
+{
+    "total":77,
+    "rows": [{
+        "id": 1,
+        "name": "YOUJF-DCITSTEST001",
+        "ip":"10.5.5.80",
+        "OS":"Linux",
+        "status":"在线",
+        "agentVersion":"5.0.0"
+    }]
+}

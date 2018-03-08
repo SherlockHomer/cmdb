@@ -39,6 +39,7 @@
     // 各个表的渲染
     function initSNMPTable(){
         $('#Configuration-SNMP-table').bootstrapTable({
+            toolbarId:'Configuration-SNMP-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/SNMPInfo'),
             checkbox:true,
@@ -81,6 +82,7 @@
     }
     function initPortStTable(){
         $('#Configuration-portStandard-table').bootstrapTable({
+            toolbarId:'Configuration-portStandard-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/portAll'),
             checkbox:true,
@@ -118,6 +120,7 @@
     };
     function initPortCusTable(){
         $('#Configuration-portCustom-table').bootstrapTable({
+            toolbarId:'Configuration-portCustom-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/portAll'),
             checkbox:true,
@@ -155,6 +158,7 @@
     }
     function initServerTable(){
         $('#Configuration-server-table').bootstrapTable({
+            toolbarId:'Configuration-server-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/serverAll'),
             checkbox:true,
@@ -201,6 +205,7 @@
     }
     function initCloudTable(){
         $('#Configuration-cloud-table').bootstrapTable({
+            toolbarId:'Configuration-cloud-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/cloudAll'),
             checkbox:true,
@@ -239,6 +244,7 @@
     }
     function initDBTable(){
         $('#Configuration-database-table').bootstrapTable({
+            toolbarId:'Configuration-database-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/dbAll'),
             checkbox:true,
@@ -289,6 +295,7 @@
     }
     function initMidwareTable(){
         $('#Configuration-middleware-table').bootstrapTable({
+            toolbarId:'Configuration-middleware-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/midwareAll'),
             checkbox:true,
@@ -331,6 +338,7 @@
     }
     function initMissionTable(){
         $('#Configuration-mission-table').bootstrapTable({
+            toolbarId:'Configuration-mission-table-toolbar',
             method:'post',
             url:ConfirmUrl('strategy/missionAll'),
             checkbox:true,
@@ -384,7 +392,54 @@
             }]
         });
     }
-    
+    function initAgentTable(){
+        $('#Configuration-agent-table').bootstrapTable({
+            toolbarId:'Configuration-agent-table-toolbar',
+            method:'post',
+            url:ConfirmUrl('strategy/agentAll'),
+            checkbox:true,
+            pagination:true,
+            sortName:'ip',
+            sortOrder: "desc",
+            // sortable:true,
+            pageNumber:1,
+            pageSize:20,
+            pageList:[20,50,100],
+            // 排序是后台的
+            sidePagination:'server',
+            queryParams:queryParams,
+            uniqueId:'id',
+            columns:[{
+                checkbox:true,
+            },{
+                title:'设备名称',
+                field:'name',
+                sortable:true
+            },{
+                title:'设备IP',
+                field:'ip',
+                sortable:true
+            },{
+                title:'操作系统',
+                field:'OS',
+                sortable:true
+            },{
+                title:'节点状态',
+                field:'status',
+                sortable:true
+            },{
+                title:'代理版本',
+                field:'agentVersion',
+                sortable:true
+            },{
+                title:'操作',
+                formatter:function(value, row, index, field){
+                    return '<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                }
+            }]
+        });
+    }
+
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
         renderBasic();
@@ -476,6 +531,10 @@
                 var url = 'strategy/delMission';
                 break;
             }
+            case 'Configuration-agent-table':{
+                var url = 'strategy/delAgent';
+                break;
+            }
         }
         fetchData(url,'json',params,{
             success:function(res){
@@ -490,6 +549,8 @@
         })
     }
     function queryParams(params){
+        var toolbar = $('#'+this.toolbarId);
+        params.searchText = toolbar.find('.searchInput').val();
         return params;
     }
     function search(){
@@ -508,7 +569,7 @@
     }
     function renderAddNew(tabId,params){
         $('#'+tabId).find('.tableView').addClass('hide');
-        var html = Handlebars.getHTMLByCompile(tabId+'-editView',params);
+        var html = Handlebars.getHTMLByCompile(tabId+'-editView-template',params);
         $('#'+tabId).find('.editView').html(html);
         if ( params ) {
             $('#'+tabId).find('.editView select').each(function(i,perSel){
@@ -532,7 +593,7 @@
                     } 
                 }
             });
-            if(params.ips && params.ips.length > 1 ){
+            if(params && params.ips && params.ips.length > 1 ){
                 $.each(params.ips,function(i,perIp){
                     var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
                     newOne.insertBefore( $('#'+tabId+ ' .editView .ips .add') );
@@ -562,6 +623,7 @@
         e.preventDefault();
         var tabId = $(e.target).parents('.tab-pane').eq(0).attr('id');
         $('#'+tabId).find('.editView').html('');
+        $('#'+tabId).find('.nest').html('');
         $('#'+tabId).find('.tableView').removeClass('hide');
     }
     function saveOne(e){
@@ -737,9 +799,49 @@
         })
     }
 
-    // 设置代理
-    function setAgent() {
+    // 添加嵌套 tab-pane
+    function setNest() {
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        var nestTemp = $(this).attr('data-nestTemp');
+        $('#'+tabId).find('.tableView').addClass('hide');
+        var html = Handlebars.getHTMLByCompile(nestTemp);
+        $('#'+tabId).find('.nest').html(html);
+        var nestTabId = $('#'+tabId).find('.nest .tab-pane').eq(0).attr('id');
+        switch (nestTemp){
+            case 'Configuration-agent-template' : {
+                initAgentTable();
+                initAgentSelect(nestTabId);
+                break;
+            }
+        }
+    };
+    function initAgentSelect(tabId) {
+        var ipSel = $('#'+tabId+' select.ip');
+        ipSel.select2({
+            ajax:{
+                url:ConfirmUrl('strategy/getAgents'),
+                dataType: 'json'
+            }
+        });
+    }
+    function addAgent() {
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sel = $('#'+ tabId).find('select.ip');
+        if ( !sel.val() ){
+            return;
+        }
+        var params = {ids:[sel.val()]}
+        fetchData('strategy/addAgent','json',params,{
+            success:function(res){
+                if (res.success) {
+                    $('#'+tableId).bootstrapTable('refresh');
+                    sel.val('').trigger('change');
+                } else {
 
+                }
+            }
+        })
     }
 
     // 事件注册
@@ -755,8 +857,8 @@
     $('body').on('click','#Configuration-basic td .edit',editOne);
     $('body').on('click','#Configuration-basic td .scan',scanThis);
     $('body').on('click','#Configuration-basic .toolbar .scan',scanSome);
-    $('body').on('click','#Configuration-basic .toolbar .setAgent',setAgent);
-
+    $('body').on('click','#Configuration-basic .toolbar .setNest',setNest);
+    $('body').on('click','#Configuration-basic .toolbar .addAgent',addAgent);
 
 
     // 编辑表单 
@@ -764,7 +866,7 @@
     $('body').on('click','#Configuration-basic .editView .btn.cancle',function(e){
         backToTableView(e);
     });
-    $('body').on('click','#Configuration-basic .editView .backToTableView',function(e){
+    $('body').on('click','#Configuration-basic .backToTableView',function(e){
         backToTableView(e);
     });
     $('body').on('click','#Configuration-basic .editView .btn.save',function(e){

@@ -211,7 +211,7 @@
                     <div id="Configuration-mission-table-toolbar" class="toolbar">
                         <div class="form-group">
                             <button type="button" class="btn btn-default addNew">新增</button>
-                            <button type="button" class="btn btn-default setAgent">设置发现代理</button>
+                            <button type="button" class="btn btn-default setNest" data-nestTemp="Configuration-agent-template">设置发现代理</button>
                         </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
@@ -238,13 +238,57 @@
                     </table>
                 </div>
                 <div class="editView"></div>
+                <div class="nest"></div>
             </div>
         </div>
     </div>
 </script>
 
+<script type="text/x-handlebars-template" id="Configuration-agent-template">
+    <ol class="breadcrumb">
+        <li class="backToTableView"><a>发现任务策略</a></li>
+        <li class="active">设置发现代理</li>
+    </ol>
+    <div class="tab-pane" id="Configuration-agent">
+        <div class="tableView">
+            <div id="Configuration-agent-table-toolbar" class="toolbar">
+                <div class="col-sm-12 form-inline form-group">
+                    <label class="form-group control-label">代理：</label>
+                    <div class="form-group" style="width: 300px">
+                        <select class="ip" ></select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default addAgent">快速添加</button>
+                    </div>
+                </div>
+                <div class="form-group col-sm-7 col-xs-12">
+                    <label>选择：</label>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default checkAll">全选</button>
+                        <button type="button" class="btn btn-default uncheckAll">无</button>
+                        <button type="button" class="btn btn-default invertCheck">反选</button>
+                    </div>
+                    <label>操作：</label>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default delete">批量删除</button>
+                    </div>
+                    
+                </div>
+                <div class="col-sm-5 col-xs-12 form-inline">
+                    <div class="pull-right">
+                        <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                        <button type="button" class="btn btn-default searchBtn">查询</button>
+                    </div>
+                </div>
+            </div>
+            <table id="Configuration-agent-table" class="table table-bordered table-hover">
+            </table>
+        </div>
+        <div class="editView"></div>
+    </div>
+</script>
 
-<script type="text/x-handlebars-template" id="Configuration-SNMP-editView">
+<script type="text/x-handlebars-template" id="Configuration-SNMP-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>SNMP设备发现策略</a></li>
         {{#if id}}
@@ -329,7 +373,7 @@
 </script>
 
 
-<script type="text/x-handlebars-template" id="Configuration-server-editView">
+<script type="text/x-handlebars-template" id="Configuration-server-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>服务器发现策略</a></li>
         {{#if id}}
@@ -406,7 +450,7 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-cloud-editView">
+<script type="text/x-handlebars-template" id="Configuration-cloud-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>云环境发现策略</a></li>
         {{#if id}}
@@ -458,7 +502,7 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-database-editView">
+<script type="text/x-handlebars-template" id="Configuration-database-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>数据库发现策略</a></li>
         {{#if id}}
@@ -554,7 +598,7 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-middleware-editView">
+<script type="text/x-handlebars-template" id="Configuration-middleware-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>中间件发现策略</a></li>
         {{#if id}}
@@ -614,8 +658,8 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-mission-editView">
-        <ol class="breadcrumb">
+<script type="text/x-handlebars-template" id="Configuration-mission-editView-template">
+    <ol class="breadcrumb">
         <li class="backToTableView"><a>发现任务策略</a></li>
         {{#if id}}
         <li class="active">修改</li>
@@ -703,7 +747,7 @@
     </div>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-portStandard-editView">
+<script type="text/x-handlebars-template" id="Configuration-portStandard-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>标准应用端口策略</a></li>
         {{#if id}}
@@ -735,7 +779,7 @@
 </script>
 
 
-<script type="text/x-handlebars-template" id="Configuration-portCustom-editView">
+<script type="text/x-handlebars-template" id="Configuration-portCustom-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>客户化应用端口策略</a></li>
         {{#if id}}

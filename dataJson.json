@@ -580,6 +580,57 @@ action：  strategy/delMission
     "msg": "成功"
 }
 
+action： strategy/agentAll
+{}
+{
+    "total":77,
+    "rows": [{
+        "id": 1,
+        "name": "YOUJF-DCITSTEST001",
+        "ip":"10.5.5.80",
+        "OS":"Linux",
+        "status":"在线",
+        "agentVersion":"5.0.0"
+    }]
+}
+
+
+action：  strategy/delAgent
+请求
+{
+    "ids": [1,2,3]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
+
+action： strategy/getAgents
+{
+    "data": [{
+        "id": 1,
+        "text": "10.5.5.1"
+    }, {
+        "id": 2,
+        "text": "10.5.5.2"
+    }, {
+        "id": 3,
+        "text": "10.5.5.3"
+    }],
+    "success":true,
+    "msg":""
+}
+
+action : strategy/addAgent
+{
+    "ids":[1]
+}
+{
+    "data": {},
+    "success": true,
+    "msg": "成功"
+}
 
 
 // # 自动发现监控
@@ -589,25 +640,26 @@ action：  strategy/delMission
 action：  monitor/infoAll
 请求
 {
-    "page":1,
-    "rows":15,
+    "limit": 20,
+    "offset": 60,
+    "order":"asc",
     "searchText":"",
     "monitorType":1
 }
 {
-    "data": [{
+    "total": 180,
+    "rows": [{
         "id": 1,
         "name": "扫描任务1",
-        "content":[1,2,3],
-        "schedule":"每天九点",
-        "scheduleId":"1",
-        "startTime":"2018-01-10 09:00:00",
-        "endTime":"2018-01-10 10:00:00",
-        "operator":"系统",
-        "status": 0.4
-    }],
-    "success": true,
-    "msg": "成功"
+        "content": "server,db",
+        "schedule": ["每天九点", "下午三点"],
+        "scheduleId": "2,3,4",
+        "startTime": "2018-01-10 09:00:00",
+        "endTime": "2018-01-10 10:00:00",
+        "operator": "系统",
+        "status": 1,
+        "progress":40
+    }]
 }
 
 action：  monitor/detail
