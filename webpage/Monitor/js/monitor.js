@@ -103,7 +103,7 @@
                         html +=  '<span class="form-control-static text-aqua cancleScan operator" role="button" data-id="'+row.id+'">取消扫描</span>' ;
                     }
                     if ( row.status == 2 || row.status == 3) {
-                        html += '<span class="form-control-static text-aqua startScan operator" role="button" data-id="'+row.id+'">启动扫描</span>'
+                        html += '<span class="form-control-static text-aqua scan operator" role="button" data-id="'+row.id+'">启动扫描</span>'
                     }
                     return html;
                 }
@@ -160,14 +160,14 @@
 
 
     // 扫描
-    function scanThis() {
-        var rowId = $(this).attr('data-id');
-        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+    function scanThis(btn,scanOrNot) {
+        var rowId = $(btn).attr('data-id');
+        var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var params = { ids : [rowId] };
-        ajaxScan( tableId,params );
+        ajaxScan( tableId,params ,scanOrNot);
     }
-    function scanSome() {
-        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+    function scanSome(btn,scanOrNot) {
+        var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var sels = $('#'+tableId).bootstrapTable('getSelections');
         var ids = [];
         $.each(sels,function(i,perSel){
@@ -178,21 +178,24 @@
             return false;
         }
         var params = {ids : ids};
-        ajaxScan(tableId,params);
+        ajaxScan(tableId,params,scanOrNot);
     };
 
-    function ajaxScan(tableId,params){
-        fetchData('monitor/startScan','json',params,{
+    function ajaxScan(tableId,params,scanOrNot){
+        var url = scanOrNot? 'monitor/startScan':'monitor/stopScan';
+        fetchData(url,'json',params,{
             success:function(res){
                 if (res.success) {
-                    
+                    $('#'+tableId).bootstrapTable('refresh');
                 } else {
 
                 }
             }
         })
     }
-
+    function cancleScanThis(){
+        scanThis(this,false);
+    }
 
     // 事件注册
     // 相同功能
@@ -201,8 +204,20 @@
     $('body').on('click','#Monitor-basic .invertCheck' ,invertCheck);
     $('body').on('input','#Monitor-basic .searchInput',filterText);
     $('body').on('click','#Monitor-basic .toolbar .searchBtn',search);
-    $('body').on('click','#Monitor-basic td .scan',scanThis);
-    $('body').on('click','#Monitor-basic .toolbar .scan',scanSome);
+    $('body').on('click','#Monitor-basic td .scan',function(){
+        scanThis(this,true)
+    });
+    $('body').on('click','#Monitor-basic .toolbar .scan',function(){
+        scanSome(this,true);
+    } );
+    $('body').on('click','#Monitor-basic td .cancleScan',function(){
+        scanThis(this,false)
+    });
+    $('body').on('click','#Monitor-basic .toolbar .cancleScan',function(){
+        scanSome(this,false);
+    });
+
+
 
     var Monitor = {};
     Monitor.renderModule = renderModule;
