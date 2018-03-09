@@ -68,12 +68,22 @@
         // 首页
         if ( !hashes[1] ) {
             loadModule('Dashboard' , [] );
-        } else if ( hashes[1] == 'ITSourceReport' && hashes [2] && hashes [3]){
-            loadModule( 'ITSourceTable' , hashes);
-        } else if ( hashes[1] == 'ITSource' && hashes [2] && hashes [3]) {
-            loadModule( 'ITSourceTable' , hashes);
+        } else if ( hashes[1] == 'ITSourceReport' && hashes [3] && hashes [4]){
+            loadModule( 'ITSourceTable' , {
+                currentModule:hashes[1],
+                levelOneType:hashes[2],
+                typeCode:hashes[3],
+                countType:hashes[4],
+                classifyInCount:hashes[5],
+                detail:hashes[6],
+                rowId:hashes[7]
+            });
         } else if ( hashes[1] == 'ITSource' ) {
-            loadModule( 'ITSourceTable' , hashes);
+            loadModule( 'ITSourceTable' , {
+                currentModule:hashes[1],
+                detail:hashes[2],
+                rowId:hashes[3]
+            });
         } else if ( hashes[1] ){
             loadModule( hashes[1] ,hashes.slice(2) );
         } 

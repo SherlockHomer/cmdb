@@ -11,7 +11,12 @@
     }
 }(window, function ($) {
     if ( window.ITSourceReport ) { return window.ITSourceReport};
-
+    var Record = {
+        // 一级资源分类
+        levelOneType : '',
+        typeCode:'',
+        countType:''
+    }
     // 配置DOM和temp的一一对应
     var tempAndDom = {
         'ITSourceReport-template':'index-content',
@@ -55,10 +60,12 @@
     function renderModule(params) {
         if ( !params || params.length == 0 ) {
             getAllView();
-        } else if ( params[0] && !params[1]){
+        } else if ( params[0] && params[1] ){
+            Record.levelOneType = params[0];
+            Record.typeCode = params[1];
             // 加载统计情况
             renderCount({
-                typeCode : params[0]
+                typeCode : Record.typeCode
             });
         }
     };
@@ -69,7 +76,9 @@
 
     $('body').on('click','.ITSourceBox .info-box',function(){
         var name = $(this).find('.info-box-number').attr('data-name');
-        Route.addHash(name);
+        var levelOneType = $(this).parents('.ITSourceBox').eq(0).attr('data-levelOneType');
+
+        Route.addHash(levelOneType+'/'+name);
     });
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');

@@ -14,6 +14,8 @@
         tags:[],
         // 默认资源是服务器
         typeCode:'server',
+        // 一级资源类型，报表过来的typeCode对应哪个大分类
+        levelOneType:'server',
         OSVer:'',
         OSType:'',
         serFac:'',
@@ -37,11 +39,21 @@
     // 有数据才有表，因为是模版
     function renderBasic(){
         render('ITSource-sourceTable-template');
-        $('#ITSource-sourceTable').bootstrapTable({
+        initSourceTable('server');
+        initSourceTable('db');
+        initSourceTable('middleware');
+        initSourceTable('cloud');
+        initSourceTable('network');
+        initSourceTable('app');
+    }
+    function initSourceTable(typeCode){
+        $('#ITSource-'+typeCode+'-table').bootstrapTable({
+            typeCode:typeCode,
             method:'post',
             url:ConfirmUrl('ITSource/infoAll'),
             checkbox:true,
             pagination:true,
+            // todo ::  改不同表格  不同 sort
             sortName:'OSType',
             sortOrder: "asc",
             // sortable:true,
@@ -51,105 +63,285 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
-            columns:[{
-                checkbox:true,
-            },{
-                title:'服务器名',
-                field:'serverName',
-                sortable:true
-            },{
-                title:'IP地址',
-                field:'ip',
-                sortable:true
-            },{
-                title:'OS类型',
-                field:'OSType',
-                sortable:true
-            },{
-                title:'OS版本',
-                field:'OSVer',
-                sortable:true
-            },{
-                title:'服务器厂商',
-                field:'serFac',
-                sortable:true
-            },{
-                title:'标签',
-                field:'tag',
-                sortable:true
-            },{
-                title:'操作',
-                formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
-                }
-            }]
+            columns:getColumnsByTypeCode(typeCode)
         });
+    };
+
+    function getColumnsByTypeCode(typeCode) {
+        switch (typeCode){
+            case 'server' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'服务器名',
+                    field:'serverName',
+                    sortable:true
+                },{
+                    title:'IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'OS类型',
+                    field:'OSType',
+                    sortable:true
+                },{
+                    title:'OS版本',
+                    field:'OSVer',
+                    sortable:true
+                },{
+                    title:'服务器厂商',
+                    field:'serFac',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }]
+                break;
+            }
+            case 'db' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'数据库类型',
+                    field:'dbType',
+                    sortable:true
+                },{
+                    title:'数据库名',
+                    field:'dbName',
+                    sortable:true
+                },{
+                    title:'版本',
+                    field:'version',
+                    sortable:true
+                },{
+                    title:'IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }];
+                break;
+            }
+            case 'middleware' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'中间件类型',
+                    field:'middlewareType',
+                    sortable:true
+                },{
+                    title:'中间件名',
+                    field:'middlewareName',
+                    sortable:true
+                },{
+                    title:'版本',
+                    field:'version',
+                    sortable:true
+                },{
+                    title:'IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }];
+                break;
+            }
+            case 'cloud' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'管理域类型',
+                    field:'cloudType',
+                    sortable:true
+                },{
+                    title:'名称',
+                    field:'cloudName',
+                    sortable:true
+                },{
+                    title:'管理域IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'描述',
+                    field:'description',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }];
+                break;
+            }
+            case 'network' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'设备名',
+                    field:'deviceName',
+                    sortable:true
+                },{
+                    title:'设备类型',
+                    field:'deviceType',
+                    sortable:true
+                },{
+                    title:'厂商',
+                    field:'serFac',
+                    sortable:true
+                },{
+                    title:'IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }];
+                break;
+            }
+            case 'app' : {
+                return [{
+                    checkbox:true,
+                },{
+                    title:'软件名称',
+                    field:'appName',
+                    sortable:true
+                },{
+                    title:'IP地址',
+                    field:'ip',
+                    sortable:true
+                },{
+                    title:'版本',
+                    field:'version',
+                    sortable:true
+                },{
+                    title:'发布者',
+                    field:'promulgator',
+                    sortable:true
+                },{
+                    title:'标签',
+                    field:'tag',
+                    sortable:true
+                },{
+                    title:'操作',
+                    formatter:function(value, row, index, field){
+                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                    }
+                }]
+                break;
+            }
+        }
     }
-    
     // 对外统一接口，在cmdb.js中调用
+    // hase 判断记录参数
+    // currentModule:[1],
+    // levelOneType:[2],
+    // typeCode:[3],
+    // countType:[4],
+    // classifyInCount:[5]
     function renderModule( hashes ) {
-        // hase 判断记录参数
-        if ( hashes[1] == 'ITSourceReport') {
-            // todo : 针对报表的部分内容显隐
-            // todo: 这里也许要换成 typeCode
-            Record.OSType = hashes[2];
-            // /1/HP 
-            // 按厂商统计的-> HP 名字的
-            Record.countType = hashes[3];
+        Record.currentModule = hashes.currentModule;
+        if ( hashes.currentModule == 'ITSourceReport') {
+            Record.levelOneType = hashes.levelOneType;
+            Record.typeCode = hashes.typeCode;
+            Record.countType = hashes.countType;
             switch(Record.countType){
                 // 厂商
                 case '1':{
-                    Record.serFac = hashes[4];
+                    Record.serFac = hashes.classifyInCount;
                     break;
                 }
                 // os 版本
                 case '2':{
-                    Record.OSVer = hashes[4];
+                    Record.OSVer = hashes.classifyInCount;
                     break;
                 }
                 // 标签
                 case '3':{
-                    Record.tags = [hashes[4]];
+                    Record.tags = [hashes.classifyInCount];
                     break;
                 }
             };
-            // hashes[5] : rowId
-            if ( hashes[5] == 'detail' && hashes[6]) {
-                Record.rowId = hashes[6];
+            if ( hashes.detail && hashes.rowId ) {
+                Record.rowId = hashes.rowId;
                 renderDetail();
                 return;
             }
-        } else if ( hashes[1] == 'ITSource' && hashes[2] == 'detail' ){
+        } else if ( hashes.currentModule == 'ITSource' && hashes.detail ){
             // 如果配有id才有渲染，否则还是渲染表格
-            if ( hashes[3] ) {
-                Record.rowId = hashes[3];
+            if ( hashes.rowId ) {
+                Record.rowId = hashes.rowId;
                 renderDetail();
                 return;
             }
 
-        } else if ( hashes[1] == 'ITSource' ){
-            // todo : 针对资源信息的部分内容显隐
-            
+        } else if ( hashes.currentModule == 'ITSource' ){
+
         }
         renderBasic();
+        // 针对资源信息的部分内容显隐
+        showOrHideSome(Record.currentModule);
     };
+    function showOrHideSome(currentModule) {
+        $('#ITSource-sourceTable-box .nav-tabs a').parent().removeClass('active');
+        $('#ITSource-sourceTable-box .nav-tabs a[data-typeCode="'+Record.levelOneType+'"]').tab('show');
+        if (currentModule == 'ITSourceReport') {
+            $('#ITSource-sourceTable-box .forNotReport').hide();
+        } else if (currentModule == 'ITSource') {
+            $('#ITSource-sourceTable-box .forNotReport').show();
+        }
+    }
 
-    // 对于一个界面多个box多个ajax友好
-    function getAllView(){
-        renderITSourceTable();
-    };
+    function changeTab(tab){
+        // 能切换选项卡只在 < IT资源信息 >中
+        Record.typeCode = $(tab).attr('data-typeCode');
+    }
+    
     function checkAll(){
-        $('#ITSource-sourceTable').bootstrapTable('checkAll')
+        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+id).bootstrapTable('checkAll')
     };
     function uncheckAll(){
-        $('#ITSource-sourceTable').bootstrapTable('uncheckAll');
+        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+id).bootstrapTable('uncheckAll');
     }
     function invertCheck(){
-        $('#ITSource-sourceTable').bootstrapTable('checkInvert')
+        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+id).bootstrapTable('checkInvert')
     };
-    function filterText(text){
-        text = text.toLowerCase();
-        $('#ITSource-sourceTable tbody tr').each(function(){
+    function filterText(){
+        var text = this.value.toLowerCase();
+        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+ id +' tbody tr').each(function(){
             var has = false;
             $(this).find('td').each(function(){
                 if ( $(this).text().toLowerCase().indexOf(text) != -1){
@@ -163,19 +355,25 @@
                 $(this).show();
             }
         })
-    }
+    };
     function queryParams(params){
-        params.searchText = $('#ITSource-sourceTable-toolbar .searchInput').val();
+        var toolbar = $('#ITSource-'+this.typeCode+'-table-toolbar');
+        params.searchText = toolbar.find('.searchInput').val();
         params.tags = Record.tags;
-        // 资源大分类
-        params.typeCode = Record.typeCode;
-        // 资源二级分类
+        // 资源分类
+        if (Record.currentModule == 'ITSource') {
+            params.typeCode = this.typeCode;
+        } else {
+            params.typeCode = Record.typeCode;
+        }
+        // 统计分类
         params.OSType = Record.OSType;
         params.OSVer = Record.OSVer;
         return params;
     }
     function search(){
-        $('#ITSource-sourceTable').bootstrapTable('refresh');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        $('#'+tableId).bootstrapTable('refresh');
     }
     function clickDetail() {
         var id = $(this).attr('data-id');
@@ -219,19 +417,21 @@
         $(html).insertAfter($(this).parents('tr'));
     }
     // 事件注册
-    $('body').on('click','#ITSource-sourceTable-toolbar .checkAll' ,checkAll);
-    $('body').on('click','#ITSource-sourceTable-toolbar .uncheckAll' ,uncheckAll);
-    $('body').on('click','#ITSource-sourceTable-toolbar .invertCheck' ,invertCheck);
-    $('body').on('input','#ITSource-sourceTable-toolbar .searchInput',function(){
-        filterText(this.value);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .checkAll' ,checkAll);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .uncheckAll' ,uncheckAll);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .invertCheck' ,invertCheck);
+    $('body').on('input','#ITSource-sourceTable-box .toolbar .searchInput',filterText);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .searchBtn',search);
+    $('body').on('click','#ITSource-sourceTable-box span.detail',clickDetail);
+    // 切换一级资源类型选项卡
+    $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function (e) {
+        changeTab(e.target);
     });
-    $('body').on('click','#ITSource-sourceTable-toolbar .searchBtn',search);
-    $('body').on('click','#ITSource-sourceTable span.detail',clickDetail);
-
     // 详情中内容过多点击详情
     $('body').on('click','#ITSource-table-detail .more',clickMore);
 
     var ITSourceTable = {};
+    // ITSourceTable.Record = Record;
     ITSourceTable.renderModule = renderModule;
     ITSourceTable.checkAll = checkAll ;
     ITSourceTable.uncheckAll = uncheckAll ;

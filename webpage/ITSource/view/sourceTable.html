@@ -1,39 +1,229 @@
 <script type="text/x-handlebars-template" id="ITSource-sourceTable-template">
-    <div class="box box-info box-body">
-        <div id="ITSource-sourceTable-toolbar">
-            <div class="form-group col-sm-6 col-xs-12">
-                <label>选择：</label>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default checkAll">全选</button>
-                    <button type="button" class="btn btn-default uncheckAll">无</button>
-                    <button type="button" class="btn btn-default invertCheck">反选</button>
+    <div class="box box-info box-body" id="ITSource-sourceTable-box">
+        <div class="box-header forNotReport">
+            <ul class="nav nav-tabs nav-justified form-group">
+                <li><a href="#ITSource-sourceTable-server" data-typeCode="server" role="tab" data-toggle="tab">服务器</a></li>
+                <li><a href="#ITSource-sourceTable-db" data-typeCode="db" role="tab" data-toggle="tab">数据库</a></li>
+                <li><a href="#ITSource-sourceTable-middleware" data-typeCode="middleware" role="tab" data-toggle="tab">中间件</a></li>
+                <li><a href="#ITSource-sourceTable-cloud" data-typeCode="cloud" role="tab" data-toggle="tab">云环境</a></li>
+                <li><a href="#ITSource-sourceTable-network" data-typeCode="network" role="tab" data-toggle="tab">网络设备</a></li>
+                <li><a href="#ITSource-sourceTable-app" data-typeCode="app" role="tab" data-toggle="tab">应用程序</a></li>
+            </ul>
+        </div>
+        <div class="box-body tab-content">
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-server">
+                <div class="tableView">
+                    <div id="ITSource-server-table-toolbar" class="toolbar">
+                        <div class="form-group forNotReport">
+                            <button type="button" class="btn btn-default import">导入excle</button>
+                            <button type="button" class="btn btn-default addNew">添加</button>
+                        </div>
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                            <button type="button" class="btn btn-default defMissionStrategy">定义发现策略</button>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-server-table" class="table table-bordered table-hover">
+                    </table>
                 </div>
-                <label>操作：</label>
-                <button type="button" class="btn btn-default export">导出excle</button>
+                <div class="editView"></div>
             </div>
-            <div class="col-sm-6 col-xs-12 form-inline">
-                <div class="pull-right">
-                    <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
-                    <button type="button" class="btn btn-default searchBtn">查询</button>
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-db">
+                <div class="tableView">
+                    <div id="ITSource-db-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-db-table" class="table table-bordered table-hover">
+                    </table>
                 </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-middleware">
+                <div class="tableView">
+                    <div id="ITSource-middleware-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-middleware-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-cloud">
+                <div class="tableView">
+                    <div id="ITSource-cloud-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-cloud-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-network">
+                <div class="tableView">
+                    <div id="ITSource-network-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-network-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-app">
+                <div class="tableView">
+                    <div id="ITSource-app-table-toolbar" class="toolbar">
+                        <div class="form-group col-sm-7 col-xs-12">
+                            <label>选择：</label>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default checkAll">全选</button>
+                                <button type="button" class="btn btn-default uncheckAll">无</button>
+                                <button type="button" class="btn btn-default invertCheck">反选</button>
+                            </div>
+                            <label>操作：</label>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    导出excle
+                                    <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                  <li><a>导出列表</a></li>
+                                  <li><a>导出详情</a></li>
+                              </ul>
+                          </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 form-inline">
+                            <div class="pull-right">
+                                <input type="text" class="form-control searchInput" placeholder="输入任意词进行全表格过滤查询" style="width: 250px">
+                                <button type="button" class="btn btn-default searchBtn">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="ITSource-app-table" class="table table-bordered table-hover">
+                    </table>
+                </div>
+                <div class="editView"></div>
             </div>
         </div>
-        <table id="ITSource-sourceTable" class="table table-bordered table-hover">
-            <!-- <thead>
-                <tr>
-                    <th data-checkbox="true"></th>
-                    <th data-field="serverName" data-sortable="true">服务器名</th>
-                    <th data-field="ip" data-sortable="true">IP地址</th>
-                    <th data-field="OSType" data-sortable="true">OS类型</th>
-                    <th data-field="OSVer" data-sortable="true">OS版本</th>
-                    <th data-field="serFac" data-sortable="true">服务器厂商</th>
-                    <th data-field="tag" data-sortable="true">标签</th>
-                    <th data-field="name">操作</th>
-                </tr>
-            </thead> -->
-        </table>
     </div>
 </script>
+
 <script type="text/x-handlebars-template" id="ITSource-table-detail-template">
     <div class="row">
         <section class="col-lg-12 col-sm-12">
@@ -82,6 +272,7 @@
     </div>
 
 </script>
+
 <script type="text/x-handlebars-template" id="ITSource-table-more-template">
     <tr>
         <td colspan="6">
@@ -96,6 +287,8 @@
         </td>
     </tr>
 </script>
+
+
 <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
  
 <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>

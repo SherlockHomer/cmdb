@@ -762,12 +762,13 @@ action：  monitor/stopScan
 }
 
 // # IT资源信息
-//资源type  {type:'server',',text:'服务器'},
-    // {type:'db',',text:'数据库'},
-    // {type:'middleware,text:'中间件'},
-    // {type:'cloud,text:'Vmware云环境'},
-    // {type:'network,text:'网络设备'},
-    // {type:'app,text:'应用程序'}
+//资源type  
+// {type:'server',',text:'服务器'},
+// {type:'db',',text:'数据库'},
+// {type:'middleware,text:'中间件'},
+// {type:'cloud,text:'Vmware云环境'},
+// {type:'network,text:'网络设备'},
+// {type:'app,text:'应用程序'}
 
 action：  ITSource/getTags
 请求
@@ -925,7 +926,13 @@ action：  ITSource/setTag
 
 
 // IT 资源报表
-//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+//资源type  
+// {type:'server',',text:'服务器'},
+// {type:'db',',text:'数据库'},
+// {type:'middleware,text:'中间件'},
+// {type:'cloud,text:'Vmware云环境'},
+// {type:'network,text:'网络设备'},
+// {type:'app,text:'应用程序'}
 action：  ITSourceReport/report
 {
 
@@ -1062,7 +1069,14 @@ action：  ITSourceReport/count
 }
 
 // IT资源拓扑图
-//资源type  服务器 1 ；数据库2 ：中间件3  ；云 4  网络设备 5 ，应用程序6
+//资源type  
+// {type:'server',',text:'服务器'},
+// {type:'db',',text:'数据库'},
+// {type:'middleware,text:'中间件'},
+// {type:'cloud,text:'Vmware云环境'},
+// {type:'network,text:'网络设备'},
+// {type:'app,text:'应用程序'}
+// 
 // 关系图 ： 0  ；部署关系图：1 ；通信关系图 ：2  ；物理连接关系图 ： 3
 action：  ITSourceTopo/showTopo
 {
