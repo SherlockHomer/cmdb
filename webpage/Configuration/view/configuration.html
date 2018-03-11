@@ -366,7 +366,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
+                <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
     </form>
@@ -444,7 +444,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
+                <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
     </form>
@@ -496,7 +496,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
+                <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
     </form>
@@ -592,7 +592,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
+                <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
     </form>
@@ -652,99 +652,10 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
+                <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
     </form>
-</script>
-
-<script type="text/x-handlebars-template" id="Configuration-mission-editView-template">
-    <ol class="breadcrumb">
-        <li class="backToTableView"><a>发现任务策略</a></li>
-        {{#if id}}
-        <li class="active">修改</li>
-        {{else}}
-        <li class="active">新增</li>
-        {{/if}}
-    </ol>
-    <form class="form-horizontal">
-        <input type="hidden" name="id" value={{id}}>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">任务名称：</label>
-            <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">调度计划：</label>
-            <div class="col-sm-5">
-                <select class="form-control schedulePlan" multiple="multiple" name="scheduleId" value="{{scheduleId}}">
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">发现内容：</label>
-            <div class="col-sm-5">
-                <select class="form-control select2" multiple="multiple" name="content" value="{{content}}">
-                    <option selected="selected" value="1">物理设备</option>
-                    <option selected="selected" value="2">端口</option>
-                    <option selected="selected" value="3">服务器</option>
-                    <option selected="selected" value="4">云环境</option>
-                    <option selected="selected" value="5">数据库</option>
-                    <option selected="selected" value="6">中间件</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">目标设备：</label>
-            <div class="ips col-sm-10">
-                <button class="btn btn-default add">+</button>
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
-                <button class="btn btn-default cancle">取消</button>
-            </div>
-        </div>
-    </form>
-</script>
-
-<script type="text/x-handlebars-template" id="Configuration-mission-editView-ip-template">
-    <div class="ip form-group col-sm-12">
-        <div class="showInline changeViewBox">
-            <select class="targetDevice form-control changeView">
-                <option value="指定IP" selected="selected">指定IP</option>
-                <option value="IP地址段">IP地址段</option>
-                <option value="CIDR">CIDR</option>
-            </select>
-        </div>
-        <div class="showInline" data-belong="指定IP">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">
-        </div>
-        <div class="showInline hide" data-belong="IP地址段">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">--
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">
-        </div>
-        <div class="showInline hide" data-belong="CIDR">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">/
-            <input class="form-control ipBox" type="text">
-        </div>
-        <button class="btn btn-default remove">-</button>
-    </div>
 </script>
 
 <script type="text/x-handlebars-template" id="Configuration-portStandard-editView-template">
@@ -773,11 +684,10 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-default save">保存</button>
-            <button class="btn btn-default cancle">取消</button>
+            <button class="btn btn-default cancle backToTableView">取消</button>
         </div>
     </div>
 </script>
-
 
 <script type="text/x-handlebars-template" id="Configuration-portCustom-editView-template">
     <ol class="breadcrumb">
@@ -808,7 +718,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-default save">保存</button>
-            <button class="btn btn-default cancle">取消</button>
+            <button class="btn btn-default cancle backToTableView">取消</button>
         </div>
     </div>
 </script>
@@ -822,9 +732,11 @@
 
 <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
 
+<script>
+    Tool.loadTemp('webpage/Configuration/view/DefineMissionStrategy.html');
+</script>
 <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
-<!-- Select2 -->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+
 <script src="webpage/Configuration/js/configuration.js"></script>
 
 <!-- <script src="bower_components/bootstrap-table/dist/extensions/filter/bootstrap-table-filter.min.js"></script> -->

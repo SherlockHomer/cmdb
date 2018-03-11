@@ -32,8 +32,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                             <button type="button" class="btn btn-default defMissionStrategy">定义发现策略</button>
@@ -67,8 +67,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                         </div>
@@ -101,8 +101,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                         </div>
@@ -135,8 +135,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                         </div>
@@ -169,8 +169,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                         </div>
@@ -203,8 +203,8 @@
                                     <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu">
-                                  <li><a>导出列表</a></li>
-                                  <li><a>导出详情</a></li>
+                                  <li class="exportTable"><a>导出列表</a></li>
+                                  <li class="exportDetail"><a>导出详情</a></li>
                               </ul>
                           </div>
                         </div>
@@ -288,9 +288,138 @@
     </tr>
 </script>
 
+<script type="text/x-handlebars-template" id="ITSource-server-add-template">
+    <ol class="breadcrumb">
+        <li class="backToTableView"><a>服务器</a></li>
+        {{#if id}}
+        <li class="active">修改</li>
+        {{else}}
+        <li class="active">新增</li>
+        {{/if}}
+    </ol>
+    <form class="form-horizontal" id="ITSource-server-add-form">
+        <input type="hidden" name="id" value={{id}}>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">设备名称：</label>
+            <div class="col-sm-5">
+                <input type="text" name="name" class="form-control" value="{{name}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">IP地址：</label>
+            <div class="col-sm-5">
+                <input type="text" name="ip" class="form-control" value="{{ip}}">
+            </div>
+        </div>
+        <div class="form-group changeViewBox">
+            <label class="col-sm-2 control-label">协议类型：</label>
+            <div class="col-sm-5">
+                <select class="form-control changeView" name="prot" value="{{prot}}">
+                    <option value="WMI">WMI</option>
+                    <option value="SSH">SSH</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">端口：</label>
+            <div class="col-sm-5">
+                <input type="text" name="port" class="form-control" value="{{port}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">账户：</label>
+            <div class="col-sm-5">
+                <input type="text" name="account" class="form-control" value="{{account}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">密码：</label>
+            <div class="col-sm-5">
+                <input type="password" class="form-control" name="password" value="{{password}}">
+            </div>
+        </div>
+        <div class="form-group" data-belong="WMI">
+            <label class="col-sm-2 control-label">域：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="domain" value="{{domain}}">
+            </div>
+        </div>
+        <div class="form-group hide" data-belong="SSH">
+            <label class="col-sm-2 control-label">回显符：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="echo" value="{{echo}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">字符编码：</label>
+            <div class="col-sm-5">
+                <select class="form-control" name="encoding" value="{{encoding}}">
+                    <option value=""></option>
+                    <option value="utf8">utf8</option>
+                    <option value="gbk">gbk</option>
+                    <option value="gb2312">gb2312</option>
+                    <option value="latin1">latin1</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default save">保存</button>
+                <button class="btn btn-default cancle">取消</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-handlebars-template" id="ITSource-setTag-template">
+    <ol class="breadcrumb">
+        <li class="backToTableView"><a>服务器</a></li>
+        <li class="active">设置标签</li>
+    </ol>
+    <form id="ITSource-setTag-form">
+        <div class="col-sm-12 form-horizontal">
+            <input name="id" type="hidden" value="{{id}}">
+            <div class="form-group col-sm-6">
+                <label class="col-sm-3 control-label">名称：</label>
+                <div class="col-sm-9">
+                    <p class="form-control-static">{{name}}</p>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="col-sm-3 control-label">IP：</label>
+                <div class="col-sm-9">
+                    <p class="form-control-static">{{ip}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="tags form-inline form-group col-sm-12">
+            {{#each tags}}
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong class="text">{{this}}</strong>
+            </div>
+            {{/each}}
+            <input type="text" class="form-control">
+            <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
+        </div>
+    </form>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default save">保存</button>
+            <button class="btn btn-default cancle backToTableView">取消</button>
+        </div>
+    </div>
+</script>
+
+<script>
+    Tool.loadTemp('webpage/Configuration/view/DefineMissionStrategy.html');
+    Tool.loadTemp('webpage/Configuration/view/DefineTag.html');
+
+</script>
+
 
 <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
- 
+
 <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
 <script src="webpage/ITSource/js/ITSourceTable.js"></script>
 

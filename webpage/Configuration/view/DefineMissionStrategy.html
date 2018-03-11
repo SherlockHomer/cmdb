@@ -1,0 +1,203 @@
+<script type="text/x-handlebars-template" id="Configuration-mission-editView-template">
+    <ol class="breadcrumb">
+        <li class="backToTableView"><a>{{from}}</a></li>
+        {{#if id}}
+        <li class="active">修改</li>
+        {{else}}
+        <li class="active">新增</li>
+        {{/if}}
+    </ol>
+    <form class="form-horizontal" id="DefineMissionStrategy-form">
+        <input type="hidden" name="id" value={{id}}>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">任务名称：</label>
+            <div class="col-sm-5">
+                <input type="text" name="name" class="form-control" value="{{name}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">调度计划：</label>
+            <div class="col-sm-5">
+                <select class="form-control schedulePlan" multiple="multiple" name="scheduleId" value="{{scheduleId}}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">发现内容：</label>
+            <div class="col-sm-5">
+                <select class="form-control select2" multiple="multiple" name="content" value="{{content}}">
+                    <option selected="selected" value="1">物理设备</option>
+                    <option selected="selected" value="2">端口</option>
+                    <option selected="selected" value="3">服务器</option>
+                    <option selected="selected" value="4">云环境</option>
+                    <option selected="selected" value="5">数据库</option>
+                    <option selected="selected" value="6">中间件</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">目标设备：</label>
+            <div class="ips col-sm-10">
+                <button class="btn btn-default add">+</button>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default save">保存</button>
+                <button class="btn btn-default cancle">取消</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-handlebars-template" id="Configuration-mission-editView-ip-template">
+    <div class="ip form-group col-sm-12">
+        <div class="showInline changeViewBox">
+            <select class="targetDevice form-control changeView">
+                <option value="指定IP" selected="selected">指定IP</option>
+                <option value="IP地址段">IP地址段</option>
+                <option value="CIDR">CIDR</option>
+            </select>
+        </div>
+        <div class="showInline" data-belong="指定IP">
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">
+        </div>
+        <div class="showInline hide" data-belong="IP地址段">
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">--
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">
+        </div>
+        <div class="showInline hide" data-belong="CIDR">
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">.
+            <input class="form-control ipBox" type="text">/
+            <input class="form-control ipBox" type="text">
+        </div>
+        <button class="btn btn-default remove">-</button>
+    </div>
+</script>
+
+<script>
+    (function (window, factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD
+            define(factory);
+        } else if (typeof exports === 'object') {
+            // Node, CommonJS-like
+            module.exports = factory();
+        } else {
+            // Browser globals (window is window)
+            window.DefineMissionStrategy = factory();
+        };
+    }(window, function () {
+        // 添加ip
+        function addIp(e){
+            e.preventDefault();
+            var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
+            newOne.insertBefore( $(e.target) );
+        }
+        function removeIp(e){
+            e.preventDefault();
+            $(e.target).parent().remove();
+        }
+        $('body').on('click','#DefineMissionStrategy-form .ips .add',function(e){
+            addIp(e);
+        });
+        $('body').on('click','#DefineMissionStrategy-form .ips .remove',function(e){
+            removeIp(e);
+        });
+        function collectFormInfo() {
+            var arr = $('#DefineMissionStrategy-form').serializeArray();
+            var params = {}
+            $.each(arr,function(i,perA){
+                if (params[perA.name]) {
+                    params[perA.name] = params[perA.name] + ',' +  perA.value;
+                } else {
+                    params[perA.name] = perA.value;
+                }
+            });
+            params.ips = [];
+            $('#DefineMissionStrategy-form .ips .ip').each(function(i,perIp){
+                var ip = {};
+                ip.type = $(perIp).find('.targetDevice').val();
+                var inputs = $(perIp).find('input:visible').map(function(){
+                    return $(this).val();
+                }).get();
+                switch(ip.type){
+                    case '指定IP' : {
+                        ip.value = inputs.join('.');
+                        break;
+                    }
+                    case 'IP地址段' : {
+                        ip.value = inputs.splice(4,4).join('.') ;
+                        ip.value = inputs.join('.') + '-' + ip.value;
+                        break;
+                    }
+                    case 'CIDR' : {
+                        var pop = inputs.pop();
+                        ip.value = inputs.join('.') + '/' + pop;
+                        break;
+                    }
+                };
+                params.ips.push(ip);
+            });
+            return params;
+        }
+        function render(params) {
+            $('#DefineMissionStrategy-form .select2').select2({
+                closeOnSelect:false
+            });
+            fetchData('strategy/getSchedule','json',null,{
+                success:function(res){
+                    if (res.success) {
+                        var scheduleSel = $('#DefineMissionStrategy-form .schedulePlan');
+                        var val = scheduleSel.attr('value').split(',');
+                        scheduleSel.select2({
+                            data:res.data,
+                            closeOnSelect:false
+                        }).val( val ).change();
+                    } 
+                }
+            });
+            if(params && params.ips && params.ips.length > 1 ){
+                $.each(params.ips,function(i,perIp){
+                    var newOne = $( $('#DefineMissionStrategy-ip-template').html() );
+                    newOne.insertBefore( $('#DefineMissionStrategy-form .ips .add') );
+                    newOne.find('.targetDevice').val(perIp.type).change();
+                    switch(perIp.type){
+                        case '指定IP' : {
+                            var values = perIp.value.split('.');
+                            break;
+                        }
+                        case 'IP地址段' : {
+                            var values = perIp.value.split('-').join('.').split('.');
+                            break;
+                        }
+                        case 'CIDR' : {
+                            var values = perIp.value.split('/').join('.').split('.');
+                            break;
+                        }
+                    }
+                    newOne.find('input:visible').each(function(y,perInput){
+                        $(perInput).val(values[y]);
+                    });
+                });
+            }
+        }
+        return {
+            render:render,
+            collectFormInfo:collectFormInfo
+        };
+    }));
+    
+</script>

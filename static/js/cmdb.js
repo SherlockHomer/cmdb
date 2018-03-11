@@ -236,6 +236,8 @@
         window.Tool = factory(window.jQuery);
     };
 }(window, function ($) {
+    $('body').on('change','select.changeView',changeSelected);
+
     function changeSelected (e) {
         var selected = e.target;
         // 适用于Bootstrap 且 固定模版
@@ -251,8 +253,60 @@
         }
     };
 
+    /**
+     * 我将做一个可用于整个项目的嵌入editView，
+     * 之前是引入tabId+'-editView-template',导致只能嵌入一个，
+     * 设计大于实现
+     * @param  {[type]} tempName [description]
+     * @return {[type]}          [description]
+     */
+    function renderEditView(tabId,tempName,params){
+        $('#'+tabId).find('.tableView').addClass('hide');
+        var html = Handlebars.getHTMLByCompile(tempName,params);
+        $('#'+tabId).find('.editView').html(html);
+        // 这是对如果有select.changeView的触发显隐
+        if ( params ) {
+            $('#'+tabId).find('.editView select').each(function(i,perSel){
+                $(perSel).val( $(perSel).attr('value').split(',') ).change();
+            })
+        };
+    };
+    // 有的内容需要提醒用户是否直接回退，则可在具体的模块取消冒泡
+    $('body').on('click','.backToTableView',function(e){
+        e.preventDefault();
+        backToTableView(e.target);
+    });
+    function backToTableView(dom){
+        var tabId = $(dom).parents('.tab-pane').eq(0).attr('id');
+        $('#'+tabId).find('.editView').html('');
+        $('#'+tabId).find('.nest').html('');
+        $('#'+tabId).find('.tableView').removeClass('hide');
+    };
+
+    // 加载模版 || 插件
+    var TempRepo = {};
+    function loadTemp(fileName){
+        if (TempRepo.fileName) {
+            return;
+        }
+        $.ajax({
+            url: fileName,
+            dataType: 'html',
+            type: 'post',
+            success:function(res){
+                $('body').append(res);
+                TempRepo.fileName = true;
+            },
+            error:function(e){
+                console.warn('加载模版失败')
+            }
+        });
+    }
     return {
-        changeSelected : changeSelected
+        changeSelected : changeSelected,
+        renderEditView : renderEditView,
+        backToTableView: backToTableView,
+        loadTemp       : loadTemp
     }
 }));
 

@@ -54,7 +54,7 @@
             checkbox:true,
             pagination:true,
             // todo ::  改不同表格  不同 sort
-            sortName:'OSType',
+            sortName:getTableSortName(typeCode),
             sortOrder: "asc",
             // sortable:true,
             pageNumber:1,
@@ -63,10 +63,39 @@
             // 排序是后台的
             sidePagination:'server',
             queryParams:queryParams,
+            uniqueId:'id',
             columns:getColumnsByTypeCode(typeCode)
         });
     };
+    function getTableSortName(typeCode){
 
+        switch (typeCode){
+            case 'server' : {
+                return 'OSType';
+                break;
+            }
+            case 'db' : {
+                return 'dbType';
+                break;
+            }
+            case 'middleware' : {
+                return 'middlewareType';
+                break;
+            }
+            case 'cloud' : {
+                return 'cloudType';
+                break;
+            }
+            case 'network' : {
+                return 'deviceType';
+                break;
+            }
+            case 'app' : {
+                return 'appName';
+                break;
+            }
+        }
+    }
     function getColumnsByTypeCode(typeCode) {
         switch (typeCode){
             case 'server' : {
@@ -74,7 +103,7 @@
                     checkbox:true,
                 },{
                     title:'服务器名',
-                    field:'serverName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'IP地址',
@@ -94,8 +123,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -113,7 +145,7 @@
                     sortable:true
                 },{
                     title:'数据库名',
-                    field:'dbName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'版本',
@@ -125,8 +157,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -144,7 +179,7 @@
                     sortable:true
                 },{
                     title:'中间件名',
-                    field:'middlewareName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'版本',
@@ -156,8 +191,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -175,7 +213,7 @@
                     sortable:true
                 },{
                     title:'名称',
-                    field:'cloudName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'管理域IP地址',
@@ -187,8 +225,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -202,7 +243,7 @@
                     checkbox:true,
                 },{
                     title:'设备名',
-                    field:'deviceName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'设备类型',
@@ -218,8 +259,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -233,7 +277,7 @@
                     checkbox:true,
                 },{
                     title:'软件名称',
-                    field:'appName',
+                    field:'name',
                     sortable:true
                 },{
                     title:'IP地址',
@@ -249,8 +293,11 @@
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tag',
-                    sortable:true
+                    field:'tags',
+                    sortable:true,
+                    formatter:function(value){
+                        return value.join(',');
+                    }
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -323,7 +370,7 @@
 
     function changeTab(tab){
         // 能切换选项卡只在 < IT资源信息 >中
-        Record.typeCode = $(tab).attr('data-typeCode');
+        Record.levelOneType = $(tab).attr('data-typeCode');
     }
     
     function checkAll(){
@@ -355,6 +402,62 @@
                 $(this).show();
             }
         })
+    };
+    function exportTable(){
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        var ids = [];
+        $.each(sels,function(i,perSel){
+            ids.push(perSel.id);
+        });
+        // if ( !ids[0] ) {
+        //     console.warn('sel some');
+        //     return false;
+        // }
+        var params = {
+            ids : ids,
+            typeCode:Record.typeCode
+        };
+        ajaxExportTable(tableId,params);
+    }
+    function ajaxExportTable(tableId,params){
+        fetchData('ITSource/exportTable','json',params,{
+            success:function(res){
+                if (res.success) {
+
+                } else {
+
+                }
+            }
+        });
+    };
+    function exportDetail(){
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        var ids = [];
+        $.each(sels,function(i,perSel){
+            ids.push(perSel.id);
+        });
+        if ( !ids[0] ) {
+            console.warn('sel some');
+            return false;
+        }
+        var params = {
+            ids : ids,
+            typeCode:Record.typeCode
+        };
+        ajaxExportDetail(tableId,params);
+    }
+    function ajaxExportDetail(tableId,params){
+        fetchData('ITSource/exportDetail','json',params,{
+            success:function(res){
+                if (res.success) {
+
+                } else {
+
+                }
+            }
+        });
     };
     function queryParams(params){
         var toolbar = $('#ITSource-'+this.typeCode+'-table-toolbar');
@@ -416,6 +519,74 @@
         var html = Handlebars.getHTMLByCompile('ITSource-table-more-template',data);
         $(html).insertAfter($(this).parents('tr'));
     }
+    function addNewServer(){
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        Tool.renderEditView( tabId , 'ITSource-server-add-template');
+    };
+    function defMissionStrategy(){
+        var params = {from:'服务器'};
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        Tool.renderEditView( tabId , 'Configuration-mission-editView-template',params);
+        DefineMissionStrategy.render();
+    };
+    function setTag(){
+        var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
+        Tool.renderEditView(tabId,'ITSource-setTag-template',params);
+    }
+    function saveOne(btn) {
+        // 所属选项卡
+        var tabId = $(btn).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        // 当前form
+        var formId = $('#'+tabId).find('.editView form').eq(0).attr('id');
+        if ( formId == 'ITSource-setTag-form') {
+            // 非表格类的处理
+            params = DefineTag.collectPortTags(tabId);
+            params.id = $('#'+tabId).find('.editView [name="id"]').val();
+
+        } else if ( formId == 'DefineMissionStrategy-form' ){
+            params = DefineMissionStrategy.collectFormInfo();
+        } else {
+            var arr = $('#'+formId).serializeArray();
+            var params = {}
+            $.each(arr,function(i,perA){
+                if (params[perA.name]) {
+                    params[perA.name] = params[perA.name] + ',' +  perA.value;
+                } else {
+                    params[perA.name] = perA.value;
+                }
+            });
+        }
+        ajaxSave(tableId,formId,params,btn);
+    }
+    function ajaxSave(tableId,formId,params,btn) {
+        switch(formId){
+            case 'ITSource-server-add-form':{
+                var url = 'ITSource/addServer';
+                break;
+            }
+            case 'DefineMissionStrategy-form':{
+                var url = 'strategy/saveMission';
+                break;
+            }
+            case 'ITSource-setTag-form':{
+                var url = 'ITSource/setTag';
+                break;
+            }
+        }
+        fetchData(url,'json',params,{
+            success:function(res){
+                if (res.success) {
+                    $('#'+tableId).bootstrapTable('refresh');
+                    Tool.backToTableView(btn);
+                } else {
+
+                }
+            }
+        })
+    }
     // 事件注册
     $('body').on('click','#ITSource-sourceTable-box .toolbar .checkAll' ,checkAll);
     $('body').on('click','#ITSource-sourceTable-box .toolbar .uncheckAll' ,uncheckAll);
@@ -423,6 +594,26 @@
     $('body').on('input','#ITSource-sourceTable-box .toolbar .searchInput',filterText);
     $('body').on('click','#ITSource-sourceTable-box .toolbar .searchBtn',search);
     $('body').on('click','#ITSource-sourceTable-box span.detail',clickDetail);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .exportTable',exportTable);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .exportDetail',exportDetail);
+
+    $('body').on('click','#ITSource-sourceTable-server .addNew',addNewServer);
+    $('body').on('click','#ITSource-sourceTable-server .defMissionStrategy',defMissionStrategy);
+    $('body').on('click','#ITSource-sourceTable-box td .setTag',setTag);
+
+    $('body').on('click','#ITSource-sourceTable-box .editView .btn.cancle',function(e){
+        e.preventDefault();
+        Tool.backToTableView(e.target);
+    });
+    $('body').on('click','#ITSource-sourceTable-box .backToTableView',function(e){
+        e.preventDefault();
+        Tool.backToTableView(e.target);
+    });
+    $('body').on('click','#ITSource-sourceTable-box .editView .btn.save',function(e){
+        e.preventDefault();
+        saveOne(e.target);
+    });
+
     // 切换一级资源类型选项卡
     $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function (e) {
         changeTab(e.target);

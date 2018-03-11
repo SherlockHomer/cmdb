@@ -1,49 +1,49 @@
 {
     "total": 180,
     "rows": [{
-        "serverName": "serv",
+        "name": "serv",
         "ip": "10.5.5.111",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 1 Santago",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tag":"应用系统1",
+        "tags":["应用系统1"],
         "id": 1
     }, {
-        "serverName": "yery",
+        "name": "yery",
         "ip": "10.5.5.14",
         "OSType": "Linux",
         "OSVer": "Enterprise 2 Santago",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tag":"应用系统2",
+        "tags":["应用系统2","应用系统3"],
         "id": 2
     }, {
-        "serverName": "cc",
+        "name": "cc",
         "ip": "10.5.5.145",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 4 Santago",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tag":"应用系统3",
+        "tags":["应用系统3","应用系统3"],
         "id": 3
     }, {
-        "serverName": "qqq",
+        "name": "qqq",
         "ip": "10.5.5.13",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 5 Santago",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tag":"应用系统4",
+        "tags":["应用系统4","应用系统3"],
         "id": 4
     }, {
-        "serverName": "ttt",
+        "name": "ttt",
         "ip": "10.5.5.15",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 6.5",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tag":"应用系统5",
+        "tags":["应用系统5","应用系统3"],
         "id": 5
     }]
 }

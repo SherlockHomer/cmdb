@@ -799,36 +799,73 @@ action：  ITSource/infoAll
 {
     "total": 180,
     "rows": [{
-        "serverName": "LIANGDL",
-        "ip": "10.5.5.175",
+        "name": "serv",
+        "ip": "10.5.5.111",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 1 Santago",
+        "OSType":"OS类型",
+        "serFac":"Dell",
+        "tags":["应用系统1"],
         "id": 1
     }, {
-        "serverName": "LIANGDL",
-        "ip": "10.5.5.175",
+        "name": "yery",
+        "ip": "10.5.5.14",
         "OSType": "Linux",
         "OSVer": "Enterprise 2 Santago",
+        "OSType":"OS类型",
+        "serFac":"Dell",
+        "tags":["应用系统2","应用系统3"],
         "id": 2
     }, {
-        "serverName": "LIANGDL",
-        "ip": "10.5.5.175",
+        "name": "cc",
+        "ip": "10.5.5.145",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 4 Santago",
+        "OSType":"OS类型",
+        "serFac":"Dell",
+        "tags":["应用系统3","应用系统3"],
         "id": 3
     }, {
-        "serverName": "LIANGDL",
-        "ip": "10.5.5.175",
+        "name": "qqq",
+        "ip": "10.5.5.13",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 5 Santago",
+        "OSType":"OS类型",
+        "serFac":"Dell",
+        "tags":["应用系统4","应用系统3"],
         "id": 4
     }, {
-        "serverName": "LIANGDL",
-        "ip": "10.5.5.175",
+        "name": "ttt",
+        "ip": "10.5.5.15",
         "OSType": "Linux",
         "OSVer": "Redhat Enterprise 6.5",
+        "OSType":"OS类型",
+        "serFac":"Dell",
+        "tags":["应用系统5","应用系统3"],
         "id": 5
     }]
+}
+
+action：  ITSource/addServer
+请求：
+{
+    "id": 1,
+    "name": "设备名称",
+    "ip":"10.4.4.1",
+    "prot": "window",
+    "port":151,
+    "account":"administrator",
+    "password":"",
+    "domain":"digitalchina.com",
+    "encoding":"GBK",
+    "echo":"sdf"
+}
+{
+    "data": {
+        "id":1
+    },
+    "success": true,
+    "msg": "成功"
 }
 
 action：  ITSource/detail
