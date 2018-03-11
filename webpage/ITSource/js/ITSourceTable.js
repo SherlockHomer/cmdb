@@ -352,7 +352,9 @@
             }
 
         } else if ( hashes.currentModule == 'ITSource' ){
-
+            if (hashes.levelOneType) {
+                Record.levelOneType = hashes.levelOneType ;
+            }
         }
         renderBasic();
         // 针对资源信息的部分内容显隐

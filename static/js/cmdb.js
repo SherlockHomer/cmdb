@@ -79,11 +79,19 @@
                 rowId:hashes[7]
             });
         } else if ( hashes[1] == 'ITSource' ) {
-            loadModule( 'ITSourceTable' , {
-                currentModule:hashes[1],
-                detail:hashes[2],
-                rowId:hashes[3]
-            });
+            if (hashes[2] == 'detail') {
+                loadModule( 'ITSourceTable' , {
+                    currentModule:hashes[1],
+                    detail:hashes[2],
+                    rowId:hashes[3]
+                });
+            } else {
+                loadModule( 'ITSourceTable' , {
+                    currentModule:hashes[1],
+                    levelOneType:hashes[2]
+                });
+            }
+            
         } else if ( hashes[1] ){
             loadModule( hashes[1] ,hashes.slice(2) );
         } 

@@ -17,7 +17,8 @@
 
     // 配置DOM和temp的一一对应
     var tempAndDom = {
-        'Monitor-basic-template':'index-content'
+        'Monitor-basic-template':'index-content',
+        'Monitor-table-detail-template':'index-content'
     };
     function render(temp,data) {
         if (!data) {
@@ -93,7 +94,7 @@
                 field:'status',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return '<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
+                    return '<div class="progress detail" data-id="'+row.id+'"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
                 }
             },{
                 title:'操作',
@@ -113,6 +114,10 @@
 
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
+        if (hashes[0] == 'detail') {
+            renderDetail(hashes[1]);
+            return;
+        }
         renderBasic();
     };
 
@@ -196,7 +201,50 @@
     function cancleScanThis(){
         scanThis(this,false);
     }
+    function clickDetail() {
+        var id = $(this).attr('data-id');
+        Route.addHash('detail/'+id);
+    };
+    function renderDetail(id){
+        var params = {
+            id: id
+        }
+        fetchData('monitor/detail','json',params,{
+            success:function(res){
+                render('Monitor-table-detail-template',res.data);
+                Record.details = res.data.details;
+            },
+            error:function(){
 
+            }
+        });
+    };
+    function clickMore(){
+        if ( $(this).text() == '显示详情') {
+            $(this).text('隐藏详情');
+        } else {
+            $(this).text('显示详情');
+            $(this).parents('tr').next().remove();
+            return;
+        }
+        var trIndex = $(this).parents('tr').index();
+        var labelIndex = $(this).parents('.form-group').index();
+        var columnsTexts = Record.details[labelIndex].value.columnsText;
+        var tr = Record.details[labelIndex].value.tableData[trIndex];
+        var data = {more:[]};
+        for (var i = 5; i < columnsTexts.length; i++) {
+            data.more.push({
+                keyText:columnsTexts[i],
+                value:tr[i]
+            });
+        };
+        var html = Handlebars.getHTMLByCompile('Monitor-table-more-template',data);
+        $(html).insertAfter($(this).parents('tr'));
+    }
+    function clickInfobox(){
+        var typeCode = $(this).attr('data-typeCode');
+        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ typeCode;
+    }
     // 事件注册
     // 相同功能
     $('body').on('click','#Monitor-basic .checkAll' ,checkAll);
@@ -216,8 +264,10 @@
     $('body').on('click','#Monitor-basic .toolbar .cancleScan',function(){
         scanSome(this,false);
     });
-
-
+    $('body').on('click','#Monitor-basic td .detail',clickDetail);
+    // 详情中内容过多点击详情
+    $('body').on('click','#Monitor-table-detail .more',clickMore);
+    $('body').on('click','#Monitor-table-detail .info-box',clickInfobox);
 
     var Monitor = {};
     Monitor.renderModule = renderModule;

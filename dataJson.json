@@ -691,6 +691,7 @@ action：  monitor/detail
 }
 {
     "data": {
+        "name": "WIN-0ECQ6MI24DJ",
         "contentInfo": [{
             "typeCode": "server",
             "sum": 33
@@ -710,28 +711,51 @@ action：  monitor/detail
             "typeCode": "app",
             "sum": 1001
         }],
-        "details":[{
-            // "key":"startTime",
-            "keyText":"开始时间",
-            "value":"2018-01-10 09:00:00",
-            "type":"text"
-        },{
-            // "key":"scanProgress",
-            "keyText":"扫描进度",
-            "value":0.4,
-            "type":"process"
-        },{
-            "keyText":"扫描进度",
-            "value":{
-                "columnsText":["服务器名","IP地址","OS类型","OS版本"],
-                "tableData":[{
-                    "serverName": "LIANGDL",
-                    "ip":"10.5.5.175",
-                    "OSType":"Linux",
-                    "OSVer":"Redhat Enterprise 6.5 Santago"
-                }]
+        "details": [{
+            "keyText": "开始时间",
+            "value": "2018-01-10 09:00:00",
+            "isText": true
+        }, {
+            "keyText": "扫描进度",
+            "value": 40,
+            "isProcess": true
+        }, {
+            "keyText": "补丁",
+            "value": {
+                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本","数量","发布者","新内容1","新内容2","新内容3"],
+                "tableData": [[
+                    "##IANGDL",
+                    "10.5.5.175",
+                    "Linux",
+                    "Redhat Enterprise 15.5 Santago",
+                    15,
+                    "sher",
+                    "新内容11",
+                    "新内容22",
+                    "新内容33"
+                ],[
+                    "LIGDL",
+                    "10.5.5.175",
+                    "Lin x",
+                    "Redhat Enterprise 6115 Santago",
+                    20,
+                    "lock",
+                    "新内容44",
+                    "新内容55",
+                    "新内容66"
+                ],[
+                    "L DL",
+                    "10.5.5.175",
+                    "Lux",
+                    "Redhat Enterprise 4.5 Santago",
+                    24,
+                    "lockss",
+                    "新内容11",
+                    "新内容22",
+                    "新内容33"
+                ]]
             },
-            "type":"table"
+            "isTable": true
         }]
     },
     "success": true,

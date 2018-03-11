@@ -83,17 +83,17 @@ ul {
 .tags .alert .close{
     right:0;
 }
-#Configuration-mission .editView .ips{
+#DefineMissionStrategy-form .ips{
     /*margin-top : -40px;*/
 }
-#Configuration-mission .editView .ips .ip{
+#DefineMissionStrategy-form .ips .ip{
     margin-bottom: 5px;
 }
-#Configuration-mission .editView .ips .ip > * {
+#DefineMissionStrategy-form .ips .ip > * {
     display: inline-block;
     vertical-align: top;
 }
-.ipBox{
+#DefineMissionStrategy-form .ipBox{
     display: inline-block;
     width:60px !important;
     margin-right: 4px;
