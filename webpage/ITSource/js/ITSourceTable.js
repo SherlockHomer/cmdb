@@ -558,7 +558,7 @@
         } else if ( !$(this).parent().next().find('.select2-results__message')[0]) {
             $(this).parent().find('button').remove();
         }
-    }
+    };
     function disableExistTag(data,exist){
         $.each(exist,function(i,perEx){
             $.each(data,function(y,perD){
@@ -568,6 +568,13 @@
             })
         });
     };
+    function addNewApp(e){
+        e.preventDefault();
+        var input = $('#ITSource-setTag-form .select2-search__field');
+        DefineTag.addTag($('#ITSource-setTag-form .addTag')[0],input.val());
+        $(this).remove();
+        $('#ITSource-setTag-form .tags select.app').select2('close');
+    }
     function deleteApp(){
         // $(this).
     }
@@ -661,6 +668,8 @@
 
     // 插件select2 增加不存在项
     $('body').on('input','#ITSource-setTag-form .select2-search__field',listenSelectSearch);
+    $('body').on('click','#ITSource-setTag-form .newApp',addNewApp);
+
 
 
     var ITSourceTable = {};

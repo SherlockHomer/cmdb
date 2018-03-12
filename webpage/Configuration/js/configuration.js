@@ -772,7 +772,7 @@
         saveOne(e);
     });
     $('body').on('click','#Configuration-basic .editView .btn.addTag',function(e){
-        DefineTag.addTag(e.target);
+        DefineTag.clickAddTag(e.target);
     });
 
 

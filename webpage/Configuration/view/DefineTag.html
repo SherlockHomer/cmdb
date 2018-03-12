@@ -19,9 +19,9 @@
         };
     }(window, function () {
         $('body').on('click','.tags .btn.addTag',function(e){
-            addTag(e.target);
+            clickAddTag(e.target);
         });
-        function addTag(dom){
+        function clickAddTag(dom){
             var prev = $(dom).prev();
             if ( prev.hasClass('hasSelect2') ) {
                 // 单选的！
@@ -44,6 +44,11 @@
                 sel.val('').trigger('change');             
             }
         };
+        function addTag(dom,text,value){
+            var newOne = $( $('#tag-template').html() );
+            newOne.find('.text').text(text);
+            newOne.insertBefore( $(dom).prev() );
+        }
 
         function collectPortTags(tabId){
             var params = {};
@@ -54,8 +59,9 @@
             return params;
         }
         return {
-            addTag:addTag,
-            collectPortTags:collectPortTags
+            clickAddTag:clickAddTag,
+            collectPortTags:collectPortTags,
+            addTag:addTag
         };
     }));
     
