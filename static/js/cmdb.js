@@ -85,10 +85,26 @@
                     detail:hashes[2],
                     rowId:hashes[3]
                 });
+            } else if (hashes[3] == 'detail') {
+                loadModule( 'ITSourceTable' , {
+                    currentModule:hashes[1],
+                    levelOneType:hashes[2],
+                    detail:hashes[3],
+                    rowId:hashes[4]
+                });
+            } else if (hashes[4] == 'detail') {
+                loadModule( 'ITSourceTable' , {
+                    currentModule:hashes[1],
+                    levelOneType:hashes[2],
+                    belongMission:hashes[3],
+                    detail:hashes[4],
+                    rowId:hashes[5]
+                });
             } else {
                 loadModule( 'ITSourceTable' , {
                     currentModule:hashes[1],
-                    levelOneType:hashes[2]
+                    levelOneType:hashes[2] || 'server',
+                    belongMission:hashes[3]
                 });
             }
             

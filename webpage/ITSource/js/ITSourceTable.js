@@ -20,7 +20,9 @@
         OSType:'',
         serFac:'',
         // 按统计进来时记录下
-        countType:''
+        countType:'',
+        // 所属那个任务策略
+        belongMission:''
     }
     if ( window.ITSourceTable ) { return window.ITSourceTable};
 
@@ -53,7 +55,6 @@
             url:ConfirmUrl('ITSource/infoAll'),
             checkbox:true,
             pagination:true,
-            // todo ::  改不同表格  不同 sort
             sortName:getTableSortName(typeCode),
             sortOrder: "asc",
             // sortable:true,
@@ -317,6 +318,10 @@
     // classifyInCount:[5]
     function renderModule( hashes ) {
         Record.currentModule = hashes.currentModule;
+        if (hashes.levelOneType) {
+            Record.levelOneType = hashes.levelOneType ;
+        }
+        Record.belongMission = hashes.belongMission
         if ( hashes.currentModule == 'ITSourceReport') {
             Record.levelOneType = hashes.levelOneType;
             Record.typeCode = hashes.typeCode;
@@ -352,9 +357,7 @@
             }
 
         } else if ( hashes.currentModule == 'ITSource' ){
-            if (hashes.levelOneType) {
-                Record.levelOneType = hashes.levelOneType ;
-            }
+
         }
         renderBasic();
         // 针对资源信息的部分内容显隐
@@ -464,16 +467,17 @@
     function queryParams(params){
         var toolbar = $('#ITSource-'+this.typeCode+'-table-toolbar');
         params.searchText = toolbar.find('.searchInput').val();
-        params.tags = Record.tags;
         // 资源分类
         if (Record.currentModule == 'ITSource') {
             params.typeCode = this.typeCode;
         } else {
             params.typeCode = Record.typeCode;
+            // 统计分类
+            params.serFac = Record.serFac;
+            params.OSVer = Record.OSVer;
+            params.tags = Record.tags;
         }
-        // 统计分类
-        params.OSType = Record.OSType;
-        params.OSVer = Record.OSVer;
+        params.belongMission = Record.belongMission;
         return params;
     }
     function search(){
@@ -623,12 +627,10 @@
     // 详情中内容过多点击详情
     $('body').on('click','#ITSource-table-detail .more',clickMore);
 
+
+
     var ITSourceTable = {};
-    // ITSourceTable.Record = Record;
     ITSourceTable.renderModule = renderModule;
-    ITSourceTable.checkAll = checkAll ;
-    ITSourceTable.uncheckAll = uncheckAll ;
-    ITSourceTable.invertCheck = invertCheck ;
 
     return ITSourceTable;
 }));

@@ -115,6 +115,7 @@
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
         if (hashes[0] == 'detail') {
+            Record.rowId = hashes[1];
             renderDetail(hashes[1]);
             return;
         }
@@ -243,7 +244,7 @@
     }
     function clickInfobox(){
         var typeCode = $(this).attr('data-typeCode');
-        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ typeCode;
+        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ typeCode + '/' + Record.rowId;
     }
     // 事件注册
     // 相同功能
