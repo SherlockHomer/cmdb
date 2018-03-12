@@ -540,6 +540,36 @@
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
         Tool.renderEditView(tabId,'ITSource-setTag-template',params);
+        fetchData('ITSource/getAllApp','json',null,{
+            success:function(res){
+                Record.appData = res.data;
+                disableExistTag(res.data,params.tags);
+                $('#ITSource-setTag-form .app').select2({
+                    data:res.data,
+                    dropdownParent:$('#ITSource-setTag-form .hasSelect2')
+                });
+            }
+        });
+    };
+    function listenSelectSearch(){
+        var val = $(this).value ;
+        if ( $(this).parent().next().find('.select2-results__message')[0] && !$(this).parent().find('button')[0] ) {
+            $('<button class="btn btn-default newApp" title="新增一项">新增此项</button>').appendTo($(this).parent());
+        } else if ( !$(this).parent().next().find('.select2-results__message')[0]) {
+            $(this).parent().find('button').remove();
+        }
+    }
+    function disableExistTag(data,exist){
+        $.each(exist,function(i,perEx){
+            $.each(data,function(y,perD){
+                if (perD.text == perEx) {
+                    perD.disabled = 'disabled';
+                }
+            })
+        });
+    };
+    function deleteApp(){
+        // $(this).
     }
     function saveOne(btn) {
         // 所属选项卡
@@ -619,6 +649,8 @@
         e.preventDefault();
         saveOne(e.target);
     });
+    // 设置标签的问题
+    $('body').on('click','#ITSource-setTag-form .tags .close',deleteApp);
 
     // 切换一级资源类型选项卡
     $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function (e) {
@@ -627,6 +659,8 @@
     // 详情中内容过多点击详情
     $('body').on('click','#ITSource-table-detail .more',clickMore);
 
+    // 插件select2 增加不存在项
+    $('body').on('input','#ITSource-setTag-form .select2-search__field',listenSelectSearch);
 
 
     var ITSourceTable = {};

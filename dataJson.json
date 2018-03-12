@@ -847,7 +847,7 @@ action：  ITSource/infoAll
         "OSVer": "Redhat Enterprise 4 Santago",
         "OSType":"OS类型",
         "serFac":"Dell",
-        "tags":["应用系统3","应用系统3"],
+        "tags":["应用系统2","应用系统3"],
         "id": 3
     }, {
         "name": "qqq",
@@ -964,10 +964,10 @@ action：  ITSource/getAllApp
 {
     "data": [{
         "id":1,
-        "name":"应用系统1"
+        "text":"应用系统1"
     },{
         "id":2,
-        "name":"应用系统2"
+        "text":"应用系统2"
     }],
     "success": true,
     "msg": "成功"

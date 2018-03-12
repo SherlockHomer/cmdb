@@ -72,10 +72,12 @@ ul {
     margin:3px;
 }
 /*可关闭标签*/
+.tags > *{
+    display: inline-block;
+}
 .tags .alert{
     padding: 6px;
     min-width: 142px;
-    display: inline-block;
     font-size: 14px;
     text-align: center;
     vertical-align: middle;
@@ -102,6 +104,12 @@ ul {
 /*select 2*/
 .select2-container{
     width: 100% !important;
+}
+.select2-search.select2-search--dropdown{
+    text-align: center;
+}
+.select2-search.select2-search--dropdown button{
+    margin-top:5px;
 }
 
 /*bootstrap table*/

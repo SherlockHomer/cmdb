@@ -291,7 +291,9 @@
         // 这是对如果有select.changeView的触发显隐
         if ( params ) {
             $('#'+tabId).find('.editView select').each(function(i,perSel){
-                $(perSel).val( $(perSel).attr('value').split(',') ).change();
+                if ( $(perSel).attr('value') ) {
+                    $(perSel).val( $(perSel).attr('value').split(',') ).change();
+                }
             })
         };
     };

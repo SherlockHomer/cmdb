@@ -22,13 +22,27 @@
             addTag(e.target);
         });
         function addTag(dom){
-            var num = $(dom).prev().val();
-            if (!num) {
+            var prev = $(dom).prev();
+            if ( prev.hasClass('hasSelect2') ) {
+                // 单选的！
+                var num = prev.find('select').val();
+                var text = prev.find('.select2-selection__rendered').text();
+            } else {
+                var text = prev.val();
+            }
+            if (!text) {
                 return false;
             };
             var newOne = $( $('#tag-template').html() );
-            newOne.find('.text').text(num);
+            newOne.find('.text').text(text);
             newOne.insertBefore( $(dom).prev() );
+            if ( prev.hasClass('hasSelect2') ){
+                var sel = prev.find('select');
+                var data = sel.select2('data')[0];
+                data.selected = false;
+                data.disabled = true;
+                sel.val('').trigger('change');             
+            }
         };
 
         function collectPortTags(tabId){
