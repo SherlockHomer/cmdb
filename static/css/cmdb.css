@@ -100,6 +100,75 @@ ul {
     width:60px !important;
     margin-right: 4px;
 }
+/*Graph.html*/
+#Graph-box{
+    position: relative;
+    min-height: 380px;
+    border: 1px solid #00c0ef;
+}
+#Graph-box .tools{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100px;
+    bottom:0;
+    border-right: 1px solid #00c0ef;
+}
+#Graph-box .Graph{
+    position: absolute;
+    left: 100px;
+    top:0;
+    right:0;
+    bottom:0;
+}
+#Graph-box .tool{
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#Graph-box .tool .info-box-icon{
+    font-size: 30px;
+}
+#Graph-box .secondMenu{
+    position: absolute;
+    left: 100px;
+    width: 140px;
+    top:0;
+    bottom:0;
+    border-right: 1px solid #00c0ef;
+    display: none;
+    z-index: 2;
+    background-color: #fff;
+}
+#Graph-box .secondMenu.show{
+    display: block;
+}
+#Graph-tool-relation .list-group-item,#Graph-tool-display .list-group .list-group-item{
+    cursor: pointer;
+}
+#Graph-tool-relation .list-group-item.clicked,#Graph-tool-relation .list-group-item:hover{
+    background-color: #00c0ef;
+}
+
+#Graph-tool-display .list-group .list-group-item > *{
+    margin-right: 3px;
+    vertical-align: middle;
+}
+#Graph-tool-display .list-group .list-group-item.clicked{
+    background-color: #00c0ef;
+}
+#Graph{
+    position: absolute;
+    left: 100px;
+    top:0;
+    right: 0;
+    bottom:0;
+    z-index: 0;
+}
+#Graph canvas{
+    outline: none;
+}
 
 /*select 2*/
 .select2-container{

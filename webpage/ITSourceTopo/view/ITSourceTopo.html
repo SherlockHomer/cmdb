@@ -1,0 +1,30 @@
+<script type="text/x-handlebars-template" id="ITSourceTopo-template">
+    <div class="box box-info box-body" id="ITSourceTopo-box">
+        <div class="box-header">
+            <ul class="nav nav-tabs nav-justified form-group">
+                {{ITSourceTopoApp apps}}
+                <!-- <li><a role="tab" data-toggle="tab">应用系统</a></li> -->
+            </ul>
+        </div>
+        <div class="box-body tab-content">
+            <div role="tabpanel" class="tab-pane active" id="ITSourceTopo-Graph">
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" id="ITSourceTopo-appMoreLi-template">
+    <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+            更多 <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" style="width: 100%;">
+            <!-- <li><input type="text" class="search" style="width: 100%"></li> -->
+            <!-- <li role="separator" class="divider"></li> -->
+            <!-- <li><a href="#">Another action</a></li> -->
+        </ul>
+    </li>
+</script>
+
+<script src="webpage/ITSourceTopo/js/ITSourceTopo.js"></script>

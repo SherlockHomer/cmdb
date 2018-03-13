@@ -1,0 +1,29 @@
+{
+    "data": {
+        "nodeDataArray":[{
+            "key":1234,
+            "parent":456,
+            "id":1,
+            "typeCode":"server",
+            "name": "BMC Patrol Agent 10.7.00"
+        }],
+        "count":[{
+            "typeCode":"server",
+            "sum":3
+        },{
+            "typeCode":"db",
+            "sum":1
+        },{
+            "typeCode":"cloud",
+            "sum":7
+        },{
+            "typeCode":"middleware",
+            "sum":6
+        },{
+            "typeCode":"app",
+            "sum":1
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}

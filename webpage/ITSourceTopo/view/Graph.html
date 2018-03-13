@@ -1,0 +1,218 @@
+<script type="text/x-handlebars-template" id="Graph-template">
+    <div class="Graph-box" id="Graph-box">
+        <div class="tools">
+            <div class="tool info-box" href="#Graph-tool-relation">
+                <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                <span class="info-box-number">关系图</span>
+            </div>
+            <div class="tool info-box" href="#Graph-tool-display">
+                <span class="info-box-icon"><i class="fa fa-star-half-empty"></i></span>
+                <span class="info-box-number">显示/隐藏</span>
+            </div>
+        </div>
+        <div class="secondMenu" id="Graph-tool-relation">
+            <ul class="list-group">
+              <li class="list-group-item clicked" data-relation="0">关系图</li>
+              <li class="list-group-item" data-relation="1">部署关系图</li>
+              <li class="list-group-item" data-relation="2">通信关系图</li>
+              <li class="list-group-item" data-relation="3">物理连接关系图</li>
+          </ul>
+        </div>
+        <div class="secondMenu" id="Graph-tool-display">
+            <li class="list-group-item">显示节点：</li>
+            <ul class="list-group">
+                <!-- <li class="list-group-item">
+                    <input type="checkbox">
+                    <i class="fa fa-star-half-empty"></i>
+                    <span>3 </span>
+                    <span>数据库</span>
+                </li> -->
+            </ul>
+        </div>
+        <div id="Graph"></div>
+    </div>
+</script>
+
+<script>
+    (function (window, factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD
+            define(factory);
+        } else if (typeof exports === 'object') {
+            // Node, CommonJS-like
+            module.exports = factory();
+        } else {
+            // Browser globals (window is window)
+            window.Graph = factory();
+        };
+    }(window, function () {
+        var Record = {
+            params:{}
+        }
+
+        // 在dom中载入基本的内容
+        function renderBasic($dom){
+            $dom.append( $('#Graph-template').html() );
+        }
+        function render(params){
+            params.relation = params.relation || 0;
+            // 记录参数
+            Record.params = params;
+            getData(loadData);
+            if (Record.diagram){
+                Record.diagram.div = null;
+            }
+            initTheDiagram();
+        };
+        // 获取数据
+        function getData(callback){
+            fetchData('ITSourceTopo/showTopo','json',Record.params,{
+                success:function(res){
+                    if (callback) {
+                        callback(res.data);
+                    }
+                }
+            });
+        }
+        // 载入数据
+        function loadData(data){
+            loadDataToDiagram(data);
+            loadDataToTool(data.count);
+        }
+        function loadDataToDiagram(data){
+            Record.diagram.model = new go.TreeModel(data.nodeDataArray);
+        }
+        function loadDataToTool(count){
+            var dom = $('#Graph-tool-display .list-group');
+            dom.html('');
+            $.each(count,function(i,perType){
+                var status = getStatusItem('devices',perType.typeCode);
+                dom.append('<li class="list-group-item clicked">'+
+                    '<i class="fa '+status.icon+'"></i>'+
+                    '<span>'+ perType.sum +' </span>'+
+                    '<span>'+ status.text +'</span>'+
+                    '</li>');
+            });
+        };
+
+        function initTheDiagram(){
+
+            var $ = go.GraphObject.make;  
+            myDiagram =
+            $(go.Diagram, "Graph",
+            {
+                "toolManager.hoverDelay":10,
+                "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+                initialAutoScale : go.Diagram.Uniform,
+                initialContentAlignment: go.Spot.Center,
+                layout: $(go.TreeLayout, {  
+                    angle: 270,
+                    nodeSpacing: 20,
+                    layerSpacing: 60,
+                })
+            });
+
+            myDiagram.nodeTemplate =
+            $(go.Node, "Horizontal",
+                new go.Binding("location", "loc"),
+                {   locationSpot: go.Spot.Center,
+                    toEndSegmentLength: 30, fromEndSegmentLength: 30
+                },
+                { 
+                    selectionChanged: function(){} 
+                },  
+                $(go.Panel, "Auto",
+                    $(go.Shape, {
+                        fill: "darkslategray", stroke: null
+                    },
+                    new go.Binding("fill", "type", genderBrushConverter)),
+                    $(go.TextBlock,
+                        { font: "bold 14px Helvetica, bold Arial, sans-serif",
+                        stroke: "white", margin: 12 },
+                        new go.Binding("text", "name"))
+                    ),
+                $("TreeExpanderButton",
+                {
+                    width:20,height:20,scale:1,
+                    mouseEnter:function(e, obj) { obj.scale = 1.4; },
+                    mouseLeave:function(e, obj) { obj.scale = 1; }
+                }
+                )
+                );
+
+
+            myDiagram.linkTemplate =
+            $(go.Link,
+            {
+                selectionAdornmentTemplate:
+                $(go.Adornment,
+                    $(go.Shape,
+                        { isPanelMain: true, stroke: "dodgerblue", strokeWidth: 3 }),
+                    $(go.Shape,
+                        { toArrow: "Standard", fill: "dodgerblue", stroke: null, scale: 1 })
+                    ),
+                routing: go.Link.Normal,
+                curve: go.Link.Bezier,
+                reshapable:true
+            },
+            {
+                mouseHover:function(e,obj){;
+                    myDiagram.startTransaction('setDiagramLayout');
+                    myDiagram.model.setDataProperty(obj.data,"linkState",'sher');
+                    myDiagram.commitTransaction('setDiagramLayout');
+                }
+            },
+            $(go.Shape,
+                { name: "OBJSHAPE",stroke: "gray" }),
+            $(go.Shape,
+                { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "gray" ,fill:'gray'}),
+            $(go.TextBlock, {
+                areaBackground:'#fff',
+                isMultiline:true,
+                maxLines:4,
+                wrap:go.TextBlock.WrapDesiredSize,
+                overflow:go.TextBlock.OverflowEllipsis,
+                textAlign: "left",
+                font: "12px Tahoma",
+                stroke: "#333333",
+                visible: true,
+                editable: false 
+            }, new go.Binding("text","linkState"))
+            );
+
+            function genderBrushConverter(type) {
+                return "orange";
+            }
+            
+            Record.diagram = myDiagram;
+        }
+
+        // 注册事件
+        $('body').on('click','#Graph-tool-relation .list-group-item',function(){
+            $(this).addClass('clicked');
+            $(this).siblings().removeClass('clicked');
+            Record.params.relation = $(this).attr('data-relation');
+            getData(loadData);
+        });
+        $('body').on('click','#Graph-box .tools .tool',function(){
+            $(this).siblings().each(function(i,perTool){
+                $( $(perTool).attr('href') ).removeClass('show');
+            });
+            $( $(this).attr('href') ).toggleClass('show');
+            
+        });
+        $('body').on('click','#Graph-tool-display .list-group .list-group-item',function(){
+            $(this).toggleClass('clicked');
+        });
+        // $(window).on('resize',function(){
+        //     $('#Graph-box').height($(window).height() - 280 );
+        // })
+        return {
+            render:render,
+            renderBasic:renderBasic
+        };
+    }));
+
+</script>
+
+<script src="plugins/gojs-1.5.8/go-no.js"></script>

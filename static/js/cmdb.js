@@ -28,6 +28,9 @@
         },
         'Monitor':{
             'moduleUrl':'webpage/Monitor/view/monitor.html'
+        },
+        'ITSourceTopo':{
+            'moduleUrl':'webpage/ITSourceTopo/view/ITSourceTopo.html'
         }
     };
 
@@ -245,6 +248,26 @@
         html = html + '</tbody>'
         return new Handlebars.SafeString(html);
     });
+
+    // ITSourceTopo
+    Handlebars.registerHelper('ITSourceTopoApp',function(apps){
+        var html = '';
+        if (apps.length > 5){
+            for (var i = 0; i < 4; i++) {
+                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].text+'</a></li>';
+            };
+            var more = $($('#ITSourceTopo-appMoreLi-template').html());
+            for (var y = 4; y < apps.length; y++) {
+                more.find('.dropdown-menu').append('<li><a role="tab" data-toggle="tab" data-id="'+apps[y].id+'">'+apps[y].text+'</a></li>');
+            };
+            html += more[0].outerHTML;
+        } else {
+            for (var i = 0; i < apps.length; i++) {
+                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].text+'</a></li>';
+            }
+        }
+        return new Handlebars.SafeString(html);
+    })
 }));
 
 // 一些常用的方法
@@ -311,8 +334,11 @@
 
     // 加载模版 || 插件
     var TempRepo = {};
-    function loadTemp(fileName){
+    function loadTemp(fileName,callback){
         if (TempRepo.fileName) {
+            if (callback) {
+                callback();
+            }
             return;
         }
         $.ajax({
@@ -322,6 +348,9 @@
             success:function(res){
                 $('body').append(res);
                 TempRepo.fileName = true;
+                if (callback) {
+                    callback()
+                }
             },
             error:function(e){
                 console.warn('加载模版失败')

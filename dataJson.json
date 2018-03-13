@@ -968,6 +968,28 @@ action：  ITSource/getAllApp
     },{
         "id":2,
         "text":"应用系统2"
+    },{
+        "id":3,
+        "text":"应用系统2"
+    },{
+        "id":4,
+        "text":"应用系统2"
+    }],
+    "success": true,
+    "msg": "成功"
+}
+
+action：  ITSource/getAppUsed
+{
+
+}
+{
+    "data": [{
+        "id":1,
+        "text":"应用系统1"
+    },{
+        "id":2,
+        "text":"应用系统2"
     }],
     "success": true,
     "msg": "成功"
@@ -1157,6 +1179,22 @@ action：  ITSourceTopo/showTopo
             "typeCode":"server",
             // 节点的名字
             "name": "BMC Patrol Agent 10.7.00"
+        }],
+        "count":[{
+            "typeCode":"server",
+            "sum":3
+        },{
+            "typeCode":"db",
+            "sum":1
+        },{
+            "typeCode":"cloud",
+            "sum":7
+        },{
+            "typeCode":"middleware",
+            "sum":6
+        },{
+            "typeCode":"app",
+            "sum":1
         }]
     },
     "success": true,
