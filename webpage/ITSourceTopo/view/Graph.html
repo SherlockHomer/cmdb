@@ -116,64 +116,91 @@
             $(go.Node, "Horizontal",
                 new go.Binding("location", "loc"),
                 {   locationSpot: go.Spot.Center,
-                    toEndSegmentLength: 30, fromEndSegmentLength: 30
+                    toEndSegmentLength: 30,
+                    fromEndSegmentLength: 30
                 },
                 { 
                     selectionChanged: function(){} 
-                },  
-                $(go.Panel, "Auto",
-                    $(go.Shape, {
-                        fill: "darkslategray", stroke: null
+                },
+                $(go.Panel,'Vertical',
+                    $(go.Panel,'Spot',
+                        $(go.Panel, "Auto",
+                            $(go.Shape, 
+                            {
+                                width:80,
+                                height:80,
+                                figure:'Circle',
+                                fill: "#f1f1f1",
+                                stroke: null
+                            },
+                            new go.Binding("fill", "type", genderBrushConverter)
+                            )
+
+                            ),
+                        $(go.Picture, {
+                            source:'dist/img/avatar.png',
+                            width: 48,
+                            height: 48
+                        }, new go.Binding("source")),
+                        $("TreeExpanderButton",
+                        {
+                            alignment: go.Spot.TopRight,
+                            width:20,height:20,scale:1,
+                            mouseEnter:function(e, obj) { obj.scale = 1.4; },
+                            mouseLeave:function(e, obj) { obj.scale = 1; }
+                        }
+                        )),
+                    $(go.TextBlock,{
+                        font: "bold 16px Helvetica, bold Arial, sans-serif",
+                        stroke: "#000", 
+                        margin: 12 
                     },
-                    new go.Binding("fill", "type", genderBrushConverter)),
-                    $(go.TextBlock,
-                        { font: "bold 14px Helvetica, bold Arial, sans-serif",
-                        stroke: "white", margin: 12 },
-                        new go.Binding("text", "name"))
-                    ),
-                $("TreeExpanderButton",
-                {
-                    width:20,height:20,scale:1,
-                    mouseEnter:function(e, obj) { obj.scale = 1.4; },
-                    mouseLeave:function(e, obj) { obj.scale = 1; }
-                }
-                )
+                    new go.Binding("text", "name")
+                    )
+                    )
+
                 );
 
 
             myDiagram.linkTemplate =
             $(go.Link,
             {
-                selectionAdornmentTemplate:
-                $(go.Adornment,
-                    $(go.Shape,
-                        { isPanelMain: true, stroke: "dodgerblue", strokeWidth: 3 }),
-                    $(go.Shape,
-                        { toArrow: "Standard", fill: "dodgerblue", stroke: null, scale: 1 })
-                    ),
+                // selectionAdornmentTemplate:
+                // $(go.Adornment,
+                //     $(go.Shape,
+                //         { isPanelMain: true, stroke: "dodgerblue", strokeWidth: 3 }),
+                //     $(go.Shape,
+                //         { toArrow: "Standard", fill: "dodgerblue", stroke: null, scale: 1 })
+                //     ),
                 routing: go.Link.Normal,
                 curve: go.Link.Bezier,
                 reshapable:true
             },
             {
-                mouseHover:function(e,obj){;
+                mouseHover:function(e,obj){
                     myDiagram.startTransaction('setDiagramLayout');
                     myDiagram.model.setDataProperty(obj.data,"linkState",'sher');
+                    myDiagram.commitTransaction('setDiagramLayout');
+                },
+                mouseLeave:function(e,obj){
+                    myDiagram.startTransaction('setDiagramLayout');
+                    myDiagram.model.setDataProperty(obj.data,"linkState",'');
                     myDiagram.commitTransaction('setDiagramLayout');
                 }
             },
             $(go.Shape,
-                { name: "OBJSHAPE",stroke: "gray" }),
+                { name: "OBJSHAPE",stroke: "#00c0ef",strokeWidth: 2 }),
             $(go.Shape,
-                { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "gray" ,fill:'gray'}),
+                { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "#00c0ef" ,fill:'#00c0ef',scale:1.3}),
             $(go.TextBlock, {
-                areaBackground:'#fff',
+                // border:'1px solid',
+                segmentOffset: new go.Point(0, 20),
                 isMultiline:true,
                 maxLines:4,
                 wrap:go.TextBlock.WrapDesiredSize,
                 overflow:go.TextBlock.OverflowEllipsis,
-                textAlign: "left",
-                font: "12px Tahoma",
+                // textAlign: "left",
+                font: "16px Tahoma",
                 stroke: "#333333",
                 visible: true,
                 editable: false 

@@ -5,6 +5,17 @@
             "parent":456,
             "id":1,
             "typeCode":"server",
+            "name": "服务器"
+        },{
+            "key":456,
+            "parent":11,
+            "id":1,
+            "typeCode":"server",
+            "name": "TOMCAT"
+        },{
+            "key":11,
+            "id":1,
+            "typeCode":"server",
             "name": "BMC Patrol Agent 10.7.00"
         }],
         "count":[{
