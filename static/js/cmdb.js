@@ -335,7 +335,7 @@
     // 加载模版 || 插件
     var TempRepo = {};
     function loadTemp(fileName,callback){
-        if (TempRepo.fileName) {
+        if (TempRepo[fileName] ) {
             if (callback) {
                 callback();
             }
@@ -347,7 +347,7 @@
             type: 'post',
             success:function(res){
                 $('body').append(res);
-                TempRepo.fileName = true;
+                TempRepo[fileName] = true;
                 if (callback) {
                     callback()
                 }
