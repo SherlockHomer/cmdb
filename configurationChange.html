@@ -21,16 +21,16 @@
   <link rel="stylesheet" href="static/css/THEAuto.css">
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed">
+<body class="hold-transition skin-blue sidebar-mini fixed sidebar-collapse">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Au</b></span>
+      <span class="logo-mini"><b>CC</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b></b> 服务自动化系统</span>
+      <span class="logo-lg"><b></b> 配置变更</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -141,12 +141,13 @@
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
         <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-calendar"></i> <span>调度时序图</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-list"></i> <span>作业执行列表</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-file"></i> <span>计划作业</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>作业审计</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-clipboard"></i> <span>作业设计</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-plus-square"></i> <span>作业维护</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>服务器操作</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>云环境操作</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>网络操作</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>数据库操作</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>中间件操作</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>操作审计</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>操作统计</span></a></li>
         <li class=""><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
       </ul>
     </section>
@@ -167,7 +168,7 @@
       <div class="row">
         <section class="col-sm-12 col-lg-12 connectedSortable">
           <div class="box box-info">
-            <!-- <div class="box-header with-border">
+            <div class="box-header with-border hide">
               <h3 class="box-title">作业调度</h3>
 
               <div class="box-tools pull-right hide">
@@ -175,154 +176,20 @@
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
-            </div> -->
+            </div>
             <div class="box-body">
               <div class="col-sm-4">
-                <h4>当天作业执行统计</h4>
-                <canvas id="jobScheduleChart" class="chart" data-data="2" data-label="已执行,未执行"></canvas>
+                <h4>变更操作模板</h4>
+                <canvas class="chart" data-data="4" data-legend="right" data-label="服务器,网络,云环境,数据库"></canvas>
               </div>
-              <div class="col-sm-8">
-                <h4>当天作业实例统计</h4>
-                <div class="infoboxes">
-                  <div class="infobox col-sm-4 col-xs-6 infobox-running link-pointer">
-                    <div class="infobox-icon">
-                      <div class="back-rectangle"></div>
-                      <div class="front-rectangle jobRunning"></div>
-                      <img class="infobox-img running" src="static/image/global/fun-running.png" width="22" height="22">
-                    </div>
-
-                    <div class="infobox-data">
-                      <div class="infobox-content">
-                        正在运行
-                      </div>
-                      <span id="running_number" class="infobox-data-number jobRunning-color">0</span>
-                    </div>
-                    <div id="running_percent" class="stat jobRunning-color">0.0%</div>
-
-
-                  </div>
-                  <div class="infobox col-sm-4 col-xs-6 infobox-overtime link-pointer">
-
-                    <div class="infobox-icon">
-                      <div class="back-rectangle"></div>
-                      <div class="front-rectangle jobOvertime"></div>
-                      <img class="" src="static/image/global/fun-overtime.png" width="22" height="22">
-                    </div>
-
-                    <div class="infobox-data">
-                      <div class="infobox-content">
-                        超时
-                      </div>
-                      <span id="overtime_number" class="infobox-data-number jobOvertime-color">0</span>
-                    </div>
-                    <div id="overtime_percent" class="stat jobOvertime-color">0.0%</div>
-
-
-                  </div>
-                  <div class="infobox col-sm-4 col-xs-6 infobox-pause link-pointer">
-
-                    <div class="infobox-icon">
-                      <div class="back-rectangle"></div>
-                      <div class="front-rectangle jobStop"></div>
-                      <img class="" src="static/image/global/fun-shut.png" width="22" height="22">
-                    </div>
-
-                    <div class="infobox-data">
-                      <div class="infobox-content">
-                        强制终止
-                      </div>
-                      <span id="pause_number" class="infobox-data-number jobStop-color">0</span>
-                    </div>
-                    <div id="pause_percent" class="stat jobStop-color">0.0%</div>
-
-
-                  </div>
-                  <div class="infobox col-sm-4 col-xs-6 infobox-normal link-pointer">
-                    <div class="infobox-icon">
-                      <div class="back-rectangle"></div>
-                      <div class="front-rectangle jobNormal"></div>
-                      <img class="" src="static/image/global/fun-normal.png" width="22" height="22">
-                    </div>
-
-                    <div class="infobox-data">
-                      <div class="infobox-content">
-                        正常
-                      </div>
-                      <span id="normal_number" class="infobox-data-number jobNormal-color">12</span>
-                    </div>
-                    <div id="normal_percent" class="stat jobNormal-color">85.7%</div>
-
-                  </div>
-                  <div class="infobox col-sm-4 col-xs-6  infobox-wrong  link-pointer">
-                    <div class="infobox-icon">
-                      <div class="back-rectangle"></div>
-                      <div class="front-rectangle jobWrong"></div>
-                      <img class="" src="static/image/global/fun-wrong.png" width="22" height="22">
-                    </div>
-
-                    <div class="infobox-data">
-                      <div class="infobox-content">
-                        错误
-                      </div>
-                      <span id="error_number" class="infobox-data-number jobWrong-color" style="font-size:20px">2</span>
-                    </div>
-
-                    <div class="infobox-data" style="margin-left:15px">
-                      <div class="infobox-content">
-                        系统错误
-                      </div>
-                      <span id="syserror_number" class="infobox-data-number jobWrong-color" style="font-size:20px">1</span>
-                    </div>
-                    <div id="error_percent" class="stat jobWrong-color">14.3%</div>
-                  </div>
-                </div>
+              <div class="col-sm-4">
+                <h4>IT资源总数</h4>
+                <canvas class="chart" data-data="4" data-legend="right" data-label="服务器,网络,云环境,数据库"></canvas>
               </div>
-            </div>
-          </div>
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">应用系统调度时序图</h3>
-
-              <div class="box-tools pull-right">
-                  <span>
-                    <div class="tip triangular jobNormal"></div>
-                    <span class="text">正常</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobWrong"></div>
-                    <span class="text">异常</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobRunning"></div>
-                    <span class="text">正在运行</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobNorun"></div>
-                    <span class="text">未运行</span>
-                  </span>
-                  <!-- <span>
-                    <div class="tip triangular jobWait"></div>
-                    <span class="text">等待;</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobStop"></div>
-                    <span class="text">停止;</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobOvertime"></div>
-                    <span class="text">超时;</span>
-                  </span>
-                  <span>
-                    <div class="tip triangular jobDontRun"></div>
-                    <span class="text">不执行</span>
-                  </span> -->
-                <!-- <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> -->
-                <!-- </button> -->
-                <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+              <div class="col-sm-4">
+                <h4>当天变更操作数</h4>
+                <canvas class="chart" data-data="2" data-legend="right" data-label="成功,失败"></canvas>
               </div>
-            </div>
-            <div class="box-body">
-
             </div>
           </div>
         </section>

@@ -1,6 +1,13 @@
 *{
     font-family: '微软雅黑';
 }
+canvas{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
 ul{
     list-style: none;
     padding-left: 20px;
@@ -60,4 +67,214 @@ color:#ff6700;
 }
 .sidebar-collapse .sysMenu{
     display: none;
+}
+/*取自自动化*/
+.infobox{
+  padding: 8px 0% 0% 2%;
+/*  height: 33.33%;
+  margin: 0 2% 0 0%;
+  width: 48%;
+  max-height: 82px;
+  min-height: 52px;*/
+  min-width: 250px;
+}
+.infobox.link-pointer:hover{
+  box-shadow: 0 0 4px #9a9a9a;
+  background-color: #b5dee8;
+  cursor: pointer;
+}
+.infobox-icon {
+  display: inline-block;
+  /*vertical-align: top;*/
+  width: 48px;
+  height: 48px;
+  position: relative;
+}
+.infobox-icon img{
+  position: absolute;
+  bottom: 9px;
+  right: 9px;
+}
+.back-rectangle{
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  top: 0;
+  left: 0;
+}
+.front-rectangle{
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  bottom: 0;
+  right: 0;
+}
+.infobox-norun {
+  color: #0ff;
+  border-color: #0ff;
+}
+.infobox-norun>.infobox-icon>[class*="icon-"] {
+  background-color: #0ff
+}
+.infobox-running {
+  color: #0089e9;
+}
+.infobox-running .back-rectangle{
+  border: 1px solid #abe401;
+}
+.infobox-wrong  .back-rectangle{
+  border: 1px solid #ff5e57;
+}
+.infobox-normal .back-rectangle{
+  border: 1px solid #45b97c;
+}
+.infobox-stop .back-rectangle{
+  border:1px solid #9263ff;
+}
+.infobox-pause .back-rectangle{
+  border: 1px solid #e34e98;
+}
+.infobox-overtime .back-rectangle{
+  border:1px solid #ffa6a6;
+}
+.infobox-norun  .back-rectangle{
+  border: 1px solid #cbedf7;
+}
+.infobox-running>.infobox-icon>[class*="icon-"] {
+  background-color: #abe401
+}
+.infobox-wrong  {
+  color: #ff7930;
+}
+.infobox-wrong >.infobox-icon>[class*="icon-"] {
+  background-color: #ff6d6d
+}
+.infobox-normal {
+  color: #72d628;
+  border-color: #0f0;
+}
+.infobox-normal>.infobox-icon>[class*="icon-"] {
+  background-color: #45b97c
+}
+.infobox-stop {
+  color: #9263ff;
+}
+.infobox-stop>.infobox-icon>[class*="icon-"] {
+  background-color: #e34e98
+}
+.infobox-pause {
+  color: #f04e50;
+}
+.infobox .infobox-content {
+  color: #333333;
+  font-size: 12px;
+}
+.infobox>.infobox-data {
+  display: inline-block;
+  line-height: 26px;
+  margin-left: 10px;
+}
+.infobox>.infobox-data>.infobox-data-number {
+  display: block;
+  font-size: 24px;
+  margin:  0;
+  position: relative
+}
+.infobox>.infobox-data>.infobox-text {
+  display: block;
+  font-size: 16px;
+  margin: 2px 0 4px;
+  position: relative;
+  text-shadow: none
+}
+.infobox.no-border {
+  border: none!important
+}
+.infobox>.stat {
+  /* text-shadow: 1px 1px 0 rgba(0,0,0,0.15); */
+  font-size: 18px;
+  margin: 27px 5px 0 0;
+  float: right;
+}
+/*状态类型背景颜色*/
+.jobRunning{
+  background-color: #abe401;
+}
+.jobNormal{
+  background-color: #45b97c;
+}
+.jobNorun{
+  background-color: #cbedf7;
+}
+.jobPause{
+  background-color: #7bbfea;
+}
+.jobWrong{
+  background-color: #ff5e57;
+}
+.jobStop{
+  background-color: #E34E98;
+}
+.jobOvertime{
+  background-color: #FFA6A6;
+}
+.jobWait{
+  background-color: #f7d04a;
+}
+/*为配合具体效果改动了颜色，和作为背景颜色不同*/
+.jobRunning-color{
+  color: #abe401;
+}
+.jobNormal-color{
+  color: #45b97c;
+}
+.jobNorun-color{
+  color: #cbedf7;
+}
+.jobPause-color{
+  color: #7bbfea;
+}
+.jobWrong-color{
+  color: #ff5e57;
+}
+.jobStop-color{
+  color: #E34E98;
+}
+.jobOvertime-color{
+  color: #FFA6A6;
+}
+.jobWait-color{
+  color: #f7d04a;
+}
+
+
+.tip-line{
+    display: inline-block;
+    height: 28px;
+    border: 1px solid #c3c3c3;
+    background-color: #F4F4F4;
+    vertical-align: top;
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    display: none;
+    opacity: 0;
+}
+.tip-line .text{
+    vertical-align: middle;
+}
+.tip.triangular{
+    display:inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin: 5px 3px 4px 4px;
+}
+/*取自自动化end*/
+
+
+
+/*chart*/
+.chart {
+    width: 100%;
 }

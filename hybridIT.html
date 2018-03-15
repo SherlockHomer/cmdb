@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="static/css/THEAuto.css">
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed">
+<body class="hold-transition skin-blue sidebar-mini fixed sidebar-collapse">
 <div class="wrapper">
 
   <header class="main-header">
@@ -141,10 +141,10 @@
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
         <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>作业调度</span></a></li>
+        <li class=""><a href="http://localhost:8080/CMDB/sher-auto.html"><i class="fa fa-dashboard"></i> <span>作业调度</span></a></li>
         <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>巡检合规</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>例行操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>配置变更</span></a></li>
+        <li class=""><a href="http://localhost:8080/CMDB/routineOperation.html"><i class="fa fa-dashboard"></i> <span>例行操作</span></a></li>
+        <li class=""><a href="http://localhost:8080/CMDB/configurationChange.html"><i class="fa fa-dashboard"></i> <span>配置变更</span></a></li>
         <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>自动发现</span></a></li>
         <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>灾备切换</span></a></li>
         <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>环境构建</span></a></li>
@@ -167,25 +167,119 @@
     </section>
 
     <!-- Main content -->
-    <section class="content connectedSortable">
+    <section class="content">
       <div class="row">
-        <section class="col-lg-12 col-sm-12 col-xs-12 connectedSortable">
+        <section class="col-sm-12 col-lg-12 connectedSortable">
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">作业调度</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <h4>当天作业执行统计</h4>
+                <canvas id="jobScheduleChart" class="chart" data-data="2" data-label="已执行,未执行"></canvas>
               </div>
-              <div class="col-sm-9" style="border-right:1px solid #ddd;">
+              <div class="col-sm-8">
                 <h4>当天作业实例统计</h4>
+                <div class="infoboxes">
+                  <div class="infobox col-sm-4 col-xs-6 infobox-running link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobRunning"></div>
+                      <img class="infobox-img running" src="static/image/global/fun-running.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        正在运行
+                      </div>
+                      <span id="running_number" class="infobox-data-number jobRunning-color">0</span>
+                    </div>
+                    <div id="running_percent" class="stat jobRunning-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-overtime link-pointer">
+
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobOvertime"></div>
+                      <img class="" src="static/image/global/fun-overtime.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        超时
+                      </div>
+                      <span id="overtime_number" class="infobox-data-number jobOvertime-color">0</span>
+                    </div>
+                    <div id="overtime_percent" class="stat jobOvertime-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-pause link-pointer">
+
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobStop"></div>
+                      <img class="" src="static/image/global/fun-shut.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        强制终止
+                      </div>
+                      <span id="pause_number" class="infobox-data-number jobStop-color">0</span>
+                    </div>
+                    <div id="pause_percent" class="stat jobStop-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-normal link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobNormal"></div>
+                      <img class="" src="static/image/global/fun-normal.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        正常
+                      </div>
+                      <span id="normal_number" class="infobox-data-number jobNormal-color">12</span>
+                    </div>
+                    <div id="normal_percent" class="stat jobNormal-color">85.7%</div>
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6  infobox-wrong  link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobWrong"></div>
+                      <img class="" src="static/image/global/fun-wrong.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        错误
+                      </div>
+                      <span id="error_number" class="infobox-data-number jobWrong-color" style="font-size:20px">2</span>
+                    </div>
+
+                    <div class="infobox-data" style="margin-left:15px">
+                      <div class="infobox-content">
+                        系统错误
+                      </div>
+                      <span id="syserror_number" class="infobox-data-number jobWrong-color" style="font-size:20px">1</span>
+                    </div>
+                    <div id="error_percent" class="stat jobWrong-color">14.3%</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -193,84 +287,289 @@
             <div class="box-header with-border">
               <h3 class="box-title">巡检合规</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
+              <div class="infoboxes">
 
+                <div class="infobox col-sm-4 col-xs-6 infobox-normal link-pointer">
+                  <div class="infobox-icon">
+                    <div class="back-rectangle"></div>
+                    <div class="front-rectangle jobNormal"></div>
+                    <img class="" src="static/image/global/fun-normal.png" width="22" height="22">
+                  </div>
+
+                  <div class="infobox-data">
+                    <div class="infobox-content">
+                      正常
+                    </div>
+                    <span id="normal_number" class="infobox-data-number jobNormal-color">12</span>
+                  </div>
+                  <div id="normal_percent" class="stat jobNormal-color">85.7%</div>
+
+                </div>
+                <div class="infobox col-sm-4 col-xs-6  infobox-wrong  link-pointer">
+                  <div class="infobox-icon">
+                    <div class="back-rectangle"></div>
+                    <div class="front-rectangle jobWrong"></div>
+                    <img class="" src="static/image/global/fun-wrong.png" width="22" height="22">
+                  </div>
+
+                  <div class="infobox-data">
+                    <div class="infobox-content">
+                      错误
+                    </div>
+                    <span id="error_number" class="infobox-data-number jobWrong-color" style="font-size:20px">2</span>
+                  </div>
+
+                  <div class="infobox-data" style="margin-left:15px">
+                    <div class="infobox-content">
+                      系统错误
+                    </div>
+                    <span id="syserror_number" class="infobox-data-number jobWrong-color" style="font-size:20px">1</span>
+                  </div>
+                  <div id="error_percent" class="stat jobWrong-color">14.3%</div>
+                </div>
+                <div class="infobox col-sm-4 col-xs-6 infobox-norun link-pointer">
+
+                  <div class="infobox-icon">
+                    <div class="back-rectangle"></div>
+                    <div class="front-rectangle jobNorun"></div>
+                    <img class="" src="static/image/global/view.png" width="22" height="22">
+                  </div>
+
+                  <div class="infobox-data">
+                    <div class="infobox-content">
+                      未巡检
+                    </div>
+                    <span id="pause_number" class="infobox-data-number jobNorun-color">0</span>
+                  </div>
+                  <div id="pause_percent" class="stat jobNorun-color">0.0%</div>
+
+
+                </div>
+              </div>
             </div>
           </div>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">例行操作</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
+              <div class="col-sm-3">
+                <h4>当天操作执行统计</h4>
+                <canvas class="chart" data-data="2" data-label="已执行,未执行"></canvas>
+              </div>
+              <div class="col-sm-9">
+                <h4>当天操作实例统计</h4>
+                <div class="infoboxes">
+                  <div class="infobox col-sm-4 col-xs-6 infobox-running link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobRunning"></div>
+                      <img class="infobox-img running" src="static/image/global/fun-running.png" width="22" height="22">
+                    </div>
 
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        正在运行
+                      </div>
+                      <span id="running_number" class="infobox-data-number jobRunning-color">0</span>
+                    </div>
+                    <div id="running_percent" class="stat jobRunning-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-overtime link-pointer">
+
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobOvertime"></div>
+                      <img class="" src="static/image/global/fun-overtime.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        超时
+                      </div>
+                      <span id="overtime_number" class="infobox-data-number jobOvertime-color">0</span>
+                    </div>
+                    <div id="overtime_percent" class="stat jobOvertime-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-pause link-pointer">
+
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobStop"></div>
+                      <img class="" src="static/image/global/fun-shut.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        强制终止
+                      </div>
+                      <span id="pause_number" class="infobox-data-number jobStop-color">0</span>
+                    </div>
+                    <div id="pause_percent" class="stat jobStop-color">0.0%</div>
+
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6 infobox-normal link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobNormal"></div>
+                      <img class="" src="static/image/global/fun-normal.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        正常
+                      </div>
+                      <span id="normal_number" class="infobox-data-number jobNormal-color">12</span>
+                    </div>
+                    <div id="normal_percent" class="stat jobNormal-color">85.7%</div>
+
+                  </div>
+                  <div class="infobox col-sm-4 col-xs-6  infobox-wrong  link-pointer">
+                    <div class="infobox-icon">
+                      <div class="back-rectangle"></div>
+                      <div class="front-rectangle jobWrong"></div>
+                      <img class="" src="static/image/global/fun-wrong.png" width="22" height="22">
+                    </div>
+
+                    <div class="infobox-data">
+                      <div class="infobox-content">
+                        错误
+                      </div>
+                      <span id="error_number" class="infobox-data-number jobWrong-color" style="font-size:20px">2</span>
+                    </div>
+
+                    <div class="infobox-data" style="margin-left:15px">
+                      <div class="infobox-content">
+                        系统错误
+                      </div>
+                      <span id="syserror_number" class="infobox-data-number jobWrong-color" style="font-size:20px">1</span>
+                    </div>
+                    <div id="error_percent" class="stat jobWrong-color">14.3%</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">配置变更</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
-
+              <div class="col-sm-3">
+                <h4>操作模板总数</h4>
+                <canvas class="chart" data-data="2" data-label="作业模版,流程模版"></canvas>
+              </div>
+              <div class="col-sm-6">
+                <h4>近一个月变更操作TOP 10</h4>
+                <canvas class="barChart" data-data="2" data-label="作业模版,流程模版"></canvas>
+              </div>
+              <div class="col-sm-3">
+                <h4>当天变更操作数</h4>
+                <canvas class="chart" data-data="2" data-label="正常,异常"></canvas>
+              </div>
             </div>
           </div>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">应用部署</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
-
+              <div class="col-sm-3">
+                <h4>当天部署任务数</h4>
+                <canvas class="chart" data-data="3" data-label="部署中,正常,异常"></canvas>
+              </div>
+              <div class="col-sm-9">
+                <h4>近一个月部署任务数</h4>
+                <canvas class="areaChart"></canvas>
+              </div>
             </div>
           </div>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">IT资源</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
-
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">33个服务器</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-number text-aqua">1284个数据库</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-save"></i></span>
+                <span class="info-box-number text-aqua">1001个中间件</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
+                <span class="info-box-number text-aqua">4个云环境</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-cog"></i></span>
+                <span class="info-box-number text-aqua">4个网络设备</span>
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
+                <span class="info-box-number text-aqua">1001个应用程序</span>
+              </div>
             </div>
           </div>
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">代理</h3>
 
-              <div class="box-tools pull-right">
+              <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <div class="box-body">
-
+              <div class="col-sm-5">
+                <h4>在线情况分布</h4>
+                <canvas class="chart" data-data="2" data-legend="right" data-label="在线,离线"></canvas>
+              </div>
+              <div class="col-sm-offset-1 col-sm-5">
+                <h4>操作系统分布</h4>
+                <canvas class="chart" data-data="2" data-legend="right" data-label="Windows,Linux"></canvas>
+              </div>
             </div>
           </div>
         </section>
@@ -495,6 +794,8 @@
 <script src="bower_components/moment/min/moment.min.js"></script>
 <!-- Slimscroll -->
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- chart.js -->
+<script src="bower_components/chart.js/dist/Chart.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
