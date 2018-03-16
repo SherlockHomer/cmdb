@@ -46,7 +46,7 @@
             "sum":"12"
         }]
     }, {
-        "typeCode": "network",
+        "typeCode": "server",
         "sum": 52,
         "details":[{
             "typeName":"Window",

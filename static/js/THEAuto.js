@@ -168,12 +168,12 @@ window.chartColors = {
 }(this));
 $(function(){
 
-  var dataBook = {
-    '2':[randomScalingFactor(),randomScalingFactor()],
-    '3':[randomScalingFactor(),randomScalingFactor(),randomScalingFactor()],
-    '4':[randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()],
-    '5':[randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-
+  var dataBook = function(num){
+    var arr = [];
+    for (var i = 0; i < num; i++) {
+      arr.push(randomScalingFactor());
+    }
+    return arr;
   };
   var colorBook = {
     '2':[chartColors.red,chartColors.orange],
@@ -235,7 +235,7 @@ $(function(){
   $.each($('.chart'),function(i,perC){
     var ctx = perC.getContext('2d');
     var config = getConfig({legendP:$(perC).attr('data-legend')});
-    config.data.datasets[0].data = dataBook[$(perC).attr('data-data')];
+    config.data.datasets[0].data = dataBook($(perC).attr('data-data'));
     config.data.datasets[0].backgroundColor = colorBook[$(perC).attr('data-data')];
     config.data.labels = $(perC).attr('data-label').split(',');
     new Chart(ctx, config);
@@ -246,34 +246,22 @@ $(function(){
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var color = Chart.helpers.color;
   var barChartData = {
-    labels: ['1日', '3日', '6日', '8日', '11日', '12日', '14日','16日','20日','22日'],
+    labels: ['模块1', '模块3', '模块6', '模块8', '模块11', '模块12', '模块14','模块16','模块20','模块22'],
     datasets: [{
       label: '变更数',
       backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
       borderColor: window.chartColors.red,
       borderWidth: 1,
-      data: [
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      randomScalingFactor(),
-      ]
+      data: [20,18,17,16,14,14,13,12,8,1]
     }]
-
   };
-
   $.each( $('.barChart'),function(i,perC){
     var ctx = perC.getContext('2d');
     new Chart(ctx, {
       type: 'bar',
       data: barChartData,
       options: {
+        showLines:false,
         responsive: true,
         legend: {
           display:false,
@@ -285,11 +273,13 @@ $(function(){
         },
         scales: {
           xAxes: [{
+            display:false,
             gridLines: {
               display:false
             }
           }],
           yAxes: [{
+            display:false,
             gridLines: {
               display:false
             }
@@ -306,29 +296,60 @@ $(function(){
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var color = Chart.helpers.color;
   $.each($('.areaChart'),function(i,perC){
+    var dataNum = $(perC).attr('data-data');
+    var label = $(perC).attr('data-label').split(',');
+    var round = $(perC).attr('data-line');
+    if (dataNum == 2) {
+      var datasets = [{
+        backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.yellow,
+        data: [11 ,14,8,11,14,15,9,10,12],
+        label: label[0],
+        fill: 'start'
+      },{
+        backgroundColor: color(window.chartColors.purple).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.purple,
+        data: [11 ,4,15,11,6,15,9,13,12],
+        label: label[1],
+        fill: 'start'
+      }]
+    } else {
+      var datasets = [{
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        data: [11 ,14,5,11,14,15,9,10,12],
+        label: label[0],
+        fill: 'start'
+      }]
+    }
     var ctx = perC.getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
         labels: [2,3,4,5,6,7,8,9,10],
-        datasets: [{
-          backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-          borderColor: window.chartColors.red,
-          data: [11 ,14,5,11,14,15,9,10,12],
-          label: '部署任务数',
-          fill: 'start'
-        }]
+        datasets: datasets
       },
       options:{
         legend: {
-          display:false,
+          display:dataNum == 2 ? true : false,
           position: 'top',
         },
         spanGaps: false,
-        elements: {
+        elements: round ? {} : {
           line: {
-            tension: 0.000001
+            tension: 0.000001 
           }
+        },
+        borderDash:[14],
+        borderWidth:100,
+        scales: {
+          xAxes: [{
+          }],
+          yAxes: [{
+            borderWidth:100,
+        borderDash:[14],
+
+          }]
         }
       }
     });

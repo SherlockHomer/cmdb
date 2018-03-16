@@ -12,8 +12,8 @@
 }(window, function () {
     var Constant = {};
     Constant.devices = [
-    {type:'server',icon:'fa-flag-o',text:'服务器',url:''},
-    {type:'db',icon:'fa-flag-o',text:'数据库'},
+    {type:'server',icon:'fa-server',text:'服务器',url:''},
+    {type:'db',icon:'fa-database',text:'数据库'},
     {type:'middleware',icon:'fa-save',text:'中间件'},
     {type:'cloud',icon:'fa-wrench',text:'云环境'},
     {type:'network',icon:'fa-cog',text:'网络设备'},

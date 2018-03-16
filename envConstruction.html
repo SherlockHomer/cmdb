@@ -141,13 +141,9 @@
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
         <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>服务器操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>云环境操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>网络操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>数据库操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>中间件操作</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>操作审计</span></a></li>
-        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>操作统计</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>裸机部署</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>云环境部署</span></a></li>
+        <li class=""><a href="#"><i class="fa fa-dashboard"></i> <span>支撑环境部署</span></a></li>
         <li class=""><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
       </ul>
     </section>
@@ -168,8 +164,9 @@
       <div class="row">
         <section class="col-sm-12 col-lg-12 connectedSortable">
           <div class="box box-info">
-            <div class="box-header with-border hide">
-              <h3 class="box-title">作业调度</h3>
+            <div class="box-header with-border">
+              <i class="fa fa-cloud"></i>
+              <h3 class="box-title">基础资源</h3>
 
               <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -178,23 +175,42 @@
               </div>
             </div>
             <div class="box-body">
-              <div class="col-sm-4">
-                <h4>变更操作模板</h4>
-                <canvas class="chart" data-data="4" data-legend="right" data-label="服务器,网络,云环境,数据库"></canvas>
+              <div class="col-sm-3 col-xs-6">
+                <h4>网络设备</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="在线,故障"></canvas>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <h4>IT资源总数</h4>
-                <canvas class="chart" data-data="4" data-legend="right" data-label="服务器,网络,云环境,数据库"></canvas>
+              <div class="col-sm-3 col-xs-6">
+                <h4>Windows服务器</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="在线,离线"></canvas>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <h4>当天变更操作数</h4>
-                <canvas class="chart" data-data="2" data-legend="right" data-label="成功,失败"></canvas>
+              <div class="col-sm-3 col-xs-6">
+                <h4>Linux服务器</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="在线,离线"></canvas>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-6">
+                <h4>AIX服务器</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="在线,离线"></canvas>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-6">
+                <h4>裸机</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="在线,故障"></canvas>
+                </div>
               </div>
             </div>
           </div>
           <div class="box box-info">
-            <div class="box-header with-border ui-sortable-handle" style="cursor: move;">
-              <h3 class="box-title">近一个月变更操作TOP 10</h3>
+            <div class="box-header with-border">
+              <i class="fa fa-cloud"></i>
+              <h3 class="box-title">Vmware云环境</h3>
 
               <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -203,51 +219,42 @@
               </div>
             </div>
             <div class="box-body">
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-                <span class="info-box-number text-aqua">windows用户管理(100)</span>
+              <div class="col-sm-3 col-xs-6">
+                <h4>虚拟CPU</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="已用,未用"></canvas>
+                </div>
               </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
-                <span class="info-box-number text-aqua">windows文件拷贝(90)</span>
+              <div class="col-sm-3 col-xs-6">
+                <h4>虚拟内存</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="已用,未用"></canvas>
+                </div>
               </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-save"></i></span>
-                <span class="info-box-number text-aqua">windows注册表(90)</span>
+              <div class="col-sm-3 col-xs-6">
+                <h4>存储</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="已用,未用"></canvas>
+                </div>
               </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
-                <span class="info-box-number text-aqua">windows防火墙(90)</span>
+              <div class="col-sm-3 col-xs-6">
+                <h4>主机</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="开机,关机"></canvas>
+                </div>
               </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-cog"></i></span>
-                <span class="info-box-number text-aqua">Linux用户管理(90)</span>
-              </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                <span class="info-box-number text-aqua">Linux文件拷贝(70)</span>
-              </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                <span class="info-box-number text-aqua">Linux注册表(70)</span>
-              </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                <span class="info-box-number text-aqua">创建虚机(50)</span>
-              </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                <span class="info-box-number text-aqua">增加内存(30)</span>
-              </div>
-              <div class="info-box">
-                <span class="info-box-icon"><i class="fa fa-wifi"></i></span>
-                <span class="info-box-number text-aqua">数据库备份(20)</span>
+              <div class="col-sm-3 col-xs-6">
+                <h4>虚拟机</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="开机,挂起"></canvas>
+                </div>
               </div>
             </div>
           </div>
           <div class="box box-info">
-            <div class="box-header with-border ui-sortable-handle" style="cursor: move;">
-              <h3 class="box-title">近一个月变更操作数量</h3>
+            <div class="box-header with-border">
+              <i class="fa fa-cloud"></i>
+              <h3 class="box-title">数据库资源</h3>
 
               <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -256,12 +263,24 @@
               </div>
             </div>
             <div class="box-body">
-              <canvas class="areaChart" data-label="成功数,失败数" data-data="2" data-line="round" style="height: 400px;width: 100%;"></canvas>
+              <div class="col-sm-3 col-xs-6">
+                <h4>Oracle实例</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="打开,关闭"></canvas>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-6">
+                <h4>Mysql</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="运行,未运行"></canvas>
+                </div>
+              </div>
             </div>
           </div>
           <div class="box box-info">
-            <div class="box-header with-border ui-sortable-handle" style="cursor: move;">
-              <h3 class="box-title">近一个月总操作时间</h3>
+            <div class="box-header with-border">
+              <i class="fa fa-cloud"></i>
+              <h3 class="box-title">中间件资源</h3>
 
               <div class="box-tools pull-right hide">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -270,7 +289,43 @@
               </div>
             </div>
             <div class="box-body">
-              <canvas class="areaChart" data-label="操作时间（s）" data-line="round" style="height: 400px;width: 100%;"></canvas>
+              <div class="col-sm-3 col-xs-6">
+                <h4>Tomcat实例</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="运行,未运行"></canvas>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-6">
+                <h4>WebLogic实例</h4>
+                <div style="width: 300px;margin-left: -30px">
+                  <canvas class="chart" data-data="2" data-label="运行,未运行"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <i class="fa fa-cloud"></i>
+              <h3 class="box-title">公有云环境</h3>
+              <div class="box-tools pull-right hide">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="col-sm-5 col-xs-6">
+                <h4>云主机</h4>
+                <div style="width: 300px;">
+                  <canvas class="chart" data-data="3" data-legend="right" data-label="阿里云,腾讯云,华为云"></canvas>
+                </div>
+              </div>
+              <div class="col-sm-5 col-xs-6">
+                <h4>RDS</h4>
+                <div style="width: 300px;">
+                  <canvas class="chart" data-data="3" data-legend="right" data-label="阿里云,腾讯云,华为云"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </section>
