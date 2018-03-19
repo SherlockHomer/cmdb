@@ -35,16 +35,16 @@
         <div class="form-horizontal form-group clearfix">
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">进行中的任务：</label>
-                <span class="form-control-static text-aqua" role="button">{{missionIng}}</span>
+                <a class="text-aqua" href="#/Monitor/ing" role="button">{{missionIng}}</a>
             </div>
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">计划的任务：</label>
-                <span class="form-control-static text-aqua" role="button">{{missionPlan}}</span>
+                <a class="text-aqua" href="#/Monitor/planTo" role="button">{{missionPlan}}</a>
             </div>
         </div>
         <div>
             <h4 class="control-label">最近完成的{{missoneLately.length}}个任务
-                <small class="text-aqua pull-right" role="button">更多</small>
+                <small class="pull-right" role="button"><a class="text-aqua" href="#/Monitor/done">更多</a></small>
             </h4>
             <table class="table table-striped table-bordered">
                 <thead>
@@ -61,7 +61,7 @@
                         <td>{{name}}</td>
                         <td>{{statusInMission status}}</td>
                         <td>{{endTime}}</td>
-                        <td class="text-aqua hand" role="button">{{discoveried}}个发现</td>
+                        <td role="button"><a class="text-aqua" href="#/Monitor/done/detail/{{missionId}}">{{discoveried}}个发现</a></td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -98,10 +98,14 @@
     <!-- /.box-header -->
     <div class="box-body no-padding">
         {{#each data}}
-            <div class="info-box">
-                <span class="info-box-icon"><i class="fa {{deviceIcon typeCode}}"></i></span>
-                <span class="info-box-number text-aqua">{{sum}}个{{deviceText typeCode}}</span>
-            </div>
+            <a class="info-box" href="#/ITSource/{{typeCode}}">
+                <span class="info-box-icon">
+                    <i class="fa {{deviceIcon typeCode}}"></i>
+                </span>
+                <span class="info-box-number text-aqua">
+                    {{sum}}个{{deviceText typeCode}}
+                </span>
+            </a>
         {{/each}}
      </div>
 </script>

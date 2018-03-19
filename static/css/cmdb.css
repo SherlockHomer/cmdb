@@ -16,6 +16,7 @@ ul {
     box-shadow: none;
     vertical-align: top;
     cursor: pointer;
+    color:#000;
 }
 
 .info-box:hover .info-box-icon {

@@ -11,7 +11,8 @@
     }
 }(window, function ($) {
     var Record = {
-
+        // 默认是正在扫描选项卡
+        tab : 'ing'
     }
     if ( window.Monitor ) { return window.Monitor};
 
@@ -32,6 +33,7 @@
         initMonitorTable('Monitor-done-table',2);
         initMonitorTable('Monitor-planTo-table',3);
         initMonitorTable('Monitor-all-table',4);
+
     }
     // 各个表的渲染
     function initMonitorTable(tableId,monitorType){
@@ -118,8 +120,14 @@
             Record.rowId = hashes[1];
             renderDetail(hashes[1]);
             return;
-        }
+        } else if (hashes[1] == 'detail') {
+            Record.rowId = hashes[2];
+            renderDetail(hashes[2]);
+            return;
+        } 
         renderBasic();
+        Record.tab = hashes[0] || 'ing';
+        $('#Monitor-basic .nav-tabs a[href="#Monitor-'+Record.tab+'"]').tab('show');
     };
 
     function checkAll(){
