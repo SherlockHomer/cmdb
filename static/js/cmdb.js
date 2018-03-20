@@ -209,7 +209,7 @@
     });
 
     Handlebars.registerHelper('startTimeMat',function(startTime){
-        var long = moment(startTime).fromNow();
+        var long = moment(new Date(startTime)).fromNow();
         return new Handlebars.SafeString('<small class="label label-default"><i class="fa fa-clock-o"></i>'+long+'</small>');
     });
     Handlebars.registerHelper('deviceIcon',function(type){
