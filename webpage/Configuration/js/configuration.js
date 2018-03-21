@@ -41,7 +41,7 @@
         $('#Configuration-SNMP-table').bootstrapTable({
             toolbarId:'Configuration-SNMP-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/SNMPInfo'),
+            url:ConfirmUrl('discover-config/SNMPInfo'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -84,7 +84,7 @@
         $('#Configuration-portStandard-table').bootstrapTable({
             toolbarId:'Configuration-portStandard-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/portAll'),
+            url:ConfirmUrl('discover-config/portAll'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -122,7 +122,7 @@
         $('#Configuration-portCustom-table').bootstrapTable({
             toolbarId:'Configuration-portCustom-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/portAll'),
+            url:ConfirmUrl('discover-config/portAll'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -160,7 +160,7 @@
         $('#Configuration-server-table').bootstrapTable({
             toolbarId:'Configuration-server-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/serverAll'),
+            url:ConfirmUrl('discover-config/serverAll'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -207,7 +207,7 @@
         $('#Configuration-cloud-table').bootstrapTable({
             toolbarId:'Configuration-cloud-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/cloudAll'),
+            url:ConfirmUrl('discover-config/cloudAll'),
             checkbox:true,
             pagination:true,
             sortName:'name',
@@ -246,7 +246,7 @@
         $('#Configuration-database-table').bootstrapTable({
             toolbarId:'Configuration-database-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/dbAll'),
+            url:ConfirmUrl('discover-config/dbAll'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -297,7 +297,7 @@
         $('#Configuration-middleware-table').bootstrapTable({
             toolbarId:'Configuration-middleware-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/midwareAll'),
+            url:ConfirmUrl('discover-config/midwareAll'),
             checkbox:true,
             pagination:true,
             sortName:'name',
@@ -340,10 +340,10 @@
         $('#Configuration-mission-table').bootstrapTable({
             toolbarId:'Configuration-mission-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/missionAll'),
+            url:ConfirmUrl('discover-config/missionAll'),
             checkbox:true,
             pagination:true,
-            sortName:'name',
+            sortName:'taskName',
             sortOrder: "desc",
             // sortable:true,
             pageNumber:1,
@@ -357,11 +357,11 @@
                 checkbox:true,
             },{
                 title:'任务名称',
-                field:'name',
+                field:'taskName',
                 sortable:true
             },{
                 title:'发现内容',
-                field:'content',
+                field:'scanType',
                 sortable:true,
                 formatter:function(value, row, index, field){
                     var discoveryTypes = value.split(',');
@@ -373,17 +373,20 @@
                 }
             },{
                 title:'调度计划',
-                field:'scheduleId',
+                field:'schePlanId',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return row.schedule.join(';');
+                    return row.scheName.join(';');
                 }
             },{
                 title:'目标范围',
-                field:'ips',
+                field:'ipRange',
                 sortable:true,
-                // formatter:function(value, row, index, field){
-                // }
+                formatter:function(value, row, index, field){
+                    return $.map(value,function(perIp){
+                        return perIp.value;
+                    }).join(';</br>');
+                }
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
@@ -396,7 +399,7 @@
         $('#Configuration-agent-table').bootstrapTable({
             toolbarId:'Configuration-agent-table-toolbar',
             method:'post',
-            url:ConfirmUrl('strategy/agentAll'),
+            url:ConfirmUrl('discover-config/agentAll'),
             checkbox:true,
             pagination:true,
             sortName:'ip',
@@ -498,41 +501,41 @@
     function ajaxDelete(tableId,params){
         switch(tableId){
             case 'Configuration-SNMP-table':{
-                var url = 'strategy/delSNMP';
+                var url = 'discover-config/delSNMP';
                 break;
             }
             case 'Configuration-portStandard-table':{
-                var url = 'strategy/delPort';
+                var url = 'discover-config/delPort';
                 params.portType = 1;
                 break;
             }
             case 'Configuration-portCustom-table':{
-                var url = 'strategy/delPort';
+                var url = 'discover-config/delPort';
                 params.portType = 2;
                 break;
             }
             case 'Configuration-server-table':{
-                var url = 'strategy/delServer';
+                var url = 'discover-config/delServer';
                 break;
             }
             case 'Configuration-cloud-table':{
-                var url = 'strategy/delCloud';
+                var url = 'discover-config/delCloud';
                 break;
             }
             case 'Configuration-database-table':{
-                var url = 'strategy/delDB';
+                var url = 'discover-config/delDB';
                 break;
             }
             case 'Configuration-middleware-table':{
-                var url = 'strategy/delMidware';
+                var url = 'discover-config/delMidware';
                 break;
             }
             case 'Configuration-mission-table':{
-                var url = 'strategy/delMission';
+                var url = 'discover-config/delMission';
                 break;
             }
             case 'Configuration-agent-table':{
-                var url = 'strategy/delAgent';
+                var url = 'discover-config/delAgent';
                 break;
             }
         }
@@ -614,37 +617,37 @@
     function ajaxSave(tableId,params,btn){
         switch(tableId){
             case 'Configuration-SNMP-table':{
-                var url = 'strategy/saveSNMP';
+                var url = 'discover-config/saveSNMP';
                 break;
             }
             case 'Configuration-portStandard-table':{
-                var url = 'strategy/defPort';
+                var url = 'discover-config/defPort';
                 params.portType = 1;
                 break;
             }
             case 'Configuration-portCustom-table':{
-                var url = 'strategy/defPort';
+                var url = 'discover-config/defPort';
                 params.portType = 2;
                 break;
             }
             case 'Configuration-server-table':{
-                var url = 'strategy/saveServer';
+                var url = 'discover-config/saveServer';
                 break;
             }
             case 'Configuration-cloud-table':{
-                var url = 'strategy/saveCloud';
+                var url = 'discover-config/saveCloud';
                 break;
             }
             case 'Configuration-database-table':{
-                var url = 'strategy/saveDB';
+                var url = 'discover-config/saveDB';
                 break;
             }
             case 'Configuration-middleware-table':{
-                var url = 'strategy/saveMidware';
+                var url = 'discover-config/saveMidware';
                 break;
             }
             case 'Configuration-mission-table':{
-                var url = 'strategy/saveMission';
+                var url = 'discover-config/saveMission';
                 break;
             }
         }
@@ -694,7 +697,7 @@
     };
 
     function ajaxScan(tableId,params){
-        fetchData('monitor/startScan','json',params,{
+        fetchData('discover-monitor/startTask','json',params,{
             success:function(res){
                 if (res.success) {
                     window.location = window.location.origin + window.location.pathname + '#/Monitor';
@@ -725,7 +728,7 @@
         var ipSel = $('#'+tabId+' select.ip');
         ipSel.select2({
             ajax:{
-                url:ConfirmUrl('strategy/getAgents'),
+                url:ConfirmUrl('discover-config/getAgents'),
                 dataType: 'json'
             }
         });
@@ -738,7 +741,7 @@
             return;
         }
         var params = {ids:[sel.val()]}
-        fetchData('strategy/addAgent','json',params,{
+        fetchData('discover-config/addAgent','json',params,{
             success:function(res){
                 if (res.success) {
                     $('#'+tableId).bootstrapTable('refresh');

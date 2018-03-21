@@ -3,7 +3,7 @@
         "typeCode": "server",
         "sum": 33
     }, {
-        "typeCode": "db",
+        "typeCode": "database",
         "sum": 1284
     }, {
         "typeCode": "middleware",

@@ -12,26 +12,26 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">任务名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="taskName" class="form-control" value="{{taskName}}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">调度计划：</label>
             <div class="col-sm-5">
-                <select class="form-control schedulePlan" multiple="multiple" name="scheduleId" value="{{scheduleId}}">
+                <select class="form-control schedulePlan" multiple="multiple" name="schePlanId" value="{{schePlanId}}">
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">发现内容：</label>
             <div class="col-sm-5">
-                <select class="form-control select2" multiple="multiple" name="content" value="{{content}}">
-                    <option selected="selected" value="1">物理设备</option>
-                    <option selected="selected" value="2">端口</option>
-                    <option selected="selected" value="3">服务器</option>
-                    <option selected="selected" value="4">云环境</option>
-                    <option selected="selected" value="5">数据库</option>
-                    <option selected="selected" value="6">中间件</option>
+                <select class="form-control select2" multiple="multiple" name="scanType" value="{{scanType}}">
+                    <option selected="selected" value="device">物理设备</option>
+                    <option selected="selected" value="port">端口</option>
+                    <option selected="selected" value="server">服务器</option>
+                    <option selected="selected" value="cloud">云环境</option>
+                    <option selected="selected" value="database">数据库</option>
+                    <option selected="selected" value="middleware">中间件</option>
                 </select>
             </div>
         </div>
@@ -55,18 +55,18 @@
     <div class="ip form-group col-sm-12">
         <div class="showInline changeViewBox">
             <select class="targetDevice form-control changeView">
-                <option value="指定IP" selected="selected">指定IP</option>
-                <option value="IP地址段">IP地址段</option>
-                <option value="CIDR">CIDR</option>
+                <option value="1" selected="selected">指定IP</option>
+                <option value="2">IP地址段</option>
+                <option value="3">CIDR</option>
             </select>
         </div>
-        <div class="showInline" data-belong="指定IP">
+        <div class="showInline" data-belong="1">
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">
         </div>
-        <div class="showInline hide" data-belong="IP地址段">
+        <div class="showInline hide" data-belong="2">
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
@@ -76,7 +76,7 @@
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">
         </div>
-        <div class="showInline hide" data-belong="CIDR">
+        <div class="showInline hide" data-belong="3">
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
             <input class="form-control ipBox" type="text">.
@@ -134,16 +134,16 @@
                     return $(this).val();
                 }).get();
                 switch(ip.type){
-                    case '指定IP' : {
+                    case '1' : {
                         ip.value = inputs.join('.');
                         break;
                     }
-                    case 'IP地址段' : {
+                    case '2' : {
                         ip.value = inputs.splice(4,4).join('.') ;
                         ip.value = inputs.join('.') + '-' + ip.value;
                         break;
                     }
-                    case 'CIDR' : {
+                    case '3' : {
                         var pop = inputs.pop();
                         ip.value = inputs.join('.') + '/' + pop;
                         break;
@@ -157,7 +157,7 @@
             $('#DefineMissionStrategy-form .select2').select2({
                 closeOnSelect:false
             });
-            fetchData('strategy/getSchedule','json',null,{
+            fetchData('discover-config/getSchedule','json',null,{
                 success:function(res){
                     if (res.success) {
                         var scheduleSel = $('#DefineMissionStrategy-form .schedulePlan');
@@ -175,15 +175,15 @@
                     newOne.insertBefore( $('#DefineMissionStrategy-form .ips .add') );
                     newOne.find('.targetDevice').val(perIp.type).change();
                     switch(perIp.type){
-                        case '指定IP' : {
+                        case '1' : {
                             var values = perIp.value.split('.');
                             break;
                         }
-                        case 'IP地址段' : {
+                        case '2' : {
                             var values = perIp.value.split('-').join('.').split('.');
                             break;
                         }
-                        case 'CIDR' : {
+                        case '3' : {
                             var values = perIp.value.split('/').join('.').split('.');
                             break;
                         }

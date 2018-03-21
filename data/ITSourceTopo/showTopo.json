@@ -22,7 +22,7 @@
             "typeCode":"server",
             "sum":3
         },{
-            "typeCode":"db",
+            "typeCode":"database",
             "sum":1
         },{
             "typeCode":"cloud",

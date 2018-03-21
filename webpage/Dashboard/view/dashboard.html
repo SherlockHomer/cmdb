@@ -35,15 +35,15 @@
         <div class="form-horizontal form-group clearfix">
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">进行中的任务：</label>
-                <a class="text-aqua" href="#/Monitor/ing" role="button">{{missionIng}}</a>
+                <a class="text-aqua" href="#/Monitor/ing" role="button">{{processCount}}</a>
             </div>
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">计划的任务：</label>
-                <a class="text-aqua" href="#/Monitor/planTo" role="button">{{missionPlan}}</a>
+                <a class="text-aqua" href="#/Monitor/planTo" role="button">{{planCount}}</a>
             </div>
         </div>
         <div>
-            <h4 class="control-label">最近完成的{{missoneLately.length}}个任务
+            <h4 class="control-label">最近完成的{{latelyInst.length}}个任务
                 <small class="pull-right" role="button"><a class="text-aqua" href="#/Monitor/done">更多</a></small>
             </h4>
             <table class="table table-striped table-bordered">
@@ -56,12 +56,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each missoneLately}}
+                    {{#each latelyInst}}
                     <tr>
                         <td>{{name}}</td>
                         <td>{{statusInMission status}}</td>
-                        <td>{{endTime}}</td>
-                        <td role="button"><a class="text-aqua" href="#/Monitor/done/detail/{{missionId}}">{{discoveried}}个发现</a></td>
+                        <td>{{endDate}}</td>
+                        <td role="button"><a class="text-aqua" href="#/Monitor/done/detail/{{missionId}}">{{count}}个发现</a></td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -82,7 +82,7 @@
                     <!-- todo text -->
                     <span class="text">{{info}}</span>
                     <!-- Emphasis label -->
-                    {{startTimeMat startTime}}
+                    {{startDateMat startDate}}
                     <!-- General tools such as edit or delete-->
                 </li>
             {{/each}}

@@ -345,5 +345,13 @@ $(function () {
 
   setup()
 
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
+
+
+
+  // 选中菜单换active
+  $('body').on('click','.main-sidebar .sidebar-menu li',function(){
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+  })
 })

@@ -10,7 +10,7 @@
             "sum":"2"
         }]
     }, {
-        "typeCode": "db",
+        "typeCode": "database",
         "sum": 18,
         "details":[{
             "typeName":"Oracle",

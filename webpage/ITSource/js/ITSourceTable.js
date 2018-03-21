@@ -42,7 +42,7 @@
     function renderBasic(){
         render('ITSource-sourceTable-template');
         initSourceTable('server');
-        initSourceTable('db');
+        initSourceTable('database');
         initSourceTable('middleware');
         initSourceTable('cloud');
         initSourceTable('network');
@@ -75,7 +75,7 @@
                 return 'OSType';
                 break;
             }
-            case 'db' : {
+            case 'database' : {
                 return 'dbType';
                 break;
             }
@@ -137,7 +137,7 @@
                 }]
                 break;
             }
-            case 'db' : {
+            case 'database' : {
                 return [{
                     checkbox:true,
                 },{
@@ -611,7 +611,7 @@
                 break;
             }
             case 'DefineMissionStrategy-form':{
-                var url = 'strategy/saveMission';
+                var url = 'discover-config/saveMission';
                 break;
             }
             case 'ITSource-setTag-form':{

@@ -1,24 +1,24 @@
 {
     "data": {
-        "missionIng": 10,
-        "missionPlan": 20,
-        "missoneLately": [{
+        "processCount": 10,
+        "planCount": 20,
+        "latelyInst": [{
             "name": "发现物理设备",
             "status": 1,
-            "endTime": "2018-01-10 13:26:36",
-            "discoveried":14,
+            "endDate": "2018-01-10 13:26:36",
+            "count":14,
             "missionId":1
         }, {
             "name": "发现中间件",
             "status": 1,
-            "endTime": "2018-01-10 13:30:36",
-            "discoveried":10,
+            "endDate": "2018-01-10 13:30:36",
+            "count":10,
             "missionId":2
         }, {
             "name": "发现数据库",
             "status": 1,
-            "endTime": "2018-01-10 13:35:36",
-            "discoveried":10,
+            "endDate": "2018-01-10 13:35:36",
+            "count":10,
             "missionId":3
         }]
     },

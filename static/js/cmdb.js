@@ -150,8 +150,15 @@
         window.fetchData = factory();
     };
 }(window, function () {
+    window.ConfirmUrl = function(url){
+        var urls = url.split('/');
+        var backEndUrl = urls.join('!');
+        backEndUrl = '../auto_web/' + backEndUrl + '.action';
+        var frontEnd = 'data/' + url + '.json';
+        return  window.UrlConfig == 'frontEnd' ?  frontEnd: backEndUrl;
+    }
     function fetchData (url,type,params,callback) {
-        url = window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
+        url = ConfirmUrl(url);
         $.ajax({
             url: url,
             dataType: type,
@@ -169,9 +176,6 @@
             }
         });
     };
-    window.ConfirmUrl = function(url){
-        return  window.UrlConfig == 'frontEnd' ? 'data/' + url + '.json' : url;
-    }
     return fetchData;
 }));
 
@@ -208,7 +212,7 @@
             return new Handlebars.SafeString('任务完成') ;
     });
 
-    Handlebars.registerHelper('startTimeMat',function(startTime){
+    Handlebars.registerHelper('startDateMat',function(startTime){
         var long = moment(new Date(startTime)).fromNow();
         return new Handlebars.SafeString('<small class="label label-default"><i class="fa fa-clock-o"></i>'+long+'</small>');
     });

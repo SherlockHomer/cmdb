@@ -41,7 +41,7 @@
             toolbarId:tableId+'-toolbar',
             monitorType:monitorType,
             method:'post',
-            url:ConfirmUrl('monitor/infoAll'),
+            url:ConfirmUrl('discover-monitor/infoAll'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -74,10 +74,10 @@
                 }
             },{
                 title:'调度计划',
-                field:'scheduleId',
+                field:'schePlanId',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return row.schedule.join(';');
+                    return row.scheName.join(';');
                 }
             },{
                 title:'开始时间',
@@ -196,7 +196,7 @@
     };
 
     function ajaxScan(tableId,params,scanOrNot){
-        var url = scanOrNot? 'monitor/startScan':'monitor/stopScan';
+        var url = scanOrNot? 'discover-monitor/startTask':'discover-monitor/stopScan';
         fetchData(url,'json',params,{
             success:function(res){
                 if (res.success) {
@@ -218,7 +218,7 @@
         var params = {
             id: id
         }
-        fetchData('monitor/detail','json',params,{
+        fetchData('discover-monitor/detail','json',params,{
             success:function(res){
                 render('Monitor-table-detail-template',res.data);
                 Record.details = res.data.details;
