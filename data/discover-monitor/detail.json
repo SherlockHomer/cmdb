@@ -2,22 +2,22 @@
     "data": {
         "name": "WIN-0ECQ6MI24DJ",
         "contentInfo": [{
-            "typeCode": "server",
+            "code": "server",
             "sum": 33
         }, {
-            "typeCode": "database",
+            "code": "database",
             "sum": 1284
         }, {
-            "typeCode": "middleware",
+            "code": "middleware",
             "sum": 1001
         }, {
-            "typeCode": "cloud",
+            "code": "cloud",
             "sum": 4
         }, {
-            "typeCode": "network",
+            "code": "network",
             "sum": 4
         }, {
-            "typeCode": "app",
+            "code": "app",
             "sum": 1001
         }],
         "details": [{

@@ -13,7 +13,7 @@
     var Record = {
         tags:[],
         // 默认资源是服务器
-        typeCode:'server',
+        code:'server',
         // 一级资源类型，报表过来的typeCode对应哪个大分类
         levelOneType:'server',
         OSVer:'',
@@ -48,14 +48,14 @@
         initSourceTable('network');
         initSourceTable('app');
     }
-    function initSourceTable(typeCode){
-        $('#ITSource-'+typeCode+'-table').bootstrapTable({
-            typeCode:typeCode,
+    function initSourceTable(code){
+        $('#ITSource-'+code+'-table').bootstrapTable({
+            code:code,
             method:'post',
             url:ConfirmUrl('ITSource/infoAll'),
             checkbox:true,
             pagination:true,
-            sortName:getTableSortName(typeCode),
+            sortName:getTableSortName(code),
             sortOrder: "asc",
             // sortable:true,
             pageNumber:1,
@@ -65,12 +65,12 @@
             sidePagination:'server',
             queryParams:queryParams,
             uniqueId:'id',
-            columns:getColumnsByTypeCode(typeCode)
+            columns:getColumnsByTypeCode(code)
         });
     };
-    function getTableSortName(typeCode){
+    function getTableSortName(code){
 
-        switch (typeCode){
+        switch (code){
             case 'server' : {
                 return 'OSType';
                 break;
@@ -97,8 +97,8 @@
             }
         }
     }
-    function getColumnsByTypeCode(typeCode) {
-        switch (typeCode){
+    function getColumnsByTypeCode(code) {
+        switch (code){
             case 'server' : {
                 return [{
                     checkbox:true,
@@ -313,7 +313,7 @@
     // hase 判断记录参数
     // currentModule:[1],
     // levelOneType:[2],
-    // typeCode:[3],
+    // code:[3],
     // countType:[4],
     // classifyInCount:[5]
     function renderModule( hashes ) {
@@ -324,7 +324,7 @@
         Record.belongMission = hashes.belongMission
         if ( hashes.currentModule == 'ITSourceReport') {
             Record.levelOneType = hashes.levelOneType;
-            Record.typeCode = hashes.typeCode;
+            Record.code = hashes.code;
             Record.countType = hashes.countType;
             switch(Record.countType){
                 // 厂商
@@ -365,7 +365,7 @@
     };
     function showOrHideSome(currentModule) {
         $('#ITSource-sourceTable-box .nav-tabs a').parent().removeClass('active');
-        $('#ITSource-sourceTable-box .nav-tabs a[data-typeCode="'+Record.levelOneType+'"]').tab('show');
+        $('#ITSource-sourceTable-box .nav-tabs a[data-code="'+Record.levelOneType+'"]').tab('show');
         if (currentModule == 'ITSourceReport') {
             $('#ITSource-sourceTable-box .forNotReport').hide();
         } else if (currentModule == 'ITSource') {
@@ -375,7 +375,7 @@
 
     function changeTab(tab){
         // 能切换选项卡只在 < IT资源信息 >中
-        Record.levelOneType = $(tab).attr('data-typeCode');
+        Record.levelOneType = $(tab).attr('data-code');
     }
     
     function checkAll(){
@@ -421,7 +421,7 @@
         // }
         var params = {
             ids : ids,
-            typeCode:Record.typeCode
+            code:Record.code
         };
         ajaxExportTable(tableId,params);
     }
@@ -449,7 +449,7 @@
         }
         var params = {
             ids : ids,
-            typeCode:Record.typeCode
+            code:Record.code
         };
         ajaxExportDetail(tableId,params);
     }
@@ -465,13 +465,13 @@
         });
     };
     function queryParams(params){
-        var toolbar = $('#ITSource-'+this.typeCode+'-table-toolbar');
+        var toolbar = $('#ITSource-'+this.code+'-table-toolbar');
         params.searchText = toolbar.find('.searchInput').val();
         // 资源分类
         if (Record.currentModule == 'ITSource') {
-            params.typeCode = this.typeCode;
+            params.code = this.code;
         } else {
-            params.typeCode = Record.typeCode;
+            params.code = Record.code;
             // 统计分类
             params.serFac = Record.serFac;
             params.OSVer = Record.OSVer;

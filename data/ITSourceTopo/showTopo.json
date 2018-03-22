@@ -4,34 +4,34 @@
             "key":1234,
             "parent":456,
             "id":1,
-            "typeCode":"server",
+            "code":"server",
             "name": "服务器"
         },{
             "key":456,
             "parent":11,
             "id":1,
-            "typeCode":"server",
+            "code":"server",
             "name": "TOMCAT"
         },{
             "key":11,
             "id":1,
-            "typeCode":"server",
+            "code":"server",
             "name": "BMC Patrol Agent 10.7.00"
         }],
         "count":[{
-            "typeCode":"server",
+            "code":"server",
             "sum":3
         },{
-            "typeCode":"database",
+            "code":"database",
             "sum":1
         },{
-            "typeCode":"cloud",
+            "code":"cloud",
             "sum":7
         },{
-            "typeCode":"middleware",
+            "code":"middleware",
             "sum":6
         },{
-            "typeCode":"app",
+            "code":"app",
             "sum":1
         }]
     },

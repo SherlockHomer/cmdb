@@ -86,7 +86,7 @@
             var dom = $('#Graph-tool-display .list-group');
             dom.html('');
             $.each(count,function(i,perType){
-                var status = getStatusItem('devices',perType.typeCode);
+                var status = getStatusItem('devices',perType.code);
                 dom.append('<li class="list-group-item clicked">'+
                     '<i class="fa '+status.icon+'"></i>'+
                     '<span>'+ perType.sum +' </span>'+

@@ -14,7 +14,7 @@
     var Record = {
         // 一级资源分类
         levelOneType : '',
-        typeCode:'',
+        code:'',
         countType:''
     }
     // 配置DOM和temp的一一对应
@@ -34,7 +34,7 @@
             success:function(res){
                 $.each(res.data,function(i,per){
                     $.each(per.details,function(y,perD){
-                        perD.typeCode = per.typeCode;
+                        perD.code = per.code;
                     })
                 })
                 render('ITSourceReport-template',res);
@@ -62,10 +62,10 @@
             getAllView();
         } else if ( params[0] && params[1] ){
             Record.levelOneType = params[0];
-            Record.typeCode = params[1];
+            Record.code = params[1];
             // 加载统计情况
             renderCount({
-                typeCode : Record.typeCode
+                code : Record.code
             });
         }
     };

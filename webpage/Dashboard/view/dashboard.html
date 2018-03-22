@@ -98,12 +98,12 @@
     <!-- /.box-header -->
     <div class="box-body no-padding">
         {{#each data}}
-            <a class="info-box" href="#/ITSource/{{typeCode}}">
+            <a class="info-box" href="#/ITSource/{{code}}">
                 <span class="info-box-icon">
-                    <i class="fa {{deviceIcon typeCode}}"></i>
+                    <i class="fa {{deviceIcon code}}"></i>
                 </span>
                 <span class="info-box-number text-aqua">
-                    {{sum}}个{{deviceText typeCode}}
+                    {{sum}}个{{deviceText code}}
                 </span>
             </a>
         {{/each}}

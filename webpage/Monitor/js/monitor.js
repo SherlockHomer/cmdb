@@ -251,8 +251,8 @@
         $(html).insertAfter($(this).parents('tr'));
     }
     function clickInfobox(){
-        var typeCode = $(this).attr('data-typeCode');
-        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ typeCode + '/' + Record.rowId;
+        var code = $(this).attr('data-code');
+        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ code + '/' + Record.rowId;
     }
     // 事件注册
     // 相同功能

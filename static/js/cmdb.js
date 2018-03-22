@@ -75,7 +75,7 @@
             loadModule( 'ITSourceTable' , {
                 currentModule:hashes[1],
                 levelOneType:hashes[2],
-                typeCode:hashes[3],
+                code:hashes[3],
                 countType:hashes[4],
                 classifyInCount:hashes[5],
                 detail:hashes[6],

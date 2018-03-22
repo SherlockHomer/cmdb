@@ -125,9 +125,9 @@
                 <div class="box-body">
                     <div class="form-group">
                         {{#each contentInfo}}
-                        <div class="info-box" data-typeCode="{{typeCode}}">
-                            <span class="info-box-icon"><i class="fa {{deviceIcon typeCode}}"></i></span>
-                            <span class="info-box-number text-aqua">{{sum}}个{{deviceText typeCode}}</span>
+                        <div class="info-box" data-code="{{code}}">
+                            <span class="info-box-icon"><i class="fa {{deviceIcon code}}"></i></span>
+                            <span class="info-box-number text-aqua">{{sum}}个{{deviceText code}}</span>
                         </div>
                         {{/each}}
                     </div>
