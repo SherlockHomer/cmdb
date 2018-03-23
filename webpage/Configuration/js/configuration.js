@@ -384,8 +384,10 @@
                 field:'ipRange',
                 sortable:true,
                 formatter:function(value, row, index, field){
+                    if (!value) {return};
+                    value = JSON.parse( value );
                     return $.map(value,function(perIp){
-                        return perIp.value;
+                        return perIp.ip;
                     }).join(';</br>');
                 }
             },{

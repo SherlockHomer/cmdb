@@ -12,18 +12,18 @@
 }(window, function () {
     var Constant = {};
     Constant.devices = [
-    {type:'device',icon:'icon-device',text:'物理设备',url:''},
-    {type:'server',icon:'icon-host',text:'服务器',url:''},
-    {type:'port',icon:'icon-port',text:'端口'},
-    {type:'database',icon:'icon-database',text:'数据库'},
-    {type:'middleware',icon:'icon-middleware',text:'中间件'},
-    {type:'cloud',icon:'icon-cloud',text:'云环境'},
-    {type:'network',icon:'icon-networkDevice',text:'网络设备'},
-    {type:'application',icon:'icon-app',text:'应用程序'},
-    {type:'storage',icon:'icon-storage',text:'存储'},
-    {type:'visual',icon:'icon-visual',text:'虚拟资源'},
-    {type:'platform',icon:'icon-platform',text:'平台资源'},
-    {type:'appsys',icon:'icon-appsys',text:'业务系统'}
+    {type:'device',icon:'icon-device',text:'物理设备',image:'static/image/device/unknownDevice.png'},
+    {type:'server',icon:'icon-host',text:'服务器',image:'static/image/device/host.png'},
+    {type:'port',icon:'icon-port',text:'端口',image:'static/image/device/unknownDevice.png'},
+    {type:'database',icon:'icon-database',text:'数据库',image:'static/image/device/database.png'},
+    {type:'middleware',icon:'icon-middleware',text:'中间件',image:'static/image/device/middleware.png'},
+    {type:'cloud',icon:'icon-cloud',text:'云环境',image:'static/image/device/cloud.png'},
+    {type:'network',icon:'icon-networkDevice',text:'网络设备',image:'static/image/device/networkDevice.png'},
+    {type:'application',icon:'icon-app',text:'应用程序',image:'static/image/device/app.png'},
+    {type:'storage',icon:'icon-storage',text:'存储',image:'static/image/device/storage.png'},
+    {type:'visual',icon:'icon-visual',text:'虚拟资源',image:'static/image/device/unknownDevice.png'},
+    {type:'platform',icon:'icon-platform',text:'平台资源',image:'static/image/device/unknownDevice.png'},
+    {type:'appsys',icon:'icon-appsys',text:'业务系统',image:'static/image/device/unknownDevice.png'}
     
     ];
     Constant.count = [

@@ -168,9 +168,11 @@
                     }).val( val ).change();
                 }
             });
-            if(params && params.ips && params.ips.length > 1 ){
-                $.each(params.ips,function(i,perIp){
-                    var newOne = $( $('#DefineMissionStrategy-ip-template').html() );
+            if(params && params.ipRange ){
+
+                var ipRange = JSON.parse( params.ipRange );
+                $.each(ipRange,function(i,perIp){
+                    var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
                     newOne.insertBefore( $('#DefineMissionStrategy-form .ips .add') );
                     newOne.find('.targetDevice').val(perIp.type).change();
                     switch(perIp.type){
