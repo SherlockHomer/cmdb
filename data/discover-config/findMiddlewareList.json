@@ -1,0 +1,25 @@
+{
+    "total": 55,
+    "rows": [{
+        "id": 1,
+        "name": "中间件发现策略1",
+        "OSType": "Tomcat",
+        "port": "8080",
+        "soapPort": 0,
+        "account": "admin"
+    },{
+        "id": 2,
+        "name": "中间件发现策略1",
+        "OSType": "Weblogic",
+        "port": "1443",
+        "soapPort": 1,
+        "account": "admin"
+    },{
+        "id": 3,
+        "name": "中间件发现策略1",
+        "OSType": "Websphere",
+        "port": "666",
+        "soapPort": 2,
+        "account": "admin"
+    }]
+}

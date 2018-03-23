@@ -1,0 +1,18 @@
+{
+    "total":10,
+    "rows": [{
+        "id": 1,
+        "name": "服务器发现策略",
+        "prot": "WMI",
+        "account":"administrator",
+        "encoding":"GBK",
+        "port":15
+    },{
+        "id": 2,
+        "name": "发现策略",
+        "prot": "SSH",
+        "account":"admin",
+        "encoding":"utf",
+        "port":16
+    }]
+}
