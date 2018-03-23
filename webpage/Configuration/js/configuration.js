@@ -41,7 +41,7 @@
         $('#Configuration-SNMP-table').bootstrapTable({
             toolbarId:'Configuration-SNMP-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/SNMPInfo'),
+            url:ConfirmUrl('discover-config/findSnmpList'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -84,7 +84,7 @@
         $('#Configuration-portStandard-table').bootstrapTable({
             toolbarId:'Configuration-portStandard-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/portAll'),
+            url:ConfirmUrl('discover-config/findPortList'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -122,7 +122,7 @@
         $('#Configuration-portCustom-table').bootstrapTable({
             toolbarId:'Configuration-portCustom-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/portAll'),
+            url:ConfirmUrl('discover-config/findPortList'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -160,7 +160,7 @@
         $('#Configuration-server-table').bootstrapTable({
             toolbarId:'Configuration-server-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/serverAll'),
+            url:ConfirmUrl('discover-config/findServerList'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -207,7 +207,7 @@
         $('#Configuration-cloud-table').bootstrapTable({
             toolbarId:'Configuration-cloud-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/cloudAll'),
+            url:ConfirmUrl('discover-config/findCloudList'),
             checkbox:true,
             pagination:true,
             sortName:'name',
@@ -246,7 +246,7 @@
         $('#Configuration-database-table').bootstrapTable({
             toolbarId:'Configuration-database-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/dbAll'),
+            url:ConfirmUrl('discover-config/findDatabaseList'),
             checkbox:true,
             pagination:true,
             sortName:'port',
@@ -297,7 +297,7 @@
         $('#Configuration-middleware-table').bootstrapTable({
             toolbarId:'Configuration-middleware-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/midwareAll'),
+            url:ConfirmUrl('discover-config/findMiddlewareList'),
             checkbox:true,
             pagination:true,
             sortName:'name',
@@ -340,7 +340,7 @@
         $('#Configuration-mission-table').bootstrapTable({
             toolbarId:'Configuration-mission-table-toolbar',
             method:'post',
-            url:ConfirmUrl('discover-config/missionAll'),
+            url:ConfirmUrl('discover-config/findTaskList'),
             checkbox:true,
             pagination:true,
             sortName:'taskName',
@@ -376,6 +376,7 @@
                 field:'schePlanId',
                 sortable:true,
                 formatter:function(value, row, index, field){
+                    if ( row.scheName || row.scheName.length == 0 ) {return}
                     return row.scheName.join(';');
                 }
             },{
@@ -647,7 +648,7 @@
                 break;
             }
             case 'Configuration-mission-table':{
-                var url = 'discover-config/saveMission';
+                var url = 'discover-config/saveDiscTask';
                 break;
             }
         }

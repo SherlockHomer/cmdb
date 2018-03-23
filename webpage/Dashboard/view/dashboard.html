@@ -71,7 +71,7 @@
 </script>
 <script type="text/x-handlebars-template" id="dashboard-discovery-sync-template">
     <div class="box-header">
-        <i class="fa fa-refresh"></i>
+        <i class="icon icon-sync"></i>
         <h3 class="box-title">CMDB同步状态</h3>
     </div>
     <!-- /.box-header -->
@@ -98,20 +98,23 @@
     <!-- /.box-header -->
     <div class="box-body no-padding">
         {{#each data}}
-            <a class="info-box" href="#/ITSource/{{code}}">
-                <span class="info-box-icon">
-                    <i class="fa {{deviceIcon code}}"></i>
-                </span>
-                <span class="info-box-number text-aqua">
-                    {{sum}}个{{deviceText code}}
-                </span>
-            </a>
+        {{#if sum}}
+        <a class="info-box" href="#/ITSource/{{code}}">
+            <span class="info-box-icon">
+                <i class="iconfont {{deviceIcon code}}"></i>
+            </span>
+            <span class="info-box-number text-aqua">
+                {{sum}}个{{deviceText code}}
+                
+            </span>
+        </a>
+        {{/if}}
         {{/each}}
      </div>
 </script>
 <script type="text/x-handlebars-template" id="dashboard-discovery-NEWS-template">
     <div class="box-header">
-        <i class="fa fa-newspaper-o"></i>
+        <i class="iconfont icon-news"></i>
 
         <h3 class="box-title">新特征</h3>
     </div>

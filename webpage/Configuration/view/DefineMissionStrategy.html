@@ -126,7 +126,7 @@
                     params[perA.name] = perA.value;
                 }
             });
-            params.ips = [];
+            params.ipRange = [];
             $('#DefineMissionStrategy-form .ips .ip').each(function(i,perIp){
                 var ip = {};
                 ip.type = $(perIp).find('.targetDevice').val();
@@ -135,38 +135,37 @@
                 }).get();
                 switch(ip.type){
                     case '1' : {
-                        ip.value = inputs.join('.');
+                        ip.ip = inputs.join('.');
                         break;
                     }
                     case '2' : {
-                        ip.value = inputs.splice(4,4).join('.') ;
-                        ip.value = inputs.join('.') + '-' + ip.value;
+                        ip.ip = inputs.splice(4,4).join('.') ;
+                        ip.ip = inputs.join('.') + '-' + ip.ip;
                         break;
                     }
                     case '3' : {
                         var pop = inputs.pop();
-                        ip.value = inputs.join('.') + '/' + pop;
+                        ip.ip = inputs.join('.') + '/' + pop;
                         break;
                     }
                 };
-                params.ips.push(ip);
+                params.ipRange.push(ip);
             });
+            params.ipRange = JSON.stringify( params.ipRange );
             return params;
         }
         function render(params) {
             $('#DefineMissionStrategy-form .select2').select2({
                 closeOnSelect:false
             });
-            fetchData('discover-config/getSchedule','json',null,{
+            fetchData('systemCalenderAction/getSchedulePlans','json',null,{
                 success:function(res){
-                    if (res.success) {
-                        var scheduleSel = $('#DefineMissionStrategy-form .schedulePlan');
-                        var val = scheduleSel.attr('value').split(',');
-                        scheduleSel.select2({
-                            data:res.data,
-                            closeOnSelect:false
-                        }).val( val ).change();
-                    } 
+                    var scheduleSel = $('#DefineMissionStrategy-form .schedulePlan');
+                    var val = scheduleSel.attr('value').split(',');
+                    scheduleSel.select2({
+                        data:res,
+                        closeOnSelect:false
+                    }).val( val ).change();
                 }
             });
             if(params && params.ips && params.ips.length > 1 ){
@@ -176,15 +175,15 @@
                     newOne.find('.targetDevice').val(perIp.type).change();
                     switch(perIp.type){
                         case '1' : {
-                            var values = perIp.value.split('.');
+                            var values = perIp.ip.split('.');
                             break;
                         }
                         case '2' : {
-                            var values = perIp.value.split('-').join('.').split('.');
+                            var values = perIp.ip.split('-').join('.').split('.');
                             break;
                         }
                         case '3' : {
-                            var values = perIp.value.split('/').join('.').split('.');
+                            var values = perIp.ip.split('/').join('.').split('.');
                             break;
                         }
                     }

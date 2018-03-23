@@ -19,11 +19,11 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" type="text/css" href="static/icon/auto/iconfont.css">
     <link rel="stylesheet" href="static/css/cmdb.css">
-
     <script>
         // 前后端分离
-        window.UrlConfig = 'frontEnd';
+        // window.UrlConfig = 'frontEnd';
     </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -147,13 +147,13 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="active"><a href="#/Dashboard"><i class="fa fa-dashboard"></i> <span>仪表盘</span></a></li>
-                <li><a href="#/Configuration"><i class="fa fa-cogs"></i> <span>自动发现配置</span></a></li>
-                <li><a href="#/Monitor"><i class="fa fa-search"></i> <span>自动发现监控</span></a></li>
-                <li><a href="#/ITSource"><i class="fa fa-share-alt"></i> <span>IT资源信息</span></a></li>
-                <li><a href="#/ITSourceTopo"><i class="fa fa-object-ungroup"></i> <span>IT资源拓扑图</span></a></li>
-                <li><a href="#/ITSourceReport"><i class="fa fa-file-text"></i> <span>IT资源报表</span></a></li>
-                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="fa fa-cog"></i> <span>系统管理</span></a></li>
+                <li class="active"><a href="#/Dashboard"><i class="iconfont icon-dashBoard"></i> <span>仪表盘</span></a></li>
+                <li><a href="#/Configuration"><i class="iconfont icon-management"></i> <span>自动发现配置</span></a></li>
+                <li><a href="#/Monitor"><i class="iconfont icon-monitor"></i> <span>自动发现监控</span></a></li>
+                <li><a href="#/ITSource"><i class="iconfont icon-information"></i> <span>IT资源信息</span></a></li>
+                <li><a href="#/ITSourceTopo"><i class="iconfont icon-topology"></i> <span>IT资源拓扑图</span></a></li>
+                <li><a href="#/ITSourceReport"><i class="iconfont icon-report"></i> <span>IT资源报表</span></a></li>
+                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="iconfont icon-configuration"></i> <span>系统管理</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

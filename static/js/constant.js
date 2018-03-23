@@ -12,14 +12,19 @@
 }(window, function () {
     var Constant = {};
     Constant.devices = [
-    {type:'device',icon:'fa-device',text:'物理设备',url:''},
-    {type:'server',icon:'fa-server',text:'服务器',url:''},
-    {type:'port',icon:'fa-port',text:'端口'},
-    {type:'database',icon:'fa-database',text:'数据库'},
-    {type:'middleware',icon:'fa-save',text:'中间件'},
-    {type:'cloud',icon:'fa-wrench',text:'云环境'},
-    {type:'network',icon:'fa-cog',text:'网络设备'},
-    {type:'app',icon:'fa-wifi',text:'应用程序'}
+    {type:'device',icon:'icon-device',text:'物理设备',url:''},
+    {type:'server',icon:'icon-host',text:'服务器',url:''},
+    {type:'port',icon:'icon-port',text:'端口'},
+    {type:'database',icon:'icon-database',text:'数据库'},
+    {type:'middleware',icon:'icon-middleware',text:'中间件'},
+    {type:'cloud',icon:'icon-cloud',text:'云环境'},
+    {type:'network',icon:'icon-networkDevice',text:'网络设备'},
+    {type:'application',icon:'icon-app',text:'应用程序'},
+    {type:'storage',icon:'icon-storage',text:'存储'},
+    {type:'visual',icon:'icon-visual',text:'虚拟资源'},
+    {type:'platform',icon:'icon-platform',text:'平台资源'},
+    {type:'appsys',icon:'icon-appsys',text:'业务系统'}
+    
     ];
     Constant.count = [
     {type:1,text:'设备厂商'},

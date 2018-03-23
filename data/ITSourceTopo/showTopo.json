@@ -1,22 +1,64 @@
 {
     "data": {
         "nodeDataArray":[{
-            "key":1234,
-            "parent":456,
+            "key":"ServiceJet",
             "id":1,
             "code":"server",
-            "name": "服务器"
+            "name": "ServiceJet"
         },{
-            "key":456,
-            "parent":11,
+            "key":"AutoWeb",
             "id":1,
             "code":"server",
-            "name": "TOMCAT"
+            "name": "AutoWeb"
         },{
-            "key":11,
+            "key":"AutoServer",
             "id":1,
             "code":"server",
-            "name": "BMC Patrol Agent 10.7.00"
+            "name": "AutoServer"
+        },{
+            "key":"LoadBalance",
+            "id":1,
+            "code":"server",
+            "name": "LoadBalance"
+        },{
+            "key":"Taskmanage",
+            "id":1,
+            "code":"server",
+            "name": "Taskmanage"
+        },{
+            "key":"AutoServer2",
+            "id":1,
+            "code":"server",
+            "name": "AutoServer2"
+        },{
+            "key":"LoadBalance2",
+            "id":1,
+            "code":"server",
+            "name": "LoadBalance2"
+        }],
+        "linkDataArray":[{
+            "from":"ServiceJet",
+            "to":"AutoWeb",
+            "color":"#000"
+        },{
+            "from":"ServiceJet",
+            "to":"AutoServer",
+            "color":"red"
+        },{
+            "from":"ServiceJet",
+            "to":"LoadBalance"
+        },{
+            "from":"ServiceJet",
+            "to":"Taskmanage"
+        },{
+            "from":"ServiceJet",
+            "to":"AutoServer2"
+        },{
+            "from":"ServiceJet",
+            "to":"LoadBalance2"
+        },{
+            "from":"LoadBalance2",
+            "to":"AutoWeb"
         }],
         "count":[{
             "code":"server",

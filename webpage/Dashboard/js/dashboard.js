@@ -65,7 +65,7 @@
     }
     // 渲染NEWS
     function renderDbNEWS(){
-        fetchData('dashboard/getVersionNEWS','json',null,{
+        fetchData('dashboard/getVersionNews','json',null,{
             success:function(res){
                 render('dashboard-discovery-NEWS-template',res.data);
             },

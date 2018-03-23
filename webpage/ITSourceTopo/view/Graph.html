@@ -80,7 +80,15 @@
             loadDataToTool(data.count);
         }
         function loadDataToDiagram(data){
-            Record.diagram.model = new go.TreeModel(data.nodeDataArray);
+            var newData = new Object();
+            newData['class'] = 'go.GraphLinksModel';
+            newData['copiesArrays'] = true;
+            newData['copiesArrayObjects'] = true;
+            newData['linkFromPortIdProperty'] = 'fromPort';
+            newData['linkToPortIdProperty'] = 'toPort';
+            newData['nodeDataArray'] = data.nodeDataArray;
+            newData['linkDataArray'] = data.linkDataArray || [];
+            Record.diagram.model = new go.Model.fromJson(newData);
         }
         function loadDataToTool(count){
             var dom = $('#Graph-tool-display .list-group');
@@ -88,7 +96,7 @@
             $.each(count,function(i,perType){
                 var status = getStatusItem('devices',perType.code);
                 dom.append('<li class="list-group-item clicked">'+
-                    '<i class="fa '+status.icon+'"></i>'+
+                    '<i class="iconfont '+status.icon+'"></i>'+
                     '<span>'+ perType.sum +' </span>'+
                     '<span>'+ status.text +'</span>'+
                     '</li>');
@@ -105,10 +113,11 @@
                 "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
                 initialAutoScale : go.Diagram.Uniform,
                 initialContentAlignment: go.Spot.Center,
-                layout: $(go.TreeLayout, {  
-                    angle: 270,
-                    nodeSpacing: 20,
-                    layerSpacing: 60,
+                layout: $(go.TreeLayout,{  
+                    angle: 90,
+                    // // tree
+                    // nodeSpacing: 20,
+                    layerSpacing: 100,
                 })
             });
 
@@ -165,16 +174,16 @@
             myDiagram.linkTemplate =
             $(go.Link,
             {
-                // selectionAdornmentTemplate:
-                // $(go.Adornment,
-                //     $(go.Shape,
-                //         { isPanelMain: true, stroke: "dodgerblue", strokeWidth: 3 }),
-                //     $(go.Shape,
-                //         { toArrow: "Standard", fill: "dodgerblue", stroke: null, scale: 1 })
-                //     ),
-                routing: go.Link.Normal,
-                curve: go.Link.Bezier,
-                reshapable:true
+                layoutConditions: go.Part.LayoutNone,
+                // routing: go.Link.Normal,
+                // 该属性设置曲线 且routing为Orthogonal时会夸张曲
+                // curve: go.Link.Bezier,
+                // reshapable:true
+                // 直角
+                // routing: go.Link.Orthogonal,
+                // curve: go.Link.JumpOver,
+                // 该值设置直角程度,需加上 JumpOver
+                // corner: 5
             },
             {
                 mouseHover:function(e,obj){
@@ -189,9 +198,12 @@
                 }
             },
             $(go.Shape,
-                { name: "OBJSHAPE",stroke: "#00c0ef",strokeWidth: 2 }),
+                { name: "OBJSHAPE",stroke: "#00c0ef",strokeWidth: 2 },
+                new go.Binding('stroke','color')),
             $(go.Shape,
-                { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "#00c0ef" ,fill:'#00c0ef',scale:1.3}),
+                { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "#00c0ef" ,fill:'#00c0ef',scale:1.3},
+                new go.Binding('stroke','color'),
+                new go.Binding('fill','color')),
             $(go.TextBlock, {
                 // border:'1px solid',
                 segmentOffset: new go.Point(0, 20),

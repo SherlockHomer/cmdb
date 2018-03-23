@@ -9,9 +9,19 @@ ul {
 .showInline{
     display: inline-block;
 }
+.iconfont {
+    font-size:inherit;
+    display: inline-block;
+}
+.box-header>.iconfont {
+    font-size: 18px;
+}
+.sidebar-menu>li>a>.iconfont{
+    width: 20px;
+}
 .info-box {
     display: inline-block;
-    width: 120px;
+    width: 122px;
     text-align: center;
     box-shadow: none;
     vertical-align: top;
@@ -28,6 +38,9 @@ ul {
     line-height: 60px;
     float: none;
     background-color: inherit;
+}
+.info-box-icon i{
+    font-size:40px;
 }
 .info-box-number {
     width: 100%;

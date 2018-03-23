@@ -153,7 +153,7 @@
     window.ConfirmUrl = function(url){
         var urls = url.split('/');
         var backEndUrl = urls.join('!');
-        backEndUrl = '../auto_web/' + backEndUrl + '.action';
+        backEndUrl = '../../' + backEndUrl + '.action';
         var frontEnd = 'data/' + url + '.json';
         return  window.UrlConfig == 'frontEnd' ?  frontEnd: backEndUrl;
     }

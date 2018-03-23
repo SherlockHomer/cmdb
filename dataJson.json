@@ -78,7 +78,7 @@ action:  dashboard/getCategoryInfo
         "code": "network",
         "sum": 4
     }, {
-        "code": "app",
+        "code": "application",
         "sum": 1001
     }],
     "success": true,
@@ -117,7 +117,7 @@ action:  dashboard/getVersionNews
 // #自动发现配置
 
 // SNMP设备发现策略
-action：  discover-config/SNMPInfo
+action：  discover-config/findSnmpList
 请求
 {
     "limit":20,
@@ -186,7 +186,7 @@ action：  discover-config/delSNMP
 
 
 // 端口发现策略
-action：  discover-config/portAll
+action：  discover-config/findPortList
 请求
 {
     // 1: 标准的  2：客户化端口
@@ -246,7 +246,7 @@ action：  discover-config/delPort
 
 
 // 服务器设备发现策略
-action：  discover-config/serverAll
+action：  discover-config/findServerList
 请求
 {
     "limit":20,
@@ -309,7 +309,7 @@ action：  discover-config/delServer
 
 
 // 云环境设备发现策略
-action：  discover-config/cloudAll
+action：  discover-config/findCloudList
 请求
 {
     "limit": 20,
@@ -365,7 +365,7 @@ action：  discover-config/delCloud
 
 
 // 数据库设备发现策略
-action：  discover-config/dbAll
+action：  discover-config/findDatabaseList
 请求
 {
     "limit": 20,
@@ -443,7 +443,7 @@ action：  discover-config/delDB
 }
 
 // 中间件设备发现策略
-action：  discover-config/midwareAll
+action：  discover-config/findMiddlewareList
 请求
 {
     "limit": 20,
@@ -499,7 +499,7 @@ action：  discover-config/delMidware
 // 发现任务发现策略
 // 
 // 策略Type：物理设备 1 ；端口2 ：服务器3  ；云 4  数据库 5 ，中间件6
-action：  discover-config/missionAll
+action：  discover-config/findTaskList
 请求
 {
     "limit": 20,
@@ -545,7 +545,7 @@ action: discover-config/getSchedule
     "msg":""
 }
 
-action：  discover-config/saveMission
+action：  discover-config/saveDiscTask
 请求
 {
     // id 为null 则是新增
@@ -712,7 +712,7 @@ action：  discover-monitor/detail
             "code": "network",
             "sum": 4
         }, {
-            "code": "app",
+            "code": "application",
             "sum": 1001
         }],
         "details": [{
@@ -1088,7 +1088,7 @@ action：  ITSourceReport/report
             "sum":"10"
         }]
     }, {
-        "code": "app",
+        "code": "application",
         "sum": 1001,
         "details":[{
             "typeName":"应用程序",
@@ -1197,7 +1197,7 @@ action：  ITSourceTopo/showTopo
             "code":"middleware",
             "sum":6
         },{
-            "code":"app",
+            "code":"application",
             "sum":1
         }]
     },

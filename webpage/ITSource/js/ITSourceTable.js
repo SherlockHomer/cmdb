@@ -611,7 +611,7 @@
                 break;
             }
             case 'DefineMissionStrategy-form':{
-                var url = 'discover-config/saveMission';
+                var url = 'discover-config/saveDiscTask';
                 break;
             }
             case 'ITSource-setTag-form':{
