@@ -697,7 +697,7 @@
                     $('#'+tableId).bootstrapTable('refresh');
                     Tool.backToTableView(btn);
                 } else {
-
+                    Tool.message( res.msg, 'danger');
                 }
             }
         })

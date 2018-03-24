@@ -126,6 +126,9 @@
         }
         window.location = window.location.origin + window.location.pathname + newHash.join('/');
     };
+    function updateBreadcrumb(breads){
+        
+    };
     // 事件注册
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
