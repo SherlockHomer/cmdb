@@ -66,11 +66,19 @@
                 sortable:true
             },{
                 title:'协议版本',
-                field:'protVersion',
-                sortable:true
+                field:'version',
+                sortable:true,
+                formatter:function(value,row,index){
+                    var item = getStatusItem('protVersion',value);
+                    if (item) {
+                        return item.text; 
+                    } else {
+                        return value;
+                    }
+                }
             },{
                 title:'读团体名',
-                field:'RGroupName',
+                field:'publicName',
                 sortable:true
             },{
                 title:'操作',
@@ -101,14 +109,14 @@
                 checkbox:true,
             },{
                 title:'标准应用',
-                field:'appName',
+                field:'portDesc',
                 sortable:true
             },{
                 title:'端口',
-                field:'ports',
+                field:'port',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return value.join(',');
+                    return value;
                 }
             },{
                 title:'操作',
@@ -139,14 +147,14 @@
                 checkbox:true,
             },{
                 title:'客户化应用',
-                field:'appName',
+                field:'portDesc',
                 sortable:true
             },{
                 title:'端口',
-                field:'ports',
+                field:'port',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return value.join(',');
+                    return value;
                 }
             },{
                 title:'操作',
@@ -182,18 +190,26 @@
             },{
                 title:'协议类型',
                 field:'type',
-                sortable:true
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    var item = getStatusItem('connectProt',value);
+                    if (item) {
+                        return item.text; 
+                    } else {
+                        return value;
+                    }
+                }
             },{
                 title:'端口',
                 field:'port',
                 sortable:true
             },{
                 title:'账户',
-                field:'account',
+                field:'username',
                 sortable:true
             },{
                 title:'字符编码',
-                field:'encoding',
+                field:'encode',
                 sortable:true
             },{
                 title:'操作',
@@ -228,11 +244,11 @@
                 sortable:true
             },{
                 title:'管理域IP',
-                field:'address',
+                field:'ip',
                 sortable:true
             },{
                 title:'账户',
-                field:'account',
+                field:'username',
                 sortable:true
             },{
                 title:'操作',
@@ -267,8 +283,12 @@
                 sortable:true
             },{
                 title:'数据库类型',
-                field:'dbType',
-                sortable:true
+                field:'type',
+                sortable:true,
+                formatter:function(value, row, index){
+                    if (!value) {return};
+                    return getStatusItem( 'dbType' , value).text;
+                }
             },{
                 title:'数据库名/服务名',
                 field:'dbName',
@@ -279,11 +299,11 @@
                 sortable:true
             },{
                 title:'账户',
-                field:'account',
+                field:'username',
                 sortable:true
             },{
                 title:'字符编码',
-                field:'encoding',
+                field:'encode',
                 sortable:true
             },{
                 title:'操作',
@@ -318,15 +338,19 @@
                 sortable:true
             },{
                 title:'中间件类型',
-                field:'OSType',
-                sortable:true
+                field:'type',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    if (!value) {return};
+                    return getStatusItem('middlewareType',value).text;
+                }
             },{
                 title:'端口',
                 field:'port',
                 sortable:true
             },{
                 title:'账户',
-                field:'account',
+                field:'username',
                 sortable:true
             },{
                 title:'操作',
@@ -376,7 +400,7 @@
                 field:'schePlanId',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    if ( row.scheName || row.scheName.length == 0 ) {return}
+                    if ( row.scheName || row.scheName.length == 0 ) {return};
                     return row.scheName.join(';');
                 }
             },{
@@ -385,7 +409,7 @@
                 sortable:true,
                 formatter:function(value, row, index, field){
                     if (!value) {return};
-                    value = JSON.parse( value );
+                    value = eval( value );
                     return $.map(value,function(perIp){
                         return perIp.ip;
                     }).join(';</br>');
@@ -484,7 +508,7 @@
     function deleteThis(){
         var rowId = $(this).attr('data-id');
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        var params = { ids : [rowId] };
+        var params = { ids : [rowId].join(',') };
         ajaxDelete( tableId,params );
     }
     function deleteSome(){
@@ -495,68 +519,80 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            console.warn('sel some');
+            Tool.message('请选择至少一条');
             return false;
         }
-        var params = {ids : ids};
+        var params = {ids : ids.join(',')};
         ajaxDelete(tableId,params);
     }
     function ajaxDelete(tableId,params){
-        switch(tableId){
-            case 'Configuration-SNMP-table':{
-                var url = 'discover-config/delSNMP';
-                break;
-            }
-            case 'Configuration-portStandard-table':{
-                var url = 'discover-config/delPort';
-                params.portType = 1;
-                break;
-            }
-            case 'Configuration-portCustom-table':{
-                var url = 'discover-config/delPort';
-                params.portType = 2;
-                break;
-            }
-            case 'Configuration-server-table':{
-                var url = 'discover-config/delServer';
-                break;
-            }
-            case 'Configuration-cloud-table':{
-                var url = 'discover-config/delCloud';
-                break;
-            }
-            case 'Configuration-database-table':{
-                var url = 'discover-config/delDB';
-                break;
-            }
-            case 'Configuration-middleware-table':{
-                var url = 'discover-config/delMidware';
-                break;
-            }
-            case 'Configuration-mission-table':{
-                var url = 'discover-config/delMission';
-                break;
-            }
-            case 'Configuration-agent-table':{
-                var url = 'discover-config/delAgent';
-                break;
-            }
-        }
-        fetchData(url,'json',params,{
-            success:function(res){
-                if (res.success) {
-                    $.each(params.ids,function(i,perId){
-                        $('#'+tableId).bootstrapTable('removeByUniqueId',perId);
-                    })
-                } else {
-
+        Tool.confirm({
+            title:'是否确认删除',
+            confirm:function(){
+                switch(tableId){
+                    case 'Configuration-SNMP-table':{
+                        var url = 'discover-config/delSnmp';
+                        break;
+                    }
+                    case 'Configuration-portStandard-table':{
+                        var url = 'discover-config/delPort';
+                        params.portType = 1;
+                        break;
+                    }
+                    case 'Configuration-portCustom-table':{
+                        var url = 'discover-config/delPort';
+                        params.portType = 2;
+                        break;
+                    }
+                    case 'Configuration-server-table':{
+                        var url = 'discover-config/delServer';
+                        break;
+                    }
+                    case 'Configuration-cloud-table':{
+                        var url = 'discover-config/delCloud';
+                        break;
+                    }
+                    case 'Configuration-database-table':{
+                        var url = 'discover-config/delDatabase';
+                        break;
+                    }
+                    case 'Configuration-middleware-table':{
+                        var url = 'discover-config/delMiddleware';
+                        break;
+                    }
+                    case 'Configuration-mission-table':{
+                        var url = 'discover-config/deleteTask';
+                        break;
+                    }
+                    case 'Configuration-agent-table':{
+                        var url = 'discover-config/delAgent';
+                        break;
+                    }
                 }
+                fetchData(url,'json',params,{
+                    success:function(res){
+                        if (res.success) {
+                            var ids = params.ids.split(',');
+                            $.each(ids,function(i,perId){
+                                $('#'+tableId).bootstrapTable('removeByUniqueId',perId);
+                            })
+                        } else {
+                            Tool.message( res.msg, 'danger');
+                        }
+                    }
+                })
             }
         })
+        
     }
     function queryParams(params){
         var toolbar = $('#'+this.toolbarId);
         params.searchText = toolbar.find('.searchInput').val();
+        if (this.toolbarId == 'Configuration-portStandard-table-toolbar') {
+            params.type = 1;
+        } else if (this.toolbarId == 'Configuration-portCustom-table-toolbar') {
+            params.type = 2;
+        }
         return params;
     }
     function search(){
@@ -620,16 +656,16 @@
     function ajaxSave(tableId,params,btn){
         switch(tableId){
             case 'Configuration-SNMP-table':{
-                var url = 'discover-config/saveSNMP';
+                var url = 'discover-config/saveSnmp';
                 break;
             }
             case 'Configuration-portStandard-table':{
-                var url = 'discover-config/defPort';
+                var url = 'discover-config/savePort';
                 params.portType = 1;
                 break;
             }
             case 'Configuration-portCustom-table':{
-                var url = 'discover-config/defPort';
+                var url = 'discover-config/savePort';
                 params.portType = 2;
                 break;
             }
@@ -642,18 +678,19 @@
                 break;
             }
             case 'Configuration-database-table':{
-                var url = 'discover-config/saveDB';
+                var url = 'discover-config/saveDatabase';
+                params.dbName = $(btn).parents('form').eq(0).find('[name="dbName"]:visible').val();
                 break;
             }
             case 'Configuration-middleware-table':{
-                var url = 'discover-config/saveMidware';
+                var url = 'discover-config/saveMiddleware';
                 break;
             }
             case 'Configuration-mission-table':{
                 var url = 'discover-config/saveDiscTask';
                 break;
             }
-        }
+        };
         fetchData(url,'json',params,{
             success:function(res){
                 if (res.success) {
@@ -668,11 +705,11 @@
 
     function collectPortTags(tabId){
         var params = {};
-        params.ports = [];
+        params.port = [];
         $('#'+tabId).find('.editView .tags .text').each(function(i,perT){
-            params.ports.push($(perT).text());
+            params.port.push($(perT).text());
         });
-        params.name = $('#'+tabId).find('.editView [name="appName"]').val();
+        params.name = $('#'+tabId).find('.editView [name="portDesc"]').val();
         params.id = $('#'+tabId).find('.editView [name="id"]').val();
         return params;
     }
@@ -681,7 +718,7 @@
     function scanThis() {
         var rowId = $(this).attr('data-id');
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        var params = { ids : [rowId] };
+        var params = { ids : [rowId].join(',') };
         ajaxScan( tableId,params );
     }
     function scanSome() {
@@ -692,10 +729,10 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            console.warn('sel some');
+            Tool.message('请选择至少一条');
             return false;
         }
-        var params = {ids : ids};
+        var params = {ids : ids.join(',')};
         ajaxScan(tableId,params);
     };
 

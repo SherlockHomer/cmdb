@@ -11,14 +11,14 @@
     }
 }(window, function ($) {
     var Record = {
-        tags:[],
+        tagName:[],
         // 默认资源是服务器
         code:'server',
         // 一级资源类型，报表过来的typeCode对应哪个大分类
         levelOneType:'server',
-        OSVer:'',
-        OSType:'',
-        serFac:'',
+        resVersion:'',
+        type:'',
+        manufacturer:'',
         // 按统计进来时记录下
         countType:'',
         // 所属那个任务策略
@@ -46,13 +46,13 @@
         initSourceTable('middleware');
         initSourceTable('cloud');
         initSourceTable('network');
-        initSourceTable('app');
+        initSourceTable('application');
     }
     function initSourceTable(code){
         $('#ITSource-'+code+'-table').bootstrapTable({
             code:code,
             method:'post',
-            url:ConfirmUrl('ITSource/infoAll'),
+            url:ConfirmUrl('resource/findResourceList'),
             checkbox:true,
             pagination:true,
             sortName:getTableSortName(code),
@@ -72,27 +72,27 @@
 
         switch (code){
             case 'server' : {
-                return 'OSType';
+                return 'osType';
                 break;
             }
             case 'database' : {
-                return 'dbType';
+                return 'ciCode';
                 break;
             }
             case 'middleware' : {
-                return 'middlewareType';
+                return 'ciCode';
                 break;
             }
             case 'cloud' : {
-                return 'cloudType';
+                return 'ciCode';
                 break;
             }
             case 'network' : {
-                return 'deviceType';
+                return 'ciCode';
                 break;
             }
-            case 'app' : {
-                return 'appName';
+            case 'application' : {
+                return 'resName';
                 break;
             }
         }
@@ -104,31 +104,32 @@
                     checkbox:true,
                 },{
                     title:'服务器名',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'OS类型',
-                    field:'OSType',
-                    sortable:true
+                    field:'osType',
+                    sortable:true,
+                    formatter:function(value){
+                        if (!value) {return };
+                        return getStatusItem('osType',value);
+                    }
                 },{
                     title:'OS版本',
-                    field:'OSVer',
+                    field:'resVersion',
                     sortable:true
                 },{
                     title:'服务器厂商',
-                    field:'serFac',
+                    field:'manufacturer',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -142,27 +143,31 @@
                     checkbox:true,
                 },{
                     title:'数据库类型',
-                    field:'dbType',
-                    sortable:true
+                    field:'ciCode',
+                    sortable:true,
+                    formatter:function(value){
+                        if (value.indexOf('DC_') > -1) {
+                            return value.substr(3);
+                        } else {
+                            return value;
+                        }
+                    }
                 },{
                     title:'数据库名',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'版本',
-                    field:'version',
+                    field:'resVersion',
                     sortable:true
                 },{
                     title:'IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -176,27 +181,31 @@
                     checkbox:true,
                 },{
                     title:'中间件类型',
-                    field:'middlewareType',
-                    sortable:true
+                    field:'ciCode',
+                    sortable:true,
+                    formatter:function(value){
+                        if (value.indexOf('DC_') > -1) {
+                            return value.substr(3);
+                        } else {
+                            return value;
+                        }
+                    }
                 },{
                     title:'中间件名',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'版本',
-                    field:'version',
+                    field:'resVersion',
                     sortable:true
                 },{
                     title:'IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -210,27 +219,31 @@
                     checkbox:true,
                 },{
                     title:'管理域类型',
-                    field:'cloudType',
-                    sortable:true
+                    field:'ciCode',
+                    sortable:true,
+                    formatter:function(value){
+                        if (value.indexOf('DC_') > -1) {
+                            return value.substr(3);
+                        } else {
+                            return value;
+                        }
+                    }
                 },{
                     title:'名称',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'管理域IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'描述',
-                    field:'description',
+                    field:'resDesc',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -244,27 +257,31 @@
                     checkbox:true,
                 },{
                     title:'设备名',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'设备类型',
-                    field:'deviceType',
-                    sortable:true
+                    field:'ciCode',
+                    sortable:true,
+                    formatter:function(value){
+                        if (value.indexOf('DC_') > -1) {
+                            return value.substr(3);
+                        } else {
+                            return value;
+                        }
+                    }
                 },{
                     title:'厂商',
-                    field:'serFac',
+                    field:'manufacturer',
                     sortable:true
                 },{
                     title:'IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -273,32 +290,29 @@
                 }];
                 break;
             }
-            case 'app' : {
+            case 'application' : {
                 return [{
                     checkbox:true,
                 },{
                     title:'软件名称',
-                    field:'name',
+                    field:'resName',
                     sortable:true
                 },{
                     title:'IP地址',
-                    field:'ip',
+                    field:'resIp',
                     sortable:true
                 },{
                     title:'版本',
-                    field:'version',
+                    field:'resVersion',
                     sortable:true
                 },{
                     title:'发布者',
-                    field:'promulgator',
+                    field:'issuer',
                     sortable:true
                 },{
                     title:'标签',
-                    field:'tags',
-                    sortable:true,
-                    formatter:function(value){
-                        return value.join(',');
-                    }
+                    field:'tagName',
+                    sortable:true
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
@@ -329,17 +343,17 @@
             switch(Record.countType){
                 // 厂商
                 case '1':{
-                    Record.serFac = hashes.classifyInCount;
+                    Record.manufacturer = hashes.classifyInCount;
                     break;
                 }
                 // os 版本
                 case '2':{
-                    Record.OSVer = hashes.classifyInCount;
+                    Record.resVersion = hashes.classifyInCount;
                     break;
                 }
                 // 标签
                 case '3':{
-                    Record.tags = [hashes.classifyInCount];
+                    Record.tagName = [hashes.classifyInCount];
                     break;
                 }
             };
@@ -426,7 +440,7 @@
         ajaxExportTable(tableId,params);
     }
     function ajaxExportTable(tableId,params){
-        fetchData('ITSource/exportTable','json',params,{
+        fetchData('resource/exportTable','json',params,{
             success:function(res){
                 if (res.success) {
 
@@ -444,7 +458,7 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            console.warn('sel some');
+            Tool.message('请选择至少一条');
             return false;
         }
         var params = {
@@ -454,7 +468,7 @@
         ajaxExportDetail(tableId,params);
     }
     function ajaxExportDetail(tableId,params){
-        fetchData('ITSource/exportDetail','json',params,{
+        fetchData('resource/exportDetail','json',params,{
             success:function(res){
                 if (res.success) {
 
@@ -473,9 +487,9 @@
         } else {
             params.code = Record.code;
             // 统计分类
-            params.serFac = Record.serFac;
-            params.OSVer = Record.OSVer;
-            params.tags = Record.tags;
+            params.manufacturer = Record.manufacturer;
+            params.resVersion = Record.resVersion;
+            params.tagName = Record.tagName.join(',');
         }
         params.belongMission = Record.belongMission;
         return params;
@@ -493,7 +507,7 @@
         var params = {
             id: Record.rowId
         }
-        fetchData('ITSource/detail','json',params,{
+        fetchData('resource/getResourceDetail','json',params,{
             success:function(res){
                 render('ITSource-table-detail-template',res.data);
                 Record.details = res.data.details;
@@ -539,11 +553,12 @@
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
+        var tagName = params.tagName || '' ;
         Tool.renderEditView(tabId,'ITSource-setTag-template',params);
-        fetchData('ITSource/getAllApp','json',null,{
+        fetchData('resource/getAllApp','json',null,{
             success:function(res){
                 Record.appData = res.data;
-                disableExistTag(res.data,params.tags);
+                disableExistTag(res.data,tagName.split(','));
                 $('#ITSource-setTag-form .app').select2({
                     data:res.data,
                     dropdownParent:$('#ITSource-setTag-form .hasSelect2')
@@ -607,7 +622,7 @@
     function ajaxSave(tableId,formId,params,btn) {
         switch(formId){
             case 'ITSource-server-add-form':{
-                var url = 'ITSource/addServer';
+                var url = 'resource/addResource';
                 break;
             }
             case 'DefineMissionStrategy-form':{
@@ -615,7 +630,7 @@
                 break;
             }
             case 'ITSource-setTag-form':{
-                var url = 'ITSource/setTag';
+                var url = 'resource/setTag';
                 break;
             }
         }

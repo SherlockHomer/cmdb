@@ -29,7 +29,7 @@
     // 渲染统计内容的具体情况表
     // 有数据才有表，因为是模版
     function renderBasic(){
-        fetchData('ITSource/getAppUsed','json',null,{
+        fetchData('resource/getAppUsed','json',null,{
             success:function(res){
                 if (res.success) {
                     Record.appId = res.data[0].id;

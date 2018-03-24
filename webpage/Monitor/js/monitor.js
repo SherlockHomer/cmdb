@@ -65,6 +65,7 @@
                 field:'content',
                 sortable:true,
                 formatter:function(value, row, index, field){
+                    if (!value) {return};
                     var discoveryTypes = value.split(',');
                     var discoveryTexts = [];
                     $.each(discoveryTypes,function(i,perT){
@@ -81,11 +82,11 @@
                 }
             },{
                 title:'开始时间',
-                field:'startTime',
+                field:'startDate',
                 sortable:true
             },{
                 title:'结束时间',
-                field:'endTime',
+                field:'endDate',
                 sortable:true
             },{
                 title:'操作人',
@@ -177,7 +178,7 @@
     function scanThis(btn,scanOrNot) {
         var rowId = $(btn).attr('data-id');
         var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        var params = { ids : [rowId] };
+        var params = { ids : [rowId].join(',') };
         ajaxScan( tableId,params ,scanOrNot);
     }
     function scanSome(btn,scanOrNot) {
@@ -188,10 +189,10 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            console.warn('sel some');
+            Tool.message('请选择至少一条');
             return false;
         }
-        var params = {ids : ids};
+        var params = {ids : ids.join(',')};
         ajaxScan(tableId,params,scanOrNot);
     };
 

@@ -360,12 +360,44 @@
                 console.warn('加载模版失败')
             }
         });
-    }
+    };
+    // 消息框
+    function message(text ,status){
+        status = status ? status : 'info';
+        if ( $('body').children('.affix') [0]) {
+            $('body').children('.affix').remove();
+        }
+        var alert = $('<div class="affix" style="top:60px;left:245px;right:20%"><div class="alert alert-'+status+' alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'+text+'</div></div>');
+        alert.appendTo( $('body') );
+        setTimeout(function(){
+            alert.fadeOut();
+        },3000);
+    };
+
+    // 弹窗确认 
+    var Confirm = {};
+    function confirm(params){
+        Confirm.confirm = params.confirm;
+        var modal = $( Handlebars.getHTMLByCompile('Modal-confim-template',params));
+        $('body').append(modal);
+        modal.modal('show');
+        Confirm.modal = modal;
+    };
+    $('body').on('hidden.bs.modal','#Modal-confim',function(){
+        $(this).remove();
+    })
+    $('body').on('click','#Modal-confim .confirm',function(){
+        Confirm.modal.modal('hide');
+        Confirm.confirm();
+    });
+
     return {
         changeSelected : changeSelected,
         renderEditView : renderEditView,
         backToTableView: backToTableView,
-        loadTemp       : loadTemp
+        loadTemp       : loadTemp,
+        message        : message,
+        confirm        : confirm
     }
 }));
 

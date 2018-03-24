@@ -61,27 +61,27 @@
             </select>
         </div>
         <div class="showInline" data-belong="1">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">
         </div>
         <div class="showInline hide" data-belong="2">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">--
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">--
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">
         </div>
         <div class="showInline hide" data-belong="3">
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">.
-            <input class="form-control ipBox" type="text">/
-            <input class="form-control ipBox" type="text">
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">.
+            <input class="form-control ipBox" type="number">/
+            <input class="form-control ipBox" type="number">
         </div>
         <button class="btn btn-default remove">-</button>
     </div>
@@ -170,7 +170,7 @@
             });
             if(params && params.ipRange ){
 
-                var ipRange = JSON.parse( params.ipRange );
+                var ipRange = eval( params.ipRange );
                 $.each(ipRange,function(i,perIp){
                     var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
                     newOne.insertBefore( $('#DefineMissionStrategy-form .ips .add') );

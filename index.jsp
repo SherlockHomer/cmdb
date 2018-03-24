@@ -153,7 +153,7 @@
                 <li><a href="#/ITSource"><i class="iconfont icon-information"></i> <span>IT资源信息</span></a></li>
                 <li><a href="#/ITSourceTopo"><i class="iconfont icon-topology"></i> <span>IT资源拓扑图</span></a></li>
                 <li><a href="#/ITSourceReport"><i class="iconfont icon-report"></i> <span>IT资源报表</span></a></li>
-                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="iconfont icon-configuration"></i> <span>系统管理</span></a></li>
+                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="iconfont icon-config"></i> <span>系统管理</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -399,5 +399,23 @@
 <script src="static/js/cmdb.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
+<script type="text/x-handlebars-template" id="Modal-confim-template">
+    <div class="modal fade" id="Modal-confim" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary confirm">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
 </body>
 </html>

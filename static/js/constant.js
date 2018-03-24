@@ -30,7 +30,32 @@
     {type:1,text:'设备厂商'},
     {type:2,text:'版本'},
     {type:3,text:'标签'}
-    ]
+    ];
+    Constant.protVersion = [
+    {type:2,text:'v1/v2'},
+    {type:3,text:'v3'}
+    ];
+    Constant.dbType = [
+    {type:1,text:'oracle'},
+    {type:2,text:'mysql'},
+    {type:3,text:'sqlserver'},
+    {type:4,text:'db2'}
+    ];
+    Constant.middlewareType = [
+    {type:1,text:'tomcat'},
+    {type:2,text:'weblogic'},
+    {type:3,text:'websphere'}
+    ];
+    Constant.connectProt = [
+    {type:1,text:'WMI'},
+    {type:2,text:'SSH'}
+    ];
+    Constant.osType = [
+    {type:1,text:'Windows'},
+    {type:2,text:'Linux'},
+    {type:3,text:'Unix'},
+    {type:4,text:'AIX'}
+    ];
     function getStatusItem(itemsName,status,def){
         var items = Constant[itemsName];
         var k = -1;

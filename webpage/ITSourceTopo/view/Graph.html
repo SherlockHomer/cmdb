@@ -133,6 +133,7 @@
                 },
                 $(go.Panel,'Vertical',
                     $(go.Panel,'Spot',
+                        // 图片背景
                         $(go.Panel, "Auto",
                             $(go.Shape, 
                             {
@@ -143,20 +144,19 @@
                                 stroke: null
                             },
                             new go.Binding("fill", "type", genderBrushConverter)
-                            )
-
-                            ),
+                            )),
                         $(go.Picture, {
                             source:'dist/img/avatar.png',
                             width: 48,
-                            height: 48
+                            height: 48,
+                            margin:10
                         }, new go.Binding("source")),
                         $("TreeExpanderButton",
                         {
                             alignment: go.Spot.TopRight,
-                            width:20,height:20,scale:1,
-                            mouseEnter:function(e, obj) { obj.scale = 1.4; },
-                            mouseLeave:function(e, obj) { obj.scale = 1; }
+                            width:20,height:20,scale:1
+                            // mouseEnter:function(e, obj) { obj.scale = 1.4; },
+                            // mouseLeave:function(e, obj) { obj.scale = 1; }
                         }
                         )),
                     $(go.TextBlock,{

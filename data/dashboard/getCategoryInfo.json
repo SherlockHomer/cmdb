@@ -15,7 +15,7 @@
         "code": "network",
         "sum": 4
     }, {
-        "code": "app",
+        "code": "application",
         "sum": 1001
     }],
     "success": true,

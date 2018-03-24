@@ -2,15 +2,15 @@
     "total":100,
     "rows": [{
         "id": 1,
-        "appName": "FTP",
-        "ports": [161]
+        "portDesc": "FTP",
+        "port": [161]
     },{
         "id": 2,
-        "appName": "FTP1",
-        "ports": [162]
+        "portDesc": "FTP1",
+        "port": [162]
     },{
         "id": 3,
-        "appName": "FTP2",
-        "ports": [163,144]
+        "portDesc": "FTP2",
+        "port": [163,144]
     }]
 }

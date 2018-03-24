@@ -131,32 +131,32 @@ action：  discover-config/findSnmpList
         "id": 1,
         "name": "SNMP发现策略",
         "port": 161,
-        "protVersion":"v1",
-        "RGroupName":"public"
+        "version":"v1",
+        "publicName":"public"
     },{
         "id": 1,
         "name": "SNMP发现策略",
         "port": 164,
-        "protVersion":"v3",
-        "RGroupName":"public"
+        "version":"v3",
+        "publicName":"public"
     },{
         "id": 1,
         "name": "SNMP发现策略",
         "port": 162,
-        "protVersion":"v4",
-        "RGroupName":"public"
+        "version":"v4",
+        "publicName":"public"
     }]
 }
 
-action：  discover-config/saveSNMP
+action：  discover-config/saveSnmp
 请求
 {
     // id 为 null 则 为新增
     "id": 1,
     "name": "SNMP发现策略",
     "port": 161,
-    "protVersion": "v1/v2",
-    "rGroupName": "public",
+    "version": "v1/v2",
+    "publicName": "public",
     "safeName":"",
     "engineId":"",
     "signatureProt":"",
@@ -173,7 +173,7 @@ action：  discover-config/saveSNMP
 }
 
 
-action：  discover-config/delSNMP
+action：  discover-config/delSnmp
 请求
 {
     "ids": [1,2,3],
@@ -190,7 +190,7 @@ action：  discover-config/findPortList
 请求
 {
     // 1: 标准的  2：客户化端口
-    "portType":1 ,
+    "type":1 ,
     // type == 2 才有下面这三项
     "limit":20,
     "offset":60,
@@ -201,26 +201,26 @@ action：  discover-config/findPortList
     "total":100,
     "rows": [{
         "id": 1,
-        "appName": "FTP",
-        "ports": [161]
+        "portDesc": "FTP",
+        "port": [161]
     },{
         "id": 2,
-        "appName": "FTP1",
-        "ports": [162]
+        "portDesc": "FTP1",
+        "port": [162]
     },{
         "id": 3,
-        "appName": "FTP2",
-        "ports": [163,144]
+        "portDesc": "FTP2",
+        "port": [163,144]
     }]
 }
 
-action：  discover-config/defPort
+action：  discover-config/savePort
 请求
 {
     // 1: 标准的  2：客户化端口
     "portType":1,
     "name":"Window RPC",
-    "ports":[135,188],
+    "port":[135,188],
     // id 为null 则是客户端的新增
     "id":1
 }
@@ -260,15 +260,15 @@ action：  discover-config/findServerList
         "id": 1,
         "name": "服务器发现策略",
         "prot": "window",
-        "account":"administrator",
-        "encoding":"GBK",
+        "username":"administrator",
+        "encode":"GBK",
         "port":15
     },{
         "id": 2,
         "name": "发现策略",
         "prot": "linux",
-        "account":"admin",
-        "encoding":"utf",
+        "username":"admin",
+        "encode":"utf",
         "port":16
     }]
 }
@@ -281,10 +281,10 @@ action：  discover-config/saveServer
     "name": "服务器发现策略",
     "prot": "window",
     "port":151,
-    "account":"administrator",
+    "username":"administrator",
     "password":"",
     "domain":"digitalchina.com",
-    "encoding":"GBK",
+    "encode":"GBK",
     "echo":"sdf"
 }
 {
@@ -323,12 +323,12 @@ action：  discover-config/findCloudList
         "id": 1,
         "name": "服务器发现策略",
         "address": "10.4.4.201",
-        "account":"administrator"
+        "username":"administrator"
     },{
         "id": 2,
         "name": "服务器发现策略",
         "address": "10.0.220.201",
-        "account":"admin"
+        "username":"admin"
     }]
 }
 
@@ -340,7 +340,7 @@ action：  discover-config/saveCloud
     "name": "服务器发现策略",
     "domainType": "vmware",
     "domainIp":"",
-    "account":"administrator",
+    "username":"administrator",
     "password":""
 }
 {
@@ -378,49 +378,49 @@ action：  discover-config/findDatabaseList
     "rows": [{
         "id": 1,
         "name": "数据库发现策略",
-        "dbType":"Oracle",
+        "type":"Oracle",
         "connectType":"服务名",
         "dbName": "auto4_4",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"gbk"
+        "encode":"gbk"
     },{
         "id": 2,
         "name": "数据库发现策略",
-        "dbType":"Oracle",
+        "type":"Oracle",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"utf8"
+        "encode":"utf8"
     },{
         "id": 3,
         "name": "数据库发现策略",
-        "dbType":"DB2",
+        "type":"DB2",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"utf8"
+        "encode":"utf8"
     }]
 }
 
-action：  discover-config/saveDB
+action：  discover-config/saveDatabase
 请求
 {
     // id 为null 则是新增
     "id": 1,
     "name": "数据库发现策略",
-    "dbType": "Oracle",
+    "type": "Oracle",
     "connectType": "服务名",
     "dbName": "auto4_4",
     "port": "1433",
-    "account": "root",
+    "username": "root",
     "password": 234,
-    "encoding": "gbk"
+    "encode": "gbk"
 }
 {
     "data": {
@@ -431,7 +431,7 @@ action：  discover-config/saveDB
 }
 
 
-action：  discover-config/delDB
+action：  discover-config/delDatabase
 请求
 {
     "ids": [1,2,3]
@@ -456,23 +456,23 @@ action：  discover-config/findMiddlewareList
     "rows": [{
         "id": 1,
         "name": "中间件发现策略1",
-        "OSType": "Tomcat",
+        "type": "Tomcat",
         "port": "8080",
         "soapPort": 0000,
-        "account": "admin"
+        "username": "admin"
     }]
 }
 
-action：  discover-config/saveMidware
+action：  discover-config/saveMiddleware
 请求
 {
     // id 为null 则是新增
     "id": 1,
     "name": "中间件发现策略1",
-    "OSType":"Tomcat",
+    "type":"Tomcat",
     "port":"8080",
     "soapPort":0000,
-    "account":"admin",
+    "username":"admin",
     "password":"123"
 }
 {
@@ -484,7 +484,7 @@ action：  discover-config/saveMidware
 }
 
 
-action：  discover-config/delMidware
+action：  discover-config/delMiddleware
 请求
 {
     "ids": [1,2,3]
@@ -573,7 +573,7 @@ action：  discover-config/saveDiscTask
 }
 
 
-action：  discover-config/delMission
+action：  discover-config/deleteTask
 请求
 {
     "ids": [1,2,3]
@@ -658,7 +658,7 @@ action：  discover-monitor/infoAll
         "content": "server,database",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
-        "startTime": "2018-01-10 09:00:00",
+        "startDate": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
         "operator": "系统",
         "status": 1,
@@ -669,7 +669,7 @@ action：  discover-monitor/infoAll
         "content": "server,database",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
-        "startTime": "2018-01-10 09:00:00",
+        "startDate": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
         "operator": "系统",
         "status": 2,
@@ -680,7 +680,7 @@ action：  discover-monitor/infoAll
         "content": "server,database",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
-        "startTime": "2018-01-10 09:00:00",
+        "startDate": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
         "operator": "系统",
         "status": 3,
@@ -798,7 +798,7 @@ action：  discover-monitor/stopScan
 // {type:'network,text:'网络设备'},
 // {type:'app,text:'应用程序'}
 
-action：  ITSource/getTags
+action：  resource/getTags
 请求
 {
     // types : 现阶段是数组为1，以下是查出服务器的id为1的资源的应用系统
@@ -811,17 +811,17 @@ action：  ITSource/getTags
     "msg": "成功"
 }
 
-action：  ITSource/infoAll
+action：  resource/findResourceList
 请求
 {
     "limit":20,
     "offset":60,
     "order":"asc",
     "searchText":"",
-    "OSVer":"",
-    "OSType":"",
-    "serFac":"",
-    "tags":[],
+    "resVersion":"",
+    "type":"",
+    "manufacturer":"",
+    "tagName":[],
     "code":"server"
 }
 {
@@ -829,52 +829,52 @@ action：  ITSource/infoAll
     "rows": [{
         "name": "serv",
         "ip": "10.5.5.111",
-        "OSType": "Linux",
-        "OSVer": "Redhat Enterprise 1 Santago",
-        "OSType":"OS类型",
-        "serFac":"Dell",
+        "type": "Linux",
+        "resVersion": "Redhat Enterprise 1 Santago",
+        "type":"OS类型",
+        "manufacturer":"Dell",
         "tags":["应用系统1"],
         "id": 1
     }, {
         "name": "yery",
         "ip": "10.5.5.14",
-        "OSType": "Linux",
-        "OSVer": "Enterprise 2 Santago",
-        "OSType":"OS类型",
-        "serFac":"Dell",
+        "type": "Linux",
+        "resVersion": "Enterprise 2 Santago",
+        "type":"OS类型",
+        "manufacturer":"Dell",
         "tags":["应用系统2","应用系统3"],
         "id": 2
     }, {
         "name": "cc",
         "ip": "10.5.5.145",
-        "OSType": "Linux",
-        "OSVer": "Redhat Enterprise 4 Santago",
-        "OSType":"OS类型",
-        "serFac":"Dell",
+        "type": "Linux",
+        "resVersion": "Redhat Enterprise 4 Santago",
+        "type":"OS类型",
+        "manufacturer":"Dell",
         "tags":["应用系统2","应用系统3"],
         "id": 3
     }, {
         "name": "qqq",
         "ip": "10.5.5.13",
-        "OSType": "Linux",
-        "OSVer": "Redhat Enterprise 5 Santago",
-        "OSType":"OS类型",
-        "serFac":"Dell",
+        "type": "Linux",
+        "resVersion": "Redhat Enterprise 5 Santago",
+        "type":"OS类型",
+        "manufacturer":"Dell",
         "tags":["应用系统4","应用系统3"],
         "id": 4
     }, {
         "name": "ttt",
         "ip": "10.5.5.15",
-        "OSType": "Linux",
-        "OSVer": "Redhat Enterprise 6.5",
-        "OSType":"OS类型",
-        "serFac":"Dell",
+        "type": "Linux",
+        "resVersion": "Redhat Enterprise 6.5",
+        "type":"OS类型",
+        "manufacturer":"Dell",
         "tags":["应用系统5","应用系统3"],
         "id": 5
     }]
 }
 
-action：  ITSource/addServer
+action：  resource/addResource
 请求：
 {
     "id": 1,
@@ -882,10 +882,10 @@ action：  ITSource/addServer
     "ip":"10.4.4.1",
     "prot": "window",
     "port":151,
-    "account":"administrator",
+    "username":"administrator",
     "password":"",
     "domain":"digitalchina.com",
-    "encoding":"GBK",
+    "encode":"GBK",
     "echo":"sdf"
 }
 {
@@ -896,7 +896,7 @@ action：  ITSource/addServer
     "msg": "成功"
 }
 
-action：  ITSource/detail
+action：  resource/getResourceDetail
 {
     "id":1,
     // "code":1
@@ -907,7 +907,7 @@ action：  ITSource/detail
         "ip":"10.5.5.174",
         "tags":["应用服务器","数据库服务器"],
         "details":[{
-            // "key":"startTime",
+            // "key":"startDate",
             "keyText":"开始时间",
             "value":"2018-01-10 09:00:00",
             "isText":true
@@ -961,7 +961,7 @@ action：  ITSource/detail
 }
 
 // 获取应用系统，可能作为标签
-action：  ITSource/getAllApp
+action：  resource/getAllApp
 {
 
 }
@@ -983,7 +983,7 @@ action：  ITSource/getAllApp
     "msg": "成功"
 }
 
-action：  ITSource/getAppUsed
+action：  resource/getAppUsed
 {
 
 }
@@ -999,7 +999,7 @@ action：  ITSource/getAppUsed
     "msg": "成功"
 }
 
-action：  ITSource/setTag
+action：  resource/setTag
 {
     "id":1,
     "code":1,

@@ -314,25 +314,25 @@
         <div class="form-group changeViewBox">
             <label class="col-sm-2 control-label">协议版本：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView" name="protVersion" value="{{protVersion}}">
-                    <option value="v1/v2">v1/v2</option>
-                    <option value="v3">v3</option>
+                <select class="form-control changeView" name="version" value="{{version}}">
+                    <option value="2">v1/v2</option>
+                    <option value="3">v3</option>
                 </select>
             </div>
         </div>
-        <div class="form-group" data-belong="v1/v2">
+        <div class="form-group" data-belong="2">
             <label class="col-sm-2 control-label">读团体名：</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="rGroupName" value="{{rGroupName}}">
+                <input type="text" class="form-control" name="publicName" value="{{publicName}}">
             </div>
         </div>
-        <div class="form-group hide" data-belong="v3">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">安全用户名：</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="safeName" value="{{safeName}}">
             </div>
         </div>
-        <div class="form-group hide" data-belong="v3">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">签名协议：</label>
             <div class="col-sm-5">
                 <select class="form-control" name="signatureProt" value="{{signatureProt}}">
@@ -341,13 +341,13 @@
                 </select>
             </div>
         </div>
-        <div class="form-group hide" data-belong="v3">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">签名口令：</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="signaturePassw" value="{{signaturePassw}}">
             </div>
         </div>
-        <div class="form-group hide" data-belong="v3">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">加密协议：</label>
             <div class="col-sm-5">
                 <select class="form-control" name="encryptProt" value="encryptProt">
@@ -357,7 +357,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group hide" data-belong="v3">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">加密口令：</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="encryptPassw" value="{{encryptPassw}}">
@@ -393,9 +393,9 @@
         <div class="form-group changeViewBox">
             <label class="col-sm-2 control-label">协议类型：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView" name="prot" value="{{prot}}">
-                    <option value="WMI">WMI</option>
-                    <option value="SSH">SSH</option>
+                <select class="form-control changeView" name="type" value="{{type}}">
+                    <option value="1">WMI</option>
+                    <option value="2">SSH</option>
                 </select>
             </div>
         </div>
@@ -408,7 +408,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="account" class="form-control" value="{{account}}">
+                <input type="text" name="username" class="form-control" value="{{username}}">
             </div>
         </div>
         <div class="form-group">
@@ -417,13 +417,13 @@
                 <input type="password" class="form-control" name="password" value="{{password}}">
             </div>
         </div>
-        <div class="form-group" data-belong="WMI">
+        <div class="form-group" data-belong="1">
             <label class="col-sm-2 control-label">域：</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="domain" value="{{domain}}">
             </div>
         </div>
-        <div class="form-group hide" data-belong="SSH">
+        <div class="form-group hide" data-belong="2">
             <label class="col-sm-2 control-label">回显符：</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="echo" value="{{echo}}">
@@ -432,7 +432,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">字符编码：</label>
             <div class="col-sm-5">
-                <select class="form-control" name="encoding" value="{{encoding}}">
+                <select class="form-control" name="encode" value="{{encode}}">
                     <option value=""></option>
                     <option value="utf8">utf8</option>
                     <option value="gbk">gbk</option>
@@ -470,21 +470,21 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">管理域类型：</label>
             <div class="col-sm-5">
-                <select class="form-control" name="domainType" value="{{domainType}}">
-                    <option value="vmware">vmware</option>
+                <select class="form-control" name="type" value="{{type}}">
+                    <option value="1">vmware</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">管理域IP：</label>
             <div class="col-sm-5">
-                <input type="text" name="domainIp" class="form-control" value="{{domainIp}}">
+                <input type="text" name="ip" class="form-control" value="{{ip}}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">用户名：</label>
             <div class="col-sm-5">
-                <input type="text" name="account" class="form-control" value="{{account}}">
+                <input type="text" name="username" class="form-control" value="{{username}}">
             </div>
         </div>
         <div class="form-group">
@@ -522,38 +522,38 @@
         <div class="form-group changeViewBox">
             <label class="col-sm-2 control-label">数据库类型：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView" name="dbType" value="{{dbType}}">
-                    <option value="Oracle">Oracle</option>
-                    <option value="SQL Server">SQL Server</option>
-                    <option value="Mysql">Mysql</option>
-                    <option value="DB2">DB2</option>
+                <select class="form-control changeView" name="type" value="{{type}}">
+                    <option value="1">Oracle</option>
+                    <option value="3">SQL Server</option>
+                    <option value="2">Mysql</option>
+                    <option value="4">DB2</option>
                 </select>
             </div>
         </div>
-        <div data-belong="Oracle">
+        <div data-belong="1">
             <div class="form-group changeViewBox">
                 <label class="col-sm-2 control-label">连接类型：</label>
                 <div class="col-sm-5">
-                    <select class="form-control changeView" name="connectType" value="{{connectType}}">
-                        <option value="服务名" selected="selected">服务名</option>
-                        <option value="实例名">实例名</option>
+                    <select class="form-control changeView" name="connType" value="{{connType}}">
+                        <option value="2" selected="selected">服务名</option>
+                        <option value="1">实例名</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group" data-belong="服务名">
+            <div class="form-group" data-belong="2">
                 <label class="col-sm-2 control-label">服务名：</label>
                 <div class="col-sm-5">
                     <input type="text" name="dbName" class="form-control" value="{{dbName}}">
                 </div>
             </div>
-            <div class="form-group hide" data-belong="实例名">
+            <div class="form-group hide" data-belong="1">
                 <label class="col-sm-2 control-label">实例名：</label>
                 <div class="col-sm-5">
                     <input type="text" name="dbName" class="form-control" value="{{dbName}}">
                 </div>
             </div>
         </div>
-        <div class="form-group hide" data-belong="SQL Server#Mysql#DB2">
+        <div class="form-group hide" data-belong="3#2#4">
             <label class="col-sm-2 control-label">数据库名：</label>
             <div class="col-sm-5">
                 <input type="text" name="dbName" class="form-control" value="{{dbName}}">
@@ -568,7 +568,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="account" class="form-control" value="{{account}}">
+                <input type="text" name="username" class="form-control" value="{{username}}">
             </div>
         </div>
         <div class="form-group">
@@ -580,7 +580,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">字符编码：</label>
             <div class="col-sm-5">
-                <select class="form-control" name="encoding" value="{{encoding}}">
+                <select class="form-control" name="encode" value="{{encode}}">
                     <option value=""></option>
                     <option value="utf8">utf8</option>
                     <option value="gbk">gbk</option>
@@ -618,10 +618,10 @@
         <div class="form-group changeViewBox">
             <label class="col-sm-2 control-label">中间件类型：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView" name="OSType" value="{{OSType}}">
-                    <option value="Tomcat">Tomcat</option>
-                    <option value="Weblogic">Weblogic</option>
-                    <option value="Websphere">Websphere</option>
+                <select class="form-control changeView" name="type" value="{{type}}">
+                    <option value="1">Tomcat</option>
+                    <option value="2">Weblogic</option>
+                    <option value="3">Websphere</option>
                 </select>
             </div>
         </div>
@@ -631,7 +631,7 @@
                 <input type="text" name="port" class="form-control" value="{{port}}">
             </div>
         </div>
-        <div class="form-group hide" data-belong="Websphere">
+        <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">soap端口：</label>
             <div class="col-sm-5">
                 <input type="text" name="soapPort" class="form-control" value="{{soapPort}}">
@@ -640,7 +640,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="account" class="form-control" value="{{account}}">
+                <input type="text" name="username" class="form-control" value="{{username}}">
             </div>
         </div>
         <div class="form-group">
@@ -662,23 +662,23 @@
     <ol class="breadcrumb">
         <li class="backToTableView"><a>标准应用端口策略</a></li>
         {{#if id}}
-        <li class="active">{{appName}}</li>
+        <li class="active">{{portDesc}}</li>
         {{else}}
         <li class="active">新增端口</li>
         {{/if}}
     </ol>
     <div class="form-group">
         <input name="id" type="hidden" value="{{id}}">
-        <input class="form-control" name="appName" type="hidden" value="{{appName}}">
+        <input class="form-control" name="portDesc" type="hidden" value="{{portDesc}}">
     </div>
     <div class="tags form-inline form-group">
-        {{#each ports}}
+        <!-- {{#each port}} -->
+        <!-- {{/each}} -->
         <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong class="text">{{this}}</strong>
+            <strong class="text">{{port}}</strong>
         </div>
-        {{/each}}
-        <input type="text" class="form-control">
+        <input type="number" class="form-control">
         <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
     </div>
     <div class="form-group">
@@ -693,7 +693,7 @@
     <ol class="breadcrumb">
         <li class="backToTableView"><a>客户化应用端口策略</a></li>
         {{#if id}}
-        <li class="active">{{appName}}</li>
+        <li class="active">{{portDesc}}</li>
         {{else}}
         <li class="active">新增端口</li>
         {{/if}}
@@ -702,17 +702,17 @@
         <input name="id" type="hidden" value="{{id}}">
         <label class="col-sm-2 control-label">应用名称：</label>
         <div class="col-sm-4">
-            <input class="form-control" name="appName" type="text" value="{{appName}}">
+            <input class="form-control" name="portDesc" type="text" value="{{portDesc}}">
         </div>
     </div>
     <div class="tags form-inline form-group col-sm-12">
-        {{#each ports}}
+        <!-- {{#each port}} -->
+        <!-- {{/each}} -->
         <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong class="text">{{this}}</strong>
+            <strong class="text">{{port}}</strong>
         </div>
-        {{/each}}
-        <input type="text" class="form-control">
+        <input type="number" class="form-control">
         <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
     </div>
     <div class="form-group">

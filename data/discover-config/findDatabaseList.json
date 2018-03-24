@@ -3,32 +3,32 @@
     "rows": [{
         "id": 1,
         "name": "数据库发现策略",
-        "dbType":"Oracle",
+        "type":"Oracle",
         "connectType":"服务名",
         "dbName": "auto4_4",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"gbk"
+        "encode":"gbk"
     },{
         "id": 2,
         "name": "数据库发现策略",
-        "dbType":"Oracle",
+        "type":"Oracle",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"utf8"
+        "encode":"utf8"
     },{
         "id": 3,
         "name": "数据库发现策略",
-        "dbType":"DB2",
+        "type":"DB2",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",
-        "account":"root",
+        "username":"root",
         "password":234,
-        "encoding":"utf8"
+        "encode":"utf8"
     }]
 }
