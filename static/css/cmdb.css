@@ -117,7 +117,7 @@ ul {
 /*Graph.html*/
 #Graph-box{
     position: relative;
-    min-height: 380px;
+    min-height: 480px;
     border: 1px solid #00c0ef;
 }
 #Graph-box .tools{
@@ -153,23 +153,23 @@ ul {
     border-right: 1px solid #00c0ef;
     display: none;
     z-index: 2;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 #Graph-box .secondMenu.show{
     display: block;
 }
-#Graph-tool-relation .list-group-item,#Graph-tool-display .list-group .list-group-item{
+#Graph-box .secondMenu .list-group-item{
     cursor: pointer;
 }
-#Graph-tool-relation .list-group-item.clicked,#Graph-tool-relation .list-group-item:hover{
+#Graph-box .secondMenu .list-group-item.clicked,#Graph-box .secondMenu .list-group-item:hover{
     background-color: #00c0ef;
 }
 
-#Graph-tool-display .list-group .list-group-item > *{
+#Graph-box .secondMenu .list-group .list-group-item > *{
     margin-right: 3px;
     vertical-align: middle;
 }
-#Graph-tool-display .list-group .list-group-item.clicked{
+#Graph-box .secondMenu .list-group .list-group-item.clicked{
     background-color: #00c0ef;
 }
 #Graph{

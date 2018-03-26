@@ -146,6 +146,7 @@
                     field:'ciCode',
                     sortable:true,
                     formatter:function(value){
+                        if (!value) {return};
                         if (value.indexOf('DC_') > -1) {
                             return value.substr(3);
                         } else {
@@ -184,6 +185,7 @@
                     field:'ciCode',
                     sortable:true,
                     formatter:function(value){
+                        if (!value) {return};
                         if (value.indexOf('DC_') > -1) {
                             return value.substr(3);
                         } else {
@@ -222,6 +224,7 @@
                     field:'ciCode',
                     sortable:true,
                     formatter:function(value){
+                        if (!value) {return};
                         if (value.indexOf('DC_') > -1) {
                             return value.substr(3);
                         } else {
@@ -264,6 +267,7 @@
                     field:'ciCode',
                     sortable:true,
                     formatter:function(value){
+                        if (!value) {return};
                         if (value.indexOf('DC_') > -1) {
                             return value.substr(3);
                         } else {

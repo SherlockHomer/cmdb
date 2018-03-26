@@ -1,0 +1,93 @@
+{
+    "data": {
+        "nodeDataArray":[{
+            "key":"Server1",
+            "id":1,
+            "code":"server",
+            "name": "Server1"
+        },{
+            "key":"Server2",
+            "id":1,
+            "code":"server",
+            "name": "Server2"
+        },{
+            "key":"Server3",
+            "id":1,
+            "code":"server",
+            "name": "Server3"
+        },{
+            "key":"Server4",
+            "id":1,
+            "code":"server",
+            "name": "Server4"
+        },{
+            "key":"Server5",
+            "id":1,
+            "code":"server",
+            "name": "Server5"
+        },{
+            "key":"Switch1",
+            "id":1,
+            "code":"switch",
+            "name": "Switch1"
+        },{
+            "key":"Switch2",
+            "id":1,
+            "code":"switch",
+            "name": "Switch2"
+        },{
+            "key":"Switch3",
+            "id":1,
+            "code":"switch",
+            "name": "Switch3"
+        },{
+            "key":"Switch4",
+            "id":1,
+            "code":"switch",
+            "name": "Switch4"
+        }],
+        "linkDataArray":[{
+            "from":"Server1",
+            "to":"Switch1",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Server2",
+            "to":"Switch1",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Server3",
+            "to":"Switch2",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Server4",
+            "to":"Switch2",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Server5",
+            "to":"Switch3",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Switch1",
+            "to":"Switch4",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Switch2",
+            "to":"Switch4",
+            "relation":"black",
+            "visible":false
+        },{
+            "from":"Switch3",
+            "to":"Switch4",
+            "relation":"black",
+            "visible":false
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}

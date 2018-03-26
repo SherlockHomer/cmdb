@@ -134,27 +134,37 @@
                     <div class="form-horizontal">
                         {{#each details}}
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">{{keyText}}</label>
 
                             {{#if isText}}
-                            <div class="col-sm-9 form-control-static">{{value}}</div>
+                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <div class="col-sm-10 form-control-static">{{value}}</div>
                             {{/if}}
 
                             {{#if isProcess}}
-                            <div class="col-sm-9 form-control-static">
+                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <div class="col-sm-10 form-control-static">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
+                                    <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
                                     </div>
                                 </div>
                             </div>
                             {{/if}}
 
                             {{#if isTable}}
-                            <div class="col-sm-9">
+                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <div class="col-sm-10">
                                 <table class="table table-bordered">
                                     {{tableDetail value}}
                                 </table>
                             </div>
+                            {{/if}}
+
+                            {{#if isGather}}
+                            {{#each value}}
+                                <label class="col-sm-2 control-label">{{keyText}}</label>
+                                <div class="col-sm-10 form-control-static">{{value}}</div>
+                            {{/each}}
+                            
                             {{/if}}
                         </div>
                         {{/each}}

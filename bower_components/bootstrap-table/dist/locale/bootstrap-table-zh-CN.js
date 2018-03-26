@@ -5,6 +5,9 @@
 (function ($) {
     'use strict';
     $.fn.bootstrapTable.defaults.undefinedText = '';
+    $.fn.bootstrapTable.defaults.contentType = 'application/x-www-form-urlencoded';
+
+    
     $.fn.bootstrapTable.locales['zh-CN'] = {
         formatLoadingMessage: function () {
             return '正在努力地加载数据中，请稍候……';

@@ -19,11 +19,14 @@
     {type:'middleware',icon:'icon-middleware',text:'中间件',image:'static/image/device/middleware.png'},
     {type:'cloud',icon:'icon-cloud',text:'云环境',image:'static/image/device/cloud.png'},
     {type:'network',icon:'icon-networkDevice',text:'网络设备',image:'static/image/device/networkDevice.png'},
-    {type:'application',icon:'icon-app',text:'应用程序',image:'static/image/device/app.png'},
+    {type:'application',icon:'icon-app',text:'应用程序',image:'static/image/device/disk.png'},
+
+    
     {type:'storage',icon:'icon-storage',text:'存储',image:'static/image/device/storage.png'},
     {type:'visual',icon:'icon-visual',text:'虚拟资源',image:'static/image/device/unknownDevice.png'},
     {type:'platform',icon:'icon-platform',text:'平台资源',image:'static/image/device/unknownDevice.png'},
-    {type:'appsys',icon:'icon-appsys',text:'业务系统',image:'static/image/device/unknownDevice.png'}
+    {type:'appsys',icon:'icon-appsys',text:'业务系统',image:'static/image/device/app.png'},
+    {type:'switch',icon:'icon-switch',text:'交换机',image:'static/image/device/switch.png'}
     
     ];
     Constant.count = [

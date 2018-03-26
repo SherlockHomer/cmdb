@@ -48,6 +48,16 @@
                 ]]
             },
             "isTable": true
+        }, {
+            "keyText": "集合",
+            "isGather": true,
+            "value": [{
+                "keyText": "服务器厂商",
+                "value": "LENOVO"
+            }, {
+                "keyText": "设备型号",
+                "value": "20AYA08DCD"
+            }]
         }]
     },
     "success": true,

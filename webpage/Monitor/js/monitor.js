@@ -32,7 +32,7 @@
         initMonitorTable('Monitor-ing-table',1);
         initMonitorTable('Monitor-done-table',2);
         initMonitorTable('Monitor-planTo-table',3);
-        initMonitorTable('Monitor-all-table',4);
+        initMonitorTable('Monitor-all-table',0);
 
     }
     // 各个表的渲染
@@ -44,7 +44,7 @@
             url:ConfirmUrl('discover-monitor/infoAll'),
             checkbox:true,
             pagination:true,
-            sortName:'port',
+            sortName:'id',
             sortOrder: "asc",
             // sortable:true,
             pageNumber:1,
@@ -97,7 +97,11 @@
                 field:'status',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    return '<div class="progress detail" data-id="'+row.id+'"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
+                    var active = '';
+                    if ( row.status == 1 ) {
+                        active = 'active';
+                    }
+                    return '<div class="progress detail" data-id="'+row.id+'"><div class="progress-bar progress-bar-success progress-bar-striped '+active+'" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
                 }
             },{
                 title:'操作',
