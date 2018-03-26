@@ -3,7 +3,7 @@
     "rows": [{
         "id": 1,
         "name": "数据库发现策略",
-        "type":"Oracle",
+        "dbType":"Oracle",
         "connectType":"服务名",
         "dbName": "auto4_4",
         "port":"1433",
@@ -13,7 +13,7 @@
     },{
         "id": 2,
         "name": "数据库发现策略",
-        "type":"Oracle",
+        "dbType":"Oracle",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",
@@ -23,7 +23,7 @@
     },{
         "id": 3,
         "name": "数据库发现策略",
-        "type":"DB2",
+        "dbType":"DB2",
         "connectType":"实例名",
         "dbName": "auto1",
         "port":"1433",

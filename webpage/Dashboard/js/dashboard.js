@@ -77,6 +77,10 @@
     // 对外统一接口，在cmdb.js中调用
     function renderModule(params) {
         if ( !params || params.length == 0 ) {
+            Router.updateBreadcrumb([{
+                url: '#/Dashboard',
+                text:'仪表盘' 
+            }])
             getAllView();
         }
     };

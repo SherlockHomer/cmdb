@@ -62,7 +62,7 @@
             "sum":"10"
         }]
     }, {
-        "code": "app",
+        "code": "application",
         "sum": 1001,
         "details":[{
             "typeName":"应用程序",

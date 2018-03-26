@@ -53,6 +53,10 @@
     // 对外统一接口，在cmdb.js中调用
     // hase 判断记录参数
     function renderModule( hashes ) {
+        Router.updateBreadcrumb([{
+            url:'#/ITSourceTopo',
+            text:'IT资源拓扑图'
+        }])
         renderBasic();
     };
 

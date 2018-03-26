@@ -472,6 +472,10 @@
 
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
+        Router.updateBreadcrumb([{
+            url:'#/Configuration',
+            text:'自动发现配置'
+        }]);
         renderBasic();
     };
 
@@ -741,8 +745,9 @@
             success:function(res){
                 if (res.success) {
                     window.location = window.location.origin + window.location.pathname + '#/Monitor';
+                    Tool.message('启动扫描成功');
                 } else {
-
+                    Tool.message(res.msg,'warning');
                 }
             }
         })

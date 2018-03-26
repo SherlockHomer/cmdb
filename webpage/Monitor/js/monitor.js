@@ -29,10 +29,10 @@
     };
     function renderBasic() {
         render('Monitor-basic-template');
-        initMonitorTable('Monitor-ing-table',1);
-        initMonitorTable('Monitor-done-table',2);
-        initMonitorTable('Monitor-planTo-table',3);
-        initMonitorTable('Monitor-all-table',0);
+        initMonitorTable('Monitor-ing-table',0);
+        initMonitorTable('Monitor-done-table',1);
+        initMonitorTable('Monitor-planTo-table',2);
+        initMonitorTable('Monitor-all-table','');
 
     }
     // 各个表的渲染
@@ -45,7 +45,7 @@
             checkbox:true,
             pagination:true,
             sortName:'id',
-            sortOrder: "asc",
+            sortOrder: "desc",
             // sortable:true,
             pageNumber:1,
             pageSize:20,
@@ -121,15 +121,28 @@
 
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
+        var crumb = [{
+            url:'#/Monitor',
+            text:'自动发现监控'
+        }];
         if (hashes[0] == 'detail') {
+            crumb.push({
+                text: Record.detailName|| '详情'
+            });
+            Router.updateBreadcrumb(crumb);
             Record.rowId = hashes[1];
             renderDetail(hashes[1]);
             return;
         } else if (hashes[1] == 'detail') {
+            crumb.push({
+                text: Record.detailName || '详情'
+            });
+            Router.updateBreadcrumb(crumb);
             Record.rowId = hashes[2];
             renderDetail(hashes[2]);
             return;
-        } 
+        }
+        Router.updateBreadcrumb(crumb);
         renderBasic();
         Record.tab = hashes[0] || 'ing';
         $('#Monitor-basic .nav-tabs a[href="#Monitor-'+Record.tab+'"]').tab('show');
@@ -206,8 +219,13 @@
             success:function(res){
                 if (res.success) {
                     $('#'+tableId).bootstrapTable('refresh');
+                    if ( scanOrNot ){
+                        Tool.message('启动扫描成功');
+                    } else {
+                        Tool.message('取消扫描成功');
+                    }
                 } else {
-
+                    Tool.message(res.msg,'warning');
                 }
             }
         })
@@ -217,7 +235,9 @@
     }
     function clickDetail() {
         var id = $(this).attr('data-id');
-        Route.addHash('detail/'+id);
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        Record.detailName = $('#'+tableId).bootstrapTable('getRowByUniqueId',id).name;
+        Router.addHash('detail/'+id);
     };
     function renderDetail(id){
         var params = {

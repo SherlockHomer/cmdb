@@ -504,7 +504,7 @@
     }
     function clickDetail() {
         var id = $(this).attr('data-id');
-        Route.addHash('detail/'+id);
+        Router.addHash('detail/'+id);
     };
     // 点击行详情按钮后-> 渲染详情
     function renderDetail() {

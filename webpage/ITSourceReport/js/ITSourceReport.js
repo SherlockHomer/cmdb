@@ -58,16 +58,25 @@
     
     // 对外统一接口，在cmdb.js中调用
     function renderModule(params) {
+        var crumb = [{
+            url:'#/ITSourceReport',
+            text:'IT资源报表'
+        }];
         if ( !params || params.length == 0 ) {
             getAllView();
         } else if ( params[0] && params[1] ){
             Record.levelOneType = params[0];
             Record.code = params[1];
+            crumb.push({
+                text: Record.code
+            });
             // 加载统计情况
             renderCount({
                 code : Record.code
             });
         }
+        Router.updateBreadcrumb(crumb);
+
     };
     // 对于一个界面多个box多个ajax友好
     function getAllView(){
@@ -78,12 +87,12 @@
         var name = $(this).find('.info-box-number').attr('data-name');
         var levelOneType = $(this).parents('.ITSourceBox').eq(0).attr('data-levelOneType');
 
-        Route.addHash(levelOneType+'/'+name);
+        Router.addHash(levelOneType+'/'+name);
     });
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');
         var countType = $(this).find('.info-box-number').attr('data-countType')
-        Route.addHash(countType+'/'+name);
+        Router.addHash(countType+'/'+name);
     })
     
     var ITSourceReport = {};

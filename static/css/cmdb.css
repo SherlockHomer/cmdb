@@ -13,6 +13,16 @@ ul {
     font-size:inherit;
     display: inline-block;
 }
+.content{
+    padding-top:5px;
+}
+.content-header{
+    /*padding-top: 8px;*/
+}
+.content-header>.breadcrumb{
+    float: none;
+    position: initial;
+}
 .box-header>.iconfont {
     font-size: 18px;
 }

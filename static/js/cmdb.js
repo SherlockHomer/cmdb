@@ -7,7 +7,7 @@
         module.exports = factory(require('jquery'));
     } else {
         // Browser globals (window is window)
-        window.Route = factory(window.jQuery);
+        window.Router = factory(window.jQuery);
     };
 }(window, function ($) {
     var Router = {
@@ -67,6 +67,7 @@
         });
     }
     function router () {
+        $('#index-content-header').html('');
         var hashes = ( location.hash.slice(1) || '/' ).split('/'); 
         // 首页
         if ( !hashes[1] ) {
@@ -127,13 +128,23 @@
         window.location = window.location.origin + window.location.pathname + newHash.join('/');
     };
     function updateBreadcrumb(breads){
-        
+        var html = '<ol class="breadcrumb">';
+        $.each(breads,function(i,perB){
+            if ( i == breads.length-1 ) {
+                html += '<li class="active">'+ perB.text +'</li>';
+            } else {
+                html += '<li><a href="'+perB.url+'">'+ perB.text +'</a></li>';
+            }
+        });
+        html += '</ol>';
+        $('#index-content-header').append(html)
     };
     // 事件注册
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
     return {
-        addHash : addHash
+        addHash             : addHash,
+        updateBreadcrumb    : updateBreadcrumb
     }
 }));
 
