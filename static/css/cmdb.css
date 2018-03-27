@@ -58,7 +58,9 @@ ul {
     font-size: 14px;
     font-weight: normal;
 }
-
+.detailsForm .form-group{
+    margin-bottom: 0;
+}
 .newFeature {
     position: relative;
 }

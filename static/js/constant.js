@@ -39,10 +39,12 @@
     {type:3,text:'v3'}
     ];
     Constant.dbType = [
-    {type:1,text:'oracle'},
-    {type:2,text:'mysql'},
-    {type:3,text:'sqlserver'},
-    {type:4,text:'db2'}
+    {type:1,text:'mysql'},
+    {type:2,text:'oracle'},
+    {type:3,text:'db2'},
+    {type:4,text:'sqlserver'},
+    {type:5,text:'sybase'},
+    {type:6,text:'inforMix'}
     ];
     Constant.middlewareType = [
     {type:1,text:'tomcat'},

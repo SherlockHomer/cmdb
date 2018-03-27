@@ -2,13 +2,13 @@
     <div class="box box-info box-body" id="Configuration-basic">
         <div class="box-header">
             <ul class="nav nav-tabs nav-justified form-group">
-                <li class="active"><a href="#Configuration-mission" role="tab" data-toggle="tab">发现任务</a></li>
-                <li><a href="#Configuration-SNMP" role="tab" data-toggle="tab">SNMP设备发现</a></li>
-                <li><a href="#Configuration-port" role="tab" data-toggle="tab">端口发现</a></li>
-                <li><a href="#Configuration-server" role="tab" data-toggle="tab">服务器发现</a></li>
-                <li><a href="#Configuration-cloud" role="tab" data-toggle="tab">云环境发现</a></li>
-                <li><a href="#Configuration-database" role="tab" data-toggle="tab">数据库发现</a></li>
-                <li><a href="#Configuration-middleware" role="tab" data-toggle="tab">中间件发现</a></li>
+                <li class="active"><a href="#Configuration-mission" role="tab" data-toggle="tab">发现任务定义</a></li>
+                <li><a href="#Configuration-SNMP" role="tab" data-toggle="tab">SNMP设备策略</a></li>
+                <li><a href="#Configuration-port" role="tab" data-toggle="tab">端口策略</a></li>
+                <li><a href="#Configuration-server" role="tab" data-toggle="tab">服务器策略</a></li>
+                <li><a href="#Configuration-cloud" role="tab" data-toggle="tab">云环境策略</a></li>
+                <li><a href="#Configuration-database" role="tab" data-toggle="tab">数据库策略</a></li>
+                <li><a href="#Configuration-middleware" role="tab" data-toggle="tab">中间件策略</a></li>
             </ul>
         </div>
         <div class="box-body tab-content">
@@ -344,7 +344,7 @@
         <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">签名口令：</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="signaturePassw" value="{{signaturePassw}}">
+                <input type="password" class="form-control" name="signaturePassw" value="{{signaturePassw}}">
             </div>
         </div>
         <div class="form-group hide" data-belong="3">
@@ -360,7 +360,7 @@
         <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">加密口令：</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="encryptPassw" value="{{encryptPassw}}">
+                <input type="password" class="form-control" name="encryptPassw" value="{{encryptPassw}}">
             </div>
         </div>
         <div class="form-group">
@@ -476,7 +476,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">管理域IP：</label>
+            <label class="col-sm-2 control-label">管理域地址：</label>
             <div class="col-sm-5">
                 <input type="text" name="ip" class="form-control" value="{{ip}}">
             </div>
@@ -523,14 +523,14 @@
             <label class="col-sm-2 control-label">数据库类型：</label>
             <div class="col-sm-5">
                 <select class="form-control changeView" name="type" value="{{type}}">
-                    <option value="1">Oracle</option>
-                    <option value="3">SQL Server</option>
-                    <option value="2">Mysql</option>
-                    <option value="4">DB2</option>
+                    <option value="1">Mysql</option>
+                    <option value="2">Oracle</option>
+                    <option value="3">DB2</option>
+                    <option value="4">SQL Server</option>
                 </select>
             </div>
         </div>
-        <div data-belong="1">
+        <div data-belong="2">
             <div class="form-group changeViewBox">
                 <label class="col-sm-2 control-label">连接类型：</label>
                 <div class="col-sm-5">
@@ -553,7 +553,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group hide" data-belong="3#2#4">
+        <div class="form-group hide" data-belong="4#1#3">
             <label class="col-sm-2 control-label">数据库名：</label>
             <div class="col-sm-5">
                 <input type="text" name="dbName" class="form-control" value="{{dbName}}">
@@ -672,12 +672,12 @@
         <input class="form-control" name="portDesc" type="hidden" value="{{portDesc}}">
     </div>
     <div class="tags form-inline form-group">
-        <!-- {{#each port}} -->
-        <!-- {{/each}} -->
+        {{#each portArr}}
         <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong class="text">{{port}}</strong>
+            <strong class="text">{{this}}</strong>
         </div>
+        {{/each}}
         <input type="number" class="form-control">
         <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
     </div>
@@ -706,12 +706,12 @@
         </div>
     </div>
     <div class="tags form-inline form-group col-sm-12">
-        <!-- {{#each port}} -->
-        <!-- {{/each}} -->
+        {{#each portArr}}
         <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong class="text">{{port}}</strong>
+            <strong class="text">{{this}}</strong>
         </div>
+        {{/each}}
         <input type="number" class="form-control">
         <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
     </div>
@@ -734,6 +734,8 @@
 
 <script>
     Tool.loadTemp('webpage/Configuration/view/DefineMissionStrategy.html');
+    Tool.loadTemp('webpage/Configuration/view/DefineTag.html');
+
 </script>
 <script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
 

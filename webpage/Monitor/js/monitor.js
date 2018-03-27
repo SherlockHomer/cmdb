@@ -305,6 +305,7 @@
 
     var Monitor = {};
     Monitor.renderModule = renderModule;
+    Monitor.Record = Record ;
 
     return Monitor;
 }));

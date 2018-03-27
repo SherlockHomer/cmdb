@@ -5,7 +5,14 @@
         "name": "YOUJF-DCITSTEST001",
         "ip":"10.5.5.80",
         "OS":"Linux",
-        "status":"在线",
+        "status":1,
+        "agentVersion":"5.0.0"
+    },{
+        "id": 2,
+        "name": "YOUJF-DCITSTEST001",
+        "ip":"10.5.5.80",
+        "OS":"Linux",
+        "status":0,
         "agentVersion":"5.0.0"
     }]
 }

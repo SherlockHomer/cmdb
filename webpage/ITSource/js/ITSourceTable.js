@@ -116,7 +116,7 @@
                     sortable:true,
                     formatter:function(value){
                         if (!value) {return };
-                        return getStatusItem('osType',value);
+                        return getStatusItem('osType',value).text;
                     }
                 },{
                     title:'OS版本',
@@ -339,7 +339,22 @@
         if (hashes.levelOneType) {
             Record.levelOneType = hashes.levelOneType ;
         }
-        Record.belongMission = hashes.belongMission
+        Record.belongMission = hashes.belongMission;
+
+        var crumb = [];
+        
+        if ( Record.currentModule == 'ITSourceReport'){
+            crumb.push({
+                url:'#/ITSourceReport',
+                text:'IT资源报表'
+            });
+        } else if (Record.currentModule == 'ITSource') {
+            crumb.push({
+                url:'#/ITSource',
+                text:'IT资源信息'
+            });
+        }
+        
         if ( hashes.currentModule == 'ITSourceReport') {
             Record.levelOneType = hashes.levelOneType;
             Record.code = hashes.code;
@@ -361,22 +376,39 @@
                     break;
                 }
             };
+            crumb.push({
+                url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code ,
+                text:Record.code
+            });
+            crumb.push({
+                url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code + '/' + Record.countType + '/'  + hashes.classifyInCount,
+                text:hashes.classifyInCount
+            });
             if ( hashes.detail && hashes.rowId ) {
                 Record.rowId = hashes.rowId;
+                crumb.push({
+                    text: Record.detailName || '详情'
+                });
+                Router.updateBreadcrumb(crumb);
                 renderDetail();
                 return;
-            }
+            };
         } else if ( hashes.currentModule == 'ITSource' && hashes.detail ){
             // 如果配有id才有渲染，否则还是渲染表格
             if ( hashes.rowId ) {
                 Record.rowId = hashes.rowId;
+                crumb.push({
+                    text:Record.detailName || '详情'
+                });
+                Router.updateBreadcrumb(crumb);
                 renderDetail();
                 return;
             }
 
         } else if ( hashes.currentModule == 'ITSource' ){
 
-        }
+        };
+        Router.updateBreadcrumb(crumb);
         renderBasic();
         // 针对资源信息的部分内容显隐
         showOrHideSome(Record.currentModule);
@@ -504,6 +536,8 @@
     }
     function clickDetail() {
         var id = $(this).attr('data-id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        Record.detailName = $('#'+tableId).bootstrapTable('getRowByUniqueId',id).resName;
         Router.addHash('detail/'+id);
     };
     // 点击行详情按钮后-> 渲染详情

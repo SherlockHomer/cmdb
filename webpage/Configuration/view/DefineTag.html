@@ -52,10 +52,11 @@
 
         function collectPortTags(tabId){
             var params = {};
-            params.port = [];
+            var port = [];
             $('#'+tabId).find('.editView .tags .text').each(function(i,perT){
-                params.port.push($(perT).text());
+                port.push($(perT).text());
             });
+            params.ports = port.join(',');
             return params;
         }
         return {

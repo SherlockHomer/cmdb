@@ -1,6 +1,6 @@
 {
     "data": {
-        "name": "WIN-0ECQ6MI24DJ",
+        "resName": "WIN-0ECQ6MI24DJ",
         "ip": "10.5.5.174",
         "tags": ["应用服务器", "数据库服务器"],
         "details": [{

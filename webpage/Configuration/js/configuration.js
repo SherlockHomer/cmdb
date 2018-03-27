@@ -95,7 +95,7 @@
             url:ConfirmUrl('discover-config/findPortList'),
             checkbox:true,
             pagination:true,
-            sortName:'port',
+            sortName:'ports',
             sortOrder: "asc",
             // sortable:true,
             pageNumber:1,
@@ -113,7 +113,7 @@
                 sortable:true
             },{
                 title:'端口',
-                field:'port',
+                field:'ports',
                 sortable:true,
                 formatter:function(value, row, index, field){
                     return value;
@@ -133,7 +133,7 @@
             url:ConfirmUrl('discover-config/findPortList'),
             checkbox:true,
             pagination:true,
-            sortName:'port',
+            sortName:'ports',
             sortOrder: "asc",
             // sortable:true,
             pageNumber:1,
@@ -151,7 +151,7 @@
                 sortable:true
             },{
                 title:'端口',
-                field:'port',
+                field:'ports',
                 sortable:true,
                 formatter:function(value, row, index, field){
                     return value;
@@ -400,8 +400,8 @@
                 field:'schePlanId',
                 sortable:true,
                 formatter:function(value, row, index, field){
-                    if ( row.scheName || row.scheName.length == 0 ) {return};
-                    return row.scheName.join(';');
+                    if ( !row.scheName || row.scheName.length == 0 ) {return};
+                    return row.scheName.join('；');
                 }
             },{
                 title:'目标范围',
@@ -451,12 +451,18 @@
                 sortable:true
             },{
                 title:'操作系统',
-                field:'OS',
+                field:'os',
                 sortable:true
             },{
                 title:'节点状态',
                 field:'status',
-                sortable:true
+                sortable:true,
+                align:'center',
+                formatter:function(value){
+                    var color = value == 1 ? 'bg-green' : 'bg-red';
+                    var text = value == 1 ? '在线' : '离线';
+                    return  '<div class="text-center '+color+'">'+text+'</div>';
+                }
             },{
                 title:'代理版本',
                 field:'agentVersion',
@@ -540,12 +546,12 @@
                     }
                     case 'Configuration-portStandard-table':{
                         var url = 'discover-config/delPort';
-                        params.portType = 1;
+                        params.type = 1;
                         break;
                     }
                     case 'Configuration-portCustom-table':{
                         var url = 'discover-config/delPort';
-                        params.portType = 2;
+                        params.type = 2;
                         break;
                     }
                     case 'Configuration-server-table':{
@@ -618,8 +624,13 @@
         if (tabId == 'Configuration-mission') {
             if ( !params ){
                 var params = {};
+                params.scanType = ["device","port","server","cloud","database","middleware"];
             };
             params.from = '发现任务策略';
+        } else if ( tabId == 'Configuration-portStandard' || tabId == 'Configuration-portCustom' ){
+            if ( params ) {
+                params.portArr = params.ports ? params.ports.split(',') : [];
+            } 
         }
         var html = Handlebars.getHTMLByCompile(tabId+'-editView-template',params);
         $('#'+tabId).find('.editView').html(html);
@@ -665,12 +676,12 @@
             }
             case 'Configuration-portStandard-table':{
                 var url = 'discover-config/savePort';
-                params.portType = 1;
+                params.type = 1;
                 break;
             }
             case 'Configuration-portCustom-table':{
                 var url = 'discover-config/savePort';
-                params.portType = 2;
+                params.type = 2;
                 break;
             }
             case 'Configuration-server-table':{
@@ -709,11 +720,8 @@
 
     function collectPortTags(tabId){
         var params = {};
-        params.port = [];
-        $('#'+tabId).find('.editView .tags .text').each(function(i,perT){
-            params.port.push($(perT).text());
-        });
-        params.name = $('#'+tabId).find('.editView [name="portDesc"]').val();
+        params.ports = DefineTag.collectPortTags(tabId).ports;
+        params.portDesc = $('#'+tabId).find('.editView [name="portDesc"]').val();
         params.id = $('#'+tabId).find('.editView [name="id"]').val();
         return params;
     }
@@ -774,7 +782,31 @@
         ipSel.select2({
             ajax:{
                 url:ConfirmUrl('discover-config/getAgents'),
-                dataType: 'json'
+                dataType: 'json',
+                processResults: function (data, params) {
+                    return {
+                        results:data.data
+                    }
+                }
+            },
+            escapeMarkup: function (markup) { return markup; },
+            templateResult:function(repo){
+                if (repo.loading) {
+                    return repo.text;
+                }
+                if (repo.status == 1){
+                    var icon = 'fa-chain';
+                    var color = 'text-green'
+                } else {
+                    var icon = 'fa-chain-broken';
+                    var color = 'text-red';
+                }
+                var markup = '<div class="select2-result-repository__statistics">' +
+                '<div class="select2-result-repository__forks">'+
+                '<i class="fa '+ color +' ' + icon + '"></i> ' + repo.text + 
+                '</div></div>';
+
+                return markup;
             }
         });
     }
@@ -818,9 +850,6 @@
     // 编辑表单 
     $('body').on('click','#Configuration-basic .editView .btn.save',function(e){
         saveOne(e);
-    });
-    $('body').on('click','#Configuration-basic .editView .btn.addTag',function(e){
-        DefineTag.clickAddTag(e.target);
     });
 
 
