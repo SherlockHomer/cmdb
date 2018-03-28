@@ -15,6 +15,7 @@
         // 一级资源分类
         levelOneType : '',
         code:'',
+        codeName:'',
         countType:''
     }
     // 配置DOM和temp的一一对应
@@ -30,13 +31,8 @@
     };
     // 渲染首页
     function renderITSourceReport(){
-        fetchData('ITSourceReport/report','json',null,{
+        fetchData('ITSource/getReport','json',null,{
             success:function(res){
-                $.each(res.data,function(i,per){
-                    $.each(per.details,function(y,perD){
-                        perD.code = per.code;
-                    })
-                })
                 render('ITSourceReport-template',res);
             },
             error:function(){
@@ -46,7 +42,7 @@
     }
     // 渲染统计
     function renderCount(params){
-        fetchData('ITSourceReport/count','json',params,{
+        fetchData('ITSource/getCount','json',params,{
             success:function(res){
                 render('ITSourceReport-count-template',res);
             },
@@ -68,7 +64,7 @@
             Record.levelOneType = params[0];
             Record.code = params[1];
             crumb.push({
-                text: Record.code
+                text: Record.codeName || Record.code
             });
             // 加载统计情况
             renderCount({
@@ -84,10 +80,11 @@
     };
 
     $('body').on('click','.ITSourceBox .info-box',function(){
-        var name = $(this).find('.info-box-number').attr('data-name');
+        var ciCode = $(this).find('.info-box-number').attr('data-ciCode');
+        Record.codeName = $(this).find('.info-box-number').attr('data-name');
         var levelOneType = $(this).parents('.ITSourceBox').eq(0).attr('data-levelOneType');
 
-        Router.addHash(levelOneType+'/'+name);
+        Router.addHash(levelOneType+'/'+ciCode);
     });
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');
@@ -98,5 +95,7 @@
     var ITSourceReport = {};
     ITSourceReport.renderModule = renderModule;
     ITSourceReport.getAllView = getAllView ;
+    ITSourceReport.Record = Record ;
+
     return ITSourceReport;
 }));

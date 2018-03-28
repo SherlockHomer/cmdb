@@ -378,7 +378,7 @@
             };
             crumb.push({
                 url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code ,
-                text:Record.code
+                text: window.ITSourceReport && ITSourceReport.Record.codeName || Record.code
             });
             crumb.push({
                 url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code + '/' + Record.countType + '/'  + hashes.classifyInCount,

@@ -3,18 +3,18 @@
         <!-- Left col -->
         {{#each data}}
             <section class="col-lg-6 col-sm-6">
-                <div class="box box-solid ITSourceBox" data-levelOneType="{{this.code}}">
+                <div class="box box-solid ITSourceBox" data-levelOneType="{{this.ciCode}}">
                    <div class="box-header">
-                        <i class="iconfont {{deviceIcon this.code}}"></i>
+                        <i class="iconfont {{deviceIcon this.ciCode}}"></i>
 
-                        <h3 class="box-title">{{deviceText this.code}}</h3>
+                        <h3 class="box-title">{{deviceText this.ciCode}}</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         {{#each this.details}}
                             <div class="info-box">
-                                <span class="info-box-icon"><i class="iconfont {{deviceIcon code}}"></i></span>
-                                <span class="info-box-number text-aqua" data-name="{{typeName}}">{{typeName}}({{sum}})
+                                <span class="info-box-icon"><i class="iconfont {{deviceIcon ciCode}}"></i></span>
+                                <span class="info-box-number text-aqua" data-ciCode="{{ciCode}}" data-name="{{typeName}}">{{typeName}}({{sum}})
                                 </span>
                             </div>
                         {{/each}}
