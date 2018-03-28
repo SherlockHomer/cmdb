@@ -3,7 +3,7 @@
     "rows": [{
         "id": 1,
         "taskName": "中间件发现策略1",
-        "scanType":"server,database",
+        "scanType":"device",
         "scheName":["每天九点","下午三点"],
         "schePlanId":"2,3,4",
         "ipRange":[{

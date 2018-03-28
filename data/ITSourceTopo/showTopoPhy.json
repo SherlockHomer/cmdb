@@ -3,47 +3,47 @@
         "nodeDataArray":[{
             "key":"Server1",
             "id":1,
-            "code":"server",
+            "code":"DC_HOST",
             "name": "Server1"
         },{
             "key":"Server2",
             "id":1,
-            "code":"server",
+            "code":"DC_HOST",
             "name": "Server2"
         },{
             "key":"Server3",
             "id":1,
-            "code":"server",
+            "code":"DC_HOST",
             "name": "Server3"
         },{
             "key":"Server4",
             "id":1,
-            "code":"server",
+            "code":"DC_HOST",
             "name": "Server4"
         },{
             "key":"Server5",
             "id":1,
-            "code":"server",
+            "code":"DC_HOST",
             "name": "Server5"
         },{
             "key":"Switch1",
             "id":1,
-            "code":"switch",
+            "code":"DC_Switch",
             "name": "Switch1"
         },{
             "key":"Switch2",
             "id":1,
-            "code":"switch",
+            "code":"DC_Switch",
             "name": "Switch2"
         },{
             "key":"Switch3",
             "id":1,
-            "code":"switch",
+            "code":"DC_Switch",
             "name": "Switch3"
         },{
             "key":"Switch4",
             "id":1,
-            "code":"switch",
+            "code":"DC_Switch",
             "name": "Switch4"
         }],
         "linkDataArray":[{

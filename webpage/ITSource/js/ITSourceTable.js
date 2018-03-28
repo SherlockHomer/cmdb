@@ -13,9 +13,9 @@
     var Record = {
         tagName:[],
         // 默认资源是服务器
-        code:'server',
+        code:'DC_HOST',
         // 一级资源类型，报表过来的typeCode对应哪个大分类
-        levelOneType:'server',
+        levelOneType:'DC_HOST',
         resVersion:'',
         type:'',
         manufacturer:'',
@@ -41,12 +41,12 @@
     // 有数据才有表，因为是模版
     function renderBasic(){
         render('ITSource-sourceTable-template');
-        initSourceTable('server');
-        initSourceTable('database');
-        initSourceTable('middleware');
+        initSourceTable('DC_HOST');
+        initSourceTable('DC_DBS');
+        initSourceTable('DC_MIDDSERVER');
         initSourceTable('cloud');
-        initSourceTable('network');
-        initSourceTable('application');
+        initSourceTable('DC_NETWORKDEVICE');
+        initSourceTable('DC_APPSYS');
     }
     function initSourceTable(code){
         $('#ITSource-'+code+'-table').bootstrapTable({
@@ -71,15 +71,15 @@
     function getTableSortName(code){
 
         switch (code){
-            case 'server' : {
+            case 'DC_HOST' : {
                 return 'osType';
                 break;
             }
-            case 'database' : {
+            case 'DC_DBS' : {
                 return 'ciCode';
                 break;
             }
-            case 'middleware' : {
+            case 'DC_MIDDSERVER' : {
                 return 'ciCode';
                 break;
             }
@@ -87,11 +87,11 @@
                 return 'ciCode';
                 break;
             }
-            case 'network' : {
+            case 'DC_NETWORKDEVICE' : {
                 return 'ciCode';
                 break;
             }
-            case 'application' : {
+            case 'DC_APPSYS' : {
                 return 'resName';
                 break;
             }
@@ -99,7 +99,7 @@
     }
     function getColumnsByTypeCode(code) {
         switch (code){
-            case 'server' : {
+            case 'DC_HOST' : {
                 return [{
                     checkbox:true,
                 },{
@@ -138,7 +138,7 @@
                 }]
                 break;
             }
-            case 'database' : {
+            case 'DC_DBS' : {
                 return [{
                     checkbox:true,
                 },{
@@ -177,7 +177,7 @@
                 }];
                 break;
             }
-            case 'middleware' : {
+            case 'DC_MIDDSERVER' : {
                 return [{
                     checkbox:true,
                 },{
@@ -255,7 +255,7 @@
                 }];
                 break;
             }
-            case 'network' : {
+            case 'DC_NETWORKDEVICE' : {
                 return [{
                     checkbox:true,
                 },{
@@ -294,7 +294,7 @@
                 }];
                 break;
             }
-            case 'application' : {
+            case 'DC_APPSYS' : {
                 return [{
                     checkbox:true,
                 },{
@@ -579,7 +579,7 @@
     }
     function addNewServer(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
-        Tool.renderEditView( tabId , 'ITSource-server-add-template');
+        Tool.renderEditView( tabId , 'ITSource-DC_HOST-add-template');
     };
     function defMissionStrategy(){
         var params = {from:'服务器'};
@@ -593,7 +593,7 @@
         var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
         var tagName = params.tagName || '' ;
         Tool.renderEditView(tabId,'ITSource-setTag-template',params);
-        fetchData('resource/getAllApp','json',null,{
+        fetchData('resource/getAllTags','json',null,{
             success:function(res){
                 Record.appData = res.data;
                 disableExistTag(res.data,tagName.split(','));
@@ -659,7 +659,7 @@
     }
     function ajaxSave(tableId,formId,params,btn) {
         switch(formId){
-            case 'ITSource-server-add-form':{
+            case 'ITSource-DC_HOST-add-form':{
                 var url = 'resource/addResource';
                 break;
             }
@@ -693,8 +693,8 @@
     $('body').on('click','#ITSource-sourceTable-box .toolbar .exportTable',exportTable);
     $('body').on('click','#ITSource-sourceTable-box .toolbar .exportDetail',exportDetail);
 
-    $('body').on('click','#ITSource-sourceTable-server .addNew',addNewServer);
-    $('body').on('click','#ITSource-sourceTable-server .defMissionStrategy',defMissionStrategy);
+    $('body').on('click','#ITSource-sourceTable-DC_HOST .addNew',addNewServer);
+    $('body').on('click','#ITSource-sourceTable-DC_HOST .defMissionStrategy',defMissionStrategy);
     $('body').on('click','#ITSource-sourceTable-box td .setTag',setTag);
 
     $('body').on('click','#ITSource-sourceTable-box .editView .btn.cancle',function(e){

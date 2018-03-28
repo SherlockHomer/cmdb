@@ -5,19 +5,16 @@
                 <li class="active"><a href="#Configuration-mission" role="tab" data-toggle="tab">发现任务定义</a></li>
                 <li><a href="#Configuration-SNMP" role="tab" data-toggle="tab">SNMP设备策略</a></li>
                 <li><a href="#Configuration-port" role="tab" data-toggle="tab">端口策略</a></li>
-                <li><a href="#Configuration-server" role="tab" data-toggle="tab">服务器策略</a></li>
+                <li><a href="#Configuration-DC_HOST" role="tab" data-toggle="tab">服务器策略</a></li>
                 <li><a href="#Configuration-cloud" role="tab" data-toggle="tab">云环境策略</a></li>
-                <li><a href="#Configuration-database" role="tab" data-toggle="tab">数据库策略</a></li>
-                <li><a href="#Configuration-middleware" role="tab" data-toggle="tab">中间件策略</a></li>
+                <li><a href="#Configuration-DC_DBS" role="tab" data-toggle="tab">数据库策略</a></li>
+                <li><a href="#Configuration-DC_MIDDSERVER" role="tab" data-toggle="tab">中间件策略</a></li>
             </ul>
         </div>
         <div class="box-body tab-content">
             <div role="tabpanel" class="tab-pane" id="Configuration-SNMP">
                 <div class="tableView">
                     <div id="Configuration-SNMP-table-toolbar" class="toolbar">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
-                        </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
                             <div class="btn-group" role="group">
@@ -26,7 +23,9 @@
                                 <button type="button" class="btn btn-default invertCheck">反选</button>
                             </div>
                             <label>操作：</label>
+                            <button type="button" class="btn btn-default addNew">新增</button>
                             <button type="button" class="btn btn-default delete">批量删除</button>
+
                         </div>
                         <div class="col-sm-5 col-xs-12 form-inline">
                             <div class="pull-right">
@@ -64,9 +63,6 @@
                     <div role="tabpanel" class="tab-pane" id="Configuration-portCustom">
                         <div class="tableView">
                             <div id="Configuration-portCustom-table-toolbar" class="toolbar">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-default addNew">新增</button>
-                                </div>
                                 <div class="form-group col-sm-7 col-xs-12">
                                     <label>选择：</label>
                                     <div class="btn-group" role="group">
@@ -75,6 +71,7 @@
                                         <button type="button" class="btn btn-default invertCheck">反选</button>
                                     </div>
                                     <label>操作：</label>
+                                    <button type="button" class="btn btn-default addNew">新增</button>
                                     <button type="button" class="btn btn-default delete">批量删除</button>
                                 </div>
                                 <div class="col-sm-5 col-xs-12 form-inline">
@@ -90,15 +87,11 @@
                         <div class="editView"></div>
                     </div>
                 </div>
-                
-
-                
             </div>
-            <div role="tabpanel" class="tab-pane" id="Configuration-server">
+            <div role="tabpanel" class="tab-pane" id="Configuration-DC_HOST">
                 <div class="tableView">
-                    <div id="Configuration-server-table-toolbar" class="toolbar">
+                    <div id="Configuration-DC_HOST-table-toolbar" class="toolbar">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
                         </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
@@ -108,6 +101,7 @@
                                 <button type="button" class="btn btn-default invertCheck">反选</button>
                             </div>
                             <label>操作：</label>
+                            <button type="button" class="btn btn-default addNew">新增</button>
                             <button type="button" class="btn btn-default delete">批量删除</button>
                         </div>
                         <div class="col-sm-5 col-xs-12 form-inline">
@@ -117,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    <table id="Configuration-server-table" class="table table-bordered table-hover">
+                    <table id="Configuration-DC_HOST-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
@@ -126,7 +120,6 @@
                 <div class="tableView">
                     <div id="Configuration-cloud-table-toolbar" class="toolbar">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
                         </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
@@ -136,6 +129,7 @@
                                 <button type="button" class="btn btn-default invertCheck">反选</button>
                             </div>
                             <label>操作：</label>
+                            <button type="button" class="btn btn-default addNew">新增</button>
                             <button type="button" class="btn btn-default delete">批量删除</button>
                         </div>
                         <div class="col-sm-5 col-xs-12 form-inline">
@@ -150,11 +144,10 @@
                 </div>
                 <div class="editView"></div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="Configuration-database">
+            <div role="tabpanel" class="tab-pane" id="Configuration-DC_DBS">
                 <div class="tableView">
-                    <div id="Configuration-database-table-toolbar" class="toolbar">
+                    <div id="Configuration-DC_DBS-table-toolbar" class="toolbar">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
                         </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
@@ -164,6 +157,7 @@
                                 <button type="button" class="btn btn-default invertCheck">反选</button>
                             </div>
                             <label>操作：</label>
+                            <button type="button" class="btn btn-default addNew">新增</button>
                             <button type="button" class="btn btn-default delete">批量删除</button>
                         </div>
                         <div class="col-sm-5 col-xs-12 form-inline">
@@ -173,16 +167,15 @@
                             </div>
                         </div>
                     </div>
-                    <table id="Configuration-database-table" class="table table-bordered table-hover">
+                    <table id="Configuration-DC_DBS-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="Configuration-middleware">
+            <div role="tabpanel" class="tab-pane" id="Configuration-DC_MIDDSERVER">
                 <div class="tableView">
-                    <div id="Configuration-middleware-table-toolbar" class="toolbar">
+                    <div id="Configuration-DC_MIDDSERVER-table-toolbar" class="toolbar">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
                         </div>
                         <div class="form-group col-sm-7 col-xs-12">
                             <label>选择：</label>
@@ -192,6 +185,7 @@
                                 <button type="button" class="btn btn-default invertCheck">反选</button>
                             </div>
                             <label>操作：</label>
+                            <button type="button" class="btn btn-default addNew">新增</button>
                             <button type="button" class="btn btn-default delete">批量删除</button>
                         </div>
                         <div class="col-sm-5 col-xs-12 form-inline">
@@ -201,7 +195,7 @@
                             </div>
                         </div>
                     </div>
-                    <table id="Configuration-middleware-table" class="table table-bordered table-hover">
+                    <table id="Configuration-DC_MIDDSERVER-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
@@ -373,7 +367,7 @@
 </script>
 
 
-<script type="text/x-handlebars-template" id="Configuration-server-editView-template">
+<script type="text/x-handlebars-template" id="Configuration-DC_HOST-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>服务器发现策略</a></li>
         {{#if id}}
@@ -502,7 +496,7 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-database-editView-template">
+<script type="text/x-handlebars-template" id="Configuration-DC_DBS-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>数据库发现策略</a></li>
         {{#if id}}
@@ -598,7 +592,7 @@
     </form>
 </script>
 
-<script type="text/x-handlebars-template" id="Configuration-middleware-editView-template">
+<script type="text/x-handlebars-template" id="Configuration-DC_MIDDSERVER-editView-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>中间件发现策略</a></li>
         {{#if id}}
@@ -705,15 +699,19 @@
             <input class="form-control" name="portDesc" type="text" value="{{portDesc}}">
         </div>
     </div>
-    <div class="tags form-inline form-group col-sm-12">
-        {{#each portArr}}
-        <div class="alert alert-info alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <strong class="text">{{this}}</strong>
+    <div class="form-group col-sm-12 form-horizontal">
+        <label class="col-sm-2 control-label">端口：</label>
+        <div class="col-sm-10 tags form-inline">
+            {{#each portArr}}
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong class="text">{{this}}</strong>
+            </div>
+            {{/each}}
+            <input type="number" class="form-control">
+            <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
         </div>
-        {{/each}}
-        <input type="number" class="form-control">
-        <button type="button" class="btn bg-gray-active btn-flat addTag">+</button>
+        
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

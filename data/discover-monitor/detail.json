@@ -2,22 +2,22 @@
     "data": {
         "name": "WIN-0ECQ6MI24DJ",
         "contentInfo": [{
-            "code": "server",
+            "code": "DC_HOST",
             "sum": 33
         }, {
-            "code": "database",
+            "code": "DC_DBS",
             "sum": 1284
         }, {
-            "code": "middleware",
+            "code": "DC_MIDDSERVER",
             "sum": 1001
         }, {
             "code": "cloud",
             "sum": 4
         }, {
-            "code": "network",
+            "code": "DC_NETWORKDEVICE",
             "sum": 4
         }, {
-            "code": "application",
+            "code": "DC_APPSYS",
             "sum": 1001
         }],
         "details": [{

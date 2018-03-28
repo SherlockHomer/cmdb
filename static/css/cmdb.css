@@ -17,7 +17,7 @@ ul {
     padding-top:5px;
 }
 .content-header{
-    /*padding-top: 8px;*/
+    padding-top: 8px;
 }
 .content-header>.breadcrumb{
     float: none;
@@ -96,6 +96,7 @@ ul {
 }
 .tags > * {
     margin:3px;
+    margin-left: 0;
 }
 /*可关闭标签*/
 .tags > *{

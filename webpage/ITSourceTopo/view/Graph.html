@@ -121,7 +121,8 @@
             newData['nodeDataArray'] = data.nodeDataArray;
             newData['linkDataArray'] = data.linkDataArray || [];
             $.each(data.nodeDataArray,function(i,perNode){
-                perNode.source = getStatusItem('devices', perNode.code ).image;
+                perNode.key = perNode.id;
+                perNode.source = getStatusItem('devices', perNode.ciCode ).image;
             });
             var blackRel = [];
             for (var i = newData['linkDataArray'].length - 1; i >= 0; i--) {
@@ -166,7 +167,7 @@
             var dom = $('#Graph-tool-display .list-group');
             dom.html('');
             $.each(count,function(i,perType){
-                var status = getStatusItem('devices',perType.code);
+                var status = getStatusItem('devices',perType.ciCode);
                 dom.append('<li class="list-group-item clicked">'+
                     '<i class="iconfont '+status.icon+'"></i>'+
                     '<span>'+ perType.sum +' </span>'+
@@ -254,9 +255,7 @@
                     $(go.TextBlock,{
                         font: "bold 16px Helvetica, bold Arial, sans-serif",
                         stroke: "#000" 
-                    },
-                    new go.Binding("text", "name")
-                    )
+                    },new go.Binding("text", "resName"))
                     )
 
                 );

@@ -63,22 +63,22 @@ action: dashboard/getSyncRecord
 action:  dashboard/getCategoryInfo
 {
     "data": [{
-        "code": "server",
+        "code": "DC_HOST",
         "sum": 33
     }, {
-        "code": "database",
+        "code": "DC_DBS",
         "sum": 1284
     }, {
-        "code": "middleware",
+        "code": "DC_MIDDSERVER",
         "sum": 1001
     }, {
         "code": "cloud",
         "sum": 4
     }, {
-        "code": "network",
+        "code": "DC_NETWORKDEVICE",
         "sum": 4
     }, {
-        "code": "application",
+        "code": "DC_APPSYS",
         "sum": 1001
     }],
     "success": true,
@@ -513,7 +513,7 @@ action：  discover-config/findTaskList
     "rows": [{
         "id": 1,
         "taskName": "中间件发现策略1",
-        "scanType":"server,database",
+        "scanType":"DC_HOST,DC_DBS",
         "scheName":["每天九点","下午三点"],
         "schePlanId":"2,3,4",
         "ipRange":[{
@@ -655,7 +655,7 @@ action：  discover-monitor/infoAll
     "rows": [{
         "id": 1,
         "name": "扫描任务1",
-        "content": "server,database",
+        "content": "DC_HOST,DC_DBS",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
         "startDate": "2018-01-10 09:00:00",
@@ -666,7 +666,7 @@ action：  discover-monitor/infoAll
     },{
         "id": 2,
         "name": "扫描任务1",
-        "content": "server,database",
+        "content": "DC_HOST,DC_DBS",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
         "startDate": "2018-01-10 09:00:00",
@@ -677,7 +677,7 @@ action：  discover-monitor/infoAll
     },{
         "id": 3,
         "name": "扫描任务1",
-        "content": "server,database",
+        "content": "DC_HOST,DC_DBS",
         "scheName": ["每天九点", "下午三点"],
         "schePlanId": "2,3,4",
         "startDate": "2018-01-10 09:00:00",
@@ -697,22 +697,22 @@ action：  discover-monitor/detail
     "data": {
         "name": "WIN-0ECQ6MI24DJ",
         "contentInfo": [{
-            "code": "server",
+            "code": "DC_HOST",
             "sum": 33
         }, {
-            "code": "database",
+            "code": "DC_DBS",
             "sum": 1284
         }, {
-            "code": "middleware",
+            "code": "DC_MIDDSERVER",
             "sum": 1001
         }, {
             "code": "cloud",
             "sum": 4
         }, {
-            "code": "network",
+            "code": "DC_NETWORKDEVICE",
             "sum": 4
         }, {
-            "code": "application",
+            "code": "DC_APPSYS",
             "sum": 1001
         }],
         "details": [{
@@ -791,11 +791,11 @@ action：  discover-monitor/stopScan
 
 // # IT资源信息
 //资源type  
-// {type:'server',',text:'服务器'},
-// {type:'database',',text:'数据库'},
-// {type:'middleware,text:'中间件'},
+// {type:'DC_HOST',',text:'服务器'},
+// {type:'DC_DBS',',text:'数据库'},
+// {type:'DC_MIDDSERVER,text:'中间件'},
 // {type:'cloud,text:'Vmware云环境'},
-// {type:'network,text:'网络设备'},
+// {type:'DC_NETWORKDEVICE,text:'网络设备'},
 // {type:'app,text:'应用程序'}
 
 action：  resource/getTags
@@ -822,7 +822,7 @@ action：  resource/findResourceList
     "type":"",
     "manufacturer":"",
     "tagName":[],
-    "code":"server"
+    "code":"DC_HOST"
 }
 {
     "total": 180,
@@ -961,7 +961,7 @@ action：  resource/getResourceDetail
 }
 
 // 获取应用系统，可能作为标签
-action：  resource/getAllApp
+action：  resource/getAllApp=>getAllTags
 {
 
 }
@@ -983,7 +983,8 @@ action：  resource/getAllApp
     "msg": "成功"
 }
 
-action：  resource/getAppUsed
+// 
+action：  resource/getTagsUsed==>none
 {
 
 }
@@ -1014,11 +1015,11 @@ action：  resource/setTag
 
 // IT 资源报表
 //资源type  
-// {type:'server',',text:'服务器'},
-// {type:'database',',text:'数据库'},
-// {type:'middleware,text:'中间件'},
+// {type:'DC_HOST',',text:'服务器'},
+// {type:'DC_DBS',',text:'数据库'},
+// {type:'DC_MIDDSERVER,text:'中间件'},
 // {type:'cloud,text:'Vmware云环境'},
-// {type:'network,text:'网络设备'},
+// {type:'DC_NETWORKDEVICE,text:'网络设备'},
 // {type:'app,text:'应用程序'}
 action：  ITSourceReport/report
 {
@@ -1026,72 +1027,87 @@ action：  ITSourceReport/report
 }
 {
     "data": [{
-        "code": "network",
+        "ciCode": "DC_NETWORKDEVICE",
         "sum": 12,
         "details":[{
             "typeName":"SNMP设备",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"10"
         },{
             "typeName":"其他设备",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"2"
         }]
     }, {
-        "code": "database",
+        "ciCode": "DC_DBS",
         "sum": 18,
         "details":[{
             "typeName":"Oracle",
+            "ciCode":"DC_DBS",
             "sum":"3"
         },{
             "typeName":"Mysql",
+            "ciCode":"DC_DBS",
             "sum":"4"
         },{
             "typeName":"DB2",
+            "ciCode":"DC_DBS",
             "sum":"5"
         },{
             "typeName":"SQL Server",
+            "ciCode":"DC_DBS",
             "sum":"6"
         }]
     }, {
-        "code": "middleware",
+        "ciCode": "DC_MIDDSERVER",
         "sum": 18,
         "details":[{
             "typeName":"Tomcat",
+            "ciCode":"DC_MIDDSERVER",
             "sum":"3"
         },{
             "typeName":"WebLogic",
+            "ciCode":"DC_MIDDSERVER",
             "sum":"6"
         },{
             "typeName":"Websphere",
+            "ciCode":"DC_MIDDSERVER",
             "sum":"9"
         }]
     }, {
-        "code": "cloud",
+        "ciCode": "cloud",
         "sum": 12,
         "details":[{
             "typeName":"vmware云环境",
+            "ciCode":"cloud",
             "sum":"12"
         }]
     }, {
-        "code": "network",
+        "ciCode": "DC_NETWORKDEVICE",
         "sum": 52,
         "details":[{
             "typeName":"Window",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"30"
         },{
             "typeName":"Linux",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"2"
         },{
             "typeName":"AIX",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"10"
         },{
             "typeName":"HP-UX",
+            "ciCode":"DC_NETWORKDEVICE",
             "sum":"10"
         }]
     }, {
-        "code": "application",
+        "ciCode": "DC_APPSYS",
         "sum": 1001,
         "details":[{
             "typeName":"应用程序",
+            "ciCode":"DC_APPSYS",
             "sum":"12"
         }]
     }],
@@ -1103,16 +1119,19 @@ action：  ITSourceReport/report
 action：  ITSourceReport/count
 {
     "typeName":"window"
+    "ciCode":"DC_HOST",
 }
 {
     "data": [{
         "countType": 1,
         "details": [{
             "typeName": "HP",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 1
         }, {
             "typeName": "Dell",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 1
         }]
@@ -1120,14 +1139,17 @@ action：  ITSourceReport/count
         "countType": 2,
         "details": [{
             "typeName": "Windows Server 2008 SP2",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 2
         }, {
             "typeName": "Windows Server 2012 SP1",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 2
         }, {
             "typeName": "Windows Server 2012 SP2",
+            "ciCode":"DC_HOST",
             "sum": 20,
             "countType": 2
         }]
@@ -1135,18 +1157,22 @@ action：  ITSourceReport/count
         "countType": 3,
         "details": [{
             "typeName": "应用服务器",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 3
         }, {
             "typeName": "数据库服务器",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 3
         }, {
             "typeName": "灾备服务器",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 3
         }, {
             "typeName": "邮件服务器",
+            "ciCode":"DC_HOST",
             "sum": "5",
             "countType": 3
         }]
@@ -1157,11 +1183,11 @@ action：  ITSourceReport/count
 
 // IT资源拓扑图
 //资源type  
-// {type:'server',',text:'服务器'},
-// {type:'database',',text:'数据库'},
-// {type:'middleware,text:'中间件'},
+// {type:'DC_HOST',',text:'服务器'},
+// {type:'DC_DBS',',text:'数据库'},
+// {type:'DC_MIDDSERVER,text:'中间件'},
 // {type:'cloud,text:'Vmware云环境'},
-// {type:'network,text:'网络设备'},
+// {type:'DC_NETWORKDEVICE,text:'网络设备'},
 // {type:'app,text:'应用程序'}
 // 
 // 关系图 ： 0  ；部署关系图：1 ；通信关系图 ：2  ；物理连接关系图 ： 3
@@ -1169,7 +1195,7 @@ action：  ITSourceTopo/showTopo
 {
     // 默认查所有存在发现内容的应用系统中的第一
     "app":1,
-    "relation": 0
+    "topoType": 0
 }
 {
     "data": {
@@ -1180,24 +1206,24 @@ action：  ITSourceTopo/showTopo
             "parent":456,
             "id":1,
             // 资源 type
-            "code":"server",
+            "code":"DC_HOST",
             // 节点的名字
             "name": "BMC Patrol Agent 10.7.00"
         }],
         "count":[{
-            "code":"server",
+            "code":"DC_HOST",
             "sum":3
         },{
-            "code":"database",
+            "code":"DC_DBS",
             "sum":1
         },{
             "code":"cloud",
             "sum":7
         },{
-            "code":"middleware",
+            "code":"DC_MIDDSERVER",
             "sum":6
         },{
-            "code":"application",
+            "code":"DC_APPSYS",
             "sum":1
         }]
     },

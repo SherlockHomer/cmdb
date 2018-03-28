@@ -165,8 +165,8 @@
         });
     }
     function initServerTable(){
-        $('#Configuration-server-table').bootstrapTable({
-            toolbarId:'Configuration-server-table-toolbar',
+        $('#Configuration-DC_HOST-table').bootstrapTable({
+            toolbarId:'Configuration-DC_HOST-table-toolbar',
             method:'post',
             url:ConfirmUrl('discover-config/findServerList'),
             checkbox:true,
@@ -259,8 +259,8 @@
         });
     }
     function initDBTable(){
-        $('#Configuration-database-table').bootstrapTable({
-            toolbarId:'Configuration-database-table-toolbar',
+        $('#Configuration-DC_DBS-table').bootstrapTable({
+            toolbarId:'Configuration-DC_DBS-table-toolbar',
             method:'post',
             url:ConfirmUrl('discover-config/findDatabaseList'),
             checkbox:true,
@@ -314,8 +314,8 @@
         });
     }
     function initMidwareTable(){
-        $('#Configuration-middleware-table').bootstrapTable({
-            toolbarId:'Configuration-middleware-table-toolbar',
+        $('#Configuration-DC_MIDDSERVER-table').bootstrapTable({
+            toolbarId:'Configuration-DC_MIDDSERVER-table-toolbar',
             method:'post',
             url:ConfirmUrl('discover-config/findMiddlewareList'),
             checkbox:true,
@@ -391,7 +391,7 @@
                     var discoveryTypes = value.split(',');
                     var discoveryTexts = [];
                     $.each(discoveryTypes,function(i,perT){
-                        discoveryTexts.push(getStatusItem('devices',perT).text);
+                        discoveryTexts.push(getStatusItem('discoContent',perT).text);
                     });
                     return discoveryTexts.join('，');
                 }
@@ -554,7 +554,7 @@
                         params.type = 2;
                         break;
                     }
-                    case 'Configuration-server-table':{
+                    case 'Configuration-DC_HOST-table':{
                         var url = 'discover-config/delServer';
                         break;
                     }
@@ -562,11 +562,11 @@
                         var url = 'discover-config/delCloud';
                         break;
                     }
-                    case 'Configuration-database-table':{
+                    case 'Configuration-DC_DBS-table':{
                         var url = 'discover-config/delDatabase';
                         break;
                     }
-                    case 'Configuration-middleware-table':{
+                    case 'Configuration-DC_MIDDSERVER-table':{
                         var url = 'discover-config/delMiddleware';
                         break;
                     }
@@ -684,7 +684,7 @@
                 params.type = 2;
                 break;
             }
-            case 'Configuration-server-table':{
+            case 'Configuration-DC_HOST-table':{
                 var url = 'discover-config/saveServer';
                 break;
             }
@@ -692,12 +692,12 @@
                 var url = 'discover-config/saveCloud';
                 break;
             }
-            case 'Configuration-database-table':{
+            case 'Configuration-DC_DBS-table':{
                 var url = 'discover-config/saveDatabase';
                 params.dbName = $(btn).parents('form').eq(0).find('[name="dbName"]:visible').val();
                 break;
             }
-            case 'Configuration-middleware-table':{
+            case 'Configuration-DC_MIDDSERVER-table':{
                 var url = 'discover-config/saveMiddleware';
                 break;
             }

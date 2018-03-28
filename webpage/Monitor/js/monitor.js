@@ -29,9 +29,9 @@
     };
     function renderBasic() {
         render('Monitor-basic-template');
-        initMonitorTable('Monitor-ing-table',0);
-        initMonitorTable('Monitor-done-table',1);
-        initMonitorTable('Monitor-planTo-table',2);
+        initMonitorTable('Monitor-ing-table',1);
+        initMonitorTable('Monitor-done-table',2);
+        initMonitorTable('Monitor-planTo-table',0);
         initMonitorTable('Monitor-all-table','');
 
     }
@@ -69,7 +69,7 @@
                     var discoveryTypes = value.split(',');
                     var discoveryTexts = [];
                     $.each(discoveryTypes,function(i,perT){
-                        discoveryTexts.push(getStatusItem('devices',perT).text);
+                        discoveryTexts.push(getStatusItem('discoContent',perT).text);
                     });
                     return discoveryTexts.join('，');
                 }
@@ -101,7 +101,7 @@
                     if ( row.status == 1 ) {
                         active = 'active';
                     }
-                    return '<div class="progress detail" data-id="'+row.id+'"><div class="progress-bar progress-bar-success progress-bar-striped '+active+'" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
+                    return '<div class="progress detail" data-id="'+row.id+'" role="button"><div class="progress-bar progress-bar-success progress-bar-striped '+active+'" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
                 }
             },{
                 title:'操作',

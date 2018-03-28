@@ -4,19 +4,19 @@
         "id": 1,
         "name": "SNMP发现策略",
         "port": 161,
-        "version":"v1/v2",
+        "version":"2",
         "publicName":"public"
     },{
         "id": 2,
         "name": "SNMP发现策略",
         "port": 164,
-        "version":"v3",
+        "version":"3",
         "publicName":"public"
     },{
         "id": 3,
         "name": "SNMP发现策略",
         "port": 162,
-        "version":"v3",
+        "version":"3",
         "publicName":"public"
     }]
 }

@@ -70,6 +70,9 @@
         $('#index-content-header').html('');
         var hashes = ( location.hash.slice(1) || '/' ).split('/'); 
         // 首页
+        if ( hashes[1] ) {
+            $('body .main-sidebar .sidebar-menu li a[href="#/'+hashes[1]+'"]').parent().addClass('active').siblings().removeClass('active');
+        }
         if ( !hashes[1] ) {
             loadModule('Dashboard' , [] );
         } else if ( hashes[1] == 'ITSourceReport' && hashes [3] && hashes [4]){
@@ -107,7 +110,7 @@
             } else {
                 loadModule( 'ITSourceTable' , {
                     currentModule:hashes[1],
-                    levelOneType:hashes[2] || 'server',
+                    levelOneType:hashes[2] || 'DC_HOST',
                     belongMission:hashes[3]
                 });
             }

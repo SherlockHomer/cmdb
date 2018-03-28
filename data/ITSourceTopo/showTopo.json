@@ -1,275 +1,254 @@
 {
+
     "data": {
+        "type": 1,
         "nodeDataArray": [{
-            "key": "ServiceJet",
             "id": 1,
-            "code": "server",
-            "name": "ServiceJet"
+            "ciCode": "DC_HOST",
+            "resName": "ServiceJet"
         }, {
-            "key": "AutoWeb",
-            "id": 1,
-            "code": "application",
-            "name": "AutoWeb"
+            "id": 2,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoWeb"
         }, {
-            "key": "AutoServer",
-            "id": 1,
-            "code": "application",
-            "name": "AutoServer"
+            "id": 3,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoServer"
         }, {
-            "key": "LoadBalance",
-            "id": 1,
-            "code": "application",
-            "name": "LoadBalance"
+            "id": 4,
+            "ciCode": "DC_APPComp",
+            "resName": "LoadBalance"
         }, {
-            "key": "Taskmanage",
-            "id": 1,
-            "code": "application",
-            "name": "Taskmanage"
+            "id": 5,
+            "ciCode": "DC_APPComp",
+            "resName": "Taskmanage"
         }, {
-            "key": "AutoServer2",
-            "id": 1,
-            "code": "application",
-            "name": "AutoServer2"
+            "id": 6,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoServer2"
         }, {
-            "key": "LoadBalance2",
-            "id": 1,
-            "code": "application",
-            "name": "LoadBalance2"
+            "id": 7,
+            "ciCode": "DC_APPComp",
+            "resName": "LoadBalance2"
         }, {
-            "key": "tomcat",
-            "id": 1,
-            "code": "server",
-            "name": "tomcat"
+            "id": 8,
+            "ciCode": "DC_HOST",
+            "resName": "tomcat"
         }, {
-            "key": "集群1",
-            "id": 1,
-            "code": "middleware",
-            "name": "集群1"
+            "id": 9,
+            "ciCode": "DC_MIDDSERVER",
+            "resName": "集群1"
         }, {
-            "key": "Orcl",
-            "id": 1,
-            "code": "middleware",
-            "name": "Orcl"
+            "id": 10,
+            "ciCode": "DC_MIDDSERVER",
+            "resName": "Orcl"
         }, {
-            "key": "tomcat1",
-            "id": 1,
-            "code": "server",
-            "name": "tomcat1"
+            "id": 11,
+            "ciCode": "DC_HOST",
+            "resName": "tomcat2"
         }, {
-            "key": "vm3",
-            "id": 1,
-            "code": "server",
-            "name": "vm3"
+            "id": 12,
+            "ciCode": "DC_HOST",
+            "resName": "vm3"
         }, {
-            "key": "Oracle Server1",
-            "id": 1,
-            "code": "server",
-            "name": "Oracle Server1"
+            "id": 13,
+            "ciCode": "DC_HOST",
+            "resName": "Oracle Server1"
         }, {
-            "key": "Oracle Server2",
-            "id": 1,
-            "code": "server",
-            "name": "Oracle Server2"
+            "id": 14,
+            "ciCode": "DC_HOST",
+            "resName": "Oracle Server2"
         }, {
-            "key": "Server1",
-            "id": 1,
-            "code": "server",
-            "name": "Server1"
+            "id": 15,
+            "ciCode": "DC_HOST",
+            "resName": "Server1"
         }, {
-            "key": "Server2",
-            "id": 1,
-            "code": "server",
-            "name": "Server2"
+            "id": 16,
+            "ciCode": "DC_HOST",
+            "resName": "Server2"
         }, {
-            "key": "Server3",
-            "id": 1,
-            "code": "server",
-            "name": "Server3"
+            "id": 17,
+            "ciCode": "DC_HOST",
+            "resName": "Server3"
         }, {
-            "key": "Server4",
-            "id": 1,
-            "code": "server",
-            "name": "Server4"
+            "id": 18,
+            "ciCode": "DC_HOST",
+            "resName": "Server4"
         }, {
-            "key": "Server5",
-            "id": 1,
-            "code": "server",
-            "name": "Server5"
+            "id": 19,
+            "ciCode": "DC_HOST",
+            "resName": "Server5"
         }, {
-            "key": "Switch1",
-            "id": 1,
-            "code": "switch",
-            "name": "Switch1"
+            "id": 20,
+            "ciCode": "DC_Switch",
+            "resName": "Switch1"
         }, {
-            "key": "Switch2",
-            "id": 1,
-            "code": "switch",
-            "name": "Switch2"
+            "id": 21,
+            "ciCode": "DC_Switch",
+            "resName": "Switch2"
         }, {
-            "key": "Switch3",
-            "id": 1,
-            "code": "switch",
-            "name": "Switch3"
+            "id": 22,
+            "ciCode": "DC_Switch",
+            "resName": "Switch3"
         }, {
-            "key": "Switch4",
-            "id": 1,
-            "code": "switch",
-            "name": "Switch4"
+            "id": 23,
+            "ciCode": "DC_Switch",
+            "resName": "Switch4"
         }],
         "linkDataArray": [{
-            "from": "ServiceJet",
-            "to": "AutoWeb"
+            "from": "1",
+            "to": "2"
         }, {
-            "from": "ServiceJet",
-            "to": "AutoServer"
+            "from": "1",
+            "to": "3"
         }, {
-            "from": "ServiceJet",
-            "to": "LoadBalance"
+            "from": "1",
+            "to": "4"
         }, {
-            "from": "ServiceJet",
-            "to": "Taskmanage"
+            "from": "1",
+            "to": "5"
         }, {
-            "from": "ServiceJet",
-            "to": "AutoServer2"
+            "from": "1",
+            "to": "6"
         }, {
-            "from": "ServiceJet",
-            "to": "LoadBalance2"
+            "from": "1",
+            "to": "7"
         }, {
-            "from": "LoadBalance2",
-            "to": "LoadBalance",
+            "from": "7",
+            "to": "4",
             "relation": "black"
         }, {
-            "from": "AutoWeb",
-            "to": "tomcat"
+            "from": "2",
+            "to": "8"
         }, {
-            "from": "AutoWeb",
-            "to": "Taskmanage",
+            "from": "2",
+            "to": "5",
             "relation": "black"
         }, {
-            "from": "AutoServer",
-            "to": "tomcat"
+            "from": "3",
+            "to": "8"
         }, {
-            "from": "AutoServer",
-            "to": "LoadBalance",
+            "from": "3",
+            "to": "4",
             "relation": "black"
         }, {
-            "from": "Taskmanage",
-            "to": "LoadBalance",
+            "from": "5",
+            "to": "4",
             "relation": "black"
         }, {
-            "from": "AutoServer2",
-            "to": "LoadBalance2",
+            "from": "6",
+            "to": "7",
             "relation": "black"
         }, {
-            "from": "tomcat",
-            "to": "集群1",
+            "from": "8",
+            "to": "9",
             "relation": "green"
         }, {
-            "from": "LoadBalance",
-            "to": "集群1",
+            "from": "4",
+            "to": "9",
             "relation": "green"
         }, {
-            "from": "Taskmanage",
-            "to": "集群1",
+            "from": "5",
+            "to": "9",
             "relation": "green"
         }, {
-            "from": "Taskmanage",
-            "to": "Orcl",
+            "from": "5",
+            "to": "10",
             "relation": "black"
         }, {
-            "from": "AutoServer2",
-            "to": "tomcat1"
+            "from": "6",
+            "to": "11"
         }, {
-            "from": "LoadBalance2",
-            "to": "vm3",
+            "from": "7",
+            "to": "12",
             "relation": "green"
         }, {
-            "from": "tomcat1",
-            "to": "vm3",
+            "from": "11",
+            "to": "12",
             "relation": "green"
         }, {
-            "from": "Orcl",
-            "to": "Oracle Server1",
+            "from": "10",
+            "to": "13",
             "relation": "orange"
         }, {
-            "from": "Orcl",
-            "to": "Oracle Server2",
+            "from": "10",
+            "to": "14",
             "relation": "orange"
         }, {
-            "from": "Server1",
-            "to": "Switch1",
+            "from": "15",
+            "to": "20",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Server2",
-            "to": "Switch1",
+            "from": "16",
+            "to": "20",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Server3",
-            "to": "Switch2",
+            "from": "17",
+            "to": "21",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Server4",
-            "to": "Switch2",
+            "from": "18",
+            "to": "21",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Server5",
-            "to": "Switch3",
+            "from": "19",
+            "to": "22",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Switch1",
-            "to": "Switch4",
+            "from": "20",
+            "to": "23",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Switch2",
-            "to": "Switch4",
+            "from": "21",
+            "to": "23",
             "relation": "black",
             "visible": false
         }, {
-            "from": "Switch3",
-            "to": "Switch4",
+            "from": "22",
+            "to": "23",
             "relation": "black",
             "visible": false
         }, {
-            "from": "集群1",
-            "to": "Server1",
+            "from": "9",
+            "to": "15",
             "relation": "orange"
         }, {
-            "from": "集群1",
-            "to": "Server2",
+            "from": "9",
+            "to": "16",
             "relation": "orange"
         }, {
-            "from": "Oracle Server1",
-            "to": "Server3",
+            "from": "13",
+            "to": "17",
             "relation": "green"
         }, {
-            "from": "Oracle Server2",
-            "to": "Server4",
+            "from": "14",
+            "to": "18",
             "relation": "green"
         }, {
-            "from": "vm3",
-            "to": "Server5",
+            "from": "12",
+            "to": "19",
             "relation": "yellow"
         }],
         "count": [{
-            "code": "server",
+            "ciCode": "DC_HOST",
             "sum": 3
         }, {
-            "code": "database",
+            "ciCode": "DC_DBS",
             "sum": 1
         }, {
-            "code": "cloud",
+            "ciCode": "cloud",
             "sum": 7
         }, {
-            "code": "middleware",
+            "ciCode": "DC_MIDDSERVER",
             "sum": 6
         }, {
-            "code": "application",
+            "ciCode": "DC_APPComp",
             "sum": 1
         }]
     },
