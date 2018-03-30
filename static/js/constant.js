@@ -45,28 +45,32 @@
     {type:'DC_Redis',icon:'icon-database',text:'Redis',image:'static/image/device/database.png'},
 
 
-    {type:'DC_VIRTUALRESOURCE',icon:'icon-visual',text:'虚拟资源',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VisualDC',icon:'icon-visual',text:'虚拟数据中心',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_OpenstackSyst',icon:'icon-visual',text:'Openstack系统',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_AvailableZone',icon:'icon-visual',text:'可用域',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_ResDomain',icon:'icon-visual',text:'资源域',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualManager',icon:'icon-visual',text:'虚拟化管理器',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualTemplate',icon:'icon-visual',text:'虚拟机模板',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VM',icon:'icon-visual',text:'虚拟机',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_Project',icon:'icon-visual',text:'项目',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_User',icon:'icon-visual',text:'用户',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_ComputePlan',icon:'icon-visual',text:'计算方案',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_Image',icon:'icon-visual',text:'镜像',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_Volume',icon:'icon-visual',text:'卷',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualNetwork',icon:'icon-visual',text:'虚拟网络',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_FloatingIP',icon:'icon-visual',text:'浮动IP',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VLAN',icon:'icon-visual',text:'VLAN',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_SecurtityGROUP',icon:'icon-visual',text:'安全组',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_Docker',icon:'icon-visual',text:'容器',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VIRTUALRESOURCE',icon:'icon-virtualDevice',text:'虚拟资源',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VisualDC',icon:'icon-information',text:'虚拟数据中心',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_OpenstackSyst',icon:'icon-virtualDevice',text:'Openstack系统',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_AvailableZone',icon:'icon-virtualDevice',text:'可用域',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_ResDomain',icon:'icon-virtualDevice',text:'资源域',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VirtualManager',icon:'icon-virtualDevice',text:'虚拟化管理器',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VirtualTemplate',icon:'icon-virtualDevice',text:'虚拟机模板',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VM',icon:'icon-virtualDevice',text:'虚拟机',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_Project',icon:'icon-virtualDevice',text:'项目',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_User',icon:'fa-user',text:'用户',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_ComputePlan',icon:'icon-virtualDevice',text:'计算方案',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_Image',icon:'icon-virtualDevice',text:'镜像',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_Volume',icon:'icon-virtualDevice',text:'卷',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VirtualNetwork',icon:'icon-networkDevice',text:'虚拟网络',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_FloatingIP',icon:'icon-virtualDevice',text:'浮动IP',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VLAN',icon:'icon-virtualDevice',text:'VLAN',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_SecurtityGROUP',icon:'icon-virtualDevice',text:'安全组',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_Docker',icon:'icon-virtualDevice',text:'容器',image:'static/image/device/unknownDevice.png'},
 
 
     {type:'DC_HOST',icon:'icon-host',text:'主机',image:'static/image/device/host.png'},
     {type:'DC_Server',icon:'icon-host',text:'服务器',image:'static/image/device/host.png'},
+    {type:'DC_Windows',icon:'fa-windows',text:'Windows',image:'static/image/device/host.png'},
+    {type:'DC_Linux',icon:'fa-linux',text:'Linux',image:'static/image/device/host.png'},
+    {type:'DC_Unix',icon:'icon-host',text:'Unix',image:'static/image/device/host.png'},
+    {type:'DC_Aix',icon:'icon-host',text:'Aix',image:'static/image/device/host.png'},
 
 
     {type:'DC_STORAGE',icon:'icon-storage',text:'存储',image:'static/image/device/storage.png'},
@@ -92,8 +96,9 @@
 
 
     // 离散未分资源
+    {type:'other',icon:'icon-unknownDevice',text:'其它',image:'static/image/device/unknownDevice.png'},
     {type:'port',icon:'icon-port',text:'端口',image:'static/image/device/unknownDevice.png'},
-    {type:'cloud',icon:'icon-cloud',text:'云环境',image:'static/image/device/cloud.png'},
+    {type:'DC_CLOUD',icon:'icon-cloud',text:'云环境',image:'static/image/device/cloud.png'},
     {type:'device',icon:'icon-device',text:'物理设备',image:'static/image/device/unknownDevice.png'}
     
     ];
@@ -137,6 +142,16 @@
     {type:3,text:'Unix'},
     {type:4,text:'AIX'}
     ];
+    Constant.relation = [
+    {type:1,text:'连接',color:'green',hex:'#00a65a'},
+    {type:2,text:'虚拟化',color:'black',hex:'#000'},
+    {type:3,text:'集群',color:'orange',hex:'#f39c12'},
+    {type:4,text:'主备',color:'yellow',hex:'yellow'},
+    {type:5,text:'使用',color:'blue',hex:'#00c0ef'},
+    {type:6,text:'运行于',color:'blue',hex:'#00c0ef'},
+    {type:7,text:'依赖',color:'blue',hex:'#00c0ef'},
+    {type:8,text:'调用',color:'blue',hex:'#00c0ef'}
+    ]
     function getStatusItem(itemsName,status,def){
         var items = Constant[itemsName];
         var k = -1;

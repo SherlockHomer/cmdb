@@ -83,7 +83,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -121,7 +121,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">定义端口</span>'
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="定义端口"><i class="fa-edit"></i></span>'
                 }
             }]
         });
@@ -159,7 +159,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -214,7 +214,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -253,7 +253,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -308,7 +308,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -355,7 +355,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -417,7 +417,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua scan operator" role="button" data-id="'+row.id+'">启动扫描</span>'+'<span class="form-control-static text-aqua edit operator" role="button" data-id="'+row.id+'">修改</span>'+'<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-aqua scan operator" role="button" data-id="'+row.id+'" title="启动扫描"><i class="fa-play"></i></span>'+'<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -470,7 +470,7 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="form-control-static text-aqua delete operator" role="button" data-id="'+row.id+'">删除</span>';
+                    return '<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -720,7 +720,7 @@
 
     function collectPortTags(tabId){
         var params = {};
-        params.ports = DefineTag.collectPortTags(tabId).ports;
+        params.ports = DefineTag.collectPortTags(tabId).tags;
         params.portDesc = $('#'+tabId).find('.editView [name="portDesc"]').val();
         params.id = $('#'+tabId).find('.editView [name="id"]').val();
         return params;
@@ -783,6 +783,10 @@
             ajax:{
                 url:ConfirmUrl('discover-config/getAgents'),
                 dataType: 'json',
+                type:'post',
+                data: function (params) {
+                    return null;
+                },
                 processResults: function (data, params) {
                     return {
                         results:data.data
@@ -817,7 +821,7 @@
         if ( !sel.val() ){
             return;
         }
-        var params = {ids:[sel.val()]}
+        var params = {ids:[sel.val()].join(',')}
         fetchData('discover-config/addAgent','json',params,{
             success:function(res){
                 if (res.success) {

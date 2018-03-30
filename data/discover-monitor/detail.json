@@ -11,7 +11,7 @@
             "code": "DC_MIDDSERVER",
             "sum": 1001
         }, {
-            "code": "cloud",
+            "code": "DC_CLOUD",
             "sum": 4
         }, {
             "code": "DC_NETWORKDEVICE",

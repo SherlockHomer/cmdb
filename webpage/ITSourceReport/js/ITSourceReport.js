@@ -31,8 +31,15 @@
     };
     // 渲染首页
     function renderITSourceReport(){
-        fetchData('ITSource/getReport','json',null,{
+        fetchData('resource/getReport','json',null,{
             success:function(res){
+                if (res.success) {
+                    res.section = [];
+                    var sectionLen = Math.round(res.data.length/2);
+                    for (var i = 0; i < res.data.length; i+=sectionLen) {
+                        res.section.push( res.data.slice(i , i + sectionLen ) );
+                    };
+                };
                 render('ITSourceReport-template',res);
             },
             error:function(){
@@ -42,7 +49,7 @@
     }
     // 渲染统计
     function renderCount(params){
-        fetchData('ITSource/getCount','json',params,{
+        fetchData('resource/getCount','json',params,{
             success:function(res){
                 render('ITSourceReport-count-template',res);
             },

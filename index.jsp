@@ -23,12 +23,12 @@
     <link rel="stylesheet" href="static/css/cmdb.css">
     <script>
         // 前后端分离
-        window.UrlConfig = 'frontEnd';
+        // window.UrlConfig = 'frontEnd';
     </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed sidebar-collapse">
+<body class="hold-transition skin-blue sidebar-mini fixed">
 <div class="wrapper">
 
     <header class="main-header">
@@ -45,7 +45,7 @@
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse" style="display: none !important">
                 <ul class="nav navbar-nav">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
@@ -153,7 +153,7 @@
                 <li><a href="#/ITSource"><i class="iconfont icon-information"></i> <span>IT资源信息</span></a></li>
                 <li><a href="#/ITSourceTopo"><i class="iconfont icon-topology"></i> <span>IT资源拓扑图</span></a></li>
                 <li><a href="#/ITSourceReport"><i class="iconfont icon-report"></i> <span>IT资源报表</span></a></li>
-                <li><a href="http://localhost:8080/CMDB/sysManager.html"><i class="iconfont icon-config"></i> <span>系统管理</span></a></li>
+                <li class="hide"><a href="http://localhost:8080/CMDB/sysManager.html"><i class="iconfont icon-config"></i> <span>系统管理</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -408,6 +408,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">{{title}}</h4>
                 </div>
+                {{#if body}}
+                <div class="modal-body">
+                    {{SafeString body}}
+                </div>
+                {{/if}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary confirm">确认</button>

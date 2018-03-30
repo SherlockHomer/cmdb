@@ -13,26 +13,6 @@
             "sum": "2"
         }]
     }, {
-        "ciCode": "DC_DBS",
-        "sum": 18,
-        "details": [{
-            "ciCode": "DC_DB2",
-            "typeName": "Oracle",
-            "sum": "3"
-        }, {
-            "ciCode": "DC_Informix",
-            "typeName": "Mysql",
-            "sum": "4"
-        }, {
-            "ciCode": "DC_DB2",
-            "typeName": "DB2",
-            "sum": "5"
-        }, {
-            "ciCode": "DC_SQLServer",
-            "typeName": "SQL Server",
-            "sum": "6"
-        }]
-    }, {
         "ciCode": "DC_MIDDSERVER",
         "sum": 18,
         "details": [{
@@ -49,10 +29,10 @@
             "sum": "9"
         }]
     }, {
-        "ciCode": "cloud",
+        "ciCode": "DC_CLOUD",
         "sum": 12,
         "details": [{
-            "ciCode": "cloud",
+            "ciCode": "DC_CLOUD",
             "typeName": "vmware云环境",
             "sum": "12"
         }]
@@ -75,6 +55,34 @@
             "ciCode": "DC_HOST",
             "typeName": "HP-UX",
             "sum": "10"
+        }]
+    }, {
+        "ciCode": "DC_DBS",
+        "sum": 18,
+        "details": [{
+            "ciCode": "DC_DB2",
+            "typeName": "Oracle",
+            "sum": "3"
+        }, {
+            "ciCode": "DC_Informix",
+            "typeName": "Mysql",
+            "sum": "4"
+        }, {
+            "ciCode": "DC_DB2",
+            "typeName": "DB2",
+            "sum": "5"
+        }, {
+            "ciCode": "DC_SQLServer",
+            "typeName": "SQL Server",
+            "sum": "6"
+        }]
+    }, {
+        "ciCode": "DC_APPSYS",
+        "sum": 1001,
+        "details": [{
+            "ciCode": "DC_APPSYS",
+            "typeName": "应用程序",
+            "sum": "12"
         }]
     }, {
         "ciCode": "DC_APPSYS",

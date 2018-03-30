@@ -133,7 +133,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }]
                 break;
@@ -172,7 +172,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }];
                 break;
@@ -211,7 +211,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }];
                 break;
@@ -250,7 +250,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }];
                 break;
@@ -289,7 +289,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }];
                 break;
@@ -320,7 +320,7 @@
                 },{
                     title:'操作',
                     formatter:function(value, row, index, field){
-                        return '<span class="form-control-static text-aqua detail operator" role="button" data-id="'+row.id+'">详情</span>'+'<span class="form-control-static text-aqua setTag operator" role="button" data-id="'+row.id+'">设置标签</span>'
+                        return '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情"><i class="fa-info"></i></span>'+'<span class="text-aqua setTag operator" role="button" data-id="'+row.id+'" title="设置标签"><i class="fa-tags"></i></span>'
                     }
                 }]
                 break;
@@ -519,13 +519,27 @@
         params.searchText = toolbar.find('.searchInput').val();
         // 资源分类
         if (Record.currentModule == 'ITSource') {
-            params.code = this.code;
+            params.ciMajor = this.code;
         } else {
             params.code = Record.code;
             // 统计分类
-            params.manufacturer = Record.manufacturer;
-            params.resVersion = Record.resVersion;
-            params.tagName = Record.tagName.join(',');
+            switch(Record.countType) {
+                // 厂商
+                case '1':{
+                    params.manufacturer = Record.manufacturer;
+                    break;
+                }
+                // os 版本
+                case '2':{
+                    params.resVersion = Record.resVersion;
+                    break;
+                }
+                // 标签
+                case '3':{
+                    params.tagName =  Record.tagName.join(',');
+                    break;
+                }
+            }
         }
         params.belongMission = Record.belongMission;
         return params;
@@ -591,16 +605,19 @@
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         var params = $('#'+tableId).bootstrapTable('getRowByUniqueId',$(this).attr('data-id') );
-        var tagName = params.tagName || '' ;
+        params.tags = params.tagName ? params.tagName.split(',') : [];
         Tool.renderEditView(tabId,'ITSource-setTag-template',params);
         fetchData('resource/getAllTags','json',null,{
             success:function(res){
                 Record.appData = res.data;
-                disableExistTag(res.data,tagName.split(','));
+                $.each(res.data,function(i,perT){
+                    perT.text = perT.tagName;
+                });
+                disableExistTag(res.data,params.tags);
                 $('#ITSource-setTag-form .app').select2({
                     data:res.data,
                     dropdownParent:$('#ITSource-setTag-form .hasSelect2')
-                });
+                }).val('').change();
             }
         });
     };
@@ -632,6 +649,7 @@
         // $(this).
     }
     function saveOne(btn) {
+        var params = {};
         // 所属选项卡
         var tabId = $(btn).parents('.tab-pane').eq(0).attr('id');
         var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
@@ -639,14 +657,13 @@
         var formId = $('#'+tabId).find('.editView form').eq(0).attr('id');
         if ( formId == 'ITSource-setTag-form') {
             // 非表格类的处理
-            params = DefineTag.collectPortTags(tabId);
-            params.id = $('#'+tabId).find('.editView [name="id"]').val();
+            params.tags = DefineTag.collectPortTags(tabId).tags;
+            params.ids = $('#'+tabId).find('.editView [name="id"]').val();
 
         } else if ( formId == 'DefineMissionStrategy-form' ){
             params = DefineMissionStrategy.collectFormInfo();
         } else {
             var arr = $('#'+formId).serializeArray();
-            var params = {}
             $.each(arr,function(i,perA){
                 if (params[perA.name]) {
                     params[perA.name] = params[perA.name] + ',' +  perA.value;
@@ -678,7 +695,7 @@
                     $('#'+tableId).bootstrapTable('refresh');
                     Tool.backToTableView(btn);
                 } else {
-
+                    Tool.message(res.msg,'danger');
                 }
             }
         })

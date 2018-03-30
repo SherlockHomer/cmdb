@@ -224,6 +224,10 @@
         return html;
     };
 
+    Handlebars.registerHelper('SafeString', function(string) {
+        return new Handlebars.SafeString(string) ;
+    });
+
     Handlebars.registerHelper('statusInMission', function(status) {
         if(status == 1)
             return new Handlebars.SafeString('任务完成') ;
@@ -275,16 +279,16 @@
         var html = '';
         if (apps.length > 5){
             for (var i = 0; i < 4; i++) {
-                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].text+'</a></li>';
+                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].tagName+'</a></li>';
             };
             var more = $($('#ITSourceTopo-appMoreLi-template').html());
             for (var y = 4; y < apps.length; y++) {
-                more.find('.dropdown-menu').append('<li><a role="tab" data-toggle="tab" data-id="'+apps[y].id+'">'+apps[y].text+'</a></li>');
+                more.find('.dropdown-menu').append('<li><a role="tab" data-toggle="tab" data-id="'+apps[y].id+'">'+apps[y].tagName+'</a></li>');
             };
             html += more[0].outerHTML;
         } else {
             for (var i = 0; i < apps.length; i++) {
-                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].text+'</a></li>';
+                html += '<li><a role="tab" data-toggle="tab" data-id="'+apps[i].id+'">'+apps[i].tagName+'</a></li>';
             }
         }
         return new Handlebars.SafeString(html);

@@ -1002,7 +1002,7 @@ action：  resource/getTagsUsed==>none
 
 action：  resource/setTag
 {
-    "id":1,
+    "ids":1,
     "code":1,
     "tags":["应用服务器1","应用服务器2","应用服务器3"]
 }
@@ -1191,42 +1191,272 @@ action：  ITSourceReport/count
 // {type:'app,text:'应用程序'}
 // 
 // 关系图 ： 0  ；部署关系图：1 ；通信关系图 ：2  ；物理连接关系图 ： 3
-action：  ITSourceTopo/showTopo
+action：  resourceTopo/showTopo
 {
     // 默认查所有存在发现内容的应用系统中的第一
     "app":1,
     "topoType": 0
 }
 {
+    
     "data": {
-        "nodeDataArray":[{
-            // md5  唯一鉴别的key，可用于前端的key
-            "key":1234,
-            // 父级的key,用于前端显示上下游关系
-            "parent":456,
-            "id":1,
-            // 资源 type
-            "code":"DC_HOST",
-            // 节点的名字
-            "name": "BMC Patrol Agent 10.7.00"
+        "type":1, // 表示未保存gojs-json字符串于后台的
+        "nodeDataArray": [{
+            "id": 1,
+            "ciCode": "server",
+            "resName": "ServiceJet"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "AutoWeb"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "AutoServer"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "LoadBalance"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "Taskmanage"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "AutoServer2"
+        }, {
+            "id": 1,
+            "ciCode": "application",
+            "resName": "LoadBalance2"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "tomcat"
+        }, {
+            "id": 1,
+            "ciCode": "middleware",
+            "resName": "集群1"
+        }, {
+            "id": 1,
+            "ciCode": "middleware",
+            "resName": "Orcl"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "tomcat1"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "vm3"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Oracle Server1"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Oracle Server2"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Server1"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Server2"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Server3"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Server4"
+        }, {
+            "id": 1,
+            "ciCode": "server",
+            "resName": "Server5"
+        }, {
+            "id": 1,
+            "ciCode": "switch",
+            "resName": "Switch1"
+        }, {
+            "id": 1,
+            "ciCode": "switch",
+            "resName": "Switch2"
+        }, {
+            "id": 1,
+            "ciCode": "switch",
+            "resName": "Switch3"
+        }, {
+            "id": 1,
+            "ciCode": "switch",
+            "resName": "Switch4"
         }],
-        "count":[{
-            "code":"DC_HOST",
-            "sum":3
-        },{
-            "code":"DC_DBS",
-            "sum":1
-        },{
-            "code":"cloud",
-            "sum":7
-        },{
-            "code":"DC_MIDDSERVER",
-            "sum":6
-        },{
-            "code":"DC_APPSYS",
-            "sum":1
+        "linkDataArray": [{
+            "from": "ServiceJet",
+            "to": "AutoWeb"
+        }, {
+            "from": "ServiceJet",
+            "to": "AutoServer"
+        }, {
+            "from": "ServiceJet",
+            "to": "LoadBalance"
+        }, {
+            "from": "ServiceJet",
+            "to": "Taskmanage"
+        }, {
+            "from": "ServiceJet",
+            "to": "AutoServer2"
+        }, {
+            "from": "ServiceJet",
+            "to": "LoadBalance2"
+        }, {
+            "from": "LoadBalance2",
+            "to": "LoadBalance",
+            "relation": "black"
+        }, {
+            "from": "AutoWeb",
+            "to": "tomcat"
+        }, {
+            "from": "AutoWeb",
+            "to": "Taskmanage",
+            "relation": "black"
+        }, {
+            "from": "AutoServer",
+            "to": "tomcat"
+        }, {
+            "from": "AutoServer",
+            "to": "LoadBalance",
+            "relation": "black"
+        }, {
+            "from": "Taskmanage",
+            "to": "LoadBalance",
+            "relation": "black"
+        }, {
+            "from": "AutoServer2",
+            "to": "LoadBalance2",
+            "relation": "black"
+        }, {
+            "from": "tomcat",
+            "to": "集群1",
+            "relation": "green"
+        }, {
+            "from": "LoadBalance",
+            "to": "集群1",
+            "relation": "green"
+        }, {
+            "from": "Taskmanage",
+            "to": "集群1",
+            "relation": "green"
+        }, {
+            "from": "Taskmanage",
+            "to": "Orcl",
+            "relation": "black"
+        }, {
+            "from": "AutoServer2",
+            "to": "tomcat1"
+        }, {
+            "from": "LoadBalance2",
+            "to": "vm3",
+            "relation": "green"
+        }, {
+            "from": "tomcat1",
+            "to": "vm3",
+            "relation": "green"
+        }, {
+            "from": "Orcl",
+            "to": "Oracle Server1",
+            "relation": "orange"
+        }, {
+            "from": "Orcl",
+            "to": "Oracle Server2",
+            "relation": "orange"
+        }, {
+            "from": "Server1",
+            "to": "Switch1",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Server2",
+            "to": "Switch1",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Server3",
+            "to": "Switch2",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Server4",
+            "to": "Switch2",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Server5",
+            "to": "Switch3",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Switch1",
+            "to": "Switch4",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Switch2",
+            "to": "Switch4",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "Switch3",
+            "to": "Switch4",
+            "relation": "black",
+            "visible": false
+        }, {
+            "from": "集群1",
+            "to": "Server1",
+            "relation": "orange"
+        }, {
+            "from": "集群1",
+            "to": "Server2",
+            "relation": "orange"
+        }, {
+            "from": "Oracle Server1",
+            "to": "Server3",
+            "relation": "green"
+        }, {
+            "from": "Oracle Server2",
+            "to": "Server4",
+            "relation": "green"
+        }, {
+            "from": "vm3",
+            "to": "Server5",
+            "relation": "yellow"
+        }],
+        "count": [{
+            "ciCode": "server",
+            "sum": 3
+        }, {
+            "ciCode": "database",
+            "sum": 1
+        }, {
+            "ciCode": "cloud",
+            "sum": 7
+        }, {
+            "ciCode": "middleware",
+            "sum": 6
+        }, {
+            "ciCode": "application",
+            "sum": 1
         }]
     },
     "success": true,
     "msg": "成功"
+}
+
+action：  resourceTopo/saveTopoOnTag
+{
+    "appTag":"",
+    "topoJson":"{}"
 }

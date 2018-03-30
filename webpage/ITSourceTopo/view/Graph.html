@@ -2,24 +2,29 @@
     <div class="Graph-box" id="Graph-box">
         <div class="tools">
             <div class="tool info-box" href="#Graph-tool-relation">
-                <span class="info-box-icon"><i class="fa fa-search"></i></span>
+                <span class="info-box-icon"><i class="fa-search"></i></span>
                 <span class="info-box-number">关系图</span>
             </div>
             <div class="tool info-box" href="#Graph-tool-display">
-                <span class="info-box-icon"><i class="fa fa-star-half-empty"></i></span>
+                <span class="info-box-icon"><i class="fa-star-half-empty"></i></span>
                 <span class="info-box-number">显示/隐藏</span>
             </div>
             <div class="tool info-box" href="#Graph-tool-layout">
-                <span class="info-box-icon"><i class="iconfont icon-topology"></i></span>
+                <span class="info-box-icon"><i class="icon-topology"></i></span>
                 <span class="info-box-number">布局</span>
             </div>
+            <div class="tool info-box" href="#Graph-tool-edit">
+                <span class="info-box-icon"><i class="fa-edit"></i></span>
+                <span class="info-box-number">编辑</span>
+            </div>
+
         </div>
         <div class="secondMenu" id="Graph-tool-relation">
             <ul class="list-group">
-              <li class="list-group-item clicked" data-relation="0">关系图</li>
-              <li class="list-group-item" data-relation="1">部署关系图</li>
-              <li class="list-group-item" data-relation="2">通信关系图</li>
-              <li class="list-group-item" data-relation="3">物理连接关系图</li>
+              <li class="list-group-item clicked" data-topoType="0">关系图</li>
+              <li class="list-group-item" data-topoType="1">部署关系图</li>
+              <li class="list-group-item" data-topoType="2">通信关系图</li>
+              <li class="list-group-item" data-topoType="3">物理连接关系图</li>
           </ul>
         </div>
         <div class="secondMenu" id="Graph-tool-display">
@@ -39,6 +44,12 @@
               <li class="list-group-item" data-layout="1">应用层级</li>
               <li class="list-group-item" data-layout="2">环形</li>
           </ul>
+        </div>
+        <div class="secondMenu" id="Graph-tool-edit">
+            <ul class="list-group">
+                <li class="list-group-item save"><i class="fa-save"></i>保存</li>
+                <li class="list-group-item setTag"><i class="fa-tags"></i>设置标签</li>
+            </ul>
         </div>
         <div id="Graph"></div>
     </div>
@@ -64,9 +75,10 @@
         // 在dom中载入基本的内容
         function renderBasic($dom){
             $dom.append( $('#Graph-template').html() );
+            resizeDiagBoxHeight();
         }
         function render(params){
-            params.relation = params.relation || 0;
+            params.topoType = params.topoType || 0;
             // 记录参数
             Record.params = params;
             getData(loadData);
@@ -77,23 +89,23 @@
         };
         // 获取数据
         function getData(callback){
-            var url = 'ITSourceTopo/showTopo';
+            var url = 'resourceTopo/showTopo';
             // todo : 以后删除
-            if ( window.UrlConfig = 'frontEnd' ){
-                switch(Record.params.relation){
+            if ( window.UrlConfig == 'frontEnd' ){
+                switch(Record.params.topoType){
                     case '0':{
                         break;
                     }
                     case '1':{
-                        url = 'ITSourceTopo/showTopoDeploy'
+                        url = 'resourceTopo/showTopoDeploy'
                         break;
                     }
                     case '2':{
-                        url = 'ITSourceTopo/showTopoCon'
+                        url = 'resourceTopo/showTopoCon'
                         break;
                     }
                     case '3':{
-                        url = 'ITSourceTopo/showTopoPhy'
+                        url = 'resourceTopo/showTopoPhy'
                         break;
                     }
                 }
@@ -112,56 +124,77 @@
             loadDataToTool(data.count);
         }
         function loadDataToDiagram(data){
-            var newData = new Object();
-            newData['class'] = 'go.GraphLinksModel';
-            newData['copiesArrays'] = true;
-            newData['copiesArrayObjects'] = true;
-            newData['linkFromPortIdProperty'] = 'fromPort';
-            newData['linkToPortIdProperty'] = 'toPort';
-            newData['nodeDataArray'] = data.nodeDataArray;
-            newData['linkDataArray'] = data.linkDataArray || [];
-            $.each(data.nodeDataArray,function(i,perNode){
-                perNode.key = perNode.id;
-                perNode.source = getStatusItem('devices', perNode.ciCode ).image;
-            });
-            var blackRel = [];
-            for (var i = newData['linkDataArray'].length - 1; i >= 0; i--) {
-                var perLink = newData['linkDataArray'][i];
-                switch(perLink.relation){
-                    case 'green' :{
-                        perLink.color = '#00a65a';
-                        break;
-                    }
-                    case 'black' :{
-                        perLink.color = '#000';
-                        break;
-                    }
-                    case 'orange' :{
-                        perLink.color = '#f39c12';
-                        break;
-                    }
-                    case 'yellow' :{
-                        perLink.color = 'yellow';
-                        break;
-                    } 
-                    default :{
-                        break;
-                    }
+            if (data.type == 1){
+                var newData = {};
+                newData['class'] = 'go.GraphLinksModel';
+                newData['copiesArrays'] = true;
+                newData['copiesArrayObjects'] = true;
+                newData['linkFromPortIdProperty'] = 'fromPort';
+                newData['linkToPortIdProperty'] = 'toPort';
+                newData['nodeDataArray'] = data.nodeDataArray;
+                newData['linkDataArray'] = data.linkDataArray || [];
+                $.each(data.nodeDataArray,function(i,perNode){
+                    perNode.key = perNode.id;
+                    perNode.source = getStatusItem('devices', perNode.ciCode ).image;
+                });
+                // var blackRel = [];
+                for (var i = newData['linkDataArray'].length - 1; i >= 0; i--) {
+                    var perLink = newData['linkDataArray'][i];
+                    perLink.color = getStatusItem( 'relation', perLink.relation || 1 ).hex;
+                    // if ( perLink.relation == 1) {
+                    //     blackRel.push( newData['linkDataArray'].splice(i,1)[0] );
+                    // }
                 };
-                if (Record.params.relation == '0' && perLink.relation == 'black') {
-                    blackRel.push( newData['linkDataArray'].splice(i,1)[0] );
-                }
-            };
+            } else {
+                var newData = data.topoJson;
+            }
             var diag = Record.diagram;
             diag.model = new go.Model.fromJson(newData);
-            if (Record.params.relation == '0') {
-                setTimeout(function(){
-                    diag.startTransaction('load');
-                    diag.model.addLinkDataCollection(blackRel);
-                    diag.commitTransaction('load');
-                },2000)
+            // 后处理
+            if ( data.type != 1){
+                resetLayout(diag,newData);
+            } else {
+                // 默认
+                // setLayout('拓扑');
+                // if (Record.params.topoType == '0') {
+                //     setTimeout(function(){
+                //         diag.startTransaction('load');
+                //         diag.model.addLinkDataCollection(blackRel);
+                //         diag.commitTransaction('load');
+                //     },2000)
+                // }
             }
-            
+        }
+        function resetLayout(diag,json) {
+            if(json.layoutName == undefined || json.layoutName == 'Layout'){
+                diag.model.layoutName = "Layout";
+            }else if(json.layoutName == "LayeredDigraphLayout"){
+
+                diag.model.layoutName = "LayeredDigraphLayout";
+                diag.layout= go.GraphObject.make(go.LayeredDigraphLayout,{isInitial:false});
+            }else if(json.layoutName == "SerpentineLayout"){
+
+                diag.model.layoutName = "SerpentineLayout";
+                diag.layout= go.GraphObject.make(SerpentineLayout,{isInitial:false});
+            }else if(json.layoutName == "SpiralLayout"){
+
+                diag.model.layoutName = "SpiralLayout";
+                diag.layout= go.GraphObject.make(SpiralLayout,{isInitial:false});
+            }else if(json.layoutName == "GridLayout"){
+
+                diag.model.layoutName = "GridLayout";
+                diag.layout= go.GraphObject.make(go.GridLayout,{isInitial:false,cellSize:go.Size.parse(10,10),sorting:go.GridLayout.Forward});
+            }else if(json.layoutName == "TreeLayout"){
+
+                diag.model.layoutName = "TreeLayout";
+                diag.layout= go.GraphObject.make(go.TreeLayout,{isInitial:false});
+            }else if(json.layoutName == "CircularLayout"){
+                diag.model.layoutName = "CircularLayout";
+                diag.layout= go.GraphObject.make(go.CircularLayout,{isInitial:false});
+            }else if(json.layoutName == 'ForceDirectedLayout'){
+                diag.model.layoutName = "ForceDirectedLayout";
+                diag.layout= go.GraphObject.make(go.ForceDirectedLayout,{isInitial:false});
+            }
         }
         function loadDataToTool(count){
             var dom = $('#Graph-tool-display .list-group');
@@ -175,18 +208,23 @@
                     '</li>');
             });
         };
-        function setLayout(btn){
+
+        function setLayout(type){
             var diag = Record.diagram; 
             diag.startTransaction('setDiagramLayout');
-            if (btn.innerText == '拓扑') {
+            if (type == '拓扑') {
                 diag.layout = go.GraphObject.make(go.ForceDirectedLayout);
-            } else if (btn.innerText == '应用层级'){
+                diag.model.layoutName = 'ForceDirectedLayout';
+            } else if (type == '应用层级'){
                 diag.layout = go.GraphObject.make(go.TreeLayout,{  
                     angle: 90,
-                    // nodeSpacing: 20,
-                    // layerSpacing: 60,
+                    nodeSpacing: 20,
+                    layerSpacing: 40,
+                    isOngoing:false
                 });
-            } else if (btn.innerText == '环形'){
+                diag.model.layoutName = 'TreeLayout';
+            } else if (type == '环形'){
+                diag.model.layoutName = 'CircularLayout';
                 diag.layout = go.GraphObject.make(go.CircularLayout);
             }
             diag.commitTransaction('setDiagramLayout');
@@ -202,22 +240,19 @@
                 "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
                 initialAutoScale : go.Diagram.Uniform,
                 initialContentAlignment: go.Spot.Center,
-                layout: $(go.TreeLayout,{  
-                    angle: 90,
-                    // tree
-                    nodeSpacing: 20,
-                    layerSpacing: 40,
-                    isOngoing:false,
-                    // isInitial:false
+                // layout: $(go.Layout, {
+                //     isInitial: true
+                // }),
+                layout: $(go.ForceDirectedLayout ,{
+                    // defaultSpringLength : 90，
+                    isInitial:true
                 })
-                // layout: $(go.ForceDirectedLayout ,{
-                //     defaultSpringLength : 90
-                // })
             });
 
             myDiagram.nodeTemplate =
             $(go.Node, "Horizontal",
-                new go.Binding("location", "loc"),
+                new go.Binding('visible'),
+                new go.Binding("location", "loc",go.Point.parse).makeTwoWay(go.Point.stringify),
                 {   locationSpot: go.Spot.Center,
                     toEndSegmentLength: 30,
                     fromEndSegmentLength: 30
@@ -243,7 +278,8 @@
                             source:'dist/img/avatar.png',
                             width: 48,
                             height: 48,
-                            margin:5
+                            margin:5,
+                            alignment:go.Spot.BottomLeft
                         }, new go.Binding("source")),
                         $("TreeExpanderButton",{
                             alignment: go.Spot.TopRight,
@@ -278,7 +314,7 @@
             {
                 mouseHover:function(e,obj){
                     myDiagram.startTransaction('setDiagramLayout');
-                    myDiagram.model.setDataProperty(obj.data,"linkState",'sher');
+                    myDiagram.model.setDataProperty(obj.data,"linkState",'');
                     myDiagram.commitTransaction('setDiagramLayout');
                 },
                 mouseLeave:function(e,obj){
@@ -315,13 +351,89 @@
             }
             
             Record.diagram = myDiagram;
+        };
+        function resizeDiagBoxHeight(){
+            $('#Graph-box').height($(window).height() - 200 );
+        };
+        function saveTopo(){
+            Tool.confirm({
+                title:"是否确认保存该标签下的布局数据？！",
+                confirm:function(){
+                    var viewStr = Record.diagram.model.toJSON();
+                    var viewObj = JSON.parse(viewStr);
+                    viewObj.layoutName = Record.diagram.model.layoutName;
+                    fetchData('resourceTopo/saveTopoOnTag','json',{
+                        topoJson : JSON.stringify(viewObj),
+                        appTag: Record.params.appTag,
+                        topoType : Record.params.topoType
+                    },{
+                        success:function(res){
+                            if (res.success){
+                                Tool.message('保存成功');
+                                $('#Graph-tool-edit').removeClass('show');
+                            } else {
+                                Tool.message('保存失败！'+res.msg,'danger');
+                            }
+                        }
+                    });
+                }
+            })
+        };
+        // 批量设置标签
+        function setTag(){
+            if( Record.diagram.selection.count == 0){
+                Tool.message('请选择一个以上设备！“点击拓扑图Ctrl+A可全选~”');
+                return;
+            };
+            var ids = [];
+            Record.diagram.selection.each(function(node){
+                ids.push(node.data.id);
+            });
+            Tool.confirm({
+                title:'设置标签',
+                body:'<select class="select2" id="Confirm-tags" multiple="multiple" data-closeOnSelect="false"></select>',
+                confirm:function(){
+                    var tags = [];
+                    var sels = $('#Confirm-tags').select2('data');
+                    $.each(sels,function(i,perD){
+                        tags.push(perD.tagName);
+                    });
+                    saveTags(ids.join(','),tags.join(','));
+                }
+            });
+            fetchData('resource/getAllTags','json',null,{
+                success:function(res){
+                    $.each(res.data,function(i,perT){
+                        perT.text = perT.tagName;
+                    });
+                    $('#Confirm-tags').select2({
+                        data:res.data
+                    });
+                }
+            });
+        };
+        function saveTags(ids,tagsId){
+            if ( !tagsId ){ return };
+            var params = {
+                ids:ids,
+                tags:tagsId
+            };
+            fetchData('resource/setTag','json',params,{
+                success:function(res){
+                    if (res.success) {
+                        Tool.message('设置成功');
+                    } else {
+                        Tool.message(res.msg,'danger');
+                    }
+                }
+            })
         }
 
         // 注册事件
         $('body').on('click','#Graph-tool-relation .list-group-item',function(){
             $(this).addClass('clicked');
             $(this).siblings().removeClass('clicked');
-            Record.params.relation = $(this).attr('data-relation');
+            Record.params.topoType = $(this).attr('data-topoType');
             getData(loadData);
         });
         $('body').on('click','#Graph-box .tools .tool',function(){
@@ -337,11 +449,17 @@
         $('body').on('click','#Graph-tool-layout .list-group .list-group-item',function(){
             $(this).addClass('clicked');
             $(this).siblings().removeClass('clicked');
-            setLayout(this);
+            setLayout(this.innerText);
         });
-        // $(window).on('resize',function(){
-        //     $('#Graph-box').height($(window).height() - 280 );
-        // })
+        $('body').on('click','#Graph-tool-edit .list-group .save',function(){
+            saveTopo(this);
+        });
+        $('body').on('click','#Graph-tool-edit .list-group .setTag',function(){
+            setTag(this);
+        });
+        $(window).on('resize',function(){
+            resizeDiagBoxHeight();
+        })
         return {
             render:render,
             renderBasic:renderBasic

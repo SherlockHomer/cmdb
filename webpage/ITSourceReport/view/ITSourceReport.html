@@ -1,28 +1,31 @@
 <script type="text/x-handlebars-template" id="ITSourceReport-template">
     <div class="row">
         <!-- Left col -->
-        {{#each data}}
-            <section class="col-lg-6 col-sm-6">
-                <div class="box box-solid ITSourceBox" data-levelOneType="{{this.ciCode}}">
-                   <div class="box-header">
-                        <i class="iconfont {{deviceIcon this.ciCode}}"></i>
+        {{#each section}}
+        <section class="col-lg-6 col-sm-6">
+            {{#each this}}
+            <div class="box box-solid ITSourceBox" data-levelOneType="{{this.ciCode}}">
+                <div class="box-header">
+                    <i class="{{deviceIcon this.ciCode}}"></i>
 
-                        <h3 class="box-title">{{deviceText this.ciCode}}</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        {{#each this.details}}
-                            <div class="info-box">
-                                <span class="info-box-icon"><i class="iconfont {{deviceIcon ciCode}}"></i></span>
-                                <span class="info-box-number text-aqua" data-ciCode="{{ciCode}}" data-name="{{typeName}}">{{typeName}}({{sum}})
-                                </span>
-                            </div>
-                        {{/each}}
-                    </div>
+                    <h3 class="box-title">{{typeName}}</h3>
                 </div>
-                
-            </section>
+                <!-- /.box-header -->
+                <div class="">
+                    {{#each this.details}}
+                    <div class="info-box">
+                        <span class="info-box-icon"><i class="{{deviceIcon ciCode}}"></i></span>
+                        <span class="info-box-number text-aqua" data-ciCode="{{ciCode}}" data-name="{{typeName}}">{{typeName}}({{sum}})
+                        </span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{/each}}
+        </section>
         {{/each}}
+        
         
         <!-- /.Left col -->
     </div>

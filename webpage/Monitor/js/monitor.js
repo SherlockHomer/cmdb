@@ -108,11 +108,13 @@
                 formatter:function(value, row, index, field){
                     var html = '';
                     if ( row.status == 1 ) {
-                        html +=  '<span class="form-control-static text-aqua cancleScan operator" role="button" data-id="'+row.id+'">取消扫描</span>' ;
+                        html +=  '<span class="text-aqua cancleScan operator" role="button" data-id="'+row.id+'" style="white-space:pre" title="取消扫描"><i class="fa-stop"></i></span>' ;
                     }
                     if ( row.status == 2 || row.status == 3) {
-                        html += '<span class="form-control-static text-aqua scan operator" role="button" data-id="'+row.id+'">启动扫描</span>'
+                        html += '<span class="text-aqua scan operator" role="button" data-taskId="'+row.taskId+'" style="white-space:pre" title="启动扫描"><i class="fa-play"></i></span>'
                     }
+                    html += '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" style="white-space:pre" title="详情信息"><i class="fa-info"></i></span>'
+
                     return html;
                 }
             }]
@@ -193,9 +195,15 @@
 
     // 扫描
     function scanThis(btn,scanOrNot) {
-        var rowId = $(btn).attr('data-id');
+        if (scanOrNot) {
+            // 启动“任务”的扫描
+            var taskId = $(btn).attr('data-taskId');
+            var params = { ids : [taskId].join(',') };
+        } else {
+            var rowId = $(btn).attr('data-id');
+            var params = { ids : [rowId].join(',') };
+        }
         var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        var params = { ids : [rowId].join(',') };
         ajaxScan( tableId,params ,scanOrNot);
     }
     function scanSome(btn,scanOrNot) {
@@ -203,7 +211,11 @@
         var sels = $('#'+tableId).bootstrapTable('getSelections');
         var ids = [];
         $.each(sels,function(i,perSel){
-            ids.push(perSel.id);
+            if (scanOrNot) {
+                ids.push(perSel.taskId);
+            } else {
+                ids.push(perSel.id);
+            }
         });
         if ( !ids[0] ) {
             Tool.message('请选择至少一条');

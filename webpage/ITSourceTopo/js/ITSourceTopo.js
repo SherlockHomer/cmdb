@@ -29,10 +29,10 @@
     // 渲染统计内容的具体情况表
     // 有数据才有表，因为是模版
     function renderBasic(){
-        fetchData('resource/getAppUsed','json',null,{
+        fetchData('resource/getAllTags','json',{type:1},{
             success:function(res){
                 if (res.success) {
-                    Record.appId = res.data[0].id;
+                    Record.appTag = res.data[0].id;
                     render('ITSourceTopo-template',{
                         apps:res.data
                     });
@@ -41,7 +41,7 @@
                     Tool.loadTemp('webpage/ITSourceTopo/view/Graph.html',function(){
                         Graph.renderBasic($('#ITSourceTopo-Graph'));
                         Graph.render({
-                            apps:Record.appId
+                            appTag:Record.appTag
                         });
                     });
                 }
@@ -61,9 +61,9 @@
     };
 
     function changeTab(tab){
-        Record.appId = $(tab).attr('data-id');
+        Record.appTag = $(tab).attr('data-id');
         Graph.render({
-            apps:Record.appId,
+            appTag:Record.appTag,
             relation:$('#Graph-tool-relation .list-group-item.clicked').attr('data-relation')
         });
     }
