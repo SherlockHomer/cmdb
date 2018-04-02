@@ -394,6 +394,9 @@
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- input-mask -->
+<!-- InputMask -->
+<script src="bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="static/js/constant.js"></script>
 <script src="static/js/cmdb.js"></script>

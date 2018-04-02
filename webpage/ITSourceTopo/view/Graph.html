@@ -201,12 +201,25 @@
             dom.html('');
             $.each(count,function(i,perType){
                 var status = getStatusItem('devices',perType.ciCode);
-                dom.append('<li class="list-group-item clicked">'+
-                    '<i class="iconfont '+status.icon+'"></i>'+
+                dom.append('<li class="list-group-item clicked" data-ciCode="'+perType.ciCode+'">'+
+                    '<i class="'+status.icon+'"></i>'+
                     '<span>'+ perType.sum +' </span>'+
                     '<span>'+ status.text +'</span>'+
                     '</li>');
             });
+        };
+        // 显示隐藏节点
+        function displayNode(ciCode , showOrNot){
+            var diag  = Record.diagram;
+            var nodes = diag.model.nodeDataArray;
+            diag.startTransaction("displayNode");
+            $.each(nodes,function(i,perNode){
+                if(perNode.ciCode == ciCode){
+                    var nodeData = diag.model.findNodeDataForKey(perNode.key);
+                    diag.model.setDataProperty(nodeData, 'visible', showOrNot);
+                }
+            });
+            diag.commitTransaction("displayNode");
         };
 
         function setLayout(type){
@@ -437,7 +450,9 @@
             getData(loadData);
         });
         $('body').on('click','#Graph-box .tools .tool',function(){
+            $(this).toggleClass('clicked');
             $(this).siblings().each(function(i,perTool){
+                $(this).removeClass('clicked');
                 $( $(perTool).attr('href') ).removeClass('show');
             });
             $( $(this).attr('href') ).toggleClass('show');
@@ -445,6 +460,8 @@
         });
         $('body').on('click','#Graph-tool-display .list-group .list-group-item',function(){
             $(this).toggleClass('clicked');
+            var showOrNot = $(this).hasClass('clicked');
+            displayNode( $(this).attr('data-ciCode') ,showOrNot);
         });
         $('body').on('click','#Graph-tool-layout .list-group .list-group-item',function(){
             $(this).addClass('clicked');

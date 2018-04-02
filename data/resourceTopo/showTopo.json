@@ -3,207 +3,101 @@
     "data": {
         "type": 1,
         "nodeDataArray": [{
-                "id": 1,
-                "ciCode": "DC_HOST",
-                "resName": "ServiceJet"
-            }, {
-                "id": 2,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoWeb"
-            }, {
-                "id": 3,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoServer"
-            }, {
-                "id": 4,
-                "ciCode": "DC_APPComp",
-                "resName": "LoadBalance"
-            }, {
-                "id": 5,
-                "ciCode": "DC_APPComp",
-                "resName": "Taskmanage"
-            }, {
-                "id": 6,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoServer2"
-            }, {
-                "id": 7,
-                "ciCode": "DC_APPComp",
-                "resName": "LoadBalance2"
-            }, {
-                "id": 8,
-                "ciCode": "DC_HOST",
-                "resName": "tomcat"
-            }, {
-                "id": 9,
-                "ciCode": "DC_MIDDSERVER",
-                "resName": "集群1"
-            }, {
-                "id": 10,
-                "ciCode": "DC_MIDDSERVER",
-                "resName": "Orcl"
-            }, {
-                "id": 11,
-                "ciCode": "DC_HOST",
-                "resName": "tomcat2"
-            }, {
-                "id": 12,
-                "ciCode": "DC_HOST",
-                "resName": "vm3"
-            }, {
-                "id": 13,
-                "ciCode": "DC_HOST",
-                "resName": "Oracle Server1"
-            }, {
-                "id": 14,
-                "ciCode": "DC_HOST",
-                "resName": "Oracle Server2"
-            }, {
-                "id": 15,
-                "ciCode": "DC_HOST",
-                "resName": "Server1"
-            }, {
-                "id": 16,
-                "ciCode": "DC_HOST",
-                "resName": "Server2"
-            }, {
-                "id": 17,
-                "ciCode": "DC_HOST",
-                "resName": "Server3"
-            }, {
-                "id": 18,
-                "ciCode": "DC_HOST",
-                "resName": "Server4"
-            }, {
-                "id": 19,
-                "ciCode": "DC_HOST",
-                "resName": "Server5"
-            }, {
-                "id": 20,
-                "ciCode": "DC_Switch",
-                "resName": "Switch1"
-            }, {
-                "id": 21,
-                "ciCode": "DC_Switch",
-                "resName": "Switch2",
-                "visible": false
-            }, {
-                "id": 22,
-                "ciCode": "DC_Switch",
-                "resName": "Switch3",
-                "visible": false
-            }, {
-                "id": 23,
-                "ciCode": "DC_Switch",
-                "resName": "Switch4",
-                "visible": false
-            },
-
-
-
-
-
-
-
-
-
-            {
-                "id": 1,
-                "ciCode": "DC_HOST",
-                "resName": "ServiceJet"
-            }, {
-                "id": 2,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoWeb"
-            }, {
-                "id": 3,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoServer"
-            }, {
-                "id": 4,
-                "ciCode": "DC_APPComp",
-                "resName": "LoadBalance"
-            }, {
-                "id": 5,
-                "ciCode": "DC_APPComp",
-                "resName": "Taskmanage"
-            }, {
-                "id": 6,
-                "ciCode": "DC_APPComp",
-                "resName": "AutoServer2"
-            }, {
-                "id": 7,
-                "ciCode": "DC_APPComp",
-                "resName": "LoadBalance2"
-            }, {
-                "id": 8,
-                "ciCode": "DC_HOST",
-                "resName": "tomcat"
-            }, {
-                "id": 9,
-                "ciCode": "DC_MIDDSERVER",
-                "resName": "集群1"
-            }, {
-                "id": 10,
-                "ciCode": "DC_MIDDSERVER",
-                "resName": "Orcl"
-            }, {
-                "id": 11,
-                "ciCode": "DC_HOST",
-                "resName": "tomcat2"
-            }, {
-                "id": 12,
-                "ciCode": "DC_HOST",
-                "resName": "vm3"
-            }, {
-                "id": 13,
-                "ciCode": "DC_HOST",
-                "resName": "Oracle Server1"
-            }, {
-                "id": 14,
-                "ciCode": "DC_HOST",
-                "resName": "Oracle Server2"
-            }, {
-                "id": 15,
-                "ciCode": "DC_HOST",
-                "resName": "Server1"
-            }, {
-                "id": 16,
-                "ciCode": "DC_HOST",
-                "resName": "Server2"
-            }, {
-                "id": 17,
-                "ciCode": "DC_HOST",
-                "resName": "Server3"
-            }, {
-                "id": 18,
-                "ciCode": "DC_HOST",
-                "resName": "Server4"
-            }, {
-                "id": 19,
-                "ciCode": "DC_HOST",
-                "resName": "Server5"
-            }, {
-                "id": 20,
-                "ciCode": "DC_Switch",
-                "resName": "Switch1"
-            }, {
-                "id": 21,
-                "ciCode": "DC_Switch",
-                "resName": "Switch2",
-                "visible": false
-            }, {
-                "id": 22,
-                "ciCode": "DC_Switch",
-                "resName": "Switch3",
-                "visible": false
-            }, {
-                "id": 23,
-                "ciCode": "DC_Switch",
-                "resName": "Switch4",
-                "visible": false
-            }
-        ],
+            "id": 1,
+            "ciCode": "DC_HOST",
+            "resName": "ServiceJet"
+        }, {
+            "id": 2,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoWeb"
+        }, {
+            "id": 3,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoServer"
+        }, {
+            "id": 4,
+            "ciCode": "DC_APPComp",
+            "resName": "LoadBalance"
+        }, {
+            "id": 5,
+            "ciCode": "DC_APPComp",
+            "resName": "Taskmanage"
+        }, {
+            "id": 6,
+            "ciCode": "DC_APPComp",
+            "resName": "AutoServer2"
+        }, {
+            "id": 7,
+            "ciCode": "DC_APPComp",
+            "resName": "LoadBalance2"
+        }, {
+            "id": 8,
+            "ciCode": "DC_HOST",
+            "resName": "tomcat"
+        }, {
+            "id": 9,
+            "ciCode": "DC_MIDDSERVER",
+            "resName": "集群1"
+        }, {
+            "id": 10,
+            "ciCode": "DC_MIDDSERVER",
+            "resName": "Orcl"
+        }, {
+            "id": 11,
+            "ciCode": "DC_HOST",
+            "resName": "tomcat2"
+        }, {
+            "id": 12,
+            "ciCode": "DC_HOST",
+            "resName": "vm3"
+        }, {
+            "id": 13,
+            "ciCode": "DC_HOST",
+            "resName": "Oracle Server1"
+        }, {
+            "id": 14,
+            "ciCode": "DC_HOST",
+            "resName": "Oracle Server2"
+        }, {
+            "id": 15,
+            "ciCode": "DC_HOST",
+            "resName": "Server1"
+        }, {
+            "id": 16,
+            "ciCode": "DC_HOST",
+            "resName": "Server2"
+        }, {
+            "id": 17,
+            "ciCode": "DC_HOST",
+            "resName": "Server3"
+        }, {
+            "id": 18,
+            "ciCode": "DC_HOST",
+            "resName": "Server4"
+        }, {
+            "id": 19,
+            "ciCode": "DC_HOST",
+            "resName": "Server5"
+        }, {
+            "id": 20,
+            "ciCode": "DC_Switch",
+            "resName": "Switch1"
+        }, {
+            "id": 21,
+            "ciCode": "DC_Switch",
+            "resName": "Switch2",
+            "visible": false
+        }, {
+            "id": 22,
+            "ciCode": "DC_Switch",
+            "resName": "Switch3",
+            "visible": false
+        }, {
+            "id": 23,
+            "ciCode": "DC_Switch",
+            "resName": "Switch4",
+            "visible": false
+        }],
         "linkDataArray": [{
             "from": "1",
             "to": "2"
@@ -351,7 +245,7 @@
             "ciCode": "DC_DBS",
             "sum": 1
         }, {
-            "ciCode": "cloud",
+            "ciCode": "DC_CLOUD",
             "sum": 7
         }, {
             "ciCode": "DC_MIDDSERVER",

@@ -61,30 +61,110 @@
             </select>
         </div>
         <div class="showInline" data-belong="1">
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
         </div>
         <div class="showInline hide" data-belong="2">
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">--
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
+            --
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
         </div>
         <div class="showInline hide" data-belong="3">
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">.
-            <input class="form-control ipBox" type="number" min="0" max="255">/
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>/
             <input class="form-control ipBox" type="number" min="0" max="255">
         </div>
         <button class="btn btn-default remove">-</button>
     </div>
+</script>
+
+
+
+<script>
+    (function (window, factory) {
+        if (typeof define === 'function' && define.amd) {
+            // AMD
+            define(factory);
+        } else if (typeof exports === 'object') {
+            // Node, CommonJS-like
+            module.exports = factory();
+        } else {
+            // Browser globals (window is window)
+            window.DefineIp = factory();
+        };
+    }(window, function () {
+        // 添加ip
+        function addIp(addBtn){
+            var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
+            newOne.insertBefore( $(addBtn) );
+            newOne.find('[data-mask]').inputmask();
+            return newOne;
+        }
+        function removeIp(removeBtn){
+            $(removeBtn).parent().remove();
+        }
+        $('body').on('click','.ips .add',function(e){
+            e.preventDefault();
+            addIp(this);
+        });
+        $('body').on('click','.ips .remove',function(e){
+            e.preventDefault();
+            removeIp(this);
+        });
+        // 独立渲染关于某个dom#ips下的ips
+        function renderIpRange( $ips , ipRange ){
+            var ipRange = eval( ipRange );
+            $.each(ipRange,function(i,perIp){
+                var newOne = addIp($ips.find('.add')[0]);
+                newOne.find('.targetDevice').val(perIp.type).change();
+                switch(perIp.type){
+                    case '1' : {
+                        var values = [perIp.ip];
+                        break;
+                    }
+                    case '2' : {
+                        var values = perIp.ip.split('-');
+                        break;
+                    }
+                    case '3' : {
+                        var values = perIp.ip.split('/');
+                        break;
+                    }
+                }
+                newOne.find('input:visible').each(function(y,perInput){
+                    $(perInput).val(values[y]).focus().blur();
+                });
+            });
+        };
+        function collectIps( $ips ){
+            var ipRange = [];
+            $ips.find('.ip').each(function(i,perIp){
+                var ip = {};
+                ip.type = $(perIp).find('.targetDevice').val();
+                var inputs = $(perIp).find('input:visible');
+                switch(ip.type){
+                    case '1' : {
+                        ip.ip = inputs.eq(0).val();
+                        break;
+                    }
+                    case '2' : {
+                        ip.ip = inputs.eq(0).val() + '-' + inputs.eq(1).val();
+                        break;
+                    }
+                    case '3' : {
+                        ip.ip = inputs.eq(0).val() + '/' + inputs.eq(1).val();
+                        break;
+                    }
+                };
+                ipRange.push(ip);
+            });
+            // 数组
+            return ipRange;
+        }
+        return {
+            renderIpRange:renderIpRange,
+            collectIps:collectIps
+        };
+    }));
+    
 </script>
 
 <script>
@@ -100,60 +180,6 @@
             window.DefineMissionStrategy = factory();
         };
     }(window, function () {
-        // 添加ip
-        function addIp(e){
-            e.preventDefault();
-            var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
-            newOne.insertBefore( $(e.target) );
-        }
-        function removeIp(e){
-            e.preventDefault();
-            $(e.target).parent().remove();
-        }
-        $('body').on('click','#DefineMissionStrategy-form .ips .add',function(e){
-            addIp(e);
-        });
-        $('body').on('click','#DefineMissionStrategy-form .ips .remove',function(e){
-            removeIp(e);
-        });
-        function collectFormInfo() {
-            var arr = $('#DefineMissionStrategy-form').serializeArray();
-            var params = {}
-            $.each(arr,function(i,perA){
-                if (params[perA.name]) {
-                    params[perA.name] = params[perA.name] + ',' +  perA.value;
-                } else {
-                    params[perA.name] = perA.value;
-                }
-            });
-            params.ipRange = [];
-            $('#DefineMissionStrategy-form .ips .ip').each(function(i,perIp){
-                var ip = {};
-                ip.type = $(perIp).find('.targetDevice').val();
-                var inputs = $(perIp).find('input:visible').map(function(){
-                    return $(this).val();
-                }).get();
-                switch(ip.type){
-                    case '1' : {
-                        ip.ip = inputs.join('.');
-                        break;
-                    }
-                    case '2' : {
-                        ip.ip = inputs.splice(4,4).join('.') ;
-                        ip.ip = inputs.join('.') + '-' + ip.ip;
-                        break;
-                    }
-                    case '3' : {
-                        var pop = inputs.pop();
-                        ip.ip = inputs.join('.') + '/' + pop;
-                        break;
-                    }
-                };
-                params.ipRange.push(ip);
-            });
-            params.ipRange = JSON.stringify( params.ipRange );
-            return params;
-        }
         function render(params) {
             $('#DefineMissionStrategy-form .select2').select2({
                 closeOnSelect:false
@@ -169,36 +195,14 @@
                 }
             });
             if(params && params.ipRange ){
-
-                var ipRange = eval( params.ipRange );
-                $.each(ipRange,function(i,perIp){
-                    var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
-                    newOne.insertBefore( $('#DefineMissionStrategy-form .ips .add') );
-                    newOne.find('.targetDevice').val(perIp.type).change();
-                    switch(perIp.type){
-                        case '1' : {
-                            var values = perIp.ip.split('.');
-                            break;
-                        }
-                        case '2' : {
-                            var values = perIp.ip.split('-').join('.').split('.');
-                            break;
-                        }
-                        case '3' : {
-                            var values = perIp.ip.split('/').join('.').split('.');
-                            break;
-                        }
-                    }
-                    newOne.find('input:visible').each(function(y,perInput){
-                        $(perInput).val(values[y]);
-                    });
-                });
+                DefineIp.renderIpRange( $('#DefineMissionStrategy-form .ips') , params.ipRange );
             }
-        }
+        };
+
         return {
-            render:render,
-            collectFormInfo:collectFormInfo
+            render:render
         };
     }));
     
 </script>
+

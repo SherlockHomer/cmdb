@@ -642,6 +642,8 @@
         // 特殊标签内容处理
         if (tabId == 'Configuration-mission') {
             DefineMissionStrategy.render(params);
+        } else if (params && tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_HOST') {
+            DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , params.ipRange );
         }
     }
     function saveOne(e){
@@ -652,10 +654,8 @@
             // 非表格类的处理
             params = collectPortTags(tabId);
 
-        } else if ( tabId == 'Configuration-mission' ){
-            params = DefineMissionStrategy.collectFormInfo();
         } else {
-            var arr = $('#'+tabId).find('.editView form').serializeArray();
+            var arr = $('#'+tabId + ' .editView form').serializeArray();
             var params = {}
             $.each(arr,function(i,perA){
                 if (params[perA.name]) {
@@ -664,6 +664,10 @@
                     params[perA.name] = perA.value;
                 }
             });
+            if ( $('#'+tabId +' .editView form .ips')[0] ) {
+                var ipRange = DefineIp.collectIps( $('#'+tabId +' .editView form .ips') );
+                params.ipRange = JSON.stringify( ipRange );
+            }
         }
         
         ajaxSave(tableId,params,e.target);

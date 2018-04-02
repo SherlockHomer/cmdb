@@ -55,7 +55,8 @@ ul {
     color:#000;
 }
 
-.info-box:hover .info-box-icon {
+.info-box:hover .info-box-icon,
+.info-box.clicked .info-box-icon {
     color: #ff6700;
 }
 .info-box-icon {
@@ -128,19 +129,19 @@ ul {
 .tags .alert .close{
     right:0;
 }
-#DefineMissionStrategy-form .ips{
+.ips{
     /*margin-top : -40px;*/
 }
-#DefineMissionStrategy-form .ips .ip{
+.ips .ip{
     margin-bottom: 5px;
 }
-#DefineMissionStrategy-form .ips .ip > * {
+.ips .ip > * {
     display: inline-block;
     vertical-align: top;
 }
-#DefineMissionStrategy-form .ipBox{
+.ips .ipBox{
     display: inline-block;
-    width:66px !important;
+    width:140px !important;
     margin-right: 4px;
 }
 /*Graph.html*/
