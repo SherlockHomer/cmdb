@@ -624,7 +624,7 @@
         if (tabId == 'Configuration-mission') {
             if ( !params ){
                 var params = {};
-                params.scanType = ["device","port","server","cloud","database","middleware"];
+                params.scanType = ['device','port','server','cloud','database','middleware','connection'];
             };
             params.from = '发现任务策略';
         } else if ( tabId == 'Configuration-portStandard' || tabId == 'Configuration-portCustom' ){

@@ -108,7 +108,8 @@
     {type:'server',icon:'icon-host',text:'服务器',image:'static/image/device/host.png'},
     {type:'cloud',icon:'icon-cloud',text:'云环境',image:'static/image/device/cloud.png'},
     {type:'database',icon:'icon-database',text:'数据库',image:'static/image/device/database.png'},
-    {type:'middleware',icon:'icon-middleware',text:'中间件',image:'static/image/device/middleware.png'}
+    {type:'middleware',icon:'icon-middleware',text:'中间件',image:'static/image/device/middleware.png'},
+    {type:'connection',icon:'fa-connectdevelop',text:'应用连接',image:'static/image/device/connection.png'}
     ];
     Constant.count = [
     {type:1,text:'设备厂商'},
