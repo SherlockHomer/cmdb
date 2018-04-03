@@ -38,7 +38,7 @@
     // 各个表的渲染
     function initMonitorTable(tableId,monitorType){
         $('#'+tableId).bootstrapTable({
-            toolbarId:'#'+ tableId+'-toolbar',
+            toolbarId: tableId+'-toolbar',
             monitorType:monitorType,
             method:'post',
             url:ConfirmUrl('discover-monitor/infoAll'),
@@ -195,7 +195,7 @@
 
     function queryParams(params){
         params.monitorType = this.monitorType;
-        var toolbar = $(this.toolbarId);
+        var toolbar = $('#'+this.toolbarId);
         params.searchText = toolbar.find('.searchInput').val();
         return params;
     }
@@ -330,9 +330,24 @@
     // 循环刷新正在扫描表
     function interRefreshTable(){
         var tableId = 'Monitor-ing-table';
-        if ( $('#'+tableId)[0] && $('#'+tableId).bootstrapTable('getData').length > 0 ) {
-            refreshTable(tableId);
-        }
+        var options = $('#'+tableId).bootstrapTable('getOptions');
+        fetchData('discover-monitor/infoAll','json',{
+            monitorType:options.monitorType,
+            sort:options.sortName,
+            order:options.sortOrder,
+            offset: (options.pageNumber - 1) * options.pageSize,
+            limit:options.pageSize,
+            searchText:$('#'+ options.toolbarId).find('.searchInput').val()
+        },{
+            success:function(res){
+                $.each(res.rows,function(i,perR){
+                    $('#'+tableId).bootstrapTable('updateByUniqueId', {
+                        id: perR.id,
+                        row: perR
+                    });
+                });
+            }
+        });
     }
     // 事件注册
     // 相同功能
@@ -365,7 +380,7 @@
     // 定时刷新
     setInterval(function(){
         interRefreshTable();
-    },7000)
+    },8000)
 
     var Monitor = {};
     Monitor.renderModule = renderModule;

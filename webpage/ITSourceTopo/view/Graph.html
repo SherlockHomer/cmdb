@@ -155,7 +155,12 @@
                 resetLayout(diag,newData);
             } else {
                 // 默认
-                // setLayout('拓扑');
+                // diag.model.layoutName = "ForceDirectedLayout";
+                // 不延迟->图片消失
+                setTimeout(function(){
+                    setLayout('拓扑');
+                    diag.zoomToFit();
+                },1000);
                 // if (Record.params.topoType == '0') {
                 //     setTimeout(function(){
                 //         diag.startTransaction('load');
@@ -253,13 +258,13 @@
                 "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
                 initialAutoScale : go.Diagram.Uniform,
                 initialContentAlignment: go.Spot.Center,
-                // layout: $(go.Layout, {
-                //     isInitial: true
-                // }),
-                layout: $(go.ForceDirectedLayout ,{
-                    // defaultSpringLength : 90，
-                    isInitial:true
-                })
+                layout: $(go.Layout, {
+                    isInitial: false
+                }),
+                // layout: $(go.ForceDirectedLayout ,{
+                //     // defaultSpringLength : 90，
+                //     isInitial:true
+                // })
             });
 
             myDiagram.nodeTemplate =
@@ -384,6 +389,7 @@
                             if (res.success){
                                 Tool.message({text:'保存成功'});
                                 $('#Graph-tool-edit').removeClass('show');
+                                $('#Graph-box .tools .tool[href="#Graph-tool-edit"]').removeClass('clicked');
                             } else {
                                 Tool.message({
                                     text:'保存失败！'+res.msg,

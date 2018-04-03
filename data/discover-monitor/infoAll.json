@@ -10,7 +10,7 @@
         "endTime": "2018-01-10 10:00:00",
         "operator": "系统",
         "status": 1,
-        "progress":40
+        "progress":80
     },{
         "id": 2,
         "name": "扫描任务1",
