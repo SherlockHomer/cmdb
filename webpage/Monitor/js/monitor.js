@@ -276,8 +276,13 @@
                 render('Monitor-table-detail-template',res.data);
                 Record.details = res.data.details;
             },
-            error:function(){
-
+            error:function(e){
+                Tool.message({
+                    text:e.statusText,
+                    status:'danger',
+                    time:5000
+                })
+                render('Monitor-table-detail-template');
             }
         });
     };

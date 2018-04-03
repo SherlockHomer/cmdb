@@ -121,21 +121,21 @@
     {type:3,text:'v3'}
     ];
     Constant.dbType = [
-    {type:1,text:'mysql'},
-    {type:2,text:'oracle'},
-    {type:3,text:'db2'},
-    {type:4,text:'sqlserver'},
+    {type:1,text:'mysql',port:'3306'},
+    {type:2,text:'oracle',port:'1521'},
+    {type:3,text:'db2',port:'50000'},
+    {type:4,text:'sqlserver',port:'1433'},
     {type:5,text:'sybase'},
     {type:6,text:'inforMix'}
     ];
     Constant.middlewareType = [
-    {type:1,text:'tomcat'},
-    {type:2,text:'weblogic'},
-    {type:3,text:'websphere'}
+    {type:1,text:'tomcat',port:'8080'},
+    {type:2,text:'weblogic',port:'7001'},
+    {type:3,text:'websphere',port:'9080'}
     ];
     Constant.connectProt = [
-    {type:1,text:'WMI'},
-    {type:2,text:'SSH'}
+    {type:1,text:'WMI',port:'445'},
+    {type:2,text:'SSH',port:'22'}
     ];
     Constant.osType = [
     {type:1,text:'Windows'},

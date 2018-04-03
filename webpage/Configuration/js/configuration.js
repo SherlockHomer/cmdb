@@ -686,15 +686,20 @@
         }
         var html = Handlebars.getHTMLByCompile(tabId+'-editView-template',params);
         $('#'+tabId).find('.editView').html(html);
+        // 下拉内容需要触发 changeView 和 changePort 的事件
         if ( params ) {
             $('#'+tabId).find('.editView select').each(function(i,perSel){
                 $(perSel).val( $(perSel).attr('value').split(',') ).change();
             })
-        };
+        } else {
+            $('#'+tabId).find('.editView select').each(function(i,perSel){
+                $(perSel).change();
+            })
+        }
         // 特殊标签内容处理
         if (tabId == 'Configuration-mission') {
             DefineMissionStrategy.render(params);
-        } else if (params && tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') {
+        } else if (params && ( tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') ) {
             DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , params.ipRange );
         }
     }
@@ -919,7 +924,15 @@
     $('body').on('click','#Configuration-basic .editView .btn.save',function(e){
         saveOne(e);
     });
-
+    // 设置默认值
+    $('body').on('change','#Configuration-basic .changePort',function(e){
+        var form = $(this).parents('form').eq(0);
+        var val = $(this).val();
+        var book = $(this).attr('data-book');
+        if ( !form.find('[name="id"]').val() ) {
+            form.find('[name="port"]').val( getStatusItem(book,val).port );
+        }
+    });
 
     // 
 

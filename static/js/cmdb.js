@@ -188,7 +188,7 @@
             },
             error:function(e){
                 if (callback && callback.error) {
-                    callback.error();
+                    callback.error(e);
                 }
             }
         });
