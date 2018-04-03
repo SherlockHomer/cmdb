@@ -200,6 +200,17 @@
                     }
                 }
             },{
+                title:'目标范围',
+                field:'ipRange',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    if (!value) {return};
+                    value = eval( value );
+                    return $.map(value,function(perIp){
+                        return perIp.ip;
+                    }).join(';</br>');
+                }
+            },{
                 title:'端口',
                 field:'port',
                 sortable:true
@@ -294,6 +305,17 @@
                 field:'dbName',
                 sortable:true
             },{
+                title:'目标范围',
+                field:'ipRange',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    if (!value) {return};
+                    value = eval( value );
+                    return $.map(value,function(perIp){
+                        return perIp.ip;
+                    }).join(';</br>');
+                }
+            },{
                 title:'端口',
                 field:'port',
                 sortable:true
@@ -343,6 +365,17 @@
                 formatter:function(value, row, index, field){
                     if (!value) {return};
                     return getStatusItem('middlewareType',value).text;
+                }
+            },{
+                title:'目标范围',
+                field:'ipRange',
+                sortable:true,
+                formatter:function(value, row, index, field){
+                    if (!value) {return};
+                    value = eval( value );
+                    return $.map(value,function(perIp){
+                        return perIp.ip;
+                    }).join(';</br>');
                 }
             },{
                 title:'端口',
@@ -498,9 +531,22 @@
         $('#'+id).bootstrapTable('checkInvert')
     };
     function filterText(){
+        var $table = $(this).parents('.tab-pane').eq(0).find('table.table').eq(0);
+        var datas = $table.bootstrapTable('getData');
+        $table.bootstrapTable('uncheckAll');
+        var hiddens = $table.bootstrapTable('getHiddenRows');
+        if (hiddens.length > 0) {
+            var uniqueIds = [];
+            hiddens.forEach(function(h){
+                uniqueIds.push(h.id);
+            });
+            uniqueIds.forEach(function(u){
+                $table.bootstrapTable('showRow',{uniqueId:u})
+            })
+        };
         var text = this.value.toLowerCase();
-        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        $('#'+ id +' tbody tr').each(function(){
+        var id = $table.attr('id');
+        $('#'+ id +' tbody tr').each(function(i){
             var has = false;
             $(this).find('td').each(function(){
                 if ( $(this).text().toLowerCase().indexOf(text) != -1){
@@ -509,9 +555,9 @@
                 }
             });
             if ( !has ) {
-                $(this).hide();
+                $table.bootstrapTable('hideRow',{uniqueId:datas[i].id});
             } else {
-                $(this).show();
+                $table.bootstrapTable('showRow',{uniqueId:datas[i].id});
             }
         })
     };
@@ -529,7 +575,9 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            Tool.message('请选择至少一条');
+            Tool.message({
+                text:'请选择至少一条'
+            });
             return false;
         }
         var params = {ids : ids.join(',')};
@@ -587,7 +635,11 @@
                                 $('#'+tableId).bootstrapTable('removeByUniqueId',perId);
                             })
                         } else {
-                            Tool.message( res.msg, 'danger');
+                            Tool.message( {
+                                text:res.msg, 
+                                status:'danger',
+                                time:5000
+                            });
                         }
                     }
                 })
@@ -642,7 +694,7 @@
         // 特殊标签内容处理
         if (tabId == 'Configuration-mission') {
             DefineMissionStrategy.render(params);
-        } else if (params && tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_HOST') {
+        } else if (params && tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') {
             DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , params.ipRange );
         }
     }
@@ -716,7 +768,11 @@
                     $('#'+tableId).bootstrapTable('refresh');
                     Tool.backToTableView(btn);
                 } else {
-                    Tool.message( res.msg, 'danger');
+                    Tool.message( {
+                        text:res.msg,
+                        status:'danger',
+                        time:5000
+                    });
                 }
             }
         })
@@ -745,7 +801,7 @@
             ids.push(perSel.id);
         });
         if ( !ids[0] ) {
-            Tool.message('请选择至少一条');
+            Tool.message({text:'请选择至少一条'});
             return false;
         }
         var params = {ids : ids.join(',')};
@@ -757,9 +813,13 @@
             success:function(res){
                 if (res.success) {
                     window.location = window.location.origin + window.location.pathname + '#/Monitor';
-                    Tool.message('启动扫描成功');
+                    Tool.message({text:'启动扫描成功'});
                 } else {
-                    Tool.message(res.msg,'warning');
+                    Tool.message({
+                        text:res.msg,
+                        status:'warning',
+                        time:5000
+                    });
                 }
             }
         })

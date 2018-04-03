@@ -378,12 +378,18 @@
                 }
             },
             error:function(e){
-                console.warn('加载模版失败')
+                Tool.message({
+                    text:'加载模版失败',
+                    status:'danger'
+                });
             }
         });
     };
     // 消息框
-    function message(text ,status){
+    function message(params){
+        var status = params.status;
+        var text = params.text;
+        var time = parseInt( params.time) || 3000;
         status = status ? status : 'info';
         if ( $('body').children('.affix') [0]) {
             $('body').children('.affix').remove();
@@ -392,7 +398,7 @@
         alert.appendTo( $('body') );
         setTimeout(function(){
             alert.fadeOut();
-        },3000);
+        },time);
     };
 
     // 弹窗确认 

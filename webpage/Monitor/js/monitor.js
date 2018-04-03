@@ -27,18 +27,18 @@
         };
         Handlebars.renderDOMInTemp(temp,tempAndDom,data);
     };
-    function renderBasic() {
+    function renderBasic(tab) {
         render('Monitor-basic-template');
-        initMonitorTable('Monitor-ing-table',1);
-        initMonitorTable('Monitor-done-table',2);
-        initMonitorTable('Monitor-planTo-table',0);
-        initMonitorTable('Monitor-all-table','');
-
-    }
+        var $tab = $('#Monitor-basic .nav-tabs a[href="#Monitor-'+tab+'"]');
+        var monitorType = $tab.attr('data-monitorType');
+        var tableId = $tab.attr('href').substring(1) + '-table';
+        initMonitorTable(tableId,monitorType);
+        $tab.tab('show');
+    };
     // 各个表的渲染
     function initMonitorTable(tableId,monitorType){
         $('#'+tableId).bootstrapTable({
-            toolbarId:tableId+'-toolbar',
+            toolbarId:'#'+ tableId+'-toolbar',
             monitorType:monitorType,
             method:'post',
             url:ConfirmUrl('discover-monitor/infoAll'),
@@ -145,9 +145,8 @@
             return;
         }
         Router.updateBreadcrumb(crumb);
-        renderBasic();
         Record.tab = hashes[0] || 'ing';
-        $('#Monitor-basic .nav-tabs a[href="#Monitor-'+Record.tab+'"]').tab('show');
+        renderBasic(Record.tab);
     };
 
     function checkAll(){
@@ -163,9 +162,22 @@
         $('#'+id).bootstrapTable('checkInvert')
     };
     function filterText(){
+        var $table = $(this).parents('.tab-pane').eq(0).find('table.table').eq(0);
+        var datas = $table.bootstrapTable('getData');
+        $table.bootstrapTable('uncheckAll');
+        var hiddens = $table.bootstrapTable('getHiddenRows');
+        if (hiddens.length > 0) {
+            var uniqueIds = [];
+            hiddens.forEach(function(h){
+                uniqueIds.push(h.id);
+            });
+            uniqueIds.forEach(function(u){
+                $table.bootstrapTable('showRow',{uniqueId:u})
+            })
+        };
         var text = this.value.toLowerCase();
-        var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
-        $('#'+ id +' tbody tr').each(function(){
+        var id = $table.attr('id');
+        $('#'+ id +' tbody tr').each(function(i){
             var has = false;
             $(this).find('td').each(function(){
                 if ( $(this).text().toLowerCase().indexOf(text) != -1){
@@ -174,16 +186,16 @@
                 }
             });
             if ( !has ) {
-                $(this).hide();
+                $table.bootstrapTable('hideRow',{uniqueId:datas[i].id});
             } else {
-                $(this).show();
+                $table.bootstrapTable('showRow',{uniqueId:datas[i].id});
             }
         })
     };
 
     function queryParams(params){
         params.monitorType = this.monitorType;
-        var toolbar = $('#'+this.toolbarId);
+        var toolbar = $(this.toolbarId);
         params.searchText = toolbar.find('.searchInput').val();
         return params;
     }
@@ -218,7 +230,7 @@
             }
         });
         if ( !ids[0] ) {
-            Tool.message('请选择至少一条');
+            Tool.message({text:'请选择至少一条'});
             return false;
         }
         var params = {ids : ids.join(',')};
@@ -232,12 +244,16 @@
                 if (res.success) {
                     $('#'+tableId).bootstrapTable('refresh');
                     if ( scanOrNot ){
-                        Tool.message('启动扫描成功');
+                        Tool.message({text:'启动扫描成功'});
                     } else {
-                        Tool.message('取消扫描成功');
+                        Tool.message({text:'取消扫描成功'});
                     }
                 } else {
-                    Tool.message(res.msg,'warning');
+                    Tool.message({
+                        text:res.msg,
+                        status:'warning',
+                        time:5000
+                    });
                 }
             }
         })
@@ -290,6 +306,28 @@
     function clickInfobox(){
         var code = $(this).attr('data-code');
         window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ code + '/' + Record.rowId;
+    };
+
+    function changeTab(tab){
+        var tabDom = $(tab).attr('href').substring(1);
+        var tableId = tabDom+'-table';
+        var monitorType = $(tab).attr('data-monitorType');
+
+        if ( $('#'+tabDom).find('.bootstrap-table')[0] ){
+            refreshTable(tableId);
+        } else {
+            initMonitorTable(tableId,monitorType);
+        }
+    };
+    function refreshTable(tableId){
+        $('#'+tableId).bootstrapTable('refresh');
+    };
+    // 循环刷新正在扫描表
+    function interRefreshTable(){
+        var tableId = 'Monitor-ing-table';
+        if ( $('#'+tableId)[0] && $('#'+tableId).bootstrapTable('getData').length > 0 ) {
+            refreshTable(tableId);
+        }
     }
     // 事件注册
     // 相同功能
@@ -314,6 +352,15 @@
     // 详情中内容过多点击详情
     $('body').on('click','#Monitor-table-detail .more',clickMore);
     $('body').on('click','#Monitor-table-detail .info-box',clickInfobox);
+
+    // 切换选项卡
+    $('body').on('shown.bs.tab','#Monitor-basic a[data-toggle="tab"]', function (e) {
+        changeTab(e.target);
+    });
+    // 定时刷新
+    setInterval(function(){
+        interRefreshTable();
+    },7000)
 
     var Monitor = {};
     Monitor.renderModule = renderModule;

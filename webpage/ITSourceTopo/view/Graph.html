@@ -382,10 +382,14 @@
                     },{
                         success:function(res){
                             if (res.success){
-                                Tool.message('保存成功');
+                                Tool.message({text:'保存成功'});
                                 $('#Graph-tool-edit').removeClass('show');
                             } else {
-                                Tool.message('保存失败！'+res.msg,'danger');
+                                Tool.message({
+                                    text:'保存失败！'+res.msg,
+                                    status:'danger',
+                                    time:5000
+                                });
                             }
                         }
                     });
@@ -395,7 +399,10 @@
         // 批量设置标签
         function setTag(){
             if( Record.diagram.selection.count == 0){
-                Tool.message('请选择一个以上设备！“点击拓扑图Ctrl+A可全选~”');
+                Tool.message({
+                    text:'请选择一个以上设备！“点击拓扑图Ctrl+A可全选~”',
+                    time:5000
+                });
                 return;
             };
             var ids = [];
@@ -434,9 +441,13 @@
             fetchData('resource/setTag','json',params,{
                 success:function(res){
                     if (res.success) {
-                        Tool.message('设置成功');
+                        Tool.message({text:'设置成功'});
                     } else {
-                        Tool.message(res.msg,'danger');
+                        Tool.message({
+                            text:res.msg,
+                            status:'danger',
+                            time:5000
+                        });
                     }
                 }
             })
