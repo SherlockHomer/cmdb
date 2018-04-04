@@ -1,6 +1,6 @@
 {
     "data": {
-        "resName": "WIN-0ECQ6MI24DJ",
+        "name": "WIN-0ECQ6MI24DJ",
         "ip": "10.5.5.174",
         "tags": ["应用服务器", "数据库服务器"],
         "details": [{
@@ -9,55 +9,100 @@
             "isText": true
         }, {
             "keyText": "扫描进度",
-            "value": 40,
+            "value": 44,
             "isProcess": true
         }, {
             "keyText": "补丁",
             "value": {
-                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本","数量","发布者","新内容1","新内容2","新内容3"],
-                "tableData": [[
-                    "##IANGDL",
-                    "10.5.5.175",
-                    "Linux",
-                    "Redhat Enterprise 15.5 Santago",
-                    15,
-                    "sher",
-                    "新内容11",
-                    "新内容22",
-                    "新内容33"
-                ],[
-                    "LIGDL",
-                    "10.5.5.175",
-                    "Lin x",
-                    "Redhat Enterprise 6115 Santago",
-                    20,
-                    "lock",
-                    "新内容44",
-                    "新内容55",
-                    "新内容66"
-                ],[
-                    "L DL",
-                    "10.5.5.175",
-                    "Lux",
-                    "Redhat Enterprise 4.5 Santago",
-                    24,
-                    "lockss",
-                    "新内容11",
-                    "新内容22",
-                    "新内容33"
-                ]]
+                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本", "详情"],
+                "tableData": [
+                    [
+                        "##IANGDL",
+                        "10.5.5.175",
+                        "Linux",
+                        "Redhat Enterprise 15.5 Santago", {
+                            "details": [{
+                                "keyText": "开始时间",
+                                "value": "2018-01-10 09:00:00",
+                                "isText": true
+                            }, {
+                                "keyText": "扫描进度",
+                                "value": 44,
+                                "isProcess": true
+                            }, {
+                                "keyText": "补丁",
+                                "value": {
+                                    "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本", "详情"],
+                                    "tableData": [
+                                        [
+                                            "##IANGDL",
+                                            "10.5.5.175",
+                                            "Linux",
+                                            "Redhat Enterprise 15.5 Santago", {
+                                                "details": [{
+                                                    "keyText": "开始时间",
+                                                    "value": "2018-01-10 09:00:00",
+                                                    "isText": true
+                                                }, {
+                                                    "keyText": "扫描进度",
+                                                    "value": 44,
+                                                    "isProcess": true
+                                                }]
+                                            }
+                                        ],
+                                        [
+                                            "LIGDL",
+                                            "10.5.5.175",
+                                            "Lin x",
+                                            "Redhat Enterprise 6115 Santago",
+                                            20,
+                                            "lock",
+                                            "新内容44",
+                                            "新内容55",
+                                            "新内容66"
+                                        ],
+                                        [
+                                            "L DL",
+                                            "10.5.5.175",
+                                            "Lux",
+                                            "Redhat Enterprise 4.5 Santago",
+                                            24,
+                                            "lockss",
+                                            "新内容11",
+                                            "新内容22",
+                                            "新内容33"
+                                        ]
+                                    ]
+                                },
+                                "isTable": true
+                            }]
+                        }
+                    ],
+                    [
+                        "LIGDL",
+                        "10.5.5.175",
+                        "Lin x",
+                        "Redhat Enterprise 6115 Santago",
+                        20,
+                        "lock",
+                        "新内容44",
+                        "新内容55",
+                        "新内容66"
+                    ],
+                    [
+                        "L DL",
+                        "10.5.5.175",
+                        "Lux",
+                        "Redhat Enterprise 4.5 Santago",
+                        24,
+                        "lockss",
+                        "新内容11",
+                        "新内容22",
+                        "新内容33"
+                    ]
+                ]
             },
             "isTable": true
-        }, {
-            "keyText": "集合",
-            "isGather": true,
-            "value": [{
-                "keyText": "服务器厂商",
-                "value": "LENOVO"
-            }, {
-                "keyText": "设备型号",
-                "value": "20AYA08DCD"
-            }]
         }]
     },
     "success": true,

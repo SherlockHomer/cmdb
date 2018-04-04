@@ -919,18 +919,23 @@ action：  resource/getResourceDetail
         },{
             "keyText":"补丁",
             "value":{
-                // 如果超出五列就显示显示详情
-                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本","数量","发布者","新内容1","新内容2","新内容3"],
+                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本","详情"],
                 "tableData": [[
                     "##IANGDL",
                     "10.5.5.175",
                     "Linux",
                     "Redhat Enterprise 15.5 Santago",
-                    15,
-                    "sher",
-                    "新内容11",
-                    "新内容22",
-                    "新内容33"
+                    {
+                        "details":[{
+                            "keyText":"开始时间",
+                            "value":"2018-01-10 09:00:00",
+                            "isText":true
+                        },{
+                            "keyText":"扫描进度",
+                            "value":44,
+                            "isProcess":true
+                        }]
+                    }
                 ],[
                     "LIGDL",
                     "10.5.5.175",

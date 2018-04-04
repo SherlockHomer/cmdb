@@ -32,7 +32,6 @@
         var $tab = $('#Monitor-basic .nav-tabs a[href="#Monitor-'+tab+'"]');
         var monitorType = $tab.attr('data-monitorType');
         var tableId = $tab.attr('href').substring(1) + '-table';
-        initMonitorTable(tableId,monitorType);
         $tab.tab('show');
     };
     // 各个表的渲染
@@ -330,6 +329,7 @@
     // 循环刷新正在扫描表
     function interRefreshTable(){
         var tableId = 'Monitor-ing-table';
+        if ( !$('#Monitor-basic')[0] || !$('#Monitor-ing .bootstrap-table:visible')[0] ) {return};
         var options = $('#'+tableId).bootstrapTable('getOptions');
         fetchData('discover-monitor/infoAll','json',{
             monitorType:options.monitorType,

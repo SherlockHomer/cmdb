@@ -249,9 +249,11 @@
     // ITSource details 
     Handlebars.registerHelper('tableDetail',function(table){
         var html = '<thead><tr>';
+        var detailIndex = 999;
         $.each(table.columnsText,function(i,perCol){
-            if (i == 5){
-                html = html + '<td>操作</td>';
+            if (perCol == '详情'){
+                detailIndex = i;
+                html = html + '<td>laya </td>';
                 return false;
             } else {
                 html = html + '<td>'+perCol+'</td>'
@@ -261,8 +263,9 @@
         $.each(table.tableData,function(y,perRow){
             html = html + '<tr>';
             $.each(perRow,function(dIndex,perD){
-                if (dIndex == 5) {
-                    html = html + '<td class="more text-aqua" role="button">显示详情</td>';
+                if (dIndex == detailIndex) {
+                    // 这里外围用双引号good
+                    html = html + "<td class='more text-aqua' role='button' data-more='"+JSON.stringify(perD)+"'>显示详情</td>";
                     return false;
                 } else {
                     html = html + '<td>'+perD+'</td>'

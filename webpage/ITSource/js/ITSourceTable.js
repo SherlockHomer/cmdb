@@ -589,18 +589,8 @@
             $(this).text('显示详情');
             $(this).parents('tr').next().remove();
             return;
-        }
-        var trIndex = $(this).parents('tr').index();
-        var labelIndex = $(this).parents('.form-group').index();
-        var columnsTexts = Record.details[labelIndex].value.columnsText;
-        var tr = Record.details[labelIndex].value.tableData[trIndex];
-        var data = {more:[]};
-        for (var i = 5; i < columnsTexts.length; i++) {
-            data.more.push({
-                keyText:columnsTexts[i],
-                value:tr[i]
-            });
         };
+        var data = JSON.parse ( $(this).attr('data-more') );
         var html = Handlebars.getHTMLByCompile('ITSource-table-more-template',data);
         $(html).insertAfter($(this).parents('tr'));
     }
