@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
     <link rel="stylesheet" type="text/css" href="static/icon/auto/iconfont.css">
-    <link rel="stylesheet" href="static/css/cmdb.css">
+    <link rel="stylesheet" href="static/css/hashBS.css">
     <script>
         // 前后端分离
         // window.UrlConfig = 'frontEnd';
@@ -400,7 +400,7 @@
 <script src="bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="static/js/constant.js"></script>
-<script src="static/js/cmdb.js"></script>
+<script src="static/js/hashBS.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
