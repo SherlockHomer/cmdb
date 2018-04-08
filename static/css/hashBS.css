@@ -213,6 +213,11 @@ ul {
 #Graph canvas{
     outline: none;
 }
+/*IT资源信息*/
+#ITSource-filter-tags-box .text{
+    margin-right: 10px;
+    cursor: pointer;
+}
 
 /*select 2*/
 .select2-container{

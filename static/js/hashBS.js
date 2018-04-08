@@ -253,7 +253,7 @@
         $.each(table.columnsText,function(i,perCol){
             if (perCol == '详情'){
                 detailIndex = i;
-                html = html + '<td>laya </td>';
+                html = html + '<td>详情</td>';
                 return false;
             } else {
                 html = html + '<td>'+perCol+'</td>'

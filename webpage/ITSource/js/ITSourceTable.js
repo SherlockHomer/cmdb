@@ -29,7 +29,8 @@
     // 配置DOM和temp的一一对应
     var tempAndDom = {
         'ITSource-sourceTable-template':'index-content',
-        'ITSource-table-detail-template':'index-content'
+        'ITSource-table-detail-template':'index-content',
+        'ITSource-filter-tags-template':'ITSource-filter-tags-box'
     };
     function render(temp,data) {
         if (!data) {
@@ -41,13 +42,23 @@
     // 有数据才有表，因为是模版
     function renderBasic(){
         render('ITSource-sourceTable-template');
+        renderFilter();
         initSourceTable('DC_HOST');
         initSourceTable('DC_DBS');
         initSourceTable('DC_MIDDSERVER');
         initSourceTable('cloud');
         initSourceTable('DC_NETWORKDEVICE');
         initSourceTable('DC_APPSYS');
-    }
+    };
+    function renderFilter(){
+        fetchData('resource/getAllTags','json',null,{
+            success:function(res){
+                if (res.success) {
+                    render('ITSource-filter-tags-template',res.data);
+                };
+            }
+        });
+    };
     function initSourceTable(code){
         $('#ITSource-'+code+'-table').bootstrapTable({
             code:code,
@@ -406,7 +417,7 @@
             }
 
         } else if ( hashes.currentModule == 'ITSource' ){
-
+            Record.tagName = [];
         };
         Router.updateBreadcrumb(crumb);
         renderBasic();
@@ -421,6 +432,14 @@
         } else if (currentModule == 'ITSource') {
             $('#ITSource-sourceTable-box .forNotReport').show();
         }
+    };
+    function filterTags(text) {
+        $(text).toggleClass('clicked');
+        $(text).toggleClass('bg-olive');
+        Record.tagName = $('#ITSource-filter-tags-box .text.clicked').map(function(){
+            return this.innerHTML; 
+        }).get();
+        $('#ITSource-'+ Record.levelOneType + '-table').bootstrapTable('refresh');
     }
 
     function changeTab(tab){
@@ -533,6 +552,7 @@
         // 资源分类
         if (Record.currentModule == 'ITSource') {
             params.ciMajor = this.code;
+            params.tagName = Record.tagName.join(',');
         } else {
             params.code = Record.code;
             // 统计分类
@@ -740,6 +760,11 @@
     $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function (e) {
         changeTab(e.target);
     });
+    // 筛选条件
+    $('body').on('click','#ITSource-filter-tags-box .text',function(e){
+        filterTags(e.target);
+    });
+
     // 详情中内容过多点击详情
     $('body').on('click','#ITSource-table-detail .more',clickMore);
 
