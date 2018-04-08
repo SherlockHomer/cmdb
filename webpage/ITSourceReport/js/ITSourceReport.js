@@ -96,7 +96,7 @@
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');
         var countType = $(this).find('.info-box-number').attr('data-countType')
-        Router.addHash(countType+'/'+name);
+        Router.addHash(countType+'/'+ name.replace('/','&') );
     })
     
     var ITSourceReport = {};

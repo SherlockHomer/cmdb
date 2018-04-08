@@ -81,7 +81,7 @@
                 levelOneType:hashes[2],
                 code:hashes[3],
                 countType:hashes[4],
-                classifyInCount:hashes[5],
+                classifyInCount: window.decodeURI( hashes[5].replace('&','/') ),
                 detail:hashes[6],
                 rowId:hashes[7]
             });

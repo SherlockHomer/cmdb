@@ -13,7 +13,7 @@
     }, {
         "countType": 2,
         "details": [{
-            "typeName": "Windows Server 2008 SP2",
+            "typeName": "Windows/Server 2008 SP2",
             "sum": "5",
             "countType": 2
         }, {
