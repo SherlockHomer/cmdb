@@ -10,9 +10,9 @@
     <form class="form-horizontal" id="DefineMissionStrategy-form">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">任务名称：</label>
+            <label class="col-sm-2 control-label required">任务名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="taskName" class="form-control" value="{{taskName}}">
+                <input type="text" name="taskName" class="form-control" value="{{taskName}}" required>
             </div>
         </div>
         <div class="form-group">
@@ -23,9 +23,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">发现内容：</label>
+            <label class="col-sm-2 control-label required">发现内容：</label>
             <div class="col-sm-5">
-                <select class="form-control select2" multiple="multiple" name="scanType" value="{{scanType}}">
+                <select class="form-control select2" multiple="multiple" name="scanType" value="{{scanType}}" required>
                     <option selected="selected" value="device">物理设备</option>
                     <option selected="selected" value="port">端口</option>
                     <option selected="selected" value="server">服务器</option>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">目标设备：</label>
+            <label class="col-sm-2 control-label required">目标设备：</label>
             <div class="ips col-sm-10">
                 <button class="btn btn-default add">+</button>
             </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
@@ -53,7 +53,7 @@
 </script>
 
 <script type="text/x-handlebars-template" id="Configuration-mission-editView-ip-template">
-    <div class="ip form-group col-sm-12">
+    <div class="ip">
         <div class="showInline changeViewBox">
             <select class="targetDevice form-control changeView">
                 <option value="1" selected="selected">指定IP</option>
@@ -62,16 +62,16 @@
             </select>
         </div>
         <div class="showInline" data-belong="1">
-            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required>
         </div>
         <div class="showInline hide" data-belong="2">
-            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required>
             --
-            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required>
         </div>
         <div class="showInline hide" data-belong="3">
-            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask>/
-            <input class="form-control ipBox" type="number" min="0" max="255" style="width: 70px !important">
+            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required>/
+            <input class="form-control ipBox" type="number" min="0" max="255" required style="width: 70px !important">
         </div>
         <button class="btn btn-default remove">-</button>
     </div>
@@ -97,10 +97,13 @@
             var newOne = $( $('#Configuration-mission-editView-ip-template').html() );
             newOne.insertBefore( $(addBtn) );
             newOne.find('[data-mask]').inputmask();
+            $(addBtn).parents('form').eq(0).validator('update');
             return newOne;
         }
         function removeIp(removeBtn){
+            var form = $(removeBtn).parents('form').eq(0);
             $(removeBtn).parent().remove();
+            form.validator('update');
         }
         $('body').on('click','.ips .add',function(e){
             e.preventDefault();

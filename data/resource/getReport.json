@@ -18,7 +18,7 @@
         "details": [{
             "ciCode": "DC_MIDDSERVER",
             "typeName": "Tomcat",
-            "sum": "3"
+            "sum": "0"
         }, {
             "ciCode": "DC_IIS",
             "typeName": "WebLogic",

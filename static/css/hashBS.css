@@ -22,6 +22,10 @@ ul {
     list-style: none;
     padding-left: 20px;
 }
+label.required:before{
+  content: '*';
+  color: red;
+}
 .showInline{
     display: inline-block;
 }
@@ -216,6 +220,7 @@ ul {
 /*IT资源信息*/
 #ITSource-filter-tags-box .text{
     margin-right: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -233,4 +238,11 @@ ul {
 /*bootstrap table*/
 .bootstrap-table .table tr td .progress{
     margin-top: 0;
+}
+
+
+/*配合 bootstrap-validate 验证*/
+.form-group.has-error .select2-selection{
+    border-color: #dd4b39;
+    box-shadow:none;
 }

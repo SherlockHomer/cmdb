@@ -398,6 +398,11 @@
 <!-- input-mask -->
 <!-- InputMask -->
 <script src="bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+<!-- form validate -->
+<script src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
+<script>
+    $.fn.validator.Constructor.INPUT_SELECTOR = ':input:not([type="hidden"], [type="submit"], [type="reset"], button, input:hidden , input.select2-search__field), .select2+span.select2-container'
+</script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="static/js/constant.js"></script>
 <script src="static/js/hashBS.js"></script>

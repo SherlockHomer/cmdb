@@ -49,6 +49,7 @@
     "jquery-ui": "1.11.4",
     "handlebars": "^4.0.11",
     "bootstrap-table": "^1.11.1",
-    "inputmask": "^3.3.11"
+    "inputmask": "^3.3.11",
+    "bootstrap-validator": "^0.11.9"
   }
 }

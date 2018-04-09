@@ -13,11 +13,13 @@
                 <!-- /.box-header -->
                 <div class="">
                     {{#each this.details}}
+                    {{#if sum}}
                     <div class="info-box">
                         <span class="info-box-icon"><i class="{{deviceIcon ciCode}}"></i></span>
                         <span class="info-box-number text-aqua" data-ciCode="{{ciCode}}" data-name="{{typeName}}">{{typeName}}({{sum}})
                         </span>
                     </div>
+                    {{/if}}
                     {{/each}}
                 </div>
             </div>

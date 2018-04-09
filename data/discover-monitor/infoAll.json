@@ -8,7 +8,7 @@
         "schePlanId": "2,3,4",
         "startTime": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
-        "operator": "系统",
+        "executeUser": "系统",
         "status": 1,
         "progress":80
     },{
@@ -19,7 +19,7 @@
         "schePlanId": "2,3,4",
         "startTime": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
-        "operator": "系统",
+        "executeUser": "系统",
         "status": 2,
         "progress":100
     },{
@@ -30,7 +30,7 @@
         "schePlanId": "2,3,4",
         "startTime": "2018-01-10 09:00:00",
         "endTime": "2018-01-10 10:00:00",
-        "operator": "系统",
+        "executeUser": "系统",
         "status": 3,
         "progress":0
     }]

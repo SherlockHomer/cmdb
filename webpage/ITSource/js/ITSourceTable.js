@@ -51,7 +51,7 @@
         initSourceTable('DC_APPSYS');
     };
     function renderFilter(){
-        fetchData('resource/getAllTags','json',null,{
+        fetchData('resource/getAllTags','json',{type:1},{
             success:function(res){
                 if (res.success) {
                     render('ITSource-filter-tags-template',res.data);
@@ -440,6 +440,17 @@
             return this.innerHTML; 
         }).get();
         $('#ITSource-'+ Record.levelOneType + '-table').bootstrapTable('refresh');
+        if ( $(text).parent().children('.clicked')[0] ) {
+            $('#ITSource-filter .resetFilter').removeClass('hide');
+        } else {
+            $('#ITSource-filter .resetFilter').addClass('hide');
+        }
+    };
+    function resetFilter(btn) {
+        Record.tagName = [];
+        $('#ITSource-filter-tags-box').children().removeClass('clicked bg-olive');
+        $('#ITSource-'+ Record.levelOneType + '-table').bootstrapTable('refresh');
+        $(btn).addClass('hide');
     }
 
     function changeTab(tab){
@@ -743,26 +754,30 @@
 
     $('body').on('click','#ITSource-sourceTable-box .editView .btn.cancle',function(e){
         e.preventDefault();
-        Tool.backToTableView(e.target);
+        Tool.backToTableView(this);
     });
     $('body').on('click','#ITSource-sourceTable-box .backToTableView',function(e){
         e.preventDefault();
-        Tool.backToTableView(e.target);
+        Tool.backToTableView(this);
     });
     $('body').on('click','#ITSource-sourceTable-box .editView .btn.save',function(e){
         e.preventDefault();
-        saveOne(e.target);
+        saveOne(this);
     });
     // 设置标签的问题
     $('body').on('click','#ITSource-setTag-form .tags .close',deleteApp);
 
     // 切换一级资源类型选项卡
-    $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function (e) {
-        changeTab(e.target);
+    $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function () {
+        changeTab(this);
     });
     // 筛选条件
-    $('body').on('click','#ITSource-filter-tags-box .text',function(e){
-        filterTags(e.target);
+    $('body').on('click','#ITSource-filter-tags-box .text',function(){
+        filterTags(this);
+    });
+    // 重置筛选
+    $('body').on('click','#ITSource-filter .resetFilter',function(e){
+        resetFilter(this);
     });
 
     // 详情中内容过多点击详情

@@ -229,7 +229,7 @@
     });
 
     Handlebars.registerHelper('statusInMission', function(status) {
-        if(status == 1)
+        if(status == 2)
             return new Handlebars.SafeString('任务完成') ;
     });
 
@@ -326,6 +326,8 @@
                 $(thoseDiv[i]).addClass("hide");
             }
         }
+        // 配合Bootstrap-validate
+        $(selected).parents('form').eq(0).validator('update');
     };
 
     /**

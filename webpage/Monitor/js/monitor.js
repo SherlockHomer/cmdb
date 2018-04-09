@@ -89,7 +89,7 @@
                 sortable:true
             },{
                 title:'操作人',
-                field:'operator',
+                field:'executeUser',
                 sortable:true
             },{
                 title:'任务状态',

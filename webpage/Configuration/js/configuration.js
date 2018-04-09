@@ -701,12 +701,18 @@
             DefineMissionStrategy.render(params);
         } else if (params && ( tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') ) {
             DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , params.ipRange );
-        }
+        };
+        // 启用form验证
+        $('#'+tabId + ' .editView form').validator();
     }
-    function saveOne(e){
-        e.preventDefault();
-        var tabId = $(e.target).parents('.tab-pane').eq(0).attr('id');
-        var tableId = $(e.target).parents('.tab-pane').eq(0).find('table.table').attr('id');
+    function saveOne(btn){
+        var tabId = $(btn).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        // 配合Bootstrap-validate
+        if ($(btn).hasClass('disabled') ) {
+            // $('#'+tabId + ' .editView form').validator('validate');
+            return false;
+        };
         if ( tableId == 'Configuration-portStandard-table' || tableId == 'Configuration-portCustom-table') {
             // 非表格类的处理
             params = collectPortTags(tabId);
@@ -727,7 +733,7 @@
             }
         }
         
-        ajaxSave(tableId,params,e.target);
+        ajaxSave(tableId,params,btn);
     }
     function ajaxSave(tableId,params,btn){
         switch(tableId){
@@ -922,7 +928,8 @@
 
     // 编辑表单 
     $('body').on('click','#Configuration-basic .editView .btn.save',function(e){
-        saveOne(e);
+        e.preventDefault();
+        saveOne(this);
     });
     // 设置默认值
     $('body').on('change','#Configuration-basic .changePort',function(e){
