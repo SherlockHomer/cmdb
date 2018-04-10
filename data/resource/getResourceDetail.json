@@ -1,7 +1,9 @@
 {
     "data": {
-        "name": "WIN-0ECQ6MI24DJ",
-        "ip": "10.5.5.174",
+        "ciCode":"DC_APPComp",
+        "resName":"ice 11001",
+        "ciName": "应用组件",
+        "resIp": "10.5.5.174",
         "tags": ["应用服务器", "数据库服务器"],
         "details": [{
             "keyText": "开始时间",

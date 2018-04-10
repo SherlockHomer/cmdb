@@ -282,7 +282,10 @@
                     toEndSegmentLength: 30,
                     fromEndSegmentLength: 30
                 },
-                { 
+                {
+                    doubleClick: function(e, node) {
+                        showNodeDetail(node);
+                    },
                     selectionChanged: function(){} 
                 },
                 $(go.Panel,'Vertical',
@@ -471,6 +474,10 @@
         };
         function resetScale(){
             $('#Graph-map .scale').val( parseFloat(Record.diagram.scale) * 100);
+        };
+        // 节点详情
+        function showNodeDetail(node){
+            window.location = window.location.origin + window.location.pathname + '#/ITSource/detail/' + node.data.id;
         }
 
         // 注册事件
