@@ -214,12 +214,13 @@
             });
         };
         // 显示隐藏节点
+        // 参数ciCode 是大分类
         function displayNode(ciCode , showOrNot){
             var diag  = Record.diagram;
             var nodes = diag.model.nodeDataArray;
             diag.startTransaction("displayNode");
             $.each(nodes,function(i,perNode){
-                if(perNode.ciCode == ciCode){
+                if(perNode.ciMajor == ciCode){
                     var nodeData = diag.model.findNodeDataForKey(perNode.key);
                     diag.model.setDataProperty(nodeData, 'visible', showOrNot);
                 }

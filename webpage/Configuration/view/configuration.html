@@ -294,15 +294,15 @@
     <form class="form-horizontal">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">策略名称：</label>
+            <label class="col-sm-2 control-label required">策略名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="name" class="form-control" value="{{name}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">端口：</label>
+            <label class="col-sm-2 control-label required">端口：</label>
             <div class="col-sm-5">
-                <input type="text" name="port" class="form-control" value="{{#if port}}{{port}}{{else}}161{{/if}}">
+                <input type="text" name="port" class="form-control" value="{{#if port}}{{port}}{{else}}161{{/if}}" required>
             </div>
         </div>
         <div class="form-group changeViewBox">
@@ -315,15 +315,15 @@
             </div>
         </div>
         <div class="form-group" data-belong="2">
-            <label class="col-sm-2 control-label">读团体名：</label>
+            <label class="col-sm-2 control-label required">读团体名：</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="publicName" value="{{publicName}}">
+                <input type="text" class="form-control" name="publicName" value="{{publicName}}" required>
             </div>
         </div>
         <div class="form-group hide" data-belong="3">
-            <label class="col-sm-2 control-label">安全用户名：</label>
+            <label class="col-sm-2 control-label required">安全用户名：</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="safeName" value="{{safeName}}">
+                <input type="text" class="form-control" name="safeName" value="{{safeName}}" required>
             </div>
         </div>
         <div class="form-group hide" data-belong="3">
@@ -359,7 +359,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
@@ -379,15 +379,15 @@
     <form class="form-horizontal">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">策略名称：</label>
+            <label class="col-sm-2 control-label required">策略名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="name" class="form-control" value="{{name}}" required>
             </div>
         </div>
         <div class="form-group changeViewBox">
-            <label class="col-sm-2 control-label">协议类型：</label>
+            <label class="col-sm-2 control-label required">协议类型：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView changePort" data-book="connectProt" name="type" value="{{type}}">
+                <select class="form-control changeView changePort" data-book="connectProt" name="type" value="{{type}}" required>
                     <option value="1">WMI</option>
                     <option value="2">SSH</option>
                 </select>
@@ -400,21 +400,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">端口：</label>
+            <label class="col-sm-2 control-label required">端口：</label>
             <div class="col-sm-5">
-                <input type="text" name="port" class="form-control" value="{{port}}">
+                <input type="text" name="port" class="form-control" value="{{port}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">账户：</label>
+            <label class="col-sm-2 control-label required">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="username" class="form-control" value="{{username}}">
+                <input type="text" name="username" class="form-control" value="{{username}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">密码：</label>
+            <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}">
+                <input type="password" class="form-control" name="password" value="{{password}}" required>
             </div>
         </div>
         <div class="form-group" data-belong="1">
@@ -443,7 +443,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
@@ -462,9 +462,9 @@
     <form class="form-horizontal">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">策略名称：</label>
+            <label class="col-sm-2 control-label required">策略名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="name" class="form-control" value="{{name}}" required>
             </div>
         </div>
         <div class="form-group">
@@ -476,26 +476,26 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">管理域地址：</label>
+            <label class="col-sm-2 control-label required">管理域IP：</label>
             <div class="col-sm-5">
-                <input type="text" name="ip" class="form-control" value="{{ip}}">
+                <input type="text" name="ip" class="form-control" value="{{ip}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">用户名：</label>
+            <label class="col-sm-2 control-label required">用户名：</label>
             <div class="col-sm-5">
-                <input type="text" name="username" class="form-control" value="{{username}}">
+                <input type="text" name="username" class="form-control" value="{{username}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">口令：</label>
+            <label class="col-sm-2 control-label required">口令：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}">
+                <input type="password" class="form-control" name="password" value="{{password}}" required>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
@@ -514,13 +514,13 @@
     <form class="form-horizontal">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">策略名称：</label>
+            <label class="col-sm-2 control-label required">策略名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="name" class="form-control" value="{{name}}" required>
             </div>
         </div>
         <div class="form-group changeViewBox">
-            <label class="col-sm-2 control-label">数据库类型：</label>
+            <label class="col-sm-2 control-label required">数据库类型：</label>
             <div class="col-sm-5">
                 <select class="form-control changeView changePort" data-book="dbType" name="type" value="{{type}}">
                     <option value="1">Mysql</option>
@@ -532,7 +532,7 @@
         </div>
         <div data-belong="2">
             <div class="form-group changeViewBox">
-                <label class="col-sm-2 control-label">连接类型：</label>
+                <label class="col-sm-2 control-label required">连接类型：</label>
                 <div class="col-sm-5">
                     <select class="form-control changeView" name="connType" value="{{connType}}">
                         <option value="2" selected="selected">服务名</option>
@@ -541,22 +541,22 @@
                 </div>
             </div>
             <div class="form-group" data-belong="2">
-                <label class="col-sm-2 control-label">服务名：</label>
+                <label class="col-sm-2 control-label required">服务名：</label>
                 <div class="col-sm-5">
-                    <input type="text" name="dbName" class="form-control" value="{{dbName}}">
+                    <input type="text" name="dbName" class="form-control" value="{{dbName}}" required>
                 </div>
             </div>
             <div class="form-group hide" data-belong="1">
-                <label class="col-sm-2 control-label">实例名：</label>
+                <label class="col-sm-2 control-label required">实例名：</label>
                 <div class="col-sm-5">
-                    <input type="text" name="dbName" class="form-control" value="{{dbName}}">
+                    <input type="text" name="dbName" class="form-control" value="{{dbName}}" required>
                 </div>
             </div>
         </div>
         <div class="form-group" data-belong="4#1#3">
-            <label class="col-sm-2 control-label">数据库名：</label>
+            <label class="col-sm-2 control-label required">数据库名：</label>
             <div class="col-sm-5">
-                <input type="text" name="dbName" class="form-control" value="{{dbName}}">
+                <input type="text" name="dbName" class="form-control" value="{{dbName}}" required>
             </div>
         </div>
         <div class="form-group">
@@ -566,21 +566,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">端口：</label>
+            <label class="col-sm-2 control-label required">端口：</label>
             <div class="col-sm-5">
-                <input type="text" name="port" class="form-control" value="{{port}}">
+                <input type="text" name="port" class="form-control" value="{{port}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">账户：</label>
+            <label class="col-sm-2 control-label required">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="username" class="form-control" value="{{username}}">
+                <input type="text" name="username" class="form-control" value="{{username}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">密码：</label>
+            <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}">
+                <input type="password" class="form-control" name="password" value="{{password}}" required>
             </div>
         </div>
         <div class="form-group">
@@ -597,7 +597,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>
@@ -616,15 +616,15 @@
     <form class="form-horizontal">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
-            <label class="col-sm-2 control-label">策略名称：</label>
+            <label class="col-sm-2 control-label required">策略名称：</label>
             <div class="col-sm-5">
-                <input type="text" name="name" class="form-control" value="{{name}}">
+                <input type="text" name="name" class="form-control" value="{{name}}" required>
             </div>
         </div>
         <div class="form-group changeViewBox">
-            <label class="col-sm-2 control-label">中间件类型：</label>
+            <label class="col-sm-2 control-label required">中间件类型：</label>
             <div class="col-sm-5">
-                <select class="form-control changeView changePort" data-book="middlewareType" name="type" value="{{type}}">
+                <select class="form-control changeView changePort" data-book="middlewareType" name="type" value="{{type}}" required>
                     <option value="1">Tomcat</option>
                     <option value="2">Weblogic</option>
                     <option value="3">Websphere</option>
@@ -638,32 +638,32 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">端口：</label>
+            <label class="col-sm-2 control-label required">端口：</label>
             <div class="col-sm-5">
-                <input type="text" name="port" class="form-control" value="{{port}}">
+                <input type="text" name="port" class="form-control" value="{{port}}" required>
             </div>
         </div>
         <div class="form-group hide" data-belong="3">
-            <label class="col-sm-2 control-label">soap端口：</label>
+            <label class="col-sm-2 control-label required">soap端口：</label>
             <div class="col-sm-5">
-                <input type="text" name="soapPort" class="form-control" value="{{#if soapPort}}{{soapPort}}{{else}}8880{{/if}}">
+                <input type="text" name="soapPort" class="form-control" value="{{#if soapPort}}{{soapPort}}{{else}}8880{{/if}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">账户：</label>
+            <label class="col-sm-2 control-label required">账户：</label>
             <div class="col-sm-5">
-                <input type="text" name="username" class="form-control" value="{{username}}">
+                <input type="text" name="username" class="form-control" value="{{username}}" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">密码：</label>
+            <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}">
+                <input type="password" class="form-control" name="password" value="{{password}}" required>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default save">保存</button>
+                <button type="submit" class="btn btn-default save">保存</button>
                 <button class="btn btn-default cancle backToTableView">取消</button>
             </div>
         </div>

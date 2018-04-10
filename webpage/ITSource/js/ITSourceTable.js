@@ -628,12 +628,16 @@
     function addNewServer(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
         Tool.renderEditView( tabId , 'ITSource-DC_HOST-add-template');
+        // 启用form验证
+        $('#'+tabId + ' .editView form').validator();
     };
     function defMissionStrategy(){
         var params = {from:'服务器'};
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
         Tool.renderEditView( tabId , 'Configuration-mission-editView-template',params);
         DefineMissionStrategy.render();
+        // 启用form验证
+        $('#'+tabId + ' .editView form').validator();
     };
     function setTag(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
@@ -694,8 +698,6 @@
             params.tags = DefineTag.collectPortTags(tabId).tags;
             params.ids = $('#'+tabId).find('.editView [name="id"]').val();
 
-        } else if ( formId == 'DefineMissionStrategy-form' ){
-            params = DefineMissionStrategy.collectFormInfo();
         } else {
             var arr = $('#'+formId).serializeArray();
             $.each(arr,function(i,perA){
@@ -705,6 +707,10 @@
                     params[perA.name] = perA.value;
                 }
             });
+            if ( $('#'+tabId +' .editView form .ips')[0] ) {
+                var ipRange = DefineIp.collectIps( $('#'+tabId +' .editView form .ips') );
+                params.ipRange = JSON.stringify( ipRange );
+            }
         }
         ajaxSave(tableId,formId,params,btn);
     }

@@ -433,6 +433,22 @@
     }
 }));
 
-
+// hack input-mask blur不适应 Bootstrap-validator
+(function (window, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (window is window)
+        factory(window.jQuery);
+    };
+}(window, function ($) {
+    $('body').on('focusout change','input[data-mask]',function(){
+        $(this).next('.binding').val( $(this).val() ).change();
+    })
+}));
 
 
