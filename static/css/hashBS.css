@@ -217,6 +217,27 @@ label.required:before{
 #Graph canvas{
     outline: none;
 }
+#Graph-map{
+    position: relative;
+    width: 180px;
+    float: right;
+    margin-right: 38px;
+    margin-top: 10px;
+    height: 20px;
+}
+#Graph-map .scale{
+    position: absolute;
+    top:180px;
+    -webkit-transform-origin: top right;
+    -moz-transform-origin: top right;
+    -ms-transform-origin: top right;
+    -o-transform-origin: top right;
+    transform-origin: top right;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
 /*IT资源信息*/
 #ITSource-filter-tags-box .text{
     margin-right: 10px;

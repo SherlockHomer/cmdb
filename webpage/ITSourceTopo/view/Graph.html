@@ -52,6 +52,9 @@
             </ul>
         </div>
         <div id="Graph"></div>
+        <div id="Graph-map">
+            <input class="scale" type="range" min="1" max="200" value="100">
+        </div>
     </div>
 </script>
 
@@ -266,6 +269,9 @@
                 //     // defaultSpringLength : 90，
                 //     isInitial:true
                 // })
+                ViewportBoundsChanged:function(e){
+                    resetScale();
+                }
             });
 
             myDiagram.nodeTemplate =
@@ -458,6 +464,13 @@
                     }
                 }
             })
+        };
+        function rescaleDP(input){
+            var scale = parseInt($(input).val()) / 100;
+            Record.diagram.scale = scale;
+        };
+        function resetScale(){
+            $('#Graph-map .scale').val( parseFloat(Record.diagram.scale) * 100);
         }
 
         // 注册事件
@@ -492,6 +505,10 @@
         $('body').on('click','#Graph-tool-edit .list-group .setTag',function(){
             setTag(this);
         });
+        // 放大条
+        $('body').on('change','#Graph-map .scale',function(){
+            rescaleDP(this);
+        })
         $(window).on('resize',function(){
             resizeDiagBoxHeight();
         })
