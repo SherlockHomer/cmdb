@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="static/css/hashBS.css">
     <script>
         // 前后端分离
-        // window.UrlConfig = 'frontEnd';
+        window.UrlConfig = 'frontEnd';
     </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -399,7 +399,9 @@
 <!-- InputMask -->
 <script src="bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 <!-- form validate -->
-<script src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
+<!-- <script src="bower_components/bootstrap-validator/dist/validator.min.js"></script> -->
+<script src="bower_components/bootstrap-validator/dist/validator.js"></script>
+
 <script>
     $.fn.validator.Constructor.INPUT_SELECTOR = ':input:not([type="hidden"], [type="submit"], [type="reset"], button, input:hidden , input.select2-search__field), .select2+span.select2-container'
 </script>
