@@ -659,6 +659,62 @@
             }
         });
     };
+    // 批量设置标签
+    function patchSetTag(btn){
+        var tableId = $(btn).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        var ids = [];
+        $.each(sels,function(i,perSel){
+            ids.push(perSel.id);
+        });
+        if ( !ids[0] ) {
+            Tool.message({text:'请选择至少一条信息'});
+            return false;
+        }
+        Tool.confirm({
+            title:'设置标签',
+            body:'<select class="select2" id="Confirm-tags" multiple="multiple"></select>',
+            confirm:function(){
+                var tags = [];
+                var sels = $('#Confirm-tags').select2('data');
+                $.each(sels,function(i,perD){
+                    tags.push(perD.tagName);
+                });
+                ajaxPatchSetTag(ids.join(','),tags.join(','));
+            }
+        });
+        fetchData('resource/getAllTags','json',null,{
+            success:function(res){
+                $.each(res.data,function(i,perT){
+                    perT.text = perT.tagName;
+                });
+                $('#Confirm-tags').select2({
+                    data:res.data,
+                    closeOnSelect:false
+                });
+            }
+        });
+    };
+    function ajaxPatchSetTag(ids,tagsId){
+        if ( !tagsId ){ return };
+        var params = {
+            ids:ids,
+            tags:tagsId
+        };
+        fetchData('resource/setTag','json',params,{
+            success:function(res){
+                if (res.success) {
+                    Tool.message({text:'设置成功'});
+                } else {
+                    Tool.message({
+                        text:res.msg,
+                        status:'danger',
+                        time:5000
+                    });
+                }
+            }
+        })
+    }
     function listenSelectSearch(){
         var val = $(this).value ;
         if ( $(this).parent().next().find('.select2-results__message')[0] && !$(this).parent().find('button')[0] ) {
@@ -682,9 +738,6 @@
         DefineTag.addTag($('#ITSource-setTag-form .addTag')[0],input.val());
         $(this).remove();
         $('#ITSource-setTag-form .tags select.app').select2('close');
-    }
-    function deleteApp(){
-        // $(this).
     }
     function saveOne(btn) {
         var params = {};
@@ -756,6 +809,9 @@
 
     $('body').on('click','#ITSource-sourceTable-DC_HOST .addNew',addNewServer);
     $('body').on('click','#ITSource-sourceTable-DC_HOST .defMissionStrategy',defMissionStrategy);
+    $('body').on('click','#ITSource-sourceTable-box .toolbar .setTag',function(){
+        patchSetTag(this);
+    });
     $('body').on('click','#ITSource-sourceTable-box td .setTag',setTag);
 
     $('body').on('click','#ITSource-sourceTable-box .editView .btn.cancle',function(e){
@@ -770,8 +826,6 @@
         e.preventDefault();
         saveOne(this);
     });
-    // 设置标签的问题
-    $('body').on('click','#ITSource-setTag-form .tags .close',deleteApp);
 
     // 切换一级资源类型选项卡
     $('body').on('shown.bs.tab','#ITSource-sourceTable-box a[data-toggle="tab"]', function () {

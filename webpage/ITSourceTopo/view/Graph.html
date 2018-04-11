@@ -53,6 +53,8 @@
         </div>
         <div id="Graph"></div>
         <div id="Graph-map">
+            <i class="fa-plus plus scaleIcon"></i>
+            <i class="fa-minus minus scaleIcon"></i>
             <input class="scale" type="range" min="1" max="200" value="100">
         </div>
     </div>
@@ -341,14 +343,14 @@
             },
             {
                 mouseHover:function(e,obj){
-                    myDiagram.startTransaction('setDiagramLayout');
-                    myDiagram.model.setDataProperty(obj.data,"linkState",'');
-                    myDiagram.commitTransaction('setDiagramLayout');
+                    myDiagram.startTransaction('setLinkText');
+                    myDiagram.model.setDataProperty(obj.data,"linkState", getStatusItem('relation',obj.data.relation).text );
+                    myDiagram.commitTransaction('setLinkText');
                 },
                 mouseLeave:function(e,obj){
-                    myDiagram.startTransaction('setDiagramLayout');
-                    myDiagram.model.setDataProperty(obj.data,"linkState",'');
-                    myDiagram.commitTransaction('setDiagramLayout');
+                    myDiagram.startTransaction('setLinkText');
+                    myDiagram.model.setDataProperty(obj.data,'linkState','' );
+                    myDiagram.commitTransaction('setLinkText');
                 }
             },
             $(go.Shape,
@@ -367,7 +369,7 @@
                 wrap:go.TextBlock.WrapDesiredSize,
                 overflow:go.TextBlock.OverflowEllipsis,
                 // textAlign: "left",
-                font: "16px Tahoma",
+                font: "bold 16px Helvetica, bold Arial, sans-serif",
                 stroke: "#333333",
                 visible: true,
                 editable: false 
@@ -443,7 +445,8 @@
                         perT.text = perT.tagName;
                     });
                     $('#Confirm-tags').select2({
-                        data:res.data
+                        data:res.data,
+                        closeOnSelect:false
                     });
                 }
             });

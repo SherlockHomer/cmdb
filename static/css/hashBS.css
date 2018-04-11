@@ -227,16 +227,30 @@ label.required:before{
 }
 #Graph-map .scale{
     position: absolute;
-    top:180px;
+    top: 100%;
     -webkit-transform-origin: top right;
     -moz-transform-origin: top right;
     -ms-transform-origin: top right;
     -o-transform-origin: top right;
     transform-origin: top right;
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    right: 15px;
+}
+#Graph-map .scaleIcon{
+    position: absolute;
+    display: block;
+    color: #605ca8;
+}
+#Graph-map .plus{
+    right: 0;
+    top: 0;
+}
+#Graph-map .minus{
+    top: 210px;
+    right: 0;
 }
 /*IT资源信息*/
 #ITSource-filter-tags-box .text{
