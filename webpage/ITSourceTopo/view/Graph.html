@@ -124,10 +124,64 @@
             });
         }
         // 载入数据
-        function loadData(data){
-            loadDataToDiagram(data);
-            loadDataToTool(data.count);
-        }
+        function loadData(data){ 
+            if ( Record.params.topoType !== 0 && !data){
+                showRelation();
+            } else {
+                loadDataToDiagram(data);
+                loadDataToTool(data.count);
+            }
+        };
+        function showRelation(){
+            var diag = Record.diagram;
+            var model = diag.model;
+            var nodeDataArray = model.nodeDataArray;
+            var linkDataArray = model.linkDataArray;
+            var topoType = Record.params.topoType;
+            var linkTypeToHide = [];
+            switch (topoType){
+                // 部署关系图
+                case '1' : {
+                    linkTypeToHide = [2,3,4,6,7];
+                    break;
+                }
+                //通信关系图
+                case '2' : {
+                    linkTypeToHide = [7,8];
+                    break;
+                }
+                // 物理连接关系图
+                case '3' : {
+                    linkTypeToHide = [1,5];
+                    break;
+                }
+            };
+            diag.startTransaction('showRelation');
+            $.each(nodeDataArray,function(i,perNode){
+                var nodeData = model.findNodeDataForKey(perNode.key);
+                model.setDataProperty(nodeData, 'visible', false);
+            });
+            $.each(linkDataArray,function(i,perLink){
+                var linkRel = parseInt ( perLink.relation );
+                if ( linkTypeToHide.indexOf( linkRel) > -1  ) {
+                    // 显示线和线两端的节点
+                    model.setDataProperty(perLink,'linkVisible', true);
+                    var from = model.findNodeDataForKey( perLink.from );
+                    var to = model.findNodeDataForKey( perLink.to );
+                    if ( perLink.relation == 7 && ( from.ciMajor == 'DC_MIDDSERVER' || to.ciMajor == 'DC_MIDDSERVER' ) ) {
+                        model.setDataProperty(perLink,'linkVisible', false);
+                    } else {
+                        console.warn(getStatusItem('relation',perLink.relation).hex )
+                        model.setDataProperty(from, 'visible', true);
+                        model.setDataProperty(to, 'visible', true);
+                    }
+                } else {
+                    model.setDataProperty(perLink,'linkVisible', false);
+                }
+            });
+
+            diag.commitTransaction('showRelation');
+        };
         function loadDataToDiagram(data){
             if (data.type == 1){
                 var newData = {};
@@ -329,6 +383,7 @@
 
             myDiagram.linkTemplate =
             $(go.Link,
+            new go.Binding('visible','linkVisible'),
             {
                 layoutConditions: go.Part.LayoutNone,
                 // routing: go.Link.Normal,
@@ -354,7 +409,7 @@
                 }
             },
             $(go.Shape,
-                { name: "OBJSHAPE",stroke: "#00c0ef",strokeWidth: 2 },
+                { name: "OBJSHAPE",stroke: "#00c0ef",strokeWidth: 2 , visible:true },
                 new go.Binding('stroke','color')),
             $(go.Shape,
                 { name: "ARWSHAPE", toArrow: "Standard" ,stroke: "#00c0ef" ,fill:'#00c0ef',scale:1.3,visible:true},

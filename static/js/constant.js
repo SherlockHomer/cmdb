@@ -147,11 +147,11 @@
     {type:1,text:'连接',color:'green',hex:'#00a65a'},
     {type:2,text:'虚拟化',color:'black',hex:'#000'},
     {type:3,text:'集群',color:'orange',hex:'#f39c12'},
-    {type:4,text:'主备',color:'yellow',hex:'yellow'},
-    {type:5,text:'使用',color:'blue',hex:'#00c0ef'},
-    {type:6,text:'运行于',color:'blue',hex:'#00c0ef'},
-    {type:7,text:'依赖',color:'blue',hex:'#00c0ef'},
-    {type:8,text:'调用',color:'blue',hex:'#00c0ef'}
+    {type:4,text:'主备',color:'blue',hex:'#307095'},
+    {type:5,text:'使用',color:'蓝色',hex:'#00c0ef'},
+    {type:6,text:'运行于',color:'navy',hex:'#001f3f'},
+    {type:7,text:'依赖',color:'olive',hex:'#3d9970'},
+    {type:8,text:'调用',color:'purple',hex:'#605ca8'}
     ]
     function getStatusItem(itemsName,status,def){
         var items = Constant[itemsName];
