@@ -171,7 +171,6 @@
                     if ( perLink.relation == 7 && ( from.ciMajor == 'DC_MIDDSERVER' || to.ciMajor == 'DC_MIDDSERVER' ) ) {
                         model.setDataProperty(perLink,'linkVisible', false);
                     } else {
-                        console.warn(getStatusItem('relation',perLink.relation).hex )
                         model.setDataProperty(from, 'visible', true);
                         model.setDataProperty(to, 'visible', true);
                     }
