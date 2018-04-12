@@ -50,10 +50,10 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                       <li><a href="http://localhost:8080/CMDB/THEAuto.html" target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
-                       <li><a href="http://localhost:8080/CMDB/ins-index.html" target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
-                       <li><a href="http://localhost:8080/CMDB" target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
-                       <li><a href="http://localhost:8080/CMDB/sher-auto.html" target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
+                       <li><a target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
+                       <li><a target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
+                       <li><a target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
+                       <li><a target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
                    </ul>
               </li>
           </ul>
@@ -62,45 +62,45 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success"></span>
                         </a>
                     </li>
                     <!-- Notifications: style can be found in dropdown.less -->
                     <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning"></span>
                         </a>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
                     <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger"></span>
                         </a>
                     </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Admin</span>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="dist/img/avatar5.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs">管理员</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="dist/img/avatar5.png" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Admin<br/>
+                                    管理员<br/>
                                     ServiceJet Administrator
                                 </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">信息</a>
+                                    <a class="btn btn-default btn-flat">信息</a>
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-default btn-flat logout">退出</a>
@@ -123,11 +123,11 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="dist/img/avatar5.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Admin</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>管理员</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
