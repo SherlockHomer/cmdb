@@ -676,6 +676,7 @@
         if (tabId == 'Configuration-mission') {
             if ( !params ){
                 var params = {};
+                params.ipRange = [{type:1,ip:''}];
                 params.scanType = ['device','port','server','cloud','database','middleware','connection'];
             };
             params.from = '发现任务策略';

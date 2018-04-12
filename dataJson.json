@@ -285,7 +285,7 @@ action：  discover-config/saveServer
     "password":"",
     "domain":"digitalchina.com",
     "encode":"GBK",
-    "echo":"sdf"
+    "prompt":"sdf"
 }
 {
     "data": {
@@ -886,7 +886,7 @@ action：  resource/addResource
     "password":"",
     "domain":"digitalchina.com",
     "encode":"GBK",
-    "echo":"sdf"
+    "prompt":"sdf"
 }
 {
     "data": {

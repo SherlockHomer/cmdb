@@ -36,6 +36,13 @@
                 </select>
             </div>
         </div>
+        <div class="coreIp form-group">
+            <label class="col-sm-2 control-label required">核心设备：</label>
+            <div class="col-sm-5">
+                <input type="text" name="coreIp" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required value="{{coreIp}}">
+                <input type="text" class="binding hide" required>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-2 control-label required">目标设备：</label>
             <div class="ips col-sm-10">
@@ -123,6 +130,7 @@
             $.each(ipRange,function(i,perIp){
                 var newOne = addIp($ips.find('.add')[0]);
                 newOne.find('.targetDevice').val(perIp.type).change();
+                perIp.type = perIp.type.toString();
                 switch(perIp.type){
                     case '1' : {
                         var values = [perIp.ip];
@@ -188,11 +196,19 @@
             window.DefineMissionStrategy = factory();
         };
     }(window, function () {
+
+        $('body').on('change','#DefineMissionStrategy-form [name="scanType"]',function(){
+            var coreIp = $('#DefineMissionStrategy-form .coreIp');
+            $(this).val().indexOf('device') > -1 ? coreIp.removeClass('hide') : coreIp.addClass('hide');
+            $(this).parents('form').eq(0).validator('update'); 
+        })
+
         function render(params) {
             $('#DefineMissionStrategy-form .select2').select2({
                 closeOnSelect:false,
                 allowClear:true
             });
+            $('#DefineMissionStrategy-form .coreIp [data-mask]').inputmask();
             fetchData('systemCalenderAction/getSchedulePlans','json',null,{
                 success:function(res){
                     var scheduleSel = $('#DefineMissionStrategy-form .schedulePlan');
