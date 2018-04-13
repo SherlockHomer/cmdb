@@ -40,15 +40,12 @@
     };
     // 渲染统计内容的具体情况表
     // 有数据才有表，因为是模版
-    function renderBasic(){
+    function renderBasic(ciMajor){
         render('ITSource-sourceTable-template');
         renderFilter();
-        initSourceTable('DC_HOST');
-        initSourceTable('DC_DBS');
-        initSourceTable('DC_MIDDSERVER');
-        initSourceTable('cloud');
-        initSourceTable('DC_NETWORKDEVICE');
-        initSourceTable('DC_APPSYS');
+        // 由tab切换触发
+        var $tab = $('#ITSource-sourceTable-box .nav-tabs a[data-code="'+ciMajor+'"]');
+        $tab.tab('show');
     };
     function renderFilter(){
         fetchData('resource/getAllTags','json',{type:1},{
@@ -420,13 +417,11 @@
             Record.tagName = [];
         };
         Router.updateBreadcrumb(crumb);
-        renderBasic();
+        renderBasic(Record.levelOneType || 'DC_HOST');
         // 针对资源信息的部分内容显隐
         showOrHideSome(Record.currentModule);
     };
     function showOrHideSome(currentModule) {
-        $('#ITSource-sourceTable-box .nav-tabs a').parent().removeClass('active');
-        $('#ITSource-sourceTable-box .nav-tabs a[data-code="'+Record.levelOneType+'"]').tab('show');
         if (currentModule == 'ITSourceReport') {
             $('#ITSource-sourceTable-box .forNotReport').hide();
         } else if (currentModule == 'ITSource') {
@@ -456,7 +451,19 @@
     function changeTab(tab){
         // 能切换选项卡只在 < IT资源信息 >中
         Record.levelOneType = $(tab).attr('data-code');
-    }
+
+        var tabDom = $(tab).attr('href').substring(1);
+        var ciMajor = $(tab).attr('data-code');
+
+        if ( $('#'+tabDom).find('.bootstrap-table')[0] ){
+            refreshTable('ITSource-' + ciMajor + '-table');
+        } else {
+            initSourceTable(ciMajor);
+        }
+    };
+    function refreshTable(tableId){
+        $('#'+tableId).bootstrapTable('refresh');
+    };
     
     function checkAll(){
         var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');

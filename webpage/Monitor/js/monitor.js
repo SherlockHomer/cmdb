@@ -30,8 +30,6 @@
     function renderBasic(tab) {
         render('Monitor-basic-template');
         var $tab = $('#Monitor-basic .nav-tabs a[href="#Monitor-'+tab+'"]');
-        var monitorType = $tab.attr('data-monitorType');
-        var tableId = $tab.attr('href').substring(1) + '-table';
         $tab.tab('show');
     };
     // 各个表的渲染
