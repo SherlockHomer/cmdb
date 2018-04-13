@@ -136,12 +136,12 @@
                         <div class="form-group">
 
                             {{#if isText}}
-                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
                             <div class="col-sm-10 form-control-static">{{value}}</div>
                             {{/if}}
 
                             {{#if isProcess}}
-                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
                             <div class="col-sm-10 form-control-static">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
@@ -151,7 +151,7 @@
                             {{/if}}
 
                             {{#if isTable}}
-                            <label class="col-sm-2 control-label">{{keyText}}</label>
+                            <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
                             <div class="col-sm-10">
                                 <table class="table table-bordered">
                                     {{tableDetail value}}
@@ -161,7 +161,7 @@
 
                             {{#if isGather}}
                             {{#each value}}
-                                <label class="col-sm-2 control-label">{{keyText}}</label>
+                                <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
                                 <div class="col-sm-10 form-control-static">{{value}}</div>
                             {{/each}}
                             
@@ -182,7 +182,7 @@
             <div class="form-horizontal row">
                 {{#each more}}
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">{{keyText}}：</label>
+                    <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}：</label>
                     <div class="col-sm-10 form-control-static">{{value}}</div>
                 </div>
                 {{/each}}

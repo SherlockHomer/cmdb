@@ -345,6 +345,10 @@
                         id: perR.id,
                         row: perR
                     });
+                    // 非正在扫描的移除
+                    if (perR.status != 1) {
+                        $('#'+tableId).bootstrapTable('removeByUniqueId', perR.id);
+                    }
                 });
             }
         });

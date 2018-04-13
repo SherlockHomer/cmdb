@@ -100,7 +100,7 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
+                                <div class="pull-left hide">
                                     <a class="btn btn-default btn-flat">信息</a>
                                 </div>
                                 <div class="pull-right">
