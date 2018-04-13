@@ -48,18 +48,18 @@
             </a>
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse" style="display: none !important">
                 <ul class="nav navbar-nav">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                       <li><a target="_blank"><i class="fa fa-home"></i> 自动化首页</a></li>
-                       <li><a target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li>
-                       <li><a target="_blank" title=""><i class="fa fa-search"></i> 自动发现</a></li>
-                       <li><a target="_blank"><i class="fa fa-object-group"></i> 作业调度</a></li>
-                   </ul>
-              </li>
-          </ul>
-      </div>
-      <div class="navbar-custom-menu">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a target="_blank" href="../portal"><i class="fa fa-home"></i> 混合服务自动化系统</a></li>
+                            <!-- <li><a target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li> -->
+                            <!-- <li><a target="_blank" href="../discovery"><i class="fa fa-search"></i> 自动发现</a></li> -->
+                            <li><a target="_blank" href="../schedule"><i class="fa fa-object-group"></i> 作业调度</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">

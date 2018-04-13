@@ -136,7 +136,7 @@
             if ( i == breads.length-1 ) {
                 html += '<li class="active">'+ perB.text +'</li>';
             } else {
-                html += '<li><a href="'+perB.url+'">'+ perB.text +'</a></li>';
+                html += '<li><a class="text-aqua" href="'+perB.url+'">'+ perB.text +'</a></li>';
             }
         });
         html += '</ol>';

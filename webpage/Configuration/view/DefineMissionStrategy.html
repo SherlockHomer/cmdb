@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label required">目标设备：</label>
-            <div class="ips col-sm-10">
+            <div class="ips col-sm-10 required">
                 <button class="btn btn-default add">+</button>
             </div>
 
@@ -112,6 +112,14 @@
             return newOne;
         }
         function removeIp(removeBtn){
+            var ips = $(removeBtn).parents('.ips').eq(0);
+            if ( ips.hasClass('required') && ips.children('.ip').length == 1 ){
+                Tool.message({
+                    text:'不可删除，至少需要一个目标设备',
+                    status:'danger'
+                });
+                return false;
+            }
             var form = $(removeBtn).parents('form').eq(0);
             $(removeBtn).parent().remove();
             form.validator('update');
