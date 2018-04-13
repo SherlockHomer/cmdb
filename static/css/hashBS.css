@@ -22,9 +22,26 @@ ul {
     list-style: none;
     padding-left: 20px;
 }
+div{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.user-select{
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+    -o-user-select: initial;
+    user-select: initial;
+}
 label.required:before{
   content: '*';
   color: red;
+}
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header{
+    height: auto;
 }
 .showInline{
     display: inline-block;

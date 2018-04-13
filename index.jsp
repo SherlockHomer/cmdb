@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CMDB自动发现</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -85,14 +86,14 @@
                     <li class="dropdown user user-menu">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <img src="dist/img/avatar5.png" class="user-image" alt="User Image">
-                            <span class="hidden-xs">管理员</span>
+                            <span class="hidden-xs index-user">管理员</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="dist/img/avatar5.png" class="img-circle" alt="User Image">
 
-                                <p>
+                                <p id="index-userInfo">
                                     管理员<br/>
                                     ServiceJet Administrator
                                 </p>
@@ -126,7 +127,7 @@
                     <img src="dist/img/avatar5.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>管理员</p>
+                    <p class="index-user">管理员</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>

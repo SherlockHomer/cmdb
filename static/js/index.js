@@ -21,3 +21,16 @@
         })
     })
 }));
+
+$(function(){
+    fetchData('userAction/showModifyInfo','json',null,{
+        success:function(res){
+            var html = $('<p></p>');
+            $(html).append(res.data.realName+'<br>');
+            res.data.email && $(html).append(res.data.email+'<br>');
+            res.data.mobilePhone && $(html).append(res.data.mobilePhone+'<br>');
+            $('#index-userInfo').html(html.html());
+            $('.index-user').html(res.data.realName);
+        }
+    })
+})
