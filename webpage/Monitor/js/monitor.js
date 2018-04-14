@@ -307,7 +307,7 @@
     }
     function clickInfobox(){
         var code = $(this).attr('data-code');
-        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ code + '/' + Record.rowId;
+        window.location = window.location.origin + window.location.pathname + '#/ITSource/'+ code + '&mission=' + Record.rowId;
     };
 
     function changeTab(tab){

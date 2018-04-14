@@ -99,12 +99,20 @@
     <div class="box-body no-padding">
         {{#each data}}
         {{#if sum}}
-        <a class="info-box" href="#/ITSource/{{code}}">
+        <a class="info-box" href="#/ITSource/ciMajor={{ciMajor}}&code={{code}}">
             <span class="info-box-icon">
+                {{#if code}}
                 <i class="iconfont {{deviceIcon code}}"></i>
+                {{else}}
+                <i class="iconfont {{deviceIcon ciMajor}}"></i>
+                {{/if}}
             </span>
             <span class="info-box-number text-aqua">
+                {{#if code}}
                 {{sum}}个{{deviceText code}}
+                {{else}}
+                {{sum}}个{{deviceText ciMajor}}
+                {{/if}}
             </span>
         </a>
         {{/if}}

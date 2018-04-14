@@ -10,12 +10,23 @@
         window.ITSourceTable = factory(window.jQuery);
     }
 }(window, function ($) {
+    if ( window.ITSourceTable ) { return window.ITSourceTable};
+    var tabAndCicode = {
+        'DC_HOST':['DC_HOST','DC_VIRTUALRESOURCE/DC_VM','DC_VIRTUALRESOURCE/DC_Docker'],
+        'DC_DBS':['DC_DBS'],
+        'DC_MIDDSERVER':['DC_MIDDSERVER'],
+        'cloud':['DC_VIRTUALRESOURCE/DC_ResDomain'],
+        'DC_NETWORKDEVICE':['DC_NETWORKDEVICE'],
+        'DC_APPSYS':['DC_APPSYS']
+    };
     var Record = {
         tagName:[],
-        // 默认资源是服务器
-        code:'DC_HOST',
-        // 一级资源类型，报表过来的typeCode对应哪个大分类
-        levelOneType:'DC_HOST',
+        // 默认选项卡的code
+        tabCode : 'DC_HOST',
+        // 默认选项卡服务器包含的ciCode : DC_HOST,DC_VM,DC_Docker
+        code:'',
+        // 一级资源类型，报表过来的typeCode对应哪个大分类 tabCode : 'DC_HOST'
+        ciMajor:'',
         resVersion:'',
         type:'',
         manufacturer:'',
@@ -23,9 +34,31 @@
         countType:'',
         // 所属那个任务策略
         belongMission:''
+    };
+    function getCodeByTabCode (tabCode){
+        var code = [];
+        $.each(tabAndCicode[tabCode],function(i,perV){
+            code.push ( perV.split('/').pop() );
+        });
+        return code.join(',')
+    };
+    // 一级二级得出放在哪个选项卡
+    function getTabCodeByCode(ciMajor,code){
+        if (!ciMajor) {
+            return '';
+        };
+        if (ciMajor && !code) {
+            return ciMajor;
+        };
+        var oneTwo = ciMajor + '/' + code  ;
+        for( var i in tabAndCicode ){
+            if ( tabAndCicode[i].indexOf(oneTwo) > -1 ){
+                return i;
+            }
+        }
+        // Tool.message({text:'没有找到对应的选项卡',status:'danger'});
+        return '';
     }
-    if ( window.ITSourceTable ) { return window.ITSourceTable};
-
     // 配置DOM和temp的一一对应
     var tempAndDom = {
         'ITSource-sourceTable-template':'index-content',
@@ -40,11 +73,11 @@
     };
     // 渲染统计内容的具体情况表
     // 有数据才有表，因为是模版
-    function renderBasic(ciMajor){
+    function renderBasic(tabCode){
         render('ITSource-sourceTable-template');
         renderFilter();
         // 由tab切换触发
-        var $tab = $('#ITSource-sourceTable-box .nav-tabs a[data-code="'+ciMajor+'"]');
+        var $tab = $('#ITSource-sourceTable-box .nav-tabs a[data-tabCode="'+tabCode+'"]');
         $tab.tab('show');
     };
     function renderFilter(){
@@ -104,7 +137,7 @@
                 break;
             }
         }
-    }
+    };
     function getColumnsByTypeCode(code) {
         switch (code){
             case 'DC_HOST' : {
@@ -121,11 +154,7 @@
                 },{
                     title:'OS类型',
                     field:'osType',
-                    sortable:true,
-                    formatter:function(value){
-                        if (!value) {return };
-                        return getStatusItem('osType',value).text;
-                    }
+                    sortable:true
                 },{
                     title:'OS版本',
                     field:'resVersion',
@@ -334,19 +363,14 @@
                 break;
             }
         }
-    }
+    };
     // 对外统一接口，在cmdb.js中调用
     // hase 判断记录参数
-    // currentModule:[1],
-    // levelOneType:[2],
-    // code:[3],
-    // countType:[4],
-    // classifyInCount:[5]
+    // ITSource/params?/detail/id
+    // ITSourceReport/ciMajor/code/countType/classifyInCount/detail/id
+
     function renderModule( hashes ) {
         Record.currentModule = hashes.currentModule;
-        if (hashes.levelOneType) {
-            Record.levelOneType = hashes.levelOneType ;
-        }
         Record.belongMission = hashes.belongMission;
 
         var crumb = [];
@@ -357,14 +381,24 @@
                 text:'IT资源报表'
             });
         } else if (Record.currentModule == 'ITSource') {
-            crumb.push({
-                url:'#/ITSource',
+            var theCrumb = {
+                url:'#/ITSource/',
                 text:'IT资源信息'
-            });
+            };
+            if (hashes.params) {
+                var pArr = [];
+                for(var i in hashes.params){
+                    if (hashes.params[i]){
+                        pArr.push( i + '=' + hashes.params[i] );
+                    }
+                }
+                theCrumb.url += pArr.join('&');
+            }
+            crumb.push(theCrumb);
         }
         
         if ( hashes.currentModule == 'ITSourceReport') {
-            Record.levelOneType = hashes.levelOneType;
+            Record.ciMajor = hashes.ciMajor;
             Record.code = hashes.code;
             Record.countType = hashes.countType;
             switch(Record.countType){
@@ -385,11 +419,11 @@
                 }
             };
             crumb.push({
-                url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code ,
+                url:'#/ITSourceReport/'+ Record.ciMajor +'/' + Record.code ,
                 text: window.ITSourceReport && ITSourceReport.Record.codeName || Record.code
             });
             crumb.push({
-                url:'#/ITSourceReport/'+ Record.levelOneType +'/' + Record.code + '/' + Record.countType + '/'  + hashes.classifyInCount,
+                url:'#/ITSourceReport/'+ Record.ciMajor +'/' + Record.code + '/' + Record.countType + '/'  + hashes.classifyInCount,
                 text:hashes.classifyInCount
             });
             if ( hashes.detail && hashes.rowId ) {
@@ -401,6 +435,10 @@
                 renderDetail();
                 return;
             };
+            Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code);
+            if (!Record.tabCode) {
+                Record.tabCode = Record.ciMajor;
+            }
         } else if ( hashes.currentModule == 'ITSource' && hashes.detail ){
             // 如果配有id才有渲染，否则还是渲染表格
             if ( hashes.rowId ) {
@@ -414,10 +452,20 @@
             }
 
         } else if ( hashes.currentModule == 'ITSource' ){
+            var params = hashes.params;
+            if (!params) {
+                Record.tabCode = 'DC_HOST';
+                Record.code = 'DC_HOST';
+            } else {
+                Record.ciMajor = params.ciMajor;
+                Record.code = params.code;
+                Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code) || 'DC_HOST';
+                Record.belongMission = params.mission;
+            }
             Record.tagName = [];
         };
         Router.updateBreadcrumb(crumb);
-        renderBasic(Record.levelOneType || 'DC_HOST');
+        renderBasic(Record.tabCode);
         // 针对资源信息的部分内容显隐
         showOrHideSome(Record.currentModule);
     };
@@ -434,7 +482,7 @@
         Record.tagName = $('#ITSource-filter-tags-box .text.clicked').map(function(){
             return this.innerHTML; 
         }).get();
-        $('#ITSource-'+ Record.levelOneType + '-table').bootstrapTable('refresh');
+        $('#ITSource-'+ Record.tabCode + '-table').bootstrapTable('refresh');
         if ( $(text).parent().children('.clicked')[0] ) {
             $('#ITSource-filter .resetFilter').removeClass('hide');
         } else {
@@ -444,21 +492,24 @@
     function resetFilter(btn) {
         Record.tagName = [];
         $('#ITSource-filter-tags-box').children().removeClass('clicked bg-olive');
-        $('#ITSource-'+ Record.levelOneType + '-table').bootstrapTable('refresh');
+        $('#ITSource-'+ Record.tabCode + '-table').bootstrapTable('refresh');
         $(btn).addClass('hide');
     }
 
     function changeTab(tab){
-        // 能切换选项卡只在 < IT资源信息 >中
-        Record.levelOneType = $(tab).attr('data-code');
-
+        // todo:  现在切换选项卡用什么ciMajor
         var tabDom = $(tab).attr('href').substring(1);
-        var ciMajor = $(tab).attr('data-code');
-
+        var tabCode = $(tab).attr('data-tabCode');
+        // 能切换选项卡只在 < IT资源信息 >中
+        // 手动切换时以下两值不同
+        if (Record.tabCode != tabCode ) {
+            Record.code = tabCode;
+        }
+        Record.tabCode = tabCode;
         if ( $('#'+tabDom).find('.bootstrap-table')[0] ){
-            refreshTable('ITSource-' + ciMajor + '-table');
+            refreshTable('ITSource-' + tabCode + '-table');
         } else {
-            initSourceTable(ciMajor);
+            initSourceTable(tabCode);
         }
     };
     function refreshTable(tableId){
@@ -569,7 +620,7 @@
         params.searchText = toolbar.find('.searchInput').val();
         // 资源分类
         if (Record.currentModule == 'ITSource') {
-            params.ciMajor = this.code;
+            params.ciMajor = Record.code ||  this.code ;
             params.tagName = Record.tagName.join(',');
         } else {
             params.code = Record.code;

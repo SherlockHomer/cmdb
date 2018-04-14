@@ -26,7 +26,7 @@
             <label class="col-sm-2 control-label required">发现内容：</label>
             <div class="col-sm-5">
                 <select class="form-control select2" multiple="multiple" name="scanType" value="{{scanType}}" required>
-                    <option selected="selected" value="device">物理设备</option>
+                    <option selected="selected" value="device">网络拓扑</option>
                     <option selected="selected" value="port">端口</option>
                     <option selected="selected" value="server">服务器</option>
                     <option selected="selected" value="cloud">云环境</option>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="coreIp form-group">
-            <label class="col-sm-2 control-label required">核心设备：</label>
+            <label class="col-sm-2 control-label required">核心网关：</label>
             <div class="col-sm-5">
                 <input type="text" name="coreIp" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required value="{{coreIp}}">
                 <input type="text" class="binding hide" required>

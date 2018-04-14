@@ -13,7 +13,7 @@
     if ( window.ITSourceReport ) { return window.ITSourceReport};
     var Record = {
         // 一级资源分类
-        levelOneType : '',
+        ciMajor : '',
         code:'',
         codeName:'',
         countType:''
@@ -68,7 +68,7 @@
         if ( !params || params.length == 0 ) {
             getAllView();
         } else if ( params[0] && params[1] ){
-            Record.levelOneType = params[0];
+            Record.ciMajor = params[0];
             Record.code = params[1];
             crumb.push({
                 text: Record.codeName || Record.code
@@ -89,9 +89,9 @@
     $('body').on('click','.ITSourceBox .info-box',function(){
         var ciCode = $(this).find('.info-box-number').attr('data-ciCode');
         Record.codeName = $(this).find('.info-box-number').attr('data-name');
-        var levelOneType = $(this).parents('.ITSourceBox').eq(0).attr('data-levelOneType');
+        var ciMajor = $(this).parents('.ITSourceBox').eq(0).attr('data-ciMajor');
 
-        Router.addHash(levelOneType+'/'+ciCode);
+        Router.addHash(ciMajor+'/'+ciCode);
     });
     $('body').on('click','.ITSource-countBox .btn',function(){
         var name = $(this).find('.info-box-number').attr('data-name');

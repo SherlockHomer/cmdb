@@ -125,9 +125,21 @@
                 <div class="box-body">
                     <div class="form-group">
                         {{#each contentInfo}}
-                        <div class="info-box" data-code="{{code}}">
-                            <span class="info-box-icon"><i class="iconfont {{deviceIcon code}}"></i></span>
-                            <span class="info-box-number text-aqua">{{sum}}个{{deviceText code}}</span>
+                        <div class="info-box" data-code="ciMajor={{ciMajor}}&code={{code}}">
+                            <span class="info-box-icon">
+                                {{#if code}}
+                                <i class="iconfont {{deviceIcon code}}"></i>
+                                {{else}}
+                                <i class="iconfont {{deviceIcon ciMajor}}"></i>
+                                {{/if}}
+                            </span>
+                            <span class="info-box-number text-aqua">
+                                {{#if code}}
+                                {{sum}}个{{deviceText code}}
+                                {{else}}
+                                {{sum}}个{{deviceText ciMajor}}
+                                {{/if}}
+                            </span>
                         </div>
                         {{/each}}
                     </div>

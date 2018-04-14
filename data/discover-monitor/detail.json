@@ -2,23 +2,25 @@
     "data": {
         "name": "WIN-0ECQ6MI24DJ",
         "contentInfo": [{
-            "code": "DC_HOST",
-            "sum": 33
-        }, {
-            "code": "DC_DBS",
-            "sum": 1284
-        }, {
-            "code": "DC_MIDDSERVER",
-            "sum": 1001
-        }, {
-            "code": "DC_CLOUD",
+            "ciMajor": "DC_HOST",
+            "code": "",
             "sum": 4
         }, {
-            "code": "DC_NETWORKDEVICE",
-            "sum": 4
+            "ciMajor": "DC_DBS",
+            "code": "",
+            "sum": 1
         }, {
-            "code": "DC_APPSYS",
-            "sum": 1001
+            "ciMajor": "DC_MIDDSERVER",
+            "code": "",
+            "sum": 1
+        }, {
+            "ciMajor": "DC_APPSYS",
+            "code": "",
+            "sum": 6
+        }, {
+            "ciMajor": "DC_VIRTUALRESOURCE",
+            "code": "DC_ResDomain",
+            "sum": 4
         }],
         "details": [{
             "keyText": "开始时间",

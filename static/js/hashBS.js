@@ -78,7 +78,7 @@
         } else if ( hashes[1] == 'ITSourceReport' && hashes [3] && hashes [4]){
             loadModule( 'ITSourceTable' , {
                 currentModule:hashes[1],
-                levelOneType:hashes[2],
+                ciMajor:hashes[2],
                 code:hashes[3],
                 countType:hashes[4],
                 classifyInCount: window.decodeURI( hashes[5].replace('&','/') ),
@@ -87,31 +87,25 @@
             });
         } else if ( hashes[1] == 'ITSource' ) {
             if (hashes[2] == 'detail') {
+                // 直接在该菜单下操作
                 loadModule( 'ITSourceTable' , {
                     currentModule:hashes[1],
                     detail:hashes[2],
                     rowId:hashes[3]
                 });
             } else if (hashes[3] == 'detail') {
+                // 从其他地方链接而来
                 loadModule( 'ITSourceTable' , {
                     currentModule:hashes[1],
-                    levelOneType:hashes[2],
+                    params:parseParamStr(hashes[2]),
                     detail:hashes[3],
                     rowId:hashes[4]
                 });
-            } else if (hashes[4] == 'detail') {
-                loadModule( 'ITSourceTable' , {
-                    currentModule:hashes[1],
-                    levelOneType:hashes[2],
-                    belongMission:hashes[3],
-                    detail:hashes[4],
-                    rowId:hashes[5]
-                });
             } else {
+                // 直接在该菜单下操作
                 loadModule( 'ITSourceTable' , {
                     currentModule:hashes[1],
-                    levelOneType:hashes[2] || 'DC_HOST',
-                    belongMission:hashes[3]
+                    params:parseParamStr(hashes[2])
                 });
             }
             
@@ -120,6 +114,17 @@
         } 
         return ;
     };
+    // 解析参数型
+    function parseParamStr(params){
+        if (!params) {return ''};
+        paramsArr = params.split('&');
+        var paramsObj = {};
+        $.each(paramsArr,function(i,perP){
+            var arr = perP.split('=');
+            paramsObj[arr[0]] = arr[1];
+        });
+        return paramsObj;
+    }
     // 在已有上加
     function addHash(name){
         var newHash = window.location.hash.split('/');
