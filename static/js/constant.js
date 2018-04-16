@@ -13,7 +13,7 @@
     var Constant = {};
     // 每一批的第一个是大分类
     Constant.devices = [
-    {type:'DC_APPSYS',icon:'icon-app',text:'业务系统',image:'static/image/device/app.png'},
+    {type:'DC_APPSYS',icon:'icon-app',text:'应用',image:'static/image/device/app.png'},
     {type:'DC_BusiSys',icon:'icon-disk',text:'应用系统',image:'static/image/device/disk.png'},
     {type:'DC_APPComp',icon:'icon-disk',text:'应用组件',image:'static/image/device/app.png'},
 

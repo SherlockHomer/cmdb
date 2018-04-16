@@ -19,18 +19,18 @@
                 </div>
             </div>
             <ul class="nav nav-tabs nav-justified form-group">
-                <li><a href="#ITSource-sourceTable-DC_HOST" data-tabCode="DC_HOST" role="tab" data-toggle="tab">服务器</a></li>
-                <li><a href="#ITSource-sourceTable-DC_DBS" data-tabCode="DC_DBS" role="tab" data-toggle="tab">数据库</a></li>
-                <li><a href="#ITSource-sourceTable-DC_MIDDSERVER" data-tabCode="DC_MIDDSERVER" role="tab" data-toggle="tab">中间件</a></li>
+                <li><a href="#ITSource-sourceTable-server" data-tabCode="server" role="tab" data-toggle="tab">服务器</a></li>
+                <li><a href="#ITSource-sourceTable-db" data-tabCode="db" role="tab" data-toggle="tab">数据库</a></li>
+                <li><a href="#ITSource-sourceTable-middleware" data-tabCode="middleware" role="tab" data-toggle="tab">中间件</a></li>
                 <li><a href="#ITSource-sourceTable-cloud" data-tabCode="cloud" role="tab" data-toggle="tab">云环境</a></li>
-                <li><a href="#ITSource-sourceTable-DC_NETWORKDEVICE" data-tabCode="DC_NETWORKDEVICE" role="tab" data-toggle="tab">网络设备</a></li>
-                <li><a href="#ITSource-sourceTable-app" data-tabCode="DC_APPSYS" role="tab" data-toggle="tab">应用程序</a></li>
+                <li><a href="#ITSource-sourceTable-net" data-tabCode="net" role="tab" data-toggle="tab">网络设备</a></li>
+                <li><a href="#ITSource-sourceTable-app" data-tabCode="app" role="tab" data-toggle="tab">应用程序</a></li>
             </ul>
         </div>
         <div class="box-body tab-content">
-            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-DC_HOST">
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-server">
                 <div class="tableView">
-                    <div id="ITSource-DC_HOST-table-toolbar" class="toolbar">
+                    <div id="ITSource-server-table-toolbar" class="toolbar">
                         <div class="form-group forNotReport">
                             <button type="button" class="btn btn-default import">导入excle</button>
                             <button type="button" class="btn btn-default addNew">添加</button>
@@ -64,14 +64,14 @@
                         </div>
                         
                     </div>
-                    <table id="ITSource-DC_HOST-table" class="table table-bordered table-hover">
+                    <table id="ITSource-server-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-DC_DBS">
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-db">
                 <div class="tableView">
-                    <div id="ITSource-DC_DBS-table-toolbar" class="toolbar">
+                    <div id="ITSource-db-table-toolbar" class="toolbar">
                         <div class="col-sm-12 col-xs-12">
                             <span class="form-group showInline">
                                 <label>选择：</label>
@@ -99,14 +99,14 @@
                             </div>
                         </div>
                     </div>
-                    <table id="ITSource-DC_DBS-table" class="table table-bordered table-hover">
+                    <table id="ITSource-db-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-DC_MIDDSERVER">
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-middleware">
                 <div class="tableView">
-                    <div id="ITSource-DC_MIDDSERVER-table-toolbar" class="toolbar">
+                    <div id="ITSource-middleware-table-toolbar" class="toolbar">
                         <div class="col-sm-12 col-xs-12">
                             <span class="form-group showInline">
                                 <label>选择：</label>
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                     </div>
-                    <table id="ITSource-DC_MIDDSERVER-table" class="table table-bordered table-hover">
+                    <table id="ITSource-middleware-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
@@ -174,9 +174,9 @@
                 </div>
                 <div class="editView"></div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-DC_NETWORKDEVICE">
+            <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-net">
                 <div class="tableView">
-                    <div id="ITSource-DC_NETWORKDEVICE-table-toolbar" class="toolbar">
+                    <div id="ITSource-net-table-toolbar" class="toolbar">
                         <div class="col-sm-12 col-xs-12">
                             <span class="form-group showInline">
                                 <label>选择：</label>
@@ -204,14 +204,14 @@
                             </div>
                         </div>
                     </div>
-                    <table id="ITSource-DC_NETWORKDEVICE-table" class="table table-bordered table-hover">
+                    <table id="ITSource-net-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
             </div>
             <div role="tabpanel" class="tab-pane" id="ITSource-sourceTable-app">
                 <div class="tableView">
-                    <div id="ITSource-DC_APPSYS-table-toolbar" class="toolbar">
+                    <div id="ITSource-app-table-toolbar" class="toolbar">
                         <div class="col-sm-12 col-xs-12">
                             <span class="form-group showInline">
                                 <label>选择：</label>
@@ -239,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                    <table id="ITSource-DC_APPSYS-table" class="table table-bordered table-hover">
+                    <table id="ITSource-app-table" class="table table-bordered table-hover">
                     </table>
                 </div>
                 <div class="editView"></div>
@@ -356,7 +356,7 @@
     </tr>
 </script>
 
-<script type="text/x-handlebars-template" id="ITSource-DC_HOST-add-template">
+<script type="text/x-handlebars-template" id="ITSource-server-add-template">
     <ol class="breadcrumb">
         <li class="backToTableView"><a>服务器</a></li>
         {{#if id}}
@@ -365,7 +365,7 @@
         <li class="active">新增</li>
         {{/if}}
     </ol>
-    <form class="form-horizontal" id="ITSource-DC_HOST-add-form">
+    <form class="form-horizontal" id="ITSource-server-add-form">
         <input type="hidden" name="id" value={{id}}>
         <div class="form-group">
             <label class="col-sm-2 control-label required">设备名称：</label>

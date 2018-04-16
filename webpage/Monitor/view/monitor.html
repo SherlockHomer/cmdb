@@ -125,7 +125,7 @@
                 <div class="box-body">
                     <div class="form-group">
                         {{#each contentInfo}}
-                        <div class="info-box" data-code="ciMajor={{ciMajor}}&code={{code}}">
+                        <div class="info-box" data-code="ciMajor={{ciMajor}}{{#if code}}&code={{code}}{{/if}}">
                             <span class="info-box-icon">
                                 {{#if code}}
                                 <i class="iconfont {{deviceIcon code}}"></i>

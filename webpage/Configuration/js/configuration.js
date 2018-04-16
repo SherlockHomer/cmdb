@@ -674,9 +674,7 @@
     function renderAddNew(tabId,params){
         $('#'+tabId).find('.tableView').addClass('hide');
         if (tabId == 'Configuration-mission') {
-            if ( !params ){
-                var params = {};
-                params.ipRange = [{type:1,ip:''}];
+            if ( !params.scanType ){
                 params.scanType = ['device','port','server','cloud','database','middleware','connection'];
             };
             params.from = '发现任务策略';
@@ -696,6 +694,11 @@
             $('#'+tabId).find('.editView select').each(function(i,perSel){
                 $(perSel).change();
             })
+        }
+        // 统一添加新增的一条目标设备
+        if (!params) {
+            var params = {};
+            params.ipRange = [{type:1,ip:''}];
         }
         // 特殊标签内容处理
         if (tabId == 'Configuration-mission') {

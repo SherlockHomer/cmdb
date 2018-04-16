@@ -12,20 +12,20 @@
 }(window, function ($) {
     if ( window.ITSourceTable ) { return window.ITSourceTable};
     var tabAndCicode = {
-        'DC_HOST':['DC_HOST','DC_VIRTUALRESOURCE/DC_VM','DC_VIRTUALRESOURCE/DC_Docker'],
-        'DC_DBS':['DC_DBS'],
-        'DC_MIDDSERVER':['DC_MIDDSERVER'],
+        'server':['DC_HOST/','DC_VIRTUALRESOURCE/DC_VM','DC_VIRTUALRESOURCE/DC_Docker'],
+        'db':['DC_DBS/'],
+        'middleware':['DC_MIDDSERVER/'],
         'cloud':['DC_VIRTUALRESOURCE/DC_ResDomain'],
-        'DC_NETWORKDEVICE':['DC_NETWORKDEVICE'],
-        'DC_APPSYS':['DC_APPSYS']
+        'net':['DC_NETWORKDEVICE/'],
+        'app':['DC_APPSYS/']
     };
     var Record = {
         tagName:[],
         // 默认选项卡的code
-        tabCode : 'DC_HOST',
+        tabCode : 'server',
         // 默认选项卡服务器包含的ciCode : DC_HOST,DC_VM,DC_Docker
         code:'',
-        // 一级资源类型，报表过来的typeCode对应哪个大分类 tabCode : 'DC_HOST'
+        // 一级资源类型
         ciMajor:'',
         resVersion:'',
         type:'',
@@ -42,13 +42,17 @@
         });
         return code.join(',')
     };
+    function getCiMajorByTabCode (tabCode){
+        var code = [];
+        $.each(tabAndCicode[tabCode],function(i,perV){
+            code.push ( perV.split('/')[0] );
+        });
+        return code.join(',')
+    };
     // 一级二级得出放在哪个选项卡
     function getTabCodeByCode(ciMajor,code){
         if (!ciMajor) {
             return '';
-        };
-        if (ciMajor && !code) {
-            return ciMajor;
         };
         var oneTwo = ciMajor + '/' + code  ;
         for( var i in tabAndCicode ){
@@ -56,7 +60,12 @@
                 return i;
             }
         }
-        // Tool.message({text:'没有找到对应的选项卡',status:'danger'});
+        // 如果一二级code都对应不上时，尝试一级code
+        for( var i in tabAndCicode ){
+            if ( tabAndCicode[i].indexOf( ciMajor+'/' ) > -1 ){
+                return i;
+            }
+        }
         return '';
     }
     // 配置DOM和temp的一一对应
@@ -112,15 +121,15 @@
     function getTableSortName(code){
 
         switch (code){
-            case 'DC_HOST' : {
+            case 'server' : {
                 return 'osType';
                 break;
             }
-            case 'DC_DBS' : {
+            case 'db' : {
                 return 'ciCode';
                 break;
             }
-            case 'DC_MIDDSERVER' : {
+            case 'middleware' : {
                 return 'ciCode';
                 break;
             }
@@ -128,11 +137,11 @@
                 return 'ciCode';
                 break;
             }
-            case 'DC_NETWORKDEVICE' : {
+            case 'net' : {
                 return 'ciCode';
                 break;
             }
-            case 'DC_APPSYS' : {
+            case 'app' : {
                 return 'resName';
                 break;
             }
@@ -140,7 +149,7 @@
     };
     function getColumnsByTypeCode(code) {
         switch (code){
-            case 'DC_HOST' : {
+            case 'server' : {
                 return [{
                     checkbox:true,
                 },{
@@ -175,7 +184,7 @@
                 }]
                 break;
             }
-            case 'DC_DBS' : {
+            case 'db' : {
                 return [{
                     checkbox:true,
                 },{
@@ -214,7 +223,7 @@
                 }];
                 break;
             }
-            case 'DC_MIDDSERVER' : {
+            case 'middleware' : {
                 return [{
                     checkbox:true,
                 },{
@@ -292,7 +301,7 @@
                 }];
                 break;
             }
-            case 'DC_NETWORKDEVICE' : {
+            case 'net' : {
                 return [{
                     checkbox:true,
                 },{
@@ -331,7 +340,7 @@
                 }];
                 break;
             }
-            case 'DC_APPSYS' : {
+            case 'app' : {
                 return [{
                     checkbox:true,
                 },{
@@ -454,12 +463,13 @@
         } else if ( hashes.currentModule == 'ITSource' ){
             var params = hashes.params;
             if (!params) {
-                Record.tabCode = 'DC_HOST';
-                Record.code = 'DC_HOST';
+                Record.tabCode = 'server';
+                Record.ciMajor = '';
+                Record.code = '';
             } else {
                 Record.ciMajor = params.ciMajor;
                 Record.code = params.code;
-                Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code) || 'DC_HOST';
+                Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code) || 'server';
                 Record.belongMission = params.mission;
             }
             Record.tagName = [];
@@ -503,7 +513,8 @@
         // 能切换选项卡只在 < IT资源信息 >中
         // 手动切换时以下两值不同
         if (Record.tabCode != tabCode ) {
-            Record.code = tabCode;
+            Record.ciMajor = getCiMajorByTabCode( tabCode );
+            Record.code = getCodeByTabCode ( tabCode );
         }
         Record.tabCode = tabCode;
         if ( $('#'+tabDom).find('.bootstrap-table')[0] ){
@@ -618,12 +629,12 @@
     function queryParams(params){
         var toolbar = $('#ITSource-'+this.code+'-table-toolbar');
         params.searchText = toolbar.find('.searchInput').val();
+        params.ciMajor = Record.ciMajor ||  getCiMajorByTabCode(this.code) ;
+        params.code = Record.code || ( Record.ciMajor ? '' : getCodeByTabCode(this.code)  );
         // 资源分类
         if (Record.currentModule == 'ITSource') {
-            params.ciMajor = Record.code ||  this.code ;
             params.tagName = Record.tagName.join(',');
         } else {
-            params.code = Record.code;
             // 统计分类
             switch(Record.countType) {
                 // 厂商
@@ -685,7 +696,7 @@
     }
     function addNewServer(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
-        Tool.renderEditView( tabId , 'ITSource-DC_HOST-add-template');
+        Tool.renderEditView( tabId , 'ITSource-server-add-template');
         // 启用form验证
         $('#'+tabId + ' .editView form').validator();
     };
@@ -827,7 +838,7 @@
     }
     function ajaxSave(tableId,formId,params,btn) {
         switch(formId){
-            case 'ITSource-DC_HOST-add-form':{
+            case 'ITSource-server-add-form':{
                 var url = 'resource/addResource';
                 break;
             }
@@ -865,8 +876,8 @@
     $('body').on('click','#ITSource-sourceTable-box .toolbar .exportTable',exportTable);
     $('body').on('click','#ITSource-sourceTable-box .toolbar .exportDetail',exportDetail);
 
-    $('body').on('click','#ITSource-sourceTable-DC_HOST .addNew',addNewServer);
-    $('body').on('click','#ITSource-sourceTable-DC_HOST .defMissionStrategy',defMissionStrategy);
+    $('body').on('click','#ITSource-sourceTable-server .addNew',addNewServer);
+    $('body').on('click','#ITSource-sourceTable-server .defMissionStrategy',defMissionStrategy);
     $('body').on('click','#ITSource-sourceTable-box .toolbar .setTag',function(){
         patchSetTag(this);
     });
