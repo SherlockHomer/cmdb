@@ -58,6 +58,9 @@
             <input class="scale" type="range" min="1" max="200" value="100">
         </div>
     </div>
+    <div class="hide" id="Graph-node-detail-box" style="margin-top:50px">
+        <div id="Graph-node-detail"></div>
+    </div>
 </script>
 
 <script>
@@ -534,7 +537,22 @@
         };
         // 节点详情
         function showNodeDetail(node){
-            window.location = window.location.origin + window.location.pathname + '#/ITSource/detail/' + node.data.id;
+            Tool.loadTemp('webpage/ITSource/view/sourceTable.html',function(){
+                var params = {
+                    id: node.data.id
+                };
+                fetchData('resource/getResourceDetail','json',params,{
+                    success:function(res){
+                        var html = Handlebars.getHTMLByCompile('ITSource-table-detail-template',res.data);
+                        $('#Graph-node-detail').html(html);
+                        $('#Graph-node-detail-box').removeClass('hide');
+                        $('#Graph-node-detail-box')[0].scrollIntoView()
+                    },
+                    error:function(){
+
+                    }
+                });
+            });
         }
 
         // 注册事件

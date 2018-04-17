@@ -206,7 +206,8 @@
                 },{
                     title:'版本',
                     field:'resVersion',
-                    sortable:true
+                    sortable:true,
+                    width:'30%'
                 },{
                     title:'IP地址',
                     field:'resIp',

@@ -27,6 +27,10 @@
             "value": "2018-01-10 09:00:00",
             "isText": true
         }, {
+            "keyText": "执行详情",
+            "value": "something wrong",
+            "isText": true
+        }, {
             "keyText": "扫描进度",
             "value": 40,
             "isProcess": true

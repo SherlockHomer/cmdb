@@ -90,6 +90,14 @@
                 field:'executeUser',
                 sortable:true
             },{
+                title:'发现数量',
+                field:'count',
+                formatter:function(value,row){
+                    if (value) {
+                        return '<span class="text-aqua detail" data-id="'+row.id+'" role="button">'+value+'个发现</span>';
+                    }
+                }
+            },{
                 title:'任务状态',
                 field:'status',
                 sortable:true,
@@ -116,6 +124,9 @@
                 }
             }]
         });
+        if (monitorType == '1' || monitorType == '0') {
+            $('#'+tableId).bootstrapTable('hideColumn','endDate');
+        }
     }
 
     // 对外统一接口，在cmdb.js中调用
@@ -319,7 +330,7 @@
             refreshTable(tableId);
         } else {
             initMonitorTable(tableId,monitorType);
-        }
+        };
     };
     function refreshTable(tableId){
         $('#'+tableId).bootstrapTable('refresh');

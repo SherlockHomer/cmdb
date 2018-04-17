@@ -674,7 +674,9 @@
     function renderAddNew(tabId,params){
         $('#'+tabId).find('.tableView').addClass('hide');
         if (tabId == 'Configuration-mission') {
-            if ( !params.scanType ){
+            if ( !params ){
+                var params = {};
+                params.ipRange = [{type:1,ip:''}];
                 params.scanType = ['device','port','server','cloud','database','middleware','connection'];
             };
             params.from = '发现任务策略';
@@ -685,6 +687,7 @@
         }
         var html = Handlebars.getHTMLByCompile(tabId+'-editView-template',params);
         $('#'+tabId).find('.editView').html(html);
+
         // 下拉内容需要触发 changeView 和 changePort 的事件
         if ( params ) {
             $('#'+tabId).find('.editView select').each(function(i,perSel){
@@ -695,16 +698,18 @@
                 $(perSel).change();
             })
         }
-        // 统一添加新增的一条目标设备
-        if (!params) {
-            var params = {};
-            params.ipRange = [{type:1,ip:''}];
-        }
+
+        
         // 特殊标签内容处理
         if (tabId == 'Configuration-mission') {
             DefineMissionStrategy.render(params);
-        } else if (params && ( tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') ) {
-            DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , params.ipRange );
+        } else if ( tabId == 'Configuration-DC_HOST' || tabId == 'Configuration-DC_DBS'  || tabId == 'Configuration-DC_MIDDSERVER') {
+            if (!params || !params.ipRange ) {
+                var par = [{type:1,ip:''}];
+            } else {
+                var par = params.ipRange;
+            }
+            DefineIp.renderIpRange( $('#'+tabId+' .editView .ips') , par );
         };
         // 启用form验证
         $('#'+tabId + ' .editView form').validator();

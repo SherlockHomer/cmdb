@@ -40,7 +40,7 @@
         if ( moduleName == '404' && Router[moduleName].innerHTML ) {
             $('#index-content').html(Router[moduleName].innerHTML);
             return;
-        } else if ( Router[moduleName].isLoaded  ){
+        } else if ( Router[moduleName].isLoaded || window[moduleName] ){
             window[moduleName].renderModule(params);
             return;
         }
@@ -300,7 +300,12 @@
             }
         }
         return new Handlebars.SafeString(html);
-    })
+    });
+
+    // monitor details 遇到执行详情就红色
+    Handlebars.registerHelper('specailInKeDetail',function(keyName){
+        return keyName == '执行详情' ? 'text-red'  : '';
+    });
 }));
 
 // 一些常用的方法
