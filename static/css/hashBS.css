@@ -286,6 +286,9 @@ label.required:before{
 .select2-search.select2-search--dropdown button{
     margin-top:5px;
 }
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    padding:0 5px;
+}
 
 /*bootstrap table*/
 .bootstrap-table .table tr td .progress{

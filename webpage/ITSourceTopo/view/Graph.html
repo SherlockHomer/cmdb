@@ -53,8 +53,8 @@
         </div>
         <div id="Graph"></div>
         <div id="Graph-map">
-            <i class="fa-plus plus scaleIcon"></i>
-            <i class="fa-minus minus scaleIcon"></i>
+            <i class="fa-plus plus scaleIcon" role="button"></i>
+            <i class="fa-minus minus scaleIcon" role="button"></i>
             <input class="scale" type="range" min="1" max="200" value="100">
         </div>
     </div>
@@ -532,6 +532,12 @@
             var scale = parseInt($(input).val()) / 100;
             Record.diagram.scale = scale;
         };
+        // 点击内容
+        function plusDiag(plusOrnot){
+            var much = plusOrnot ? 30 : -30 ;
+            var newV = parseInt( $('#Graph-map .scale').val() ) + much;
+            $('#Graph-map .scale').val( newV ).change();
+        };
         function resetScale(){
             $('#Graph-map .scale').val( parseFloat(Record.diagram.scale) * 100);
         };
@@ -588,9 +594,15 @@
             setTag(this);
         });
         // 放大条
-        $('body').on('change','#Graph-map .scale',function(){
+        $('body').on('input change','#Graph-map .scale',function(){
             rescaleDP(this);
-        })
+        });
+        $('body').on('click','#Graph-map .plus',function(){
+            plusDiag(true);
+        });
+        $('body').on('click','#Graph-map .minus',function(){
+            plusDiag(false);
+        });
         $(window).on('resize',function(){
             resizeDiagBoxHeight();
         })

@@ -508,7 +508,6 @@
     }
 
     function changeTab(tab){
-        // todo:  现在切换选项卡用什么ciMajor
         var tabDom = $(tab).attr('href').substring(1);
         var tabCode = $(tab).attr('data-tabCode');
         // 能切换选项卡只在 < IT资源信息 >中
@@ -702,10 +701,20 @@
         $('#'+tabId + ' .editView form').validator();
     };
     function defMissionStrategy(){
-        var params = {from:'服务器'};
+        var params = {from:'服务器策略'};
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
+        var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
+        var sels = $('#'+tableId).bootstrapTable('getSelections');
+        if (sels.length) {
+            params.ipRange = [];
+            $.each(sels,function(i,perSel){
+                params.ipRange.push({type:1,ip:perSel.resIp});
+            });
+        } else {
+            params.ipRange = [{type:1,ip:''}];
+        } 
         Tool.renderEditView( tabId , 'Configuration-mission-editView-template',params);
-        DefineMissionStrategy.render();
+        DefineMissionStrategy.render(params);
         // 启用form验证
         $('#'+tabId + ' .editView form').validator();
     };
