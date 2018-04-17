@@ -306,6 +306,12 @@
     Handlebars.registerHelper('specailInKeDetail',function(keyName){
         return keyName == '执行详情' ? 'text-red'  : '';
     });
+    Handlebars.registerHelper('missionStaInProcess',function(status){
+        return status == '2' ? ''  : 'active';
+    });
+    Handlebars.registerHelper('missionStaColorInProcess',function(cancel){
+        return cancel == '1' ? 'progress-bar-danger'  : 'progress-bar-success';
+    });
 }));
 
 // 一些常用的方法

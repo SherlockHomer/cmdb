@@ -156,7 +156,7 @@
                             <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
                             <div class="col-sm-10 form-control-static">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
+                                    <div class="progress-bar {{missionStaColorInProcess ../isCancel}} progress-bar-striped {{missionStaInProcess ../status}}" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
                                     </div>
                                 </div>
                             </div>

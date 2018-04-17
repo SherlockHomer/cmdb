@@ -103,10 +103,14 @@
                 sortable:true,
                 formatter:function(value, row, index, field){
                     var active = '';
+                    var color = 'progress-bar-success';
                     if ( row.status == 1 ) {
                         active = 'active';
+                    };
+                    if ( row.isCancel == 1) {
+                        color  = 'progress-bar-danger'
                     }
-                    return '<div class="progress detail" data-id="'+row.id+'" role="button"><div class="progress-bar progress-bar-success progress-bar-striped '+active+'" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
+                    return '<div class="progress detail" data-id="'+row.id+'" role="button"><div class="progress-bar '+color+' progress-bar-striped '+active+'" role="progressbar" aria-valuenow="'+row.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+row.progress+'%">'+row.progress+'%</div></div>';
                 }
             },{
                 title:'操作',
