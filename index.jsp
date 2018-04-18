@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="static/css/hashBS.css">
     <script>
         // 前后端分离
-        window.UrlConfig = 'frontEnd';
+        // window.UrlConfig = 'frontEnd';
     </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -52,9 +52,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a target="_blank" href="../portal"><i class="fa fa-home"></i> 混合服务自动化系统</a></li>
-                            <!-- <li><a target="_blank"><i class="fa fa-dashboard"></i> 巡检调度</a></li> -->
+                            <li><a target="_blank" href="../schedule"><i class="fa fa-object-group" style="width: 12px"></i> 作业调度</a></li>
+                            <li><a target="_blank" href="../inspect"><i class="glyphicon glyphicon-screenshot"></i> 巡检合规</a></li>
+                            <li><a target="_blank" href="../deploy"><i class="fa fa-download"></i> 应用部署</a></li>
                             <!-- <li><a target="_blank" href="../discovery"><i class="fa fa-search"></i> 自动发现</a></li> -->
-                            <li><a target="_blank" href="../schedule"><i class="fa fa-object-group"></i> 作业调度</a></li>
+                            <li><a target="_blank" href="../system"><i class="fa fa-cogs"></i> 系统管理</a></li>
                         </ul>
                     </li>
                 </ul>
