@@ -89,6 +89,7 @@
             params.topoType = params.topoType || 0;
             // 记录参数
             Record.params = params;
+            hideSaveBtn();
             getData(loadData);
             if (Record.diagram){
                 Record.diagram.div = null;
@@ -559,6 +560,10 @@
                     }
                 });
             });
+        };
+        // 未分类资源不显示编辑--保存按钮
+        function hideSaveBtn(){
+            $('#Graph-tool-edit .save').toggleClass('hide',Record.params.appTag == '1' ? true : false );
         }
 
         // 注册事件
@@ -608,7 +613,8 @@
         })
         return {
             render:render,
-            renderBasic:renderBasic
+            renderBasic:renderBasic,
+            hideSaveBtn:hideSaveBtn
         };
     }));
 
