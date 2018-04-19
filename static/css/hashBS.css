@@ -95,6 +95,7 @@ label.required:before{
     word-break: break-all;
     font-size: 14px;
     font-weight: normal;
+    white-space: initial;
 }
 .detailsForm .form-group{
     margin-bottom: 0;
