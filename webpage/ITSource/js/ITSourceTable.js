@@ -682,7 +682,7 @@
         }
         fetchData('resource/getResourceDetail','json',params,{
             success:function(res){
-                res.data.tags = res.data.tagName.split(',');
+                res.data.tags = res.data.tagName ? res.data.tagName.split(',') : [];
                 render('ITSource-table-detail-template',res.data);
                 Record.details = res.data.details;
             },

@@ -129,7 +129,7 @@
         }
         // 载入数据
         function loadData(data){ 
-            if ( Record.params.topoType !== 0 && !data){
+            if ( Record.params.topoType !== 0 && !data.topoJson){
                 showRelation();
             } else {
                 loadDataToDiagram(data);
@@ -203,9 +203,9 @@
                 for (var i = newData['linkDataArray'].length - 1; i >= 0; i--) {
                     var perLink = newData['linkDataArray'][i];
                     perLink.color = getStatusItem( 'relation', perLink.relation || 1 ).hex;
-                    // if ( perLink.relation == 1) {
-                    //     blackRel.push( newData['linkDataArray'].splice(i,1)[0] );
-                    // }
+                    if (perLink.relation == 1) {
+                        perLink.visible = false;
+                    }
                 };
             } else {
                 var newData = data.topoJson;
@@ -267,8 +267,8 @@
             var dom = $('#Graph-tool-display .list-group');
             dom.html('');
             $.each(count,function(i,perType){
-                var status = getStatusItem('devices',perType.ciCode);
-                dom.append('<li class="list-group-item clicked" data-ciCode="'+perType.ciCode+'">'+
+                var status = getStatusItem('devices',perType.ciMajor);
+                dom.append('<li class="list-group-item clicked" data-ciMajor="'+perType.ciMajor+'">'+
                     '<i class="'+status.icon+'"></i>'+
                     '<span>'+ perType.sum +' </span>'+
                     '<span>'+ status.text +'</span>'+
@@ -276,13 +276,12 @@
             });
         };
         // 显示隐藏节点
-        // 参数ciCode 是大分类
-        function displayNode(ciCode , showOrNot){
+        function displayNode(ciMajor , showOrNot){
             var diag  = Record.diagram;
             var nodes = diag.model.nodeDataArray;
             diag.startTransaction("displayNode");
             $.each(nodes,function(i,perNode){
-                if(perNode.ciMajor == ciCode){
+                if(perNode.ciMajor == ciMajor){
                     var nodeData = diag.model.findNodeDataForKey(perNode.key);
                     diag.model.setDataProperty(nodeData, 'visible', showOrNot);
                 }
@@ -585,7 +584,7 @@
         $('body').on('click','#Graph-tool-display .list-group .list-group-item',function(){
             $(this).toggleClass('clicked');
             var showOrNot = $(this).hasClass('clicked');
-            displayNode( $(this).attr('data-ciCode') ,showOrNot);
+            displayNode( $(this).attr('data-ciMajor') ,showOrNot);
         });
         $('body').on('click','#Graph-tool-layout .list-group .list-group-item',function(){
             $(this).addClass('clicked');

@@ -262,24 +262,19 @@
             "relation": "4"
         }],
         "count": [{
-            "ciCode": "DC_HOST",
-            "ciMajor":"",
+            "ciMajor": "DC_HOST",
             "sum": 3
         }, {
-            "ciCode": "DC_DBS",
-            "ciMajor":"",
+            "ciMajor": "DC_DBS",
             "sum": 1
         }, {
-            "ciCode": "DC_CLOUD",
-            "ciMajor":"",
+            "ciMajor": "DC_CLOUD",
             "sum": 7
         }, {
-            "ciCode": "DC_MIDDSERVER",
-            "ciMajor":"",
+            "ciMajor": "DC_MIDDSERVER",
             "sum": 6
         }, {
-            "ciCode": "DC_APPComp",
-            "ciMajor":"",
+            "ciMajor": "DC_APPComp",
             "sum": 1
         }],
         "topoJson": ""

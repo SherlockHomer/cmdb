@@ -15,7 +15,7 @@
     Constant.devices = [
     {type:'DC_APPSYS',icon:'icon-app',text:'应用',image:'static/image/device/app.png'},
     {type:'DC_BusiSys',icon:'icon-disk',text:'应用系统',image:'static/image/device/disk.png'},
-    {type:'DC_APPComp',icon:'icon-disk',text:'应用组件',image:'static/image/device/app.png'},
+    {type:'DC_APPComp',icon:'icon-disk',text:'应用组件',image:'static/image/device/disk.png'},
 
 
     {type:'DC_PLATFORM',icon:'icon-platform',text:'平台资源',image:'static/image/device/unknownDevice.png'},
@@ -49,20 +49,20 @@
     {type:'DC_VisualDC',icon:'icon-information',text:'虚拟数据中心',image:'static/image/device/unknownDevice.png'},
     {type:'DC_OpenstackSyst',icon:'icon-virtualDevice',text:'Openstack系统',image:'static/image/device/unknownDevice.png'},
     {type:'DC_AvailableZone',icon:'icon-virtualDevice',text:'可用域',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_ResDomain',icon:'icon-virtualDevice',text:'资源域',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualManager',icon:'icon-virtualDevice',text:'虚拟化管理器',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualTemplate',icon:'icon-virtualDevice',text:'虚拟机模板',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VM',icon:'icon-virtualDevice',text:'虚拟机',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_ResDomain',icon:'icon-virtualDevice',text:'资源域',image:'static/image/device/virtualDevice.png'},
+    {type:'DC_VirtualManager',icon:'icon-virtualDevice',text:'虚拟化管理器',image:'static/image/device/virtualDevice.png'},
+    {type:'DC_VirtualTemplate',icon:'icon-virtualDevice',text:'虚拟机模板',image:'static/image/device/virtualDevice.png'},
+    {type:'DC_VM',icon:'icon-virtualDevice',text:'虚拟机',image:'static/image/device/virtualDevice.png'},
     {type:'DC_Project',icon:'icon-virtualDevice',text:'项目',image:'static/image/device/unknownDevice.png'},
     {type:'DC_User',icon:'fa-user',text:'用户',image:'static/image/device/unknownDevice.png'},
     {type:'DC_ComputePlan',icon:'icon-virtualDevice',text:'计算方案',image:'static/image/device/unknownDevice.png'},
     {type:'DC_Image',icon:'icon-virtualDevice',text:'镜像',image:'static/image/device/unknownDevice.png'},
     {type:'DC_Volume',icon:'icon-virtualDevice',text:'卷',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VirtualNetwork',icon:'icon-networkDevice',text:'虚拟网络',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_FloatingIP',icon:'icon-virtualDevice',text:'浮动IP',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_VLAN',icon:'icon-virtualDevice',text:'VLAN',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_SecurtityGROUP',icon:'icon-virtualDevice',text:'安全组',image:'static/image/device/unknownDevice.png'},
-    {type:'DC_Docker',icon:'icon-virtualDevice',text:'容器',image:'static/image/device/unknownDevice.png'},
+    {type:'DC_VirtualNetwork',icon:'icon-networkDevice',text:'虚拟网络',image:'static/image/device/icon-networkDevice.png'},
+    {type:'DC_FloatingIP',icon:'icon-virtualDevice',text:'浮动IP',image:'static/image/device/icon-networkDevice.png'},
+    {type:'DC_VLAN',icon:'icon-virtualDevice',text:'VLAN',image:'static/image/device/icon-networkDevice.png'},
+    {type:'DC_SecurtityGROUP',icon:'icon-virtualDevice',text:'安全组',image:'static/image/device/icon-networkDevice.png'},
+    {type:'DC_Docker',icon:'icon-virtualDevice',text:'容器',image:'static/image/device/icon-networkDevice.png'},
 
 
     {type:'DC_HOST',icon:'icon-host',text:'主机',image:'static/image/device/host.png'},
@@ -81,10 +81,10 @@
 
 
     {type:'DC_NETWORKDEVICE',icon:'icon-networkDevice',text:'网络设备',image:'static/image/device/networkDevice.png'},
-    {type:'DC_Router',icon:'icon-router',text:'路由器',image:'static/image/device/networkDevice.png'},
+    {type:'DC_Router',icon:'icon-router',text:'路由器',image:'static/image/device/router.png'},
     {type:'DC_Switch',icon:'icon-switch',text:'交换机',image:'static/image/device/switch.png'},
     {type:'DC_LoadBalancing',icon:'icon-loadBalance',text:'负载均衡',image:'static/image/device/networkDevice.png'},
-    {type:'DC_Firewall',icon:'icon-firewall',text:'防火墙',image:'static/image/device/networkDevice.png'},
+    {type:'DC_Firewall',icon:'icon-firewall',text:'防火墙',image:'static/image/device/firewall.png'},
     {type:'DC_IDS',icon:'icon-networkDevice',text:'入侵检测',image:'static/image/device/networkDevice.png'},
     {type:'DC_VPN',icon:'icon-networkDevice',text:'VPN网关',image:'static/image/device/networkDevice.png'},
 
