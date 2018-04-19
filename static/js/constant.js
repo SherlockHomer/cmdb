@@ -144,14 +144,14 @@
     {type:4,text:'AIX'}
     ];
     Constant.relation = [
-    {type:1,text:'连接',color:'green',hex:'#00a65a'},
+    {type:1,text:'连接',color:'green',hex:'#abe401'},
     {type:2,text:'虚拟化',color:'black',hex:'#000'},
-    {type:3,text:'集群',color:'orange',hex:'#f39c12'},
-    {type:4,text:'主备',color:'blue',hex:'#307095'},
-    {type:5,text:'使用',color:'蓝色',hex:'#00c0ef'},
-    {type:6,text:'运行于',color:'navy',hex:'#001f3f'},
-    {type:7,text:'依赖',color:'olive',hex:'#3d9970'},
-    {type:8,text:'调用',color:'purple',hex:'#605ca8'}
+    {type:3,text:'集群',color:'deepGreen',hex:'#45b97c'},
+    {type:4,text:'主备',color:'blue',hex:'#7bbfea'},
+    {type:5,text:'使用',color:'red',hex:'#ff5e57'},
+    {type:6,text:'运行于',color:'pink',hex:'#FFA6A6'},
+    {type:7,text:'依赖',color:'yellow',hex:'#f7d04a'},
+    {type:8,text:'调用',color:'purple',hex:'#c3c3c3'}
     ]
     function getStatusItem(itemsName,status,def){
         var items = Constant[itemsName];

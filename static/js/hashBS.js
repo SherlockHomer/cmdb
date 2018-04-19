@@ -253,7 +253,7 @@
     });
     // ITSource details 
     Handlebars.registerHelper('tableDetail',function(table){
-        var html = '<thead><tr>';
+        var html = '<thead><tr class="bg-gray">';
         var detailIndex = 999;
         $.each(table.columnsText,function(i,perCol){
             if (perCol == '详情'){

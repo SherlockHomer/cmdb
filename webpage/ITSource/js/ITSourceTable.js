@@ -169,9 +169,17 @@
                     field:'resVersion',
                     sortable:true
                 },{
-                    title:'服务器厂商',
-                    field:'manufacturer',
-                    sortable:true
+                    // title:'服务器厂商',
+                    // field:'manufacturer',
+                    title:'是否虚机',
+                    field:'',
+                    formatter:function(value,row){
+                        if (row.ciCode != 'DC_Server') {
+                            return '是';
+                        } else {
+                            return '否';
+                        }
+                    }
                 },{
                     title:'标签',
                     field:'tagName',
@@ -464,7 +472,7 @@
         } else if ( hashes.currentModule == 'ITSource' ){
             var params = hashes.params;
             if (!params) {
-                Record.tabCode = 'server';
+                Record.tabCode = Record.tabCode || 'server';
                 Record.ciMajor = '';
                 Record.code = '';
             } else {
@@ -674,6 +682,7 @@
         }
         fetchData('resource/getResourceDetail','json',params,{
             success:function(res){
+                res.data.tags = res.data.tagName.split(',');
                 render('ITSource-table-detail-template',res.data);
                 Record.details = res.data.details;
             },

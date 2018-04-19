@@ -73,13 +73,14 @@
             <input type="text" class="binding hide" required>
         </div>
         <div class="showInline hide" data-belong="2">
-            <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required><input type="text" class="binding hide" required>--
-            <input class="form-control ipBox" type="number" min="0" max="255" required style="width: 70px !important">
+            <input type="text" class="form-control ipBox rangeIp first" data-inputmask="'alias': 'ip'" data-mask required><input type="text" class="binding hide" required>-
+            <span class="range"></span>
+            <input class="form-control ipBox rangeIp second" type="number" min="0" max="255" required style="width: 80px !important">
         </div>
         <div class="showInline hide" data-belong="3">
             <input type="text" class="form-control ipBox" data-inputmask="'alias': 'ip'" data-mask required="true">/
             <input type="text" class="binding hide" required>
-            <input class="form-control ipBox" type="number" min="0" max="255" required style="width: 70px !important">
+            <input class="form-control ipBox" type="number" min="0" max="255" required style="width: 80px !important">
         </div>
         <button class="btn btn-default remove">-</button>
     </div>
@@ -121,14 +122,6 @@
             $(removeBtn).parent().remove();
             form.validator('update');
         }
-        $('body').on('click','.ips .add',function(e){
-            e.preventDefault();
-            addIp(this);
-        });
-        $('body').on('click','.ips .remove',function(e){
-            e.preventDefault();
-            removeIp(this);
-        });
         // 独立渲染关于某个dom#ips下的ips
         function renderIpRange( $ips , ipRange ){
             var ipRange = eval( ipRange );
@@ -179,7 +172,36 @@
             });
             // 数组
             return ipRange;
-        }
+        };
+
+
+
+
+        $('body').on('click','.ips .add',function(e){
+            e.preventDefault();
+            addIp(this);
+        });
+        $('body').on('click','.ips .remove',function(e){
+            e.preventDefault();
+            removeIp(this);
+        });
+        $('body').on('input change focusout','.ips .rangeIp.first',function(e){
+            var secondIp = $(this).parent().find('.rangeIp.second');
+            var rangeText = $(this).parent().find('.range');
+            var firstTp = $(this).val();
+            if (!firstTp ||  !firstTp.split('.')[3] ) {
+                secondIp.attr('min',0);
+            } else {
+                secondIp.attr('min',firstTp.split('.')[3]);
+            };
+            if (!firstTp) {
+                firstTp = 'XXX.XXX.XXX.XXX';
+            };
+            var firstIpArr = firstTp.split('.');
+            firstIpArr.pop();
+            rangeText.html( firstIpArr.join('.') +'.' );
+            secondIp.change();
+        })
         return {
             renderIpRange:renderIpRange,
             collectIps:collectIps

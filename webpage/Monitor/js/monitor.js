@@ -94,7 +94,7 @@
                 field:'count',
                 formatter:function(value,row){
                     if (value) {
-                        return '<span class="text-aqua detail" data-id="'+row.id+'" role="button">'+value+'个发现</span>';
+                        return '<span class="text-aqua detail" data-id="'+row.id+'" role="button">'+value+'个</span>';
                     }
                 }
             },{
