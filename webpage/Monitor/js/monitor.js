@@ -173,8 +173,8 @@
         var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         $('#'+id).bootstrapTable('checkInvert')
     };
-    function filterText(){
-        var $table = $(this).parents('.tab-pane').eq(0).find('table.table').eq(0);
+    function filterText(input){
+        var $table = $(input).parents('.tab-pane').eq(0).find('table.table').eq(0);
         var datas = $table.bootstrapTable('getData');
         $table.bootstrapTable('uncheckAll');
         var hiddens = $table.bootstrapTable('getHiddenRows');
@@ -187,7 +187,7 @@
                 $table.bootstrapTable('showRow',{uniqueId:u})
             })
         };
-        var text = this.value.toLowerCase();
+        var text = input.value.toLowerCase();
         var id = $table.attr('id');
         $('#'+ id +' tbody tr').each(function(i){
             var has = false;
@@ -371,7 +371,15 @@
     $('body').on('click','#Monitor-basic .checkAll' ,checkAll);
     $('body').on('click','#Monitor-basic .uncheckAll' ,uncheckAll);
     $('body').on('click','#Monitor-basic .invertCheck' ,invertCheck);
-    $('body').on('input','#Monitor-basic .searchInput',filterText);
+    
+    var timer;
+    $('body').on('input','#Monitor-basic .searchInput',function(){
+        var _this = this;
+        clearTimeout(timer); 
+        timer = setTimeout(function() {
+            filterText(_this);
+        }, 300)
+    });
     $('body').on('click','#Monitor-basic .toolbar .searchBtn',search);
     $('body').on('click','#Monitor-basic td .scan',function(){
         scanThis(this,true)

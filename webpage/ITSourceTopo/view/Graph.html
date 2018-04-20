@@ -365,8 +365,12 @@
                             width: 48,
                             height: 48,
                             margin:5,
-                            alignment:go.Spot.BottomLeft
-                        }, new go.Binding("source")),
+                            alignment:go.Spot.BottomLeft,
+                            background:null
+                        }, new go.Binding("source"),
+                        new go.Binding('background','shadow',function(val){
+                            return val == 1 ? 'rgb(200,200,200)' : null; 
+                        })),
                         $("TreeExpanderButton",{
                             alignment: go.Spot.TopRight,
                             width:20,height:20,scale:1
