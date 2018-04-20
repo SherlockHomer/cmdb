@@ -405,7 +405,7 @@
             {
                 mouseHover:function(e,obj){
                     myDiagram.startTransaction('setLinkText');
-                    myDiagram.model.setDataProperty(obj.data,"linkState", getStatusItem('relation',obj.data.relation).text );
+                    myDiagram.model.setDataProperty(obj.data,"linkState", getStatusItem('relation',obj.data.relation || 1).text );
                     myDiagram.commitTransaction('setLinkText');
                 },
                 mouseLeave:function(e,obj){
