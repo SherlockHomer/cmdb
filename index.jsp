@@ -20,11 +20,11 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
-    <link rel="stylesheet" type="text/css" href="static/icon/auto/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../static/icon/auto/iconfont.css">
     <link rel="stylesheet" href="static/css/hashBS.css">
     <script>
         // 前后端分离
-        // window.UrlConfig = 'frontEnd';
+        window.UrlConfig = 'frontEnd';
     </script>
     <!-- Google Font -->
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
