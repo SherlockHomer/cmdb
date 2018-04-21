@@ -2,6 +2,7 @@
     "total": 180,
     "rows": [{
         "id": 1,
+        "taskId":6,
         "name": "扫描任务1",
         "content": "server,database,connection",
         "scheName": ["每天九点", "下午三点"],
@@ -14,6 +15,7 @@
         "progress":80
     },{
         "id": 2,
+        "taskId":7,
         "name": "扫描任务1",
         "content": "server,middleware",
         "scheName": ["每天九点", "下午三点"],
@@ -26,6 +28,7 @@
         "progress":100
     },{
         "id": 3,
+        "taskId":8,
         "name": "扫描任务1",
         "content": "cloud",
         "scheName": ["每天九点", "下午三点"],

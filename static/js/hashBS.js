@@ -125,6 +125,19 @@
         });
         return paramsObj;
     }
+    function parseObjToParamStr(params){
+        var url = ''
+        if (params) {
+            var pArr = [];
+            for(var i in params){
+                if (params[i]){
+                    pArr.push( i + '=' + params[i] );
+                }
+            }
+            url += pArr.join('&');
+        }
+        return url;
+    }
     // 在已有上加
     function addHash(name){
         var newHash = window.location.hash.split('/');
@@ -152,7 +165,9 @@
     window.addEventListener('load', router);
     return {
         addHash             : addHash,
-        updateBreadcrumb    : updateBreadcrumb
+        updateBreadcrumb    : updateBreadcrumb,
+        parseParamStr       : parseParamStr,
+        parseObjToParamStr  : parseObjToParamStr
     }
 }));
 
@@ -304,7 +319,7 @@
 
     // monitor details 遇到执行详情就红色
     Handlebars.registerHelper('specailInKeDetail',function(keyName){
-        return keyName == '执行详情' ? 'text-red'  : '';
+        return keyName == '执行信息' ? 'text-red'  : '';
     });
     Handlebars.registerHelper('missionStaInProcess',function(status){
         return status == '2' ? ''  : 'active';

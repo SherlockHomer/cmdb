@@ -12,7 +12,9 @@
 }(window, function ($) {
     var Record = {
         // 默认是正在扫描选项卡
-        tab : 'ing'
+        tab : 'ing',
+        // 所属任务策略id
+        taskId:''
     }
     if ( window.Monitor ) { return window.Monitor};
 
@@ -56,7 +58,12 @@
             },{
                 title:'任务名称',
                 field:'name',
-                sortable:true
+                sortable:true,
+                formatter:function(value,row){
+                    if (value) {
+                        return '<span class="text-aqua goToConfig" data-taskId="'+row.taskId+'" role="button" title="跳转到任务定义">'+value+'</span>';
+                    }
+                }
             },{
                 title:'发现内容',
                 field:'content',
@@ -135,29 +142,26 @@
 
     // 对外统一接口，在cmdb.js中调用
     function renderModule( hashes ) {
+        var detailIndex = hashes.indexOf( 'detail' );
         var crumb = [{
-            url:'#/Monitor',
+            url:'#/Monitor/' + hashes[detailIndex - 1 ],
             text:'自动发现监控'
         }];
-        if (hashes[0] == 'detail') {
+
+        if (detailIndex > -1 ) {
             crumb.push({
                 text: Record.detailName|| '详情'
             });
             Router.updateBreadcrumb(crumb);
-            Record.rowId = hashes[1];
-            renderDetail(hashes[1]);
-            return;
-        } else if (hashes[1] == 'detail') {
-            crumb.push({
-                text: Record.detailName || '详情'
-            });
-            Router.updateBreadcrumb(crumb);
-            Record.rowId = hashes[2];
-            renderDetail(hashes[2]);
+            Record.rowId = hashes[detailIndex+1];
+            renderDetail(hashes[detailIndex+1]);
             return;
         }
+        // 监控表格界面
         Router.updateBreadcrumb(crumb);
-        Record.tab = hashes[0] || 'ing';
+        var params = Router.parseParamStr(hashes[0]);
+        Record.tab = params.tab || 'ing';
+        Record.taskId = params.taskId; 
         renderBasic(Record.tab);
     };
 
@@ -209,6 +213,7 @@
         params.monitorType = this.monitorType;
         var toolbar = $('#'+this.toolbarId);
         params.searchText = toolbar.find('.searchInput').val();
+        params.taskId = Record.taskId;
         return params;
     }
     function search(){
@@ -279,6 +284,10 @@
         Record.detailName = $('#'+tableId).bootstrapTable('getRowByUniqueId',id).name;
         Router.addHash('detail/'+id);
     };
+    function goToConfig(){
+        var taskId = $(this).attr('data-taskId');
+        window.location = window.location.origin + window.location.pathname + '#/Configuration/taskId=' + taskId ;
+    }
     function renderDetail(id){
         var params = {
             id: id
@@ -394,6 +403,8 @@
         scanSome(this,false);
     });
     $('body').on('click','#Monitor-basic td .detail',clickDetail);
+    // 跳转到任务定义
+    $('body').on('click','#Monitor-basic td .goToConfig',goToConfig);
     // 详情中内容过多点击详情
     $('body').on('click','#Monitor-table-detail .more',clickMore);
     $('body').on('click','#Monitor-table-detail .info-box',clickInfobox);

@@ -450,7 +450,10 @@
             },{
                 title:'操作',
                 formatter:function(value, row, index, field){
-                    return '<span class="text-aqua scan operator" role="button" data-id="'+row.id+'" title="启动扫描"><i class="fa-play"></i></span>'+'<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+'<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
+                    return '<span class="text-aqua scan operator" role="button" data-id="'+row.id+'" title="启动扫描"><i class="fa-play"></i></span>'+
+                    '<span class="text-aqua edit operator" role="button" data-id="'+row.id+'" title="修改"><i class="fa-edit"></i></span>'+
+                    '<span class="text-aqua goToMonitor operator" role="button" data-id="'+row.id+'" title="查看所有实例"><i class="fa-tasks"></i></span>'+
+                    '<span class="text-red delete operator" role="button" data-id="'+row.id+'" title="删除"><i class="fa-remove"></i></span>';
                 }
             }]
         });
@@ -515,6 +518,8 @@
             url:'#/Configuration',
             text:'自动发现配置'
         }]);
+        var params = Router.parseParamStr(hashes[0]);
+        Record.taskId = params.taskId;
         renderBasic();
     };
 
@@ -561,6 +566,11 @@
             }
         })
     };
+    // 跳转到监控
+    function goToMonitor(){
+        var taskId = $(this).attr('data-id');
+        window.location = window.location.origin + window.location.pathname + '#/Monitor/tab=all&taskId=' + taskId ;
+    }
     function deleteThis(){
         var rowId = $(this).attr('data-id');
         var tableId = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
@@ -655,6 +665,7 @@
         } else if (this.toolbarId == 'Configuration-portCustom-table-toolbar') {
             params.type = 2;
         }
+        params.taskId = Record.taskId;
         return params;
     }
     function search(){
@@ -934,6 +945,7 @@
     });
     $('body').on('click','#Configuration-basic .toolbar .delete',deleteSome);
     $('body').on('click','#Configuration-basic td .delete',deleteThis);
+    $('body').on('click','#Configuration-basic td .goToMonitor',goToMonitor);
     $('body').on('click','#Configuration-basic .toolbar .searchBtn',search);
     $('body').on('click','#Configuration-basic .toolbar .addNew',addNew);
     $('body').on('click','#Configuration-basic td .edit',editOne);

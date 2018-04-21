@@ -35,16 +35,16 @@
         <div class="form-horizontal form-group clearfix">
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">进行中的任务：</label>
-                <a class="text-aqua" href="#/Monitor/ing" role="button">{{processCount}}</a>
+                <a class="text-aqua" href="#/Monitor/tab=ing" role="button">{{processCount}}</a>
             </div>
             <div class="col-sm-6 col-xs-6">
                 <label class="control-label">计划的任务：</label>
-                <a class="text-aqua" href="#/Monitor/planTo" role="button">{{planCount}}</a>
+                <a class="text-aqua" href="#/Monitor/tab=planTo" role="button">{{planCount}}</a>
             </div>
         </div>
         <div>
             <h4 class="control-label">最近完成的{{latelyInst.length}}个任务
-                <small class="pull-right" role="button"><a class="text-aqua" href="#/Monitor/done">更多</a></small>
+                <small class="pull-right" role="button"><a class="text-aqua" href="#/Monitor/tab=done">更多</a></small>
             </h4>
             <table class="table table-striped table-bordered">
                 <thead>
@@ -61,7 +61,7 @@
                         <td>{{name}}</td>
                         <td>{{statusInMission status}}</td>
                         <td>{{endDate}}</td>
-                        <td role="button"><a class="text-aqua" href="#/Monitor/done/detail/{{taskId}}">{{count}}个发现</a></td>
+                        <td role="button"><a class="text-aqua" href="#/Monitor/tab=done/detail/{{id}}">{{count}}个发现</a></td>
                     </tr>
                     {{/each}}
                 </tbody>

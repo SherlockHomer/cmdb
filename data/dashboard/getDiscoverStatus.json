@@ -7,18 +7,21 @@
             "status": 2,
             "endDate": "2018-03-10 13:26:36",
             "count":14,
+            "id":6,
             "taskId":1
         }, {
             "name": "发现中间件",
             "status": 2,
             "endDate": "2018-03-10 13:30:36",
             "count":10,
+            "id":7,
             "taskId":2
         }, {
             "name": "发现数据库",
             "status": 2,
             "endDate": "2018-01-10 13:35:36",
             "count":10,
+            "id":9,
             "taskId":3
         }]
     },
