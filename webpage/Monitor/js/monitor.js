@@ -362,14 +362,18 @@
             searchText:$('#'+ options.toolbarId).find('.searchInput').val()
         },{
             success:function(res){
+                var originRows = $('#'+tableId).bootstrapTable('getData');
+                var newRows = [];
                 $.each(res.rows,function(i,perR){
+                    newRows.push(perR.id);
                     $('#'+tableId).bootstrapTable('updateByUniqueId', {
                         id: perR.id,
                         row: perR
                     });
-                    // 非正在扫描的移除
-                    if (perR.status != 1) {
-                        $('#'+tableId).bootstrapTable('removeByUniqueId', perR.id);
+                });
+                $.each(originRows,function(i,perO) {
+                    if ( newRows.indexOf ( perO.id ) == -1 ){
+                        $('#'+tableId).bootstrapTable('removeByUniqueId', perO.id);
                     }
                 });
             }
