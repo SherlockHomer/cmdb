@@ -129,7 +129,7 @@
         }
         // 载入数据
         function loadData(data){ 
-            if ( Record.params.topoType !== 0 && !data.topoJson){
+            if ( parseInt( Record.params.topoType ) != 0 && !data.topoJson){
                 showRelation();
             } else {
                 loadDataToDiagram(data);
