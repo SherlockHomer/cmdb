@@ -30,7 +30,7 @@
             "isText": true
         }, {
             "keyText": "执行信息",
-            "value": "something wrong",
+            "value": "something<br/> wrong",
             "isText": true
         }, {
             "keyText": "扫描进度",

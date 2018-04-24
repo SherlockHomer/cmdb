@@ -14,7 +14,13 @@
         // 默认是正在扫描选项卡
         tab : 'ing',
         // 所属任务策略id
-        taskId:''
+        taskId:'',
+        tabParam:{
+            ing:{},
+            done:{},
+            planTo:{},
+            all:{}
+        }
     }
     if ( window.Monitor ) { return window.Monitor};
 
@@ -31,14 +37,20 @@
     };
     function renderBasic(tab) {
         render('Monitor-basic-template');
+        // 还原部分现场
+        $('#Monitor-basic .toolbar').each(function(i,per){
+            var tabCode = $(per).attr('id').split('-')[1];
+            $(per).find('.searchInput').val( Record.tabParam[tabCode].searchText );
+        });
         var $tab = $('#Monitor-basic .nav-tabs a[href="#Monitor-'+tab+'"]');
         $tab.tab('show');
     };
     // 各个表的渲染
-    function initMonitorTable(tableId,monitorType){
+    function initMonitorTable(tableId,monitorType,tab){
         $('#'+tableId).bootstrapTable({
             toolbarId: tableId+'-toolbar',
             monitorType:monitorType,
+            tab:tab,
             method:'post',
             url:ConfirmUrl('discover-monitor/infoAll'),
             checkbox:true,
@@ -46,8 +58,8 @@
             sortName:'id',
             sortOrder: "desc",
             // sortable:true,
-            pageNumber:1,
-            pageSize:20,
+            pageNumber: Record.tabParam[tab].pageNumber || 1,
+            pageSize:Record.tabParam[tab].pageSize || 20,
             pageList:[20,50,100],
             // 排序是后台的
             sidePagination:'server',
@@ -144,7 +156,7 @@
     function renderModule( hashes ) {
         var detailIndex = hashes.indexOf( 'detail' );
         var crumb = [{
-            url:'#/Monitor/' + hashes[detailIndex - 1 ],
+            url:'#/Monitor/' + ( hashes[detailIndex - 1 ] || '' ),
             text:'自动发现监控'
         }];
 
@@ -160,9 +172,8 @@
         // 监控表格界面
         Router.updateBreadcrumb(crumb);
         var params = Router.parseParamStr(hashes[0]);
-        Record.tab = params.tab || 'ing';
-        Record.taskId = params.taskId; 
-        renderBasic(Record.tab);
+        Record.taskId = params.taskId;
+        renderBasic( params.tab || Record.tab || 'ing');
     };
 
     function checkAll(){
@@ -176,6 +187,10 @@
     function invertCheck(){
         var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         $('#'+id).bootstrapTable('checkInvert')
+    };
+    function updateRecord(input){
+        var tab = $(input).closest('.toolbar').attr('id').split('-')[1];
+        Record.tabParam[tab].searchText = $(input).val();
     };
     function filterText(input){
         var $table = $(input).parents('.tab-pane').eq(0).find('table.table').eq(0);
@@ -210,6 +225,10 @@
     };
 
     function queryParams(params){
+        // 触发状态管理
+        Record.tabParam[this.tab].pageNumber = params.offset/params.limit + 1;
+        Record.tabParam[this.tab].pageSize = params.limit;
+
         params.monitorType = this.monitorType;
         var toolbar = $('#'+this.toolbarId);
         params.searchText = toolbar.find('.searchInput').val();
@@ -338,11 +357,12 @@
         var tabDom = $(tab).attr('href').substring(1);
         var tableId = tabDom+'-table';
         var monitorType = $(tab).attr('data-monitorType');
+        Record.tab = tabDom.split('-')[1];
 
         if ( $('#'+tabDom).find('.bootstrap-table')[0] ){
             refreshTable(tableId);
         } else {
-            initMonitorTable(tableId,monitorType);
+            initMonitorTable(tableId,monitorType,Record.tab);
         };
     };
     function refreshTable(tableId){
@@ -387,6 +407,7 @@
     
     var timer;
     $('body').on('input','#Monitor-basic .searchInput',function(){
+        updateRecord(this);
         var _this = this;
         clearTimeout(timer); 
         timer = setTimeout(function() {

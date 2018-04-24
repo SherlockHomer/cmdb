@@ -33,8 +33,22 @@
         // 按统计进来时记录下
         countType:'',
         // 所属那个任务策略
-        belongMission:''
+        belongMission:'',
+        // 用于记录各个选项卡下的参数
+        tabParam:{
+            server:{},
+            db:{},
+            middleware:{},
+            cloud:{},
+            net:{},
+            app:{}
+        }
     };
+    function clearRecord(){
+        for (var i in Record.tabParam){
+            Record.tabParam[i] = {};
+        }
+    }
     function getCodeByTabCode (tabCode){
         var code = [];
         $.each(tabAndCicode[tabCode],function(i,perV){
@@ -85,6 +99,11 @@
     function renderBasic(tabCode){
         render('ITSource-sourceTable-template');
         renderFilter();
+        // 还原部分现场
+        $('#ITSource-sourceTable-box .toolbar').each(function(i,per){
+            var tabCode = $(per).attr('id').split('-')[1];
+            $(per).find('.searchInput').val( Record.tabParam[tabCode].searchText );
+        });
         // 由tab切换触发
         var $tab = $('#ITSource-sourceTable-box .nav-tabs a[data-tabCode="'+tabCode+'"]');
         $tab.tab('show');
@@ -108,8 +127,8 @@
             sortName:getTableSortName(code),
             sortOrder: "asc",
             // sortable:true,
-            pageNumber:1,
-            pageSize:20,
+            pageNumber: Record.tabParam[code].pageNumber || 1,
+            pageSize:Record.tabParam[code].pageSize || 20,
             pageList:[20,50,100],
             // 排序是后台的
             sidePagination:'server',
@@ -547,6 +566,9 @@
         var id = $(this).parents('.tab-pane').eq(0).find('table.table').attr('id');
         $('#'+id).bootstrapTable('checkInvert')
     };
+    function updateRecord(input){
+        Record.tabParam[$(input).attr('data-tabCode')].searchText = $(input).val();
+    };
     function filterText(input){
         var $table = $(input).parents('.tab-pane').eq(0).find('table.table').eq(0);
         var datas = $table.bootstrapTable('getData');
@@ -635,6 +657,10 @@
         });
     };
     function queryParams(params){
+        // 触发状态管理
+        Record.tabParam[this.code].pageNumber = params.offset/params.limit + 1;
+        Record.tabParam[this.code].pageSize = params.limit;
+
         var toolbar = $('#ITSource-'+this.code+'-table-toolbar');
         params.searchText = toolbar.find('.searchInput').val();
         params.ciMajor = Record.ciMajor ||  getCiMajorByTabCode(this.code) ;
@@ -696,12 +722,12 @@
             $(this).text('隐藏详情');
         } else {
             $(this).text('显示详情');
-            $(this).parents('tr').next().remove();
+            $(this).closest('tr').next().remove();
             return;
         };
         var data = JSON.parse ( $(this).attr('data-more') );
         var html = Handlebars.getHTMLByCompile('ITSource-table-more-template',data);
-        $(html).insertAfter($(this).parents('tr'));
+        $(html).insertAfter($(this).closest('tr'));
     }
     function addNewServer(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
@@ -892,6 +918,7 @@
     
     var timer;
     $('body').on('input','#ITSource-sourceTable-box .toolbar .searchInput',function(){
+        updateRecord(this);
         var _this = this;
         clearTimeout(timer); 
         timer = setTimeout(function() {
@@ -947,6 +974,7 @@
 
     var ITSourceTable = {};
     ITSourceTable.renderModule = renderModule;
+    ITSourceTable.clearRecord = clearRecord;
 
     return ITSourceTable;
 }));

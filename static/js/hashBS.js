@@ -171,6 +171,26 @@
     }
 }));
 
+(function (window, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = factory();
+    } else {
+        // Browser globals (window is window)
+        factory();
+    };
+}(window, function () {
+    $('body').on('click','.main-sidebar .sidebar-menu li a',function(){
+        // todo 
+        var moduleName = $(this).attr('href').split('/')[1];
+        if (window[moduleName] && window[moduleName].clearRecord){
+            window[moduleName].clearRecord();
+        }
+    })
+}));
 
 
 // 提取数据

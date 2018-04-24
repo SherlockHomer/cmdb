@@ -128,6 +128,7 @@ label.required:before{
     background-color: #fff;
 }
 .bootstrap-table span.operator{
+    display: inline-block;
     margin-right: 14px;
 }
 .tags{
