@@ -400,7 +400,7 @@
             url:ConfirmUrl('discover-config/findTaskList'),
             checkbox:true,
             pagination:true,
-            sortName:'id',
+            sortName:'updateDate',
             sortOrder: "desc",
             // sortable:true,
             pageNumber:1,
