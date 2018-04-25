@@ -163,6 +163,24 @@
     // 事件注册
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
+
+
+    // 用于配置清空状态的
+    var hashAndModule = {
+        ITSource:'ITSourceTable',
+        Monitor:'Monitor'
+    }
+    $('body').on('click','.main-sidebar .sidebar-menu li a',function(){
+        if($(this).parent().hasClass('active')){
+            return;
+        }
+        var hashModule = $(this).attr('href').split('/')[1];
+        var moduleName = hashAndModule[hashModule];
+        if (window[moduleName] && window[moduleName].clearRecord){
+            window[moduleName].clearRecord();
+        }
+    });
+
     return {
         addHash             : addHash,
         updateBreadcrumb    : updateBreadcrumb,
@@ -171,26 +189,6 @@
     }
 }));
 
-(function (window, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD
-        define(factory);
-    } else if (typeof exports === 'object') {
-        // Node, CommonJS-like
-        module.exports = factory();
-    } else {
-        // Browser globals (window is window)
-        factory();
-    };
-}(window, function () {
-    $('body').on('click','.main-sidebar .sidebar-menu li a',function(){
-        // todo 
-        var moduleName = $(this).attr('href').split('/')[1];
-        if (window[moduleName] && window[moduleName].clearRecord){
-            window[moduleName].clearRecord();
-        }
-    })
-}));
 
 
 // 提取数据

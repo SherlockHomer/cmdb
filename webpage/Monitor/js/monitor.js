@@ -10,6 +10,7 @@
         window.Monitor = factory(window.jQuery);
     }
 }(window, function ($) {
+    if ( window.Monitor ) { return window.Monitor};
     var Record = {
         // 默认是正在扫描选项卡
         tab : 'ing',
@@ -22,8 +23,11 @@
             all:{}
         }
     }
-    if ( window.Monitor ) { return window.Monitor};
-
+    function clearRecord(){
+        for (var i in Record.tabParam){
+            Record.tabParam[i] = {};
+        }
+    }
     // 配置DOM和temp的一一对应
     var tempAndDom = {
         'Monitor-basic-template':'index-content',
@@ -445,6 +449,7 @@
 
     var Monitor = {};
     Monitor.renderModule = renderModule;
+    Monitor.clearRecord = clearRecord;
 
     return Monitor;
 }));

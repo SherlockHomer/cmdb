@@ -79,11 +79,8 @@
         <ul class="todo-list">
             {{#each data}}
                 <li>
-                    <!-- todo text -->
-                    <span class="text">{{info}}</span>
-                    <!-- Emphasis label -->
                     {{startDateMat startDate}}
-                    <!-- General tools such as edit or delete-->
+                    <span class="text">{{syncDesc}}</span>
                 </li>
             {{/each}}
         </ul>
