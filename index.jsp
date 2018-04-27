@@ -196,7 +196,6 @@
 
 <script src="../bower_components/moment/min/moment.min.js"></script>
 <script src="../bower_components/moment/locale/zh-cn.js"></script>
-<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
