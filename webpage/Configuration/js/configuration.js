@@ -843,7 +843,7 @@
         fetchData('discover-monitor/startTask','json',params,{
             success:function(res){
                 if (res.success) {
-                    window.location = window.location.origin + window.location.pathname + '#/Monitor';
+                    window.location = window.location.origin + window.location.pathname + '#/Monitor/tab=ing';
                     Tool.message({text:'启动扫描成功'});
                 } else {
                     Tool.message({

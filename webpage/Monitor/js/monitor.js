@@ -160,7 +160,7 @@
     function renderModule( hashes ) {
         var detailIndex = hashes.indexOf( 'detail' );
         var crumb = [{
-            url:'#/Monitor/' + ( hashes[detailIndex - 1 ] || '' ),
+            url:'#/Monitor/',
             text:'自动发现监控'
         }];
 
