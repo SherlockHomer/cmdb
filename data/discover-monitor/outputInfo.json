@@ -1,0 +1,19 @@
+{
+    "data": {
+        "details": [{
+            "keyText": "扫描进度",
+            "value": 100,
+            "isProcess": true
+        },{
+            "keyText": "扫描输出",
+            "value": "扫描输出<br>sdf<>",
+            "isText": true
+        },{
+            "keyText":"结束时间",
+            "value":"",
+            "isText":true
+        }]
+    },
+    "success": true,
+    "msg": "成功"
+}

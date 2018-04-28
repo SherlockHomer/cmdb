@@ -495,7 +495,7 @@
                     var tags = [];
                     var sels = $('#Confirm-tags').select2('data');
                     $.each(sels,function(i,perD){
-                        tags.push(perD.tagName);
+                        tags.push(perD.text);
                     });
                     saveTags(ids.join(','),tags.join(','));
                 }
@@ -507,13 +507,14 @@
                     });
                     $('#Confirm-tags').select2({
                         data:res.data,
+                        tags: true,
                         closeOnSelect:false
                     });
                 }
             });
         };
         function saveTags(ids,tagsId){
-            if ( !tagsId ){ return };
+            // tagsId 可以为空
             var params = {
                 ids:ids,
                 tags:tagsId

@@ -140,12 +140,12 @@
                 formatter:function(value, row, index, field){
                     var html = '';
                     if ( row.status == 1 ) {
-                        html +=  '<span class="text-aqua cancleScan operator" role="button" data-id="'+row.id+'" style="white-space:pre" title="取消扫描"><i class="fa-stop"></i></span>' ;
+                        html +=  '<span class="text-aqua cancleScan operator" role="button" data-id="'+row.id+'" title="取消扫描"><i class="fa-stop"></i></span>' ;
                     }
                     if ( row.status == 2 || row.status == 3) {
-                        html += '<span class="text-aqua scan operator" role="button" data-taskId="'+row.taskId+'" style="white-space:pre" title="启动扫描"><i class="fa-play"></i></span>'
+                        html += '<span class="text-aqua scan operator" role="button" data-taskId="'+row.taskId+'" title="启动扫描"><i class="fa-play"></i></span>'
                     }
-                    html += '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" style="white-space:pre" title="详情信息"><i class="fa-info"></i></span>'
+                    html += '<span class="text-aqua detail operator" role="button" data-id="'+row.id+'" title="详情信息"><i class="fa-info"></i></span>'
 
                     return html;
                 }
@@ -153,6 +153,9 @@
         });
         if (monitorType == '1' || monitorType == '0') {
             $('#'+tableId).bootstrapTable('hideColumn','endDate');
+        }
+        if ( monitorType == '0') {
+            $('#'+tableId).bootstrapTable('hideColumn','startDate');
         }
     }
 
@@ -319,6 +322,11 @@
             success:function(res){
                 render('Monitor-table-detail-template',res.data);
                 Record.details = res.data.details;
+                refreshDetail();
+                if (res.data.status == 1 ) {
+                    Record.refreshDetail && clearInterval(Record.refreshDetail); 
+                    Record.refreshDetail = setInterval(refreshDetail,5000);
+                }
             },
             error:function(e){
                 Tool.message({
@@ -330,6 +338,54 @@
             }
         });
     };
+    function refreshDetail(){
+        fetchData('discover-monitor/outputInfo','json',{
+            taskInstId : Record.rowId,
+            currDate : Record.refreshDetailTime
+        },{
+            success:function(res){
+                if (!res.success) {return};
+                if ( !$('#Monitor-table-detail:visible')[0] ){
+                    clearInterval(Record.refreshDetail);
+                    Record.refreshDetailTime = '';
+                    return;
+                }
+                $.each(res.data.details,function(i,perD){
+                    if ( perD.keyText == '扫描进度' ){
+                        $('#Monitor-table-detail .processLabel').each(function(){
+                            if ( this.innerText == '扫描进度' ){
+                                $(this).next().find('.progress-bar').attr('aria-valuenow',perD.value).css('width',perD.value + '%').text(perD.value + '%');
+                            }
+                        });
+                    };
+                    if ( perD.keyText == '扫描输出') {
+                        var text = $('#Monitor-table-detail .outputInfo').next().html();
+                        var times = perD.value;
+                        $.each(times,function(t,perT){
+                            for(var i in perT){
+                                Record.refreshDetailTime = i ;
+                                text =  i + '：' + perT[i] +'<br/>' + text ;
+                            }
+                        })
+                        $('#Monitor-table-detail .outputInfo').next().html(text);
+                    };
+                    if ( perD.keyText == '结束时间' && perD.value ){
+                        $('#Monitor-table-detail .progress-bar').removeClass('active');
+                        clearInterval(Record.refreshDetail);
+                        Record.refreshDetailTime = '';
+                        $('#Monitor-table-detail .control-label').each(function(){
+                            if ( this.innerText == '结束时间' ){
+                                $(this).next().text(perD.value);
+                                return false;
+                            }
+                        });
+                    } 
+                });
+                
+            },
+            error:function(e){}
+        })
+    }
     function clickMore(){
         if ( $(this).text() == '显示详情') {
             $(this).text('隐藏详情');

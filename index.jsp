@@ -51,7 +51,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a target="_blank" href="../portal"><i class="fa fa-home"></i> 混合服务自动化系统</a></li>
+                            <li><a target="_blank" href="../portal"><i class="fa fa-home"></i> 服务自动化系统</a></li>
                             <li><a target="_blank" href="../schedule"><i class="fa fa-object-group" style="width: 12px"></i> 作业调度</a></li>
                             <li><a target="_blank" href="../inspect"><i class="glyphicon glyphicon-screenshot"></i> 巡检合规</a></li>
                             <li><a target="_blank" href="../deploy"><i class="fa fa-download"></i> 应用部署</a></li>
@@ -63,27 +63,6 @@
             </div>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success"></span>
-                        </a>
-                    </li>
-                    <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning"></span>
-                        </a>
-                    </li>
-                    <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger"></span>
-                        </a>
-                    </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a class="dropdown-toggle" data-toggle="dropdown">

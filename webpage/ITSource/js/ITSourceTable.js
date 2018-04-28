@@ -768,6 +768,7 @@
                 disableExistTag(res.data,params.tags);
                 $('#ITSource-setTag-form .app').select2({
                     data:res.data,
+                    tags:true,
                     dropdownParent:$('#ITSource-setTag-form .hasSelect2')
                 }).val('').change();
             }
@@ -792,7 +793,7 @@
                 var tags = [];
                 var sels = $('#Confirm-tags').select2('data');
                 $.each(sels,function(i,perD){
-                    tags.push(perD.tagName);
+                    tags.push(perD.text);
                 });
                 ajaxPatchSetTag(ids.join(','),tags.join(','));
             }
@@ -804,6 +805,7 @@
                 });
                 $('#Confirm-tags').select2({
                     data:res.data,
+                    tags: true,
                     closeOnSelect:false
                 });
             }
@@ -829,14 +831,6 @@
             }
         })
     }
-    function listenSelectSearch(){
-        var val = $(this).value ;
-        if ( $(this).parent().next().find('.select2-results__message')[0] && !$(this).parent().find('button')[0] ) {
-            $('<button class="btn btn-default newApp" title="新增一项">新增此项</button>').appendTo($(this).parent());
-        } else if ( !$(this).parent().next().find('.select2-results__message')[0]) {
-            $(this).parent().find('button').remove();
-        }
-    };
     function disableExistTag(data,exist){
         $.each(exist,function(i,perEx){
             $.each(data,function(y,perD){
@@ -846,13 +840,6 @@
             })
         });
     };
-    function addNewApp(e){
-        e.preventDefault();
-        var input = $('#ITSource-setTag-form .select2-search__field');
-        DefineTag.addTag($('#ITSource-setTag-form .addTag')[0],input.val());
-        $(this).remove();
-        $('#ITSource-setTag-form .tags select.app').select2('close');
-    }
     function saveOne(btn) {
         var params = {};
         // 所属选项卡
@@ -965,10 +952,6 @@
 
     // 详情中内容过多点击详情
     $('body').on('click','#ITSource-table-detail .more',clickMore);
-
-    // 插件select2 增加不存在项
-    $('body').on('input','#ITSource-setTag-form .select2-search__field',listenSelectSearch);
-    $('body').on('click','#ITSource-setTag-form .newApp',addNewApp);
 
 
 
