@@ -103,7 +103,7 @@
     
     ];
     Constant.discoContent = [    
-    {type:'device',icon:'icon-device',text:'物理设备',image:'../static/image/device/host.png'},
+    {type:'device',icon:'icon-device',text:'网络拓扑',image:'../static/image/device/host.png'},
     {type:'port',icon:'icon-port',text:'端口',image:'../static/image/device/port.png'},
     {type:'server',icon:'icon-host',text:'服务器',image:'../static/image/device/host.png'},
     {type:'cloud',icon:'icon-cloud',text:'云环境',image:'../static/image/device/cloud.png'},

@@ -203,7 +203,18 @@
                 <div class="tableView">
                     <div id="Configuration-mission-table-toolbar" class="toolbar">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default addNew">新增</button>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default addNew">新增</button>
+                                <button type="button" class="btn btn-default" style="border-top-right-radius: 3px;border-bottom-right-radius: 3px" data-toggle="dropdown">?</button>
+                                <div class="dropdown-menu" style="min-width:566px;padding: 3px">
+                                    <p>发现策略使用说明：</p>
+                                    <p style="text-indent: 2em">网络拓扑发现：建立SNMP协议，填写核心网关IP(路由器或交换机IP)</p>
+                                    <p style="text-indent: 2em">服务器发现：建立服务器账号</p>
+                                    <p style="text-indent: 2em">数据库发现：MySql建立JDBC协议；其他数据库需建立服务器账号+JDBC协议，在JDBC协议填写操作系统账号</p>
+                                    <p style="text-indent: 2em">中间件发现：WebSphere建立服务器账号，Tomcat/WebLogic建立相关中间件协议</p>
+                                    <p style="text-indent: 2em">云环境发现：建立云账号</p>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-default setNest" data-nestTemp="Configuration-agent-template">设置发现代理</button>
                         </div>
                         <div class="col-sm-12 col-xs-12">
@@ -335,7 +346,13 @@
         <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">签名口令：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="signaturePassw" value="{{signaturePassw}}">
+                <input type="password" class="form-control password" name="signaturePassw" value="{{signaturePassw}}">
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group hide" data-belong="3">
@@ -351,7 +368,13 @@
         <div class="form-group hide" data-belong="3">
             <label class="col-sm-2 control-label">加密口令：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="encryptPassw" value="{{encryptPassw}}">
+                <input type="password" class="form-control password" name="encryptPassw" value="{{encryptPassw}}">
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -411,7 +434,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}" required>
+                <input type="password" class="form-control password" name="password" value="{{password}}" required>
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group" data-belong="1">
@@ -487,7 +516,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label required">口令：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}" required>
+                <input type="password" class="form-control password" name="password" value="{{password}}" required>
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -577,7 +612,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}" required>
+                <input type="password" class="form-control password" name="password" value="{{password}}" required>
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group">
@@ -661,7 +702,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}" required>
+                <input type="password" class="form-control password" name="password" value="{{password}}" required>
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group">

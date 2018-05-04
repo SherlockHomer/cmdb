@@ -472,6 +472,13 @@
         Confirm.confirm();
     });
 
+    // 明文密文按钮
+    $('body').on('change','.encryptCheckbox',function(){
+        var $pass = $(this).closest('.form-group').find('.password');
+        var isEncrypt = $(this).is(':checked');
+        isEncrypt ? $pass.attr('type','text') : $pass.attr('type','password') ;
+    })
+
     return {
         changeSelected : changeSelected,
         renderEditView : renderEditView,

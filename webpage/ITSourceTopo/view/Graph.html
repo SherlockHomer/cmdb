@@ -48,6 +48,7 @@
         <div class="secondMenu" id="Graph-tool-edit">
             <ul class="list-group">
                 <li class="list-group-item save"><i class="fa-save"></i>保存</li>
+                <li class="list-group-item search"><i class="fa-search"></i>搜索</li>
                 <li class="list-group-item setTag"><i class="fa-tags"></i>设置标签</li>
             </ul>
         </div>
@@ -475,6 +476,59 @@
                 }
             })
         };
+        function searchNode(){
+            var ids = [];
+            Record.diagram.selection.each(function(node){
+                ids.push(node.data.id);
+            });
+            Tool.confirm({
+                title:'搜索设备',
+                body:'<select class="select2" id="Confirm-searchNode"></select>',
+                confirm:function(){
+                    $('#Graph-tool-edit').removeClass('show');
+                    $('#Graph-box .tools .tool[href="#Graph-tool-edit"]').removeClass('clicked');
+                }
+            });
+            $('#Confirm-searchNode').select2({
+                data:getNodeAsSelect(),
+                dropdownParent:$('#Confirm-searchNode').parent()
+            }).on('select2:select', function (e) {
+                var node = e.params.data;
+                findRectAndShow(Record.diagram,node.key);
+            })
+        };
+        // 将所有设备转为 select2 下拉数据
+        function getNodeAsSelect(){
+            var diag = Record.diagram;
+            var nodes = diag.model.nodeDataArray;
+            var newNodes = [];
+            $.each(nodes,function(i,perNode){
+                if(perNode.visible !== undefined && perNode.visible == false){
+                    return;
+                } else {
+                    perNode.text = perNode.resName;
+                    newNodes.push(perNode);
+                }
+            });
+            return newNodes;
+        };
+        function findRectAndShow(diagramObj,key){
+            diagramObj.scale = 1;
+            var finded = diagramObj.findNodeForKey(key);
+            var lastSelected = finded;
+            diagramObj.clearSelection();
+            finded.isSelected = true;
+            // 如果任一层父级未展开则选中该父级
+            // !如果父级组收缩，即使该组展开，node.data.expanded也是false
+            while(finded.containingGroup){
+                if(!finded.containingGroup.data.expanded){
+                    finded.containingGroup.isSelected = true;
+                    lastSelected = finded.containingGroup;
+                }
+                finded = finded.containingGroup;
+            }
+            diagramObj.scrollToRect(lastSelected.actualBounds);
+        }
         // 批量设置标签
         function setTag(){
             if( Record.diagram.selection.count == 0){
@@ -509,7 +563,7 @@
                         data:res.data,
                         tags: true,
                         closeOnSelect:false
-                    });
+                    }).val(Record.params.appTag).trigger("change");
                 }
             });
         };
@@ -601,6 +655,10 @@
         });
         $('body').on('click','#Graph-tool-edit .list-group .setTag',function(){
             setTag(this);
+        });
+        // 搜索节点
+        $('body').on('click','#Graph-tool-edit .list-group .search',function(){
+            searchNode(this);
         });
         // 放大条
         $('body').on('input change','#Graph-map .scale',function(){

@@ -18,6 +18,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+body>.affix{
+    z-index: 99;
+}
 ul {
     list-style: none;
     padding-left: 20px;
@@ -40,6 +43,72 @@ label.required:before{
   content: '*';
   color: red;
 }
+/*自定义的checkbox*/
+label.checkbox-label{
+    display: inline-block;
+    position: relative;
+    min-width: 60px;
+    height: 26px;
+    background: #fff;
+    border:1px solid #c3c3c3;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 0;
+    margin-top: 4px;
+}
+.checkbox-label:before {
+    content: '是';
+    position: absolute;
+    left: 9px;
+    color: #27B564;
+    font-size: 13px;
+    line-height: 24px;
+}
+.checkbox-label:after {
+    content: '否';
+    position: absolute;
+    left: 35px;
+    color: #27B564;
+    font-size: 13px;
+    line-height: 24px;
+}
+label.checkbox-label-password{
+    min-width:64px;
+}
+.checkbox-label-password:before{
+    content: '明文';
+    left: 5px;
+}
+.checkbox-label-password:after{
+    content: '密文';
+    left: 33px;
+}
+.checkbox-label div{
+    display: block;
+    min-width: 0;
+    width: 31px;
+    height: 24px;
+    background: #428bca;
+    border-radius: 4px 0 0 4px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    -ms-transition: all .5s;
+    transition: all .5s;
+    position: absolute;
+    cursor: pointer;
+    top: 0px;
+    left: 0;
+    z-index: 1;
+}
+.checkbox-label input[type=checkbox]:checked + div {
+    left: 31px;
+    border-radius: 0 4px 4px 0;
+}
+.label-checkbox{
+  visibility: hidden;
+}
+/*自定义 checkbox*/
 .navbar-nav>.user-menu>.dropdown-menu>li.user-header{
     height: auto;
 }
@@ -99,6 +168,8 @@ label.required:before{
 }
 .detailsForm .form-group{
     margin-bottom: 0;
+    /* 为了滚动条不超出 */
+    margin-right: -9px;
 }
 .newFeature {
     position: relative;
@@ -246,7 +317,9 @@ label.required:before{
 }
 #Graph-map .scale{
     position: absolute;
+    height: 20px;
     top: 100%;
+    right: 15px;
     -webkit-transform-origin: top right;
     -moz-transform-origin: top right;
     -ms-transform-origin: top right;
@@ -256,7 +329,6 @@ label.required:before{
     -ms-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    right: 15px;
 }
 #Graph-map .scaleIcon{
     position: absolute;

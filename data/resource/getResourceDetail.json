@@ -1,112 +1,291 @@
 {
+    "success": true,
     "data": {
-        "ciCode":"DC_APPComp",
-        "resName":"ice 11001",
-        "ciName": "应用组件",
-        "resIp": "10.5.5.174",
-        "tagName": "应用服务器,数据库服务器,zsw",
+        "id": 2521,
+        "resName": "websphere10.5.5.65",
+        "resIp": "10.5.5.65",
+        "ciCode": "DC_WebSphere",
+        "ciName": "WebSphere",
         "details": [{
-            "keyText": "开始时间",
-            "value": "2018-01-10 09:00:00",
+            "keyText": "名称",
+            "code": "name",
+            "value": "IBM WebSphere Application Server",
             "isText": true
         }, {
-            "keyText": "扫描进度",
-            "value": 44,
-            "isProcess": true
+            "keyText": "版本",
+            "code": "version",
+            "value": "8.5.5.0",
+            "isText": true
         }, {
-            "keyText": "补丁",
+            "keyText": "WAS根目录",
+            "code": "homeDir",
+            "value": "/opt/IBM/WebSphere/AppServer",
+            "isText": true
+        }, {
+            "keyText": "jvm版本",
+            "code": "jvmVersion",
+            "value": "1.6.0",
+            "isText": true
+        }, {
+            "keyText": "jvm路径",
+            "code": "jvmBinPath",
+            "value": "/opt/IBM/WebSphere/AppServer/java/bin/java",
+            "isText": true
+        }, {
+            "keyText": "-Xms",
+            "code": "-Xms",
+            "value": "50m",
+            "isText": true
+        }, {
+            "keyText": "-Xmx",
+            "code": "-Xmx",
+            "value": "256m",
+            "isText": true
+        }, {
+            "keyText": "-Xscmaxaot",
+            "code": "-Xscmaxaot",
+            "value": "4M",
+            "isText": true
+        }, {
+            "keyText": "-Xscmx",
+            "code": "-Xscmx",
+            "value": "60M",
+            "isText": true
+        }, {
+            "keyText": "was部署信息",
             "value": {
-                "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本", "详情"],
                 "tableData": [
-                    [
-                        "##IANGDL",
-                        "10.5.5.175",
-                        "Linux",
-                        "Redhat Enterprise 15.5 Santago", {
-                            "details": [{
-                                "keyText": "开始时间",
-                                "value": "2018-01-10 09:00:00",
-                                "isText": true
-                            }, {
-                                "keyText": "扫描进度",
-                                "value": 44,
-                                "isProcess": true
-                            }, {
-                                "keyText": "补丁",
-                                "value": {
-                                    "columnsText": ["服务器名", "IP地址", "OS类型", "OS版本", "详情"],
-                                    "tableData": [
-                                        [
-                                            "##IANGDL",
-                                            "10.5.5.175",
-                                            "Linux",
-                                            "Redhat Enterprise 15.5 Santago", {
-                                                "details": [{
-                                                    "keyText": "开始时间",
-                                                    "value": "2018-01-10 09:00:00",
-                                                    "isText": true
-                                                }, {
-                                                    "keyText": "扫描进度",
-                                                    "value": 44,
-                                                    "isProcess": true
-                                                }]
-                                            }
-                                        ],
-                                        [
-                                            "LIGDL",
-                                            "10.5.5.175",
-                                            "Lin x",
-                                            "Redhat Enterprise 6115 Santago",
-                                            20,
-                                            "lock",
-                                            "新内容44",
-                                            "新内容55",
-                                            "新内容66"
-                                        ],
-                                        [
-                                            "L DL",
-                                            "10.5.5.175",
-                                            "Lux",
-                                            "Redhat Enterprise 4.5 Santago",
-                                            24,
-                                            "lockss",
-                                            "新内容11",
-                                            "新内容22",
-                                            "新内容33"
-                                        ]
-                                    ]
-                                },
-                                "isTable": true
-                            }]
-                        }
-                    ],
-                    [
-                        "LIGDL",
-                        "10.5.5.175",
-                        "Lin x",
-                        "Redhat Enterprise 6115 Santago",
-                        20,
-                        "lock",
-                        "新内容44",
-                        "新内容55",
-                        "新内容66"
-                    ],
-                    [
-                        "L DL",
-                        "10.5.5.175",
-                        "Lux",
-                        "Redhat Enterprise 4.5 Santago",
-                        24,
-                        "lockss",
-                        "新内容11",
-                        "新内容22",
-                        "新内容33"
-                    ]
-                ]
+                    ["AppSrv01", {
+                        "details": [{
+                            "keyText": "概要名称",
+                            "code": "profile",
+                            "value": "AppSrv01",
+                            "isText": true
+                        }, {
+                            "keyText": "单元信息",
+                            "value": {
+                                "tableData": [
+                                    ["localhostNode01Cell", {
+                                        "details": [{
+                                            "keyText": "cell名称",
+                                            "code": "cell",
+                                            "value": "localhostNode01Cell",
+                                            "isText": true
+                                        }, {
+                                            "keyText": "节点信息",
+                                            "value": {
+                                                "tableData": [
+                                                    ["localhostNode01", {
+                                                        "details": [{
+                                                            "keyText": "node名称",
+                                                            "code": "node",
+                                                            "value": "localhostNode01",
+                                                            "isText": true
+                                                        }, {
+                                                            "keyText": "服务信息",
+                                                            "value": {
+                                                                "tableData": [
+                                                                    ["server1", {
+                                                                        "details": [{
+                                                                            "keyText": "server名称",
+                                                                            "code": "server",
+                                                                            "value": "server1",
+                                                                            "isText": true
+                                                                        }, {
+                                                                            "keyText": "jdbc信息",
+                                                                            "value": {
+                                                                                "tableData": [
+                                                                                    ["Default Datasource", {
+                                                                                        "details": [{
+                                                                                            "keyText": "JDBC连接池名",
+                                                                                            "code": "name",
+                                                                                            "value": "Default Datasource",
+                                                                                            "isText": true
+                                                                                        }, {
+                                                                                            "keyText": "jdbc参数信息",
+                                                                                            "value": {
+                                                                                                "tableData": [
+                                                                                                    ["", "", "", "upgrade=true", {
+                                                                                                        "details": [{
+                                                                                                            "keyText": "dataSourceName",
+                                                                                                            "code": "dataSourceName",
+                                                                                                            "value": "",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "description",
+                                                                                                            "code": "description",
+                                                                                                            "value": "",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "createDatabase",
+                                                                                                            "code": "createDatabase",
+                                                                                                            "value": "",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "connectionAttributes",
+                                                                                                            "code": "connectionAttributes",
+                                                                                                            "value": "upgrade=true",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "databaseName",
+                                                                                                            "code": "databaseName",
+                                                                                                            "value": "${APP_INSTALL_ROOT}/${CELL}/DefaultApplication.ear/DefaultDB",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "shutdownDatabase",
+                                                                                                            "code": "shutdownDatabase",
+                                                                                                            "value": "",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "id",
+                                                                                                            "code": "id",
+                                                                                                            "value": "J2EEResourcePropertySet_1183122153625",
+                                                                                                            "isText": true
+                                                                                                        }]
+                                                                                                    }]
+                                                                                                ],
+                                                                                                "columnsText": ["dataSourceName", "description", "createDatabase", "connectionAttributes", "详情"],
+                                                                                                "columnsCode": ["dataSourceName", "description", "createDatabase", "connectionAttributes"]
+                                                                                            },
+                                                                                            "isTable": true,
+                                                                                            "ip": "10.5.5.65"
+                                                                                        }, {
+                                                                                            "keyText": "jdbc连接信息",
+                                                                                            "value": {
+                                                                                                "tableData": [
+                                                                                                    ["EntirePool", "180", "1800", "1", {
+                                                                                                        "details": [{
+                                                                                                            "keyText": "purgePolicy",
+                                                                                                            "code": "purgePolicy",
+                                                                                                            "value": "EntirePool",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "reapTime",
+                                                                                                            "code": "reapTime",
+                                                                                                            "value": "180",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "unusedTimeout",
+                                                                                                            "code": "unusedTimeout",
+                                                                                                            "value": "1800",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "minConnections",
+                                                                                                            "code": "minConnections",
+                                                                                                            "value": "1",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "maxConnections",
+                                                                                                            "code": "maxConnections",
+                                                                                                            "value": "10",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "connectionTimeout",
+                                                                                                            "code": "connectionTimeout",
+                                                                                                            "value": "180",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "agedTimeout",
+                                                                                                            "code": "agedTimeout",
+                                                                                                            "value": "0",
+                                                                                                            "isText": true
+                                                                                                        }, {
+                                                                                                            "keyText": "id",
+                                                                                                            "code": "id",
+                                                                                                            "value": "ConnectionPool_1183122153625",
+                                                                                                            "isText": true
+                                                                                                        }]
+                                                                                                    }]
+                                                                                                ],
+                                                                                                "columnsText": ["purgePolicy", "reapTime", "unusedTimeout", "minConnections", "详情"],
+                                                                                                "columnsCode": ["purgePolicy", "reapTime", "unusedTimeout", "minConnections"]
+                                                                                            },
+                                                                                            "isTable": true,
+                                                                                            "ip": "10.5.5.65"
+                                                                                        }]
+                                                                                    }]
+                                                                                ],
+                                                                                "columnsText": ["JDBC连接池名", "详情"],
+                                                                                "columnsCode": ["name"]
+                                                                            },
+                                                                            "isTable": true,
+                                                                            "ip": "10.5.5.65"
+                                                                        }]
+                                                                    }]
+                                                                ],
+                                                                "columnsText": ["server名称", "详情"],
+                                                                "columnsCode": ["server"]
+                                                            },
+                                                            "isTable": true,
+                                                            "ip": "10.5.5.65"
+                                                        }, {
+                                                            "keyText": "端口信息",
+                                                            "value": {
+                                                                "tableData": [
+                                                                    ["BOOTSTRAP_ADDRESS", "10.5.5.65", "2809"],
+                                                                    ["SOAP_CONNECTOR_ADDRESS", "10.5.5.65", "8880"],
+                                                                    ["ORB_LISTENER_ADDRESS", "10.5.5.65", "9100"],
+                                                                    ["SAS_SSL_SERVERAUTH_LISTENER_ADDRESS", "10.5.5.65", "9401"],
+                                                                    ["CSIV2_SSL_SERVERAUTH_LISTENER_ADDRESS", "10.5.5.65", "9403"],
+                                                                    ["CSIV2_SSL_MUTUALAUTH_LISTENER_ADDRESS", "10.5.5.65", "9402"],
+                                                                    ["WC_adminhost", "*", "9060"],
+                                                                    ["WC_defaulthost", "*", "9080"],
+                                                                    ["DCS_UNICAST_ADDRESS", "*", "9353"],
+                                                                    ["WC_adminhost_secure", "*", "9043"],
+                                                                    ["WC_defaulthost_secure", "*", "9443"],
+                                                                    ["SIP_DEFAULTHOST", "*", "5060"],
+                                                                    ["SIP_DEFAULTHOST_SECURE", "*", "5061"],
+                                                                    ["SIB_ENDPOINT_ADDRESS", "*", "7276"],
+                                                                    ["SIB_ENDPOINT_SECURE_ADDRESS", "*", "7286"],
+                                                                    ["SIB_MQ_ENDPOINT_ADDRESS", "*", "5558"],
+                                                                    ["SIB_MQ_ENDPOINT_SECURE_ADDRESS", "*", "5578"],
+                                                                    ["IPC_CONNECTOR_ADDRESS", "${LOCALHOST_NAME}", "9633"],
+                                                                    ["OVERLAY_UDP_LISTENER_ADDRESS", "*", "11003"],
+                                                                    ["OVERLAY_TCP_LISTENER_ADDRESS", "*", "11004"]
+                                                                ],
+                                                                "columnsText": ["端口名称", "端口绑定的IP", "端口号"],
+                                                                "columnsCode": ["Name", "Host", "Port"]
+                                                            },
+                                                            "isTable": true,
+                                                            "ip": "10.5.5.65"
+                                                        }]
+                                                    }]
+                                                ],
+                                                "columnsText": ["node名称", "详情"],
+                                                "columnsCode": ["node"]
+                                            },
+                                            "isTable": true,
+                                            "ip": "10.5.5.65"
+                                        }, {
+                                            "keyText": "应用组件信息",
+                                            "value": {
+                                                "tableData": [
+                                                    ["query"],
+                                                    ["ivtApp"],
+                                                    ["perfServletApp"],
+                                                    ["DefaultApplication"]
+                                                ],
+                                                "columnsText": ["应用组件名称"],
+                                                "columnsCode": ["app"]
+                                            },
+                                            "isTable": true,
+                                            "ip": "10.5.5.65"
+                                        }]
+                                    }]
+                                ],
+                                "columnsText": ["cell名称", "详情"],
+                                "columnsCode": ["cell"]
+                            },
+                            "isTable": true,
+                            "ip": "10.5.5.65"
+                        }]
+                    }]
+                ],
+                "columnsText": ["概要名称", "详情"],
+                "columnsCode": ["profile"]
             },
-            "isTable": true
+            "isTable": true,
+            "ip": "10.5.5.65"
         }]
-    },
-    "success": true,
-    "msg": "成功"
+    }
 }

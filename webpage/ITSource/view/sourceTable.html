@@ -313,19 +313,19 @@
 
 <script type="text/x-handlebars-template" id="ITSource-table-more-template">
     <tr>
-        <td colspan="6">
+        <td colspan="1">
             <div class="form-horizontal">
                 {{#each details}}
                 <div class="form-group">
 
                     {{#if isText}}
-                    <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
-                    <div class="col-sm-10 form-control-static">{{value}}</div>
+                    <label class="col-sm-3 control-label" style="word-break: break-all;">{{keyText}}</label>
+                    <div class="col-sm-9 form-control-static">{{value}}</div>
                     {{/if}}
 
                     {{#if isProcess}}
-                    <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
-                    <div class="col-sm-10 form-control-static">
+                    <label class="col-sm-1 control-label" style="word-break: break-all;">{{keyText}}</label>
+                    <div class="col-sm-11 form-control-static">
                         <div class="progress">
                             <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="100" style="width: {{value}}%">{{value}}%
                             </div>
@@ -334,8 +334,8 @@
                     {{/if}}
 
                     {{#if isTable}}
-                    <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-1 control-label" style="word-break: break-all;">{{keyText}}</label>
+                    <div class="col-sm-11" style="overflow-x: auto;">
                         <table class="table table-bordered">
                             {{tableDetail value}}
                         </table>
@@ -344,8 +344,8 @@
 
                     {{#if isGather}}
                     {{#each value}}
-                    <label class="col-sm-2 control-label" style="word-break: break-all;">{{keyText}}</label>
-                    <div class="col-sm-10 form-control-static">{{value}}</div>
+                    <label class="col-sm-6 control-label" style="word-break: break-all;">{{keyText}}</label>
+                    <div class="col-sm-6 form-control-static">{{value}}</div>
                     {{/each}}
 
                     {{/if}}
@@ -403,7 +403,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label required">密码：</label>
             <div class="col-sm-5">
-                <input type="password" class="form-control" name="password" value="{{password}}" required>
+                <input type="password" class="form-control password" name="password" value="{{password}}" required>
+            </div>
+            <div class="col-sm-2">
+                <label class="checkbox-label checkbox-label-password">
+                    <input type="checkbox" class="label-checkbox encryptCheckbox" value="1">
+                    <div></div>
+                </label>
             </div>
         </div>
         <div class="form-group" data-belong="1">

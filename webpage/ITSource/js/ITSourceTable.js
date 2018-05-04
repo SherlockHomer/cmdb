@@ -153,7 +153,7 @@
                 break;
             }
             case 'cloud' : {
-                return 'ciCode';
+                return 'resType';
                 break;
             }
             case 'net' : {
@@ -178,7 +178,11 @@
                 },{
                     title:'IP地址',
                     field:'resIp',
-                    sortable:true
+                    width:'16%',
+                    sortable:true,
+                    formatter:function(value){
+                        return '<span style="word-break:break-all">'+value+'</span>'
+                    }
                 },{
                     title:'OS类型',
                     field:'osType',
@@ -238,7 +242,11 @@
                 },{
                     title:'IP地址',
                     field:'resIp',
-                    sortable:true
+                    width:'15%',
+                    sortable:true,
+                    formatter:function(value){
+                        return '<span style="word-break:break-all">'+value+'</span>'
+                    }
                 },{
                     title:'标签',
                     field:'tagName',
@@ -277,7 +285,11 @@
                 },{
                     title:'IP地址',
                     field:'resIp',
-                    sortable:true
+                    width:'15%',
+                    sortable:true,
+                    formatter:function(value){
+                        return '<span style="word-break:break-all">'+value+'</span>'
+                    }
                 },{
                     title:'标签',
                     field:'tagName',
@@ -295,16 +307,8 @@
                     checkbox:true,
                 },{
                     title:'管理域类型',
-                    field:'ciCode',
-                    sortable:true,
-                    formatter:function(value){
-                        if (!value) {return};
-                        if (value.indexOf('DC_') > -1) {
-                            return value.substr(3);
-                        } else {
-                            return value;
-                        }
-                    }
+                    field:'resType',
+                    sortable:true
                 },{
                     title:'名称',
                     field:'resName',
@@ -355,7 +359,11 @@
                 },{
                     title:'IP地址',
                     field:'resIp',
-                    sortable:true
+                    width:'15%',
+                    sortable:true,
+                    formatter:function(value){
+                        return '<span style="word-break:break-all">'+value+'</span>'
+                    }
                 },{
                     title:'标签',
                     field:'tagName',
@@ -378,7 +386,11 @@
                 },{
                     title:'IP地址',
                     field:'resIp',
-                    sortable:true
+                    width:'15%',
+                    sortable:true,
+                    formatter:function(value){
+                        return '<span style="word-break:break-all">'+value+'</span>'
+                    }
                 },{
                     title:'版本',
                     field:'resVersion',
@@ -425,7 +437,7 @@
             if (hashes.params) {
                 var pArr = [];
                 for(var i in hashes.params){
-                    if (hashes.params[i]){
+                    if (hashes.params[i] && ( i != 'ciMajor' && i != 'code' ) ){
                         pArr.push( i + '=' + hashes.params[i] );
                     }
                 }
@@ -492,12 +504,12 @@
             var params = hashes.params;
             if (!params) {
                 Record.tabCode = Record.tabCode || 'server';
-                Record.ciMajor = '';
-                Record.code = '';
+                Record.ciMajor = Record.ciMajor || '';
+                Record.code = Record.code || '';
             } else {
                 Record.ciMajor = params.ciMajor;
                 Record.code = params.code;
-                Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code) || 'server';
+                Record.tabCode = getTabCodeByCode(Record.ciMajor, Record.code) || Record.tabCode || 'server';
                 Record.belongMission = params.mission;
             }
             Record.tagName = [];
@@ -727,7 +739,7 @@
         };
         var data = JSON.parse ( $(this).attr('data-more') );
         var html = Handlebars.getHTMLByCompile('ITSource-table-more-template',data);
-        $(html).insertAfter($(this).closest('tr'));
+        $(html).insertAfter($(this).closest('tr')).find('td').eq(0).attr('colspan',$(this).index()+1 );
     }
     function addNewServer(){
         var tabId = $(this).parents('.tab-pane').eq(0).attr('id');
